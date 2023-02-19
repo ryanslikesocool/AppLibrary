@@ -1,0 +1,23 @@
+{
+  "pins" : [
+    {
+      "identity" : "cursorkit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ryanslikesocool/CursorKit.git",
+      "state" : {
+        "revision" : "4137e3813332b38d860a597d201f191ae7526b7a",
+        "version" : "1.1.0"
+      }
+    },
+    {
+      "identity" : "serializationkit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ryanslikesocool/SerializationKit.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "9c891e4775c55376ab7239e4a827f41c6efae232"
+      }
+    }
+  ],
+  "version" : 2
+}

@@ -7,19 +7,47 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		AF3180A329A083BB00AE8A35 /* AppLibraryApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3180A229A083BB00AE8A35 /* AppLibraryApp.swift */; };
+		AF3180A329A083BB00AE8A35 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3180A229A083BB00AE8A35 /* App.swift */; };
 		AF3180A529A083BB00AE8A35 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3180A429A083BB00AE8A35 /* ContentView.swift */; };
 		AF3180A729A083BD00AE8A35 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AF3180A629A083BD00AE8A35 /* Assets.xcassets */; };
-		AF3180AA29A083BD00AE8A35 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AF3180A929A083BD00AE8A35 /* Preview Assets.xcassets */; };
+		AF3180BB29A0863F00AE8A35 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3180BA29A0863F00AE8A35 /* AppState.swift */; };
+		AF3180BD29A0867C00AE8A35 /* AppTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3180BC29A0867C00AE8A35 /* AppTile.swift */; };
+		AF3180C029A0877000AE8A35 /* DockUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3180BF29A0877000AE8A35 /* DockUtility.swift */; };
+		AF3180C229A096D400AE8A35 /* NSImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3180C129A096D400AE8A35 /* NSImage+Extension.swift */; };
+		AF3180C529A0986100AE8A35 /* LoveCore in Frameworks */ = {isa = PBXBuildFile; productRef = AF3180C429A0986100AE8A35 /* LoveCore */; };
+		AF3180C729A0986100AE8A35 /* MoreViews in Frameworks */ = {isa = PBXBuildFile; productRef = AF3180C629A0986100AE8A35 /* MoreViews */; };
+		AF4C9BBC29A0A12000BDBEC4 /* GrantPermissionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4C9BBB29A0A12000BDBEC4 /* GrantPermissionsView.swift */; };
+		AF4C9BBF29A0A2B300BDBEC4 /* Bookmarks.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4C9BBE29A0A2B300BDBEC4 /* Bookmarks.swift */; };
+		AF4C9BC129A0A65E00BDBEC4 /* AppListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4C9BC029A0A65E00BDBEC4 /* AppListView.swift */; };
+		AF4C9BC329A0AE5B00BDBEC4 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4C9BC229A0AE5B00BDBEC4 /* SettingsView.swift */; };
+		AF4C9BC529A0AFC600BDBEC4 /* UserDefaults+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4C9BC429A0AFC600BDBEC4 /* UserDefaults+Extension.swift */; };
+		AF4C9BC729A0B41B00BDBEC4 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4C9BC629A0B41B00BDBEC4 /* AppSettings.swift */; };
+		AF4C9BC929A0D68000BDBEC4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4C9BC829A0D68000BDBEC4 /* AppDelegate.swift */; };
+		AF4C9BCC29A19D6200BDBEC4 /* LibraryStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4C9BCB29A19D6200BDBEC4 /* LibraryStyle.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		AF31809F29A083BB00AE8A35 /* AppLibrary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppLibrary.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		AF3180A229A083BB00AE8A35 /* AppLibraryApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLibraryApp.swift; sourceTree = "<group>"; };
+		AF3180A229A083BB00AE8A35 /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		AF3180A429A083BB00AE8A35 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		AF3180A629A083BD00AE8A35 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		AF3180A929A083BD00AE8A35 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		AF3180AB29A083BD00AE8A35 /* AppLibrary.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AppLibrary.entitlements; sourceTree = "<group>"; };
+		AF3180B229A0844B00AE8A35 /* LoveCore */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = LoveCore; path = ../../LoveCore; sourceTree = "<group>"; };
+		AF3180B329A0845B00AE8A35 /* MathematicsKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = MathematicsKit; path = ../../MathematicsKit; sourceTree = "<group>"; };
+		AF3180B429A0846A00AE8A35 /* MoreViews */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = MoreViews; path = ../../MoreViews; sourceTree = "<group>"; };
+		AF3180BA29A0863F00AE8A35 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		AF3180BC29A0867C00AE8A35 /* AppTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTile.swift; sourceTree = "<group>"; };
+		AF3180BF29A0877000AE8A35 /* DockUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DockUtility.swift; sourceTree = "<group>"; };
+		AF3180C129A096D400AE8A35 /* NSImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSImage+Extension.swift"; sourceTree = "<group>"; };
+		AF4C9BBB29A0A12000BDBEC4 /* GrantPermissionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrantPermissionsView.swift; sourceTree = "<group>"; };
+		AF4C9BBD29A0A14B00BDBEC4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		AF4C9BBE29A0A2B300BDBEC4 /* Bookmarks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bookmarks.swift; sourceTree = "<group>"; };
+		AF4C9BC029A0A65E00BDBEC4 /* AppListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppListView.swift; sourceTree = "<group>"; };
+		AF4C9BC229A0AE5B00BDBEC4 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		AF4C9BC429A0AFC600BDBEC4 /* UserDefaults+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extension.swift"; sourceTree = "<group>"; };
+		AF4C9BC629A0B41B00BDBEC4 /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
+		AF4C9BC829A0D68000BDBEC4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		AF4C9BCB29A19D6200BDBEC4 /* LibraryStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryStyle.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -27,6 +55,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF3180C729A0986100AE8A35 /* MoreViews in Frameworks */,
+				AF3180C529A0986100AE8A35 /* LoveCore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -36,8 +66,10 @@
 		AF31809629A083BB00AE8A35 = {
 			isa = PBXGroup;
 			children = (
+				AF3180B129A0843F00AE8A35 /* Packages */,
 				AF3180A129A083BB00AE8A35 /* AppLibrary */,
 				AF3180A029A083BB00AE8A35 /* Products */,
+				AF3180C329A0986100AE8A35 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -52,21 +84,82 @@
 		AF3180A129A083BB00AE8A35 /* AppLibrary */ = {
 			isa = PBXGroup;
 			children = (
-				AF3180A229A083BB00AE8A35 /* AppLibraryApp.swift */,
-				AF3180A429A083BB00AE8A35 /* ContentView.swift */,
-				AF3180A629A083BD00AE8A35 /* Assets.xcassets */,
 				AF3180AB29A083BD00AE8A35 /* AppLibrary.entitlements */,
-				AF3180A829A083BD00AE8A35 /* Preview Content */,
+				AF4C9BBD29A0A14B00BDBEC4 /* Info.plist */,
+				AF3180A229A083BB00AE8A35 /* App.swift */,
+				AF3180A629A083BD00AE8A35 /* Assets.xcassets */,
+				AF3180B729A085A400AE8A35 /* Application */,
+				AF4C9BCA29A19D5C00BDBEC4 /* Data */,
+				AF3180B629A0859400AE8A35 /* Extensions */,
+				AF3180BE29A0876500AE8A35 /* Helpers */,
+				AF3180B529A0859100AE8A35 /* Views */,
 			);
 			path = AppLibrary;
 			sourceTree = "<group>";
 		};
-		AF3180A829A083BD00AE8A35 /* Preview Content */ = {
+		AF3180B129A0843F00AE8A35 /* Packages */ = {
 			isa = PBXGroup;
 			children = (
-				AF3180A929A083BD00AE8A35 /* Preview Assets.xcassets */,
+				AF3180B229A0844B00AE8A35 /* LoveCore */,
+				AF3180B329A0845B00AE8A35 /* MathematicsKit */,
+				AF3180B429A0846A00AE8A35 /* MoreViews */,
 			);
-			path = "Preview Content";
+			path = Packages;
+			sourceTree = "<group>";
+		};
+		AF3180B529A0859100AE8A35 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				AF3180A429A083BB00AE8A35 /* ContentView.swift */,
+				AF3180BC29A0867C00AE8A35 /* AppTile.swift */,
+				AF4C9BBB29A0A12000BDBEC4 /* GrantPermissionsView.swift */,
+				AF4C9BC029A0A65E00BDBEC4 /* AppListView.swift */,
+				AF4C9BC229A0AE5B00BDBEC4 /* SettingsView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		AF3180B629A0859400AE8A35 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				AF3180C129A096D400AE8A35 /* NSImage+Extension.swift */,
+				AF4C9BC429A0AFC600BDBEC4 /* UserDefaults+Extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		AF3180B729A085A400AE8A35 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				AF3180BA29A0863F00AE8A35 /* AppState.swift */,
+				AF4C9BC629A0B41B00BDBEC4 /* AppSettings.swift */,
+				AF4C9BC829A0D68000BDBEC4 /* AppDelegate.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		AF3180BE29A0876500AE8A35 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				AF3180BF29A0877000AE8A35 /* DockUtility.swift */,
+				AF4C9BBE29A0A2B300BDBEC4 /* Bookmarks.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		AF3180C329A0986100AE8A35 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		AF4C9BCA29A19D5C00BDBEC4 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				AF4C9BCB29A19D6200BDBEC4 /* LibraryStyle.swift */,
+			);
+			path = Data;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -85,6 +178,10 @@
 			dependencies = (
 			);
 			name = AppLibrary;
+			packageProductDependencies = (
+				AF3180C429A0986100AE8A35 /* LoveCore */,
+				AF3180C629A0986100AE8A35 /* MoreViews */,
+			);
 			productName = AppLibrary;
 			productReference = AF31809F29A083BB00AE8A35 /* AppLibrary.app */;
 			productType = "com.apple.product-type.application";
@@ -127,7 +224,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AF3180AA29A083BD00AE8A35 /* Preview Assets.xcassets in Resources */,
 				AF3180A729A083BD00AE8A35 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -139,8 +235,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF4C9BC729A0B41B00BDBEC4 /* AppSettings.swift in Sources */,
+				AF3180BD29A0867C00AE8A35 /* AppTile.swift in Sources */,
+				AF3180C029A0877000AE8A35 /* DockUtility.swift in Sources */,
+				AF3180C229A096D400AE8A35 /* NSImage+Extension.swift in Sources */,
+				AF4C9BC129A0A65E00BDBEC4 /* AppListView.swift in Sources */,
 				AF3180A529A083BB00AE8A35 /* ContentView.swift in Sources */,
-				AF3180A329A083BB00AE8A35 /* AppLibraryApp.swift in Sources */,
+				AF3180A329A083BB00AE8A35 /* App.swift in Sources */,
+				AF4C9BC329A0AE5B00BDBEC4 /* SettingsView.swift in Sources */,
+				AF4C9BC929A0D68000BDBEC4 /* AppDelegate.swift in Sources */,
+				AF4C9BBF29A0A2B300BDBEC4 /* Bookmarks.swift in Sources */,
+				AF4C9BBC29A0A12000BDBEC4 /* GrantPermissionsView.swift in Sources */,
+				AF4C9BC529A0AFC600BDBEC4 /* UserDefaults+Extension.swift in Sources */,
+				AF3180BB29A0863F00AE8A35 /* AppState.swift in Sources */,
+				AF4C9BCC29A19D6200BDBEC4 /* LibraryStyle.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -180,6 +288,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -197,7 +306,9 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 13.1;
+				INFOPLIST_KEY_CFBundleDisplayName = "App Library";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "© %@ Ryan Boyer";
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -240,6 +351,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -251,7 +363,9 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 13.1;
+				INFOPLIST_KEY_CFBundleDisplayName = "App Library";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "© %@ Ryan Boyer";
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;
@@ -266,20 +380,24 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = AppLibrary/AppLibrary.entitlements;
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"AppLibrary/Preview Content\"";
+				CURRENT_PROJECT_VERSION = 296;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 838RGQ32CA;
 				ENABLE_HARDENED_RUNTIME = YES;
-				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = AppLibrary/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "App Library";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.DevelopedWithLove.AppLibrary;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -293,20 +411,24 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = AppLibrary/AppLibrary.entitlements;
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"AppLibrary/Preview Content\"";
+				CURRENT_PROJECT_VERSION = 296;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 838RGQ32CA;
 				ENABLE_HARDENED_RUNTIME = YES;
-				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = AppLibrary/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "App Library";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.DevelopedWithLove.AppLibrary;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -336,6 +458,17 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		AF3180C429A0986100AE8A35 /* LoveCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = LoveCore;
+		};
+		AF3180C629A0986100AE8A35 /* MoreViews */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = MoreViews;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = AF31809729A083BB00AE8A35 /* Project object */;
 }
