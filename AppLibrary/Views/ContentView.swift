@@ -13,16 +13,38 @@ struct ContentView: View {
 	}
 
 	@ViewBuilder private var content: some View {
-		if appDelegate.state.bookmarks.isEmpty {
-			GrantPermissionsView()
-		} else {
-			AppListView()
-				.libraryStyle(libraryStyle)
-				.frame(maxHeight: 450)
-				.background { KeyboardHandlerView() }
-//				.overlay(alignment: .bottom) {
-//					stylePicker
-//				}
+		Group {
+			if appDelegate.state.bookmarks.isEmpty {
+				GrantPermissionsView()
+			} else {
+				AppListView()
+					.libraryStyle(libraryStyle)
+					.frame(maxHeight: 450)
+					.background { KeyboardHandlerView() }
+			}
+		}
+		.overlay {
+			Superellipse(radius: 16)
+				.stroke(Color.separator, lineWidth: 3)
+		}
+		.accessWindow { window in
+			window.hasShadow = false
+
+			if let layer = window.contentView?.layer {
+				layer.cornerRadius = 16
+				layer.cornerCurve = CALayerCornerCurve.continuous
+				layer.masksToBounds = true
+			}
+
+//			window.center()
+		}
+		.compositingGroup()
+	}
+
+	private func recurseSubviews(view: NSView, safe: Bool, body: @escaping (NSView, Bool) -> Bool) {
+		let safe = body(view, safe)
+		for subview in view.subviews {
+			recurseSubviews(view: subview, safe: safe, body: body)
 		}
 	}
 
@@ -39,22 +61,28 @@ struct ContentView: View {
 		.buttonStyle(.plain)
 	}
 
-	private var stylePicker: some View {
-		Picker("", selection: $libraryStyle) {
-			Text("Tile")
-				.tag(LibraryStyle.tile)
+//	private var stylePicker: some View {
+//		Picker("", selection: $libraryStyle) {
+//			Text("Tile")
+//				.tag(LibraryStyle.tile)
+//
+//			Text("List")
+//				.tag(LibraryStyle.list)
+//		}
+//		.labelsHidden()
+//		.frame(maxWidth: 200)
+//		.pickerStyle(.segmented)
+//		.padding(8)
+//		.background(Material.regular, in: RoundedRectangle(cornerRadius: 16, style: .continuous))
+//		.padding(8)
+//		.compositingGroup()
+//		.shadow(radius: 4, y: 2)
+//	}
+}
 
-			Text("List")
-				.tag(LibraryStyle.list)
-		}
-//		.controlSize(.large)
-		.labelsHidden()
-		.frame(maxWidth: 200)
-		.pickerStyle(.segmented)
-		.padding(8)
-		.background(Material.regular, in: RoundedRectangle(cornerRadius: 16, style: .continuous))
-		.padding(8)
-		.compositingGroup()
-		.shadow(radius: 4, y: 2)
+private struct ClippingView: View {
+	var body: some View {
+		Color.clear
+			.superellipseClipShape(radius: 32)
 	}
 }

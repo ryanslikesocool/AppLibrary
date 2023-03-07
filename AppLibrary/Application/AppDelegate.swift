@@ -8,7 +8,6 @@ final class AppDelegate: NSObject, NSApplicationDelegate, ObservableObject {
 	@Published var settings: AppSettings = AppSettings()
 
 	func applicationDidFinishLaunching(_ notification: Notification) {
-		NSApp.setActivationPolicy(.accessory)
 		state.load()
 
 		setAppearance(AppSettings.get(for: .appearance))
