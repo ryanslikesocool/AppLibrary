@@ -16,7 +16,6 @@
 		AF3180A729A083BD00AE8A35 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AF3180A629A083BD00AE8A35 /* Assets.xcassets */; };
 		AF3180BB29A0863F00AE8A35 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3180BA29A0863F00AE8A35 /* AppState.swift */; };
 		AF3180BD29A0867C00AE8A35 /* AppTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3180BC29A0867C00AE8A35 /* AppTile.swift */; };
-		AF3180C029A0877000AE8A35 /* DockUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3180BF29A0877000AE8A35 /* DockUtility.swift */; };
 		AF3180C229A096D400AE8A35 /* NSImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3180C129A096D400AE8A35 /* NSImage+Extension.swift */; };
 		AF3180C529A0986100AE8A35 /* LoveCore in Frameworks */ = {isa = PBXBuildFile; productRef = AF3180C429A0986100AE8A35 /* LoveCore */; };
 		AF3180C729A0986100AE8A35 /* MoreViews in Frameworks */ = {isa = PBXBuildFile; productRef = AF3180C629A0986100AE8A35 /* MoreViews */; };
@@ -45,7 +44,6 @@
 		AF3180B429A0846A00AE8A35 /* MoreViews */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = MoreViews; path = ../../MoreViews; sourceTree = "<group>"; };
 		AF3180BA29A0863F00AE8A35 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		AF3180BC29A0867C00AE8A35 /* AppTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTile.swift; sourceTree = "<group>"; };
-		AF3180BF29A0877000AE8A35 /* DockUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DockUtility.swift; sourceTree = "<group>"; };
 		AF3180C129A096D400AE8A35 /* NSImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSImage+Extension.swift"; sourceTree = "<group>"; };
 		AF4C9BBB29A0A12000BDBEC4 /* GrantPermissionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrantPermissionsView.swift; sourceTree = "<group>"; };
 		AF4C9BBD29A0A14B00BDBEC4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -118,13 +116,13 @@
 		AF3180B529A0859100AE8A35 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				AF3180A429A083BB00AE8A35 /* ContentView.swift */,
-				AF3180BC29A0867C00AE8A35 /* AppTile.swift */,
-				AF4C9BBB29A0A12000BDBEC4 /* GrantPermissionsView.swift */,
 				AF4C9BC029A0A65E00BDBEC4 /* AppListView.swift */,
-				AF4C9BC229A0AE5B00BDBEC4 /* SettingsView.swift */,
+				AF3180BC29A0867C00AE8A35 /* AppTile.swift */,
+				AF3180A429A083BB00AE8A35 /* ContentView.swift */,
+				AF4C9BBB29A0A12000BDBEC4 /* GrantPermissionsView.swift */,
 				AF287D2C29B723B400FB344B /* KeyboardHandlerView.swift */,
 				AF287D3029B7277C00FB344B /* SearchBar.swift */,
+				AF4C9BC229A0AE5B00BDBEC4 /* SettingsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -132,10 +130,10 @@
 		AF3180B629A0859400AE8A35 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				AF3180C129A096D400AE8A35 /* NSImage+Extension.swift */,
-				AF4C9BC429A0AFC600BDBEC4 /* UserDefaults+Extension.swift */,
-				AF287D2A29B720F000FB344B /* NSTextField+Extension.swift */,
 				AF287D2E29B725CC00FB344B /* Notification.Name+Extension.swift */,
+				AF3180C129A096D400AE8A35 /* NSImage+Extension.swift */,
+				AF287D2A29B720F000FB344B /* NSTextField+Extension.swift */,
+				AF4C9BC429A0AFC600BDBEC4 /* UserDefaults+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -143,9 +141,9 @@
 		AF3180B729A085A400AE8A35 /* Application */ = {
 			isa = PBXGroup;
 			children = (
-				AF3180BA29A0863F00AE8A35 /* AppState.swift */,
-				AF4C9BC629A0B41B00BDBEC4 /* AppSettings.swift */,
 				AF4C9BC829A0D68000BDBEC4 /* AppDelegate.swift */,
+				AF4C9BC629A0B41B00BDBEC4 /* AppSettings.swift */,
+				AF3180BA29A0863F00AE8A35 /* AppState.swift */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -153,7 +151,6 @@
 		AF3180BE29A0876500AE8A35 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				AF3180BF29A0877000AE8A35 /* DockUtility.swift */,
 				AF4C9BBE29A0A2B300BDBEC4 /* Bookmarks.swift */,
 			);
 			path = Helpers;
@@ -250,7 +247,6 @@
 				AF287D2F29B725CC00FB344B /* Notification.Name+Extension.swift in Sources */,
 				AF4C9BC729A0B41B00BDBEC4 /* AppSettings.swift in Sources */,
 				AF3180BD29A0867C00AE8A35 /* AppTile.swift in Sources */,
-				AF3180C029A0877000AE8A35 /* DockUtility.swift in Sources */,
 				AF3180C229A096D400AE8A35 /* NSImage+Extension.swift in Sources */,
 				AF287D3129B7277C00FB344B /* SearchBar.swift in Sources */,
 				AF4C9BC129A0A65E00BDBEC4 /* AppListView.swift in Sources */,
@@ -399,7 +395,7 @@
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 441;
+				CURRENT_PROJECT_VERSION = 467;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 838RGQ32CA;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -430,7 +426,7 @@
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 441;
+				CURRENT_PROJECT_VERSION = 467;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 838RGQ32CA;
 				ENABLE_HARDENED_RUNTIME = YES;

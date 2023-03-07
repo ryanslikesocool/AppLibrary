@@ -3,6 +3,9 @@ import Foundation
 struct AppSettings {
 	private static let storage: UserDefaults = .standard
 
+	var appearance: String = "System" { didSet { Self.set(appearance, for: .appearance) } }
+//	var globalHotkey: Bool = false { didSet { Self.set(globalHotkey, for: .globalHotkey) } }
+
 	var hiddenApps: [String] = [] { didSet { Self.set(hiddenApps, for: .hiddenApps) } }
 
 	var columns: Int = 3 { didSet { Self.set(columns, for: .columns) } }
@@ -13,6 +16,8 @@ struct AppSettings {
 	var iconSize: Double { Double(sizeClass) * 32.0 }
 
 	init() {
+		appearance = Self.get(for: .appearance) ?? appearance
+//		globalHotkey = Self.get(for: .globalHotkey) ?? globalHotkey
 		hiddenApps = Self.get(for: .hiddenApps) ?? hiddenApps
 		columns = Self.get(for: .columns) ?? columns
 		sizeClass = Self.get(for: .sizeClass) ?? sizeClass

@@ -16,9 +16,11 @@ struct AppListView: View {
 				guard let key = notification.userInfo?["character"] as? String else {
 					return
 				}
-				// withAnimation {
-				scrollReader.scrollTo(key.first!, anchor: .top)
-				// }
+
+				// TODO: fix scroll jump
+				withAnimation {
+					scrollReader.scrollTo(key.first!, anchor: .top)
+				}
 			}
 		}
 		.frame(width: viewWidth)

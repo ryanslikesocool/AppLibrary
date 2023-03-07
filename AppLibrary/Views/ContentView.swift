@@ -28,6 +28,7 @@ struct ContentView: View {
 
 	private var settingsButton: some View {
 		Button(action: {
+			NSApp.activate(ignoringOtherApps: true)
 			openWindow(id: "settings")
 		}) {
 			Image(systemName: "gearshape.fill")

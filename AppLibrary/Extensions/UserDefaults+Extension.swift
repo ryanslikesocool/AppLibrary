@@ -5,6 +5,9 @@ extension UserDefaults {
 }
 
 extension UserDefaults.Key {
+	static let appearance: Self = "appearance"
+//	static let globalHotkey: Self = "globalHotkey"
+
 	static let bookmarkData: Self = "bookmarkData"
 
 	static let hiddenApps: Self = "hiddenApps"

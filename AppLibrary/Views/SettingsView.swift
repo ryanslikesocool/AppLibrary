@@ -1,3 +1,4 @@
+import AppKit
 import LoveCore
 import MoreViews
 import MoreWindows
@@ -12,30 +13,39 @@ struct SettingsScene: Scene {
 
 	var body: some Scene {
 		SettingsWindow.Window(
-			//			SettingsWindow.Pane("Layout", tint: .gray, systemName: "circle.grid.2x2.fill", content: { LayoutPane($appDelegate.settings) }),
-			SettingsWindow.Pane("Directories", tint: .gray, systemName: "folder", content: { DirectoriesPane($appDelegate.state) }),
-			SettingsWindow.Pane("Hidden Apps", tint: .gray, systemName: "eye.slash", content: { HiddenAppsPane($appDelegate.settings) }),
+			SettingsWindow.Pane("General", tint: .gray, systemName: "gearshape.fill", content: { GeneralPane($appDelegate.settings) }),
+			// SettingsWindow.Pane("Layout", tint: .gray, systemName: "circle.grid.2x2.fill", content: { LayoutPane($appDelegate.settings) }),
+			SettingsWindow.Pane("Directories", tint: .gray, systemName: "folder.fill", content: { DirectoriesPane($appDelegate.state) }),
+			SettingsWindow.Pane("Hidden Apps", tint: .gray, systemName: "eye.slash.fill", content: { HiddenAppsPane($appDelegate.settings) }),
 			width: SettingsWindow.defaultWidth - 100,
 			sidebarWidth: SettingsWindow.defaultSidebarWidth - 50,
-			background: {
-				Color.clear
-					.accessWindow { window in
-						Timer.delay(for: 0.5) {
-							Threading.main {
-								window.makeKeyAndOrderFront(nil)
-								window.center()
-							}
-						}
-					}
-					.toolbar {
-						Spacer()
-						Button(action: { NSApp.terminate(nil) }) {
-							Image(systemName: "power")
-						}
-						.help("Quit App Library")
-					}
-			}
+			background: Background.init
 		)
+	}
+}
+
+private struct Background: View {
+	@State private var window: NSWindow?
+
+	var body: some View {
+		Color.clear
+			.accessWindow { self.window = $0 }
+			.onAppear {
+				Threading.main {
+					NSApp.setActivationPolicy(.regular)
+					window?.center()
+				}
+			}
+			.toolbar {
+				Spacer()
+				Button(action: { NSApp.terminate(nil) }) {
+					Image(systemName: "power")
+				}
+				.help("Quit App Library")
+			}
+			.onReceive(NSWindow.willCloseNotification.publisher()) { _ in
+				NSApp.setActivationPolicy(.accessory)
+			}
 	}
 }
 
@@ -61,6 +71,35 @@ private struct LayoutPane: View {
 		Slider(value: $appSettings.padding, in: 8.0 ... 32.0, label: {
 			Text("Padding")
 		})
+	}
+}
+
+private struct GeneralPane: View {
+	@Binding private var appSettings: AppSettings
+
+	init(_ appSettings: Binding<AppSettings>) {
+		_appSettings = appSettings
+	}
+
+	var body: some View {
+		Picker("Appearance", selection: $appSettings.appearance) {
+			Text("System").tag("System")
+			Divider()
+			Text("Light").tag("Light")
+			Text("Dark").tag("Dark")
+		}
+		.onChange(of: appSettings.appearance) { newValue in
+			NotificationCenter.default.post(name: .appearanceChanged, object: nil, userInfo: ["appearance": newValue])
+		}
+
+//		Toggle(isOn: $appSettings.globalHotkey) {
+//			Text("Global Hotkey")
+//			HStack {
+//				Text("Open the App Library from anywhere with")
+//				Text("⇧ ⌘ Space")
+//					.monospaced()
+//			}
+//		}
 	}
 }
 
