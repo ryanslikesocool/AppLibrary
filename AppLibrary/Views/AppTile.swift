@@ -17,7 +17,9 @@ struct AppTile: View {
 		button
 			.contextMenu {
 				Button("Open", action: buttonAction)
-				Button("Show in Finder") { url.showInFinder() }
+				Button("Show in Finder") {
+					NSWorkspace.shared.activateFileViewerSelecting([url])
+				}
 				Divider()
 				Button("Hide") { appDelegate.settings.hiddenApps.append(url.lastPathComponent) }
 					.keyboardShortcut("h")

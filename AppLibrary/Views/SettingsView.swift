@@ -114,7 +114,7 @@ private struct DirectoriesPane: View {
 	}
 
 	var body: some View {
-		Text("Each Application Directory is scanned for apps to display in the App Library.  Subdirectories are not scanned.\n\nApp Library requires explicit permission from you before it is able to view the contents of directories.")
+		Text("App Library requires explicit permission from you before it is able to view the contents of directories.")
 
 		Section {
 			if directoryURLs.isEmpty {
@@ -122,11 +122,17 @@ private struct DirectoriesPane: View {
 					.opacity(0.5)
 			} else {
 				LazyVStack {
-					ForEach(directoryURLs, id: \.self) { url in
+					let urls = directoryURLs
+
+					ForEach(urls, id: \.self) { url in
 						ButtonItem(url.compressingTildeInPath) {
 							Button("Remove") { appState.bookmarks.removeBookmark(for: url) }
 								.help("Remove this app directory.")
 								.fontDesign(.default)
+						}
+
+						if url != urls.last {
+							Divider()
 						}
 					}
 					.fontDesign(.monospaced)
@@ -140,6 +146,7 @@ private struct DirectoriesPane: View {
 					.font(.body)
 					.help("Add a directory to search for applications.")
 			}
+			Text("Each Application Directory is scanned for apps to display in the App Library.  Subdirectories are not scanned.")
 		}
 
 		Section {
@@ -179,11 +186,17 @@ private struct HiddenAppsPane: View {
 					.opacity(0.5)
 			} else {
 				LazyVStack {
-					ForEach(hiddenApps, id: \.self) { app in
+					let apps = hiddenApps
+
+					ForEach(apps, id: \.self) { app in
 						ButtonItem(app) {
 							Button("Show") { appSettings.hiddenApps.remove(app) }
 								.help("Reveal this item in the App Library.")
 								.fontDesign(.default)
+						}
+
+						if app != apps.last {
+							Divider()
 						}
 					}
 					.fontDesign(.monospaced)
