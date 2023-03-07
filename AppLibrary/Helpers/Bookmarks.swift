@@ -10,6 +10,7 @@ struct Bookmarks {
 		get { AppSettings.get(for: .bookmarkData) ?? [:] }
 		set { AppSettings.set(newValue, for: .bookmarkData) }
 	}
+
 	var isEmpty: Bool { bookmarkData.isEmpty }
 
 	private(set) var urls: [URL] = []
@@ -74,7 +75,7 @@ struct Bookmarks {
 		}
 	}
 
-	mutating func promptForDirectory() {
+	mutating func promptForDirectory(_ directoryURL: URL? = nil) {
 		let openPanel = NSOpenPanel()
 		openPanel.message = "Choose an application directory"
 		openPanel.prompt = "Choose"
@@ -82,6 +83,7 @@ struct Bookmarks {
 		openPanel.allowsOtherFileTypes = false
 		openPanel.canChooseFiles = false
 		openPanel.canChooseDirectories = true
+		openPanel.directoryURL = directoryURL
 
 		_ = openPanel.runModal()
 		if let result = openPanel.urls.first {

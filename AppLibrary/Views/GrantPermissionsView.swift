@@ -12,7 +12,7 @@ struct GrantPermissionsView: View {
 				.controlSize(.large)
 				.buttonStyle(.borderedProminent)
 
-			Text("More directories can be added\nlater in the Settings window.")
+			Text("More directories can be added\nin the Settings pane.")
 				.multilineTextAlignment(.center)
 				.opacity(0.666)
 				.font(.footnote)

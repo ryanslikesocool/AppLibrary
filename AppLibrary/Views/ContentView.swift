@@ -18,6 +18,8 @@ struct ContentView: View {
 		} else {
 			AppListView()
 				.libraryStyle(libraryStyle)
+				.frame(maxHeight: 450)
+				.background { KeyboardHandlerView() }
 //				.overlay(alignment: .bottom) {
 //					stylePicker
 //				}
@@ -29,10 +31,11 @@ struct ContentView: View {
 			openWindow(id: "settings")
 		}) {
 			Image(systemName: "gearshape.fill")
+				.padding(8)
+				.contentShape(Rectangle())
 		}
 		.opacity(0.5)
 		.buttonStyle(.plain)
-		.padding(8)
 	}
 
 	private var stylePicker: some View {

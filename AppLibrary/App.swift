@@ -8,7 +8,6 @@ import SwiftUI
 		MenuBarExtra("App Library", systemImage: "square.grid.3x3.fill") {
 			ContentView()
 				.environmentObject(appDelegate)
-				.frame(maxHeight: 450)
 		}
 		.menuBarExtraStyle(.window)
 		.windowResizability(.contentSize)

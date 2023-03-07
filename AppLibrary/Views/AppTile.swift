@@ -20,6 +20,7 @@ struct AppTile: View {
 				Button("Show in Finder") { url.showInFinder() }
 				Divider()
 				Button("Hide") { appDelegate.settings.hiddenApps.append(url.lastPathComponent) }
+					.keyboardShortcut("h")
 			}
 	}
 }

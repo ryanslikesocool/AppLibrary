@@ -8,8 +8,18 @@ struct AppListView: View {
 	@State private var searchQuery: String = ""
 
 	var body: some View {
-		ScrollView(.vertical) {
-			scrollContent
+		ScrollViewReader { scrollReader in
+			ScrollView(.vertical) {
+				scrollContent
+			}
+			.onReceive(Notification.Name.scrollJump.publisher()) { notification in
+				guard let key = notification.userInfo?["character"] as? String else {
+					return
+				}
+				// withAnimation {
+				scrollReader.scrollTo(key.first!, anchor: .top)
+				// }
+			}
 		}
 		.frame(width: viewWidth)
 		.frame(minHeight: viewWidth + settings.iconSize)
@@ -28,8 +38,9 @@ private extension AppListView {
 
 	var applicationURLs: [URL] {
 		let initialResult = appDelegate.state.applicationURLs
-			.sorted(by: { $0.lastPathComponent < $1.lastPathComponent })
+			.filter { $0.pathExtension == "app" }
 			.filter { !appDelegate.settings.hiddenApps.contains($0.lastPathComponent) }
+			.sorted(by: { $0.lastPathComponent < $1.lastPathComponent })
 
 		guard !searchQuery.isEmpty else {
 			return initialResult
@@ -53,21 +64,8 @@ private extension AppListView {
 	var iterateURLs: some View {
 		ForEach(applicationURLs, id: \.self) { url in
 			AppTile(url)
+				.id(url.lastPathComponent.first!)
 		}
-	}
-
-	var searchBar: some View {
-		let container = RoundedRectangle(cornerRadius: 12, style: .continuous)
-
-		return TextField("􀊫 Search", text: $searchQuery)
-			.textFieldStyle(.roundedBorder)
-			.controlSize(.large)
-			.padding(4)
-			.background(Material.regular, in: container)
-			.compositingGroup()
-			.shadow(radius: 4, y: 2)
-			.padding(8)
-			.allowUnfocus()
 	}
 }
 
@@ -97,7 +95,7 @@ private extension AppListView {
 			Section {
 				iterateURLs
 			} header: {
-				searchBar
+				SearchBar(query: $searchQuery)
 			}
 		}
 		.padding(.bottom, 8)

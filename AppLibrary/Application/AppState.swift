@@ -28,6 +28,14 @@ struct AppState {
 // MARK: - Application URLs
 
 extension AppState {
+	static let recommendedURLs: [String] = [
+		"~/Applications/",
+		"/Applications/",
+		"/System/Applications/",
+//		"/System/Library/CoreServices/",
+//		"/System/Library/CoreServices/Applications/",
+	]
+
 	private mutating func loadApplicationURLs() {
 		let fileManager = FileManager.default
 		var urls: [URL] = []
