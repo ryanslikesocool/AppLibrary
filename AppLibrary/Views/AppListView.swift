@@ -27,7 +27,16 @@ private extension AppListView {
 	}
 
 	var applicationURLs: [URL] {
-		appDelegate.state.applicationURLs.sorted(by: { $0.lastPathComponent < $1.lastPathComponent })
+		let initialResult = appDelegate.state.applicationURLs
+			.sorted(by: { $0.lastPathComponent < $1.lastPathComponent })
+			.filter { !appDelegate.settings.hiddenApps.contains($0.lastPathComponent) }
+
+		guard !searchQuery.isEmpty else {
+			return initialResult
+		}
+
+		let search = searchQuery.lowercased()
+		return initialResult.filter { $0.lastPathComponent.lowercased().contains(search) }
 	}
 }
 
@@ -50,17 +59,15 @@ private extension AppListView {
 	var searchBar: some View {
 		let container = RoundedRectangle(cornerRadius: 12, style: .continuous)
 
-		return TextField(text: $searchQuery, label: {
-			Label("Search", systemImage: "magnifyingglass")
-		})
-		.textFieldStyle(.roundedBorder)
-		.controlSize(.large)
-		.padding(4)
-		.background(Material.regular, in: container)
-		.compositingGroup()
-		.shadow(radius: 4, y: 2)
-		.padding(8)
-		.allowUnfocus()
+		return TextField("􀊫 Search", text: $searchQuery)
+			.textFieldStyle(.roundedBorder)
+			.controlSize(.large)
+			.padding(4)
+			.background(Material.regular, in: container)
+			.compositingGroup()
+			.shadow(radius: 4, y: 2)
+			.padding(8)
+			.allowUnfocus()
 	}
 }
 

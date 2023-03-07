@@ -5,12 +5,16 @@ struct AppState {
 	var bookmarks: Bookmarks = Bookmarks()
 	private(set) var applicationURLs: [URL] = []
 
+	private(set) var isLoaded: Bool = false
+
 	mutating func load() {
 		bookmarks.load()
 		loadApplicationURLs()
+		isLoaded = true
 	}
 
 	mutating func unload() {
+		isLoaded = false
 		applicationURLs.removeAll()
 		bookmarks.unload()
 	}

@@ -15,8 +15,8 @@
                   <BuildableReference
                      BuildableIdentifier = "primary"
                      BlueprintIdentifier = "AF31809E29A083BB00AE8A35"
-                     BuildableName = "AppLibrary.app"
-                     BlueprintName = "AppLibrary"
+                     BuildableName = "App Library.app"
+                     BlueprintName = "App Library"
                      ReferencedContainer = "container:AppLibrary.xcodeproj">
                   </BuildableReference>
                </EnvironmentBuildable>
@@ -33,8 +33,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "AF31809E29A083BB00AE8A35"
-               BuildableName = "AppLibrary.app"
-               BlueprintName = "AppLibrary"
+               BuildableName = "App Library.app"
+               BlueprintName = "App Library"
                ReferencedContainer = "container:AppLibrary.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -63,8 +63,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "AF31809E29A083BB00AE8A35"
-            BuildableName = "AppLibrary.app"
-            BlueprintName = "AppLibrary"
+            BuildableName = "App Library.app"
+            BlueprintName = "App Library"
             ReferencedContainer = "container:AppLibrary.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -87,8 +87,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "AF31809E29A083BB00AE8A35"
-            BuildableName = "AppLibrary.app"
-            BlueprintName = "AppLibrary"
+            BuildableName = "App Library.app"
+            BlueprintName = "App Library"
             ReferencedContainer = "container:AppLibrary.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

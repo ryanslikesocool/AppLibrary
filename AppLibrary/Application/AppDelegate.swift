@@ -8,10 +8,12 @@ final class AppDelegate: NSObject, NSApplicationDelegate, ObservableObject {
 	@Published var settings: AppSettings = AppSettings()
 
 	func applicationDidFinishLaunching(_ notification: Notification) {
-		// let dockIcon = AppInformation.appIcon
-		let dockTile = NSApplication.shared.dockTile
-		dockTile.contentView = NSHostingView(rootView: DockView()) // NSImageView(image: dockIcon)
-		dockTile.display()
+		NSApp.setActivationPolicy(.accessory)
+		state.load()
+	}
+
+	func applicationWillTerminate(_ notification: Notification) {
+		state.unload()
 	}
 
 //	func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {

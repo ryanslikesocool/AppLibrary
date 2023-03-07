@@ -3,15 +3,13 @@ import MoreViews
 import SwiftUI
 
 struct ContentView: View {
+	@Environment(\.openWindow) private var openWindow
 	@EnvironmentObject private var appDelegate: AppDelegate
 	@State private var libraryStyle: LibraryStyle = .list
 
 	var body: some View {
 		content
-			.background(Material.thin)
-			.clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous), style: .init(antialiased: true))
-			.ignoresSafeArea()
-			.accessWindow(onAppear: applyWindowStyle)
+			.overlay(alignment: .bottomTrailing) { settingsButton }
 	}
 
 	@ViewBuilder private var content: some View {
@@ -26,24 +24,15 @@ struct ContentView: View {
 		}
 	}
 
-	private func applyWindowStyle(window: NSWindow) {
-		window.styleMask = [.borderless, .titled, .closable, .fullSizeContentView]
-		// remove titled for border thingy fix
-
-		window.titlebarAppearsTransparent = true
-		window.titleVisibility = .hidden
-		window.backgroundColor = .clear
-
-		window.standardWindowButton(.closeButton)?.isHidden = true
-		window.standardWindowButton(.miniaturizeButton)?.isHidden = true
-		window.standardWindowButton(.zoomButton)?.isHidden = true
-
-		window.center()
-
-//		if let dockRect = window.dockTile.contentView?.bounds {
-//			let screenRect = window.convertToScreen(dockRect)
-//			print(screenRect)
-//		}
+	private var settingsButton: some View {
+		Button(action: {
+			openWindow(id: "settings")
+		}) {
+			Image(systemName: "gearshape.fill")
+		}
+		.opacity(0.5)
+		.buttonStyle(.plain)
+		.padding(8)
 	}
 
 	private var stylePicker: some View {

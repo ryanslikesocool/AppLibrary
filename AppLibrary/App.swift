@@ -5,24 +5,14 @@ import SwiftUI
 	@NSApplicationDelegateAdaptor private var appDelegate: AppDelegate
 
 	var body: some Scene {
-		Window("App Library", id: "appLibrary") {
+		MenuBarExtra("App Library", systemImage: "square.grid.3x3.fill") {
 			ContentView()
 				.environmentObject(appDelegate)
+				.frame(maxHeight: 450)
 		}
+		.menuBarExtraStyle(.window)
 		.windowResizability(.contentSize)
-		.onChange(of: scenePhase, perform: phaseChanged)
 
 		SettingsScene(delegate: appDelegate)
-	}
-
-	private func phaseChanged(phase: ScenePhase) {
-		switch phase {
-			case .active:
-				appDelegate.state.load()
-			case .background:
-				appDelegate.state.unload()
-			default:
-				break
-		}
 	}
 }

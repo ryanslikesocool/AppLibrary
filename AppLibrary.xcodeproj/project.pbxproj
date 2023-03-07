@@ -24,11 +24,10 @@
 		AF4C9BC729A0B41B00BDBEC4 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4C9BC629A0B41B00BDBEC4 /* AppSettings.swift */; };
 		AF4C9BC929A0D68000BDBEC4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4C9BC829A0D68000BDBEC4 /* AppDelegate.swift */; };
 		AF4C9BCC29A19D6200BDBEC4 /* LibraryStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4C9BCB29A19D6200BDBEC4 /* LibraryStyle.swift */; };
-		AF4C9BCE29A20EE300BDBEC4 /* DockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4C9BCD29A20EE300BDBEC4 /* DockView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		AF31809F29A083BB00AE8A35 /* AppLibrary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppLibrary.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AF31809F29A083BB00AE8A35 /* App Library.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "App Library.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF3180A229A083BB00AE8A35 /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		AF3180A429A083BB00AE8A35 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		AF3180A629A083BD00AE8A35 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -49,7 +48,6 @@
 		AF4C9BC629A0B41B00BDBEC4 /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
 		AF4C9BC829A0D68000BDBEC4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AF4C9BCB29A19D6200BDBEC4 /* LibraryStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryStyle.swift; sourceTree = "<group>"; };
-		AF4C9BCD29A20EE300BDBEC4 /* DockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DockView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,7 +76,7 @@
 		AF3180A029A083BB00AE8A35 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				AF31809F29A083BB00AE8A35 /* AppLibrary.app */,
+				AF31809F29A083BB00AE8A35 /* App Library.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -117,7 +115,6 @@
 				AF4C9BBB29A0A12000BDBEC4 /* GrantPermissionsView.swift */,
 				AF4C9BC029A0A65E00BDBEC4 /* AppListView.swift */,
 				AF4C9BC229A0AE5B00BDBEC4 /* SettingsView.swift */,
-				AF4C9BCD29A20EE300BDBEC4 /* DockView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -168,9 +165,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		AF31809E29A083BB00AE8A35 /* AppLibrary */ = {
+		AF31809E29A083BB00AE8A35 /* App Library */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = AF3180AE29A083BD00AE8A35 /* Build configuration list for PBXNativeTarget "AppLibrary" */;
+			buildConfigurationList = AF3180AE29A083BD00AE8A35 /* Build configuration list for PBXNativeTarget "App Library" */;
 			buildPhases = (
 				AF31809B29A083BB00AE8A35 /* Sources */,
 				AF31809C29A083BB00AE8A35 /* Frameworks */,
@@ -180,13 +177,13 @@
 			);
 			dependencies = (
 			);
-			name = AppLibrary;
+			name = "App Library";
 			packageProductDependencies = (
 				AF3180C429A0986100AE8A35 /* LoveCore */,
 				AF3180C629A0986100AE8A35 /* MoreViews */,
 			);
 			productName = AppLibrary;
-			productReference = AF31809F29A083BB00AE8A35 /* AppLibrary.app */;
+			productReference = AF31809F29A083BB00AE8A35 /* App Library.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -217,7 +214,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				AF31809E29A083BB00AE8A35 /* AppLibrary */,
+				AF31809E29A083BB00AE8A35 /* App Library */,
 			);
 		};
 /* End PBXProject section */
@@ -248,7 +245,6 @@
 				AF4C9BC329A0AE5B00BDBEC4 /* SettingsView.swift in Sources */,
 				AF4C9BC929A0D68000BDBEC4 /* AppDelegate.swift in Sources */,
 				AF4C9BBF29A0A2B300BDBEC4 /* Bookmarks.swift in Sources */,
-				AF4C9BCE29A20EE300BDBEC4 /* DockView.swift in Sources */,
 				AF4C9BBC29A0A12000BDBEC4 /* GrantPermissionsView.swift in Sources */,
 				AF4C9BC529A0AFC600BDBEC4 /* UserDefaults+Extension.swift in Sources */,
 				AF3180BB29A0863F00AE8A35 /* AppState.swift in Sources */,
@@ -387,7 +383,7 @@
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 302;
+				CURRENT_PROJECT_VERSION = 370;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 838RGQ32CA;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -418,7 +414,7 @@
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 302;
+				CURRENT_PROJECT_VERSION = 370;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 838RGQ32CA;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -452,7 +448,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		AF3180AE29A083BD00AE8A35 /* Build configuration list for PBXNativeTarget "AppLibrary" */ = {
+		AF3180AE29A083BD00AE8A35 /* Build configuration list for PBXNativeTarget "App Library" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AF3180AF29A083BD00AE8A35 /* Debug */,

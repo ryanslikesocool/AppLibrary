@@ -3,6 +3,8 @@ import Foundation
 struct AppSettings {
 	private static let storage: UserDefaults = .standard
 
+	var hiddenApps: [String] = [] { didSet { Self.set(hiddenApps, for: .hiddenApps) } }
+
 	var columns: Int = 3 { didSet { Self.set(columns, for: .columns) } }
 	var sizeClass: Int = 2 { didSet { Self.set(sizeClass, for: .sizeClass) } }
 	var spacing: Double = 36.0 { didSet { Self.set(spacing, for: .spacing) } }
@@ -11,6 +13,7 @@ struct AppSettings {
 	var iconSize: Double { Double(sizeClass) * 32.0 }
 
 	init() {
+		hiddenApps = Self.get(for: .hiddenApps) ?? hiddenApps
 		columns = Self.get(for: .columns) ?? columns
 		sizeClass = Self.get(for: .sizeClass) ?? sizeClass
 		spacing = Self.get(for: .spacing) ?? spacing

@@ -16,7 +16,10 @@ struct AppTile: View {
 	var body: some View {
 		button
 			.contextMenu {
+				Button("Open", action: buttonAction)
 				Button("Show in Finder") { url.showInFinder() }
+				Divider()
+				Button("Hide") { appDelegate.settings.hiddenApps.append(url.lastPathComponent) }
 			}
 	}
 }
