@@ -49,30 +49,30 @@ private struct Background: View {
 	}
 }
 
-private struct LayoutPane: View {
-	@Binding private var appSettings: AppSettings
-
-	init(_ appSettings: Binding<AppSettings>) {
-		_appSettings = appSettings
-	}
-
-	var body: some View {
-		Slider(value: $appSettings.columns, in: 2 ... 5, label: {
-			Text("Columns")
-		}, minimumValueLabel: { Text("2") }, maximumValueLabel: { Text("5") })
-
-		Slider(value: $appSettings.sizeClass, in: 2 ... 4, label: {
-			Text("Icon Size")
-		})
-
-		Slider(value: $appSettings.spacing, in: 8.0 ... 64.0, label: {
-			Text("Spacing")
-		})
-		Slider(value: $appSettings.padding, in: 8.0 ... 32.0, label: {
-			Text("Padding")
-		})
-	}
-}
+// private struct LayoutPane: View {
+//	@Binding private var appSettings: AppSettings
+//
+//	init(_ appSettings: Binding<AppSettings>) {
+//		_appSettings = appSettings
+//	}
+//
+//	var body: some View {
+//		Slider(value: $appSettings.columns, in: 2 ... 5, label: {
+//			Text("Columns")
+//		}, minimumValueLabel: { Text("2") }, maximumValueLabel: { Text("5") })
+//
+//		Slider(value: $appSettings.sizeClass, in: 2 ... 4, label: {
+//			Text("Icon Size")
+//		})
+//
+//		Slider(value: $appSettings.spacing, in: 8.0 ... 64.0, label: {
+//			Text("Spacing")
+//		})
+//		Slider(value: $appSettings.padding, in: 8.0 ... 32.0, label: {
+//			Text("Padding")
+//		})
+//	}
+// }
 
 private struct GeneralPane: View {
 	@Binding private var appSettings: AppSettings
@@ -83,23 +83,16 @@ private struct GeneralPane: View {
 
 	var body: some View {
 		Picker("Appearance", selection: $appSettings.appearance) {
-			Text("System").tag("System")
-			Divider()
-			Text("Light").tag("Light")
-			Text("Dark").tag("Dark")
+			ForEach(Appearance.allCases, id: \.self) { appearance in
+				Text(appearance.description).tag(appearance)
+				if appearance == .system {
+					Divider()
+				}
+			}
 		}
 		.onChange(of: appSettings.appearance) { newValue in
 			NotificationCenter.default.post(name: .appearanceChanged, object: nil, userInfo: ["appearance": newValue])
 		}
-
-//		Toggle(isOn: $appSettings.globalHotkey) {
-//			Text("Global Hotkey")
-//			HStack {
-//				Text("Open the App Library from anywhere with")
-//				Text("⇧ ⌘ Space")
-//					.monospaced()
-//			}
-//		}
 	}
 }
 

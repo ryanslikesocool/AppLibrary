@@ -8,15 +8,6 @@
         "revision" : "4137e3813332b38d860a597d201f191ae7526b7a",
         "version" : "1.1.0"
       }
-    },
-    {
-      "identity" : "serializationkit",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/ryanslikesocool/SerializationKit.git",
-      "state" : {
-        "branch" : "main",
-        "revision" : "5512db33bd530e2026bfeeecd3af0cc68cf753f8"
-      }
     }
   ],
   "version" : 2

@@ -10,12 +10,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate, ObservableObject {
 	func applicationDidFinishLaunching(_ notification: Notification) {
 		state.load()
 
-		setAppearance(AppSettings.get(for: .appearance))
+		setAppearance(settings.appearance.colorScheme)
 		NotificationCenter.default.addObserver(.appearanceChanged) { userInfo in
-			guard let appearance = userInfo?["appearance"] as? String else {
-				return
-			}
-			self.setAppearance(appearance)
+			self.setAppearance(userInfo?["appearance"] as? ColorScheme)
 		}
 	}
 
@@ -23,27 +20,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, ObservableObject {
 		state.unload()
 	}
 
-	internal func setAppearance(_ theme: String?) {
-		switch theme {
-			case "Light": NSApp.appearance = ColorScheme.light.nativeAppearance
-			case "Dark": NSApp.appearance = ColorScheme.dark.nativeAppearance
-			default: NSApp.appearance = nil
-		}
+	internal func setAppearance(_ colorScheme: ColorScheme?) {
+		NSApp.appearance = colorScheme?.nativeAppearance
 	}
-
-//	func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
-//		if
-//			let dockTileView = sender.dockTile.contentView,
-//			let dockTileSuperview = dockTileView.superview
-//		{
-//			let point = NSAccessibility.screenPoint(fromView: dockTileView, point: .zero)
-//			//let rect = NSAccessibility.screenRect(fromView: dockTileView, rect: dockTileView.bounds)
-//			print(point)
-//		}
-//		return flag
-//	}
-
-//	func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
-//		false
-//	}
 }

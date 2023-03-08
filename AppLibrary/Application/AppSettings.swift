@@ -1,10 +1,10 @@
 import Foundation
+import LoveCore
 
-struct AppSettings {
+struct AppSettings: Hashable {
 	private static let storage: UserDefaults = .standard
 
-	var appearance: String = "System" { didSet { Self.set(appearance, for: .appearance) } }
-//	var globalHotkey: Bool = false { didSet { Self.set(globalHotkey, for: .globalHotkey) } }
+	var appearance: Appearance = .system { didSet { Self.set(appearance, for: .appearance) } }
 
 	var hiddenApps: [String] = [] { didSet { Self.set(hiddenApps, for: .hiddenApps) } }
 
@@ -17,7 +17,6 @@ struct AppSettings {
 
 	init() {
 		appearance = Self.get(for: .appearance) ?? appearance
-//		globalHotkey = Self.get(for: .globalHotkey) ?? globalHotkey
 		hiddenApps = Self.get(for: .hiddenApps) ?? hiddenApps
 		columns = Self.get(for: .columns) ?? columns
 		sizeClass = Self.get(for: .sizeClass) ?? sizeClass

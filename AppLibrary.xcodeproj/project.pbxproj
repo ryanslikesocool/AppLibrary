@@ -54,6 +54,7 @@
 		AF4C9BC629A0B41B00BDBEC4 /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
 		AF4C9BC829A0D68000BDBEC4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AF4C9BCB29A19D6200BDBEC4 /* LibraryStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryStyle.swift; sourceTree = "<group>"; };
+		AFF3727429B866A700D79FC8 /* SerializationKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = SerializationKit; path = ../../SerializationKit; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +107,7 @@
 		AF3180B129A0843F00AE8A35 /* Packages */ = {
 			isa = PBXGroup;
 			children = (
+				AFF3727429B866A700D79FC8 /* SerializationKit */,
 				AF3180B229A0844B00AE8A35 /* LoveCore */,
 				AF3180B329A0845B00AE8A35 /* MathematicsKit */,
 				AF3180B429A0846A00AE8A35 /* MoreViews */,
@@ -395,7 +397,7 @@
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 565;
+				CURRENT_PROJECT_VERSION = 575;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 838RGQ32CA;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -427,7 +429,7 @@
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 565;
+				CURRENT_PROJECT_VERSION = 575;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 838RGQ32CA;
 				ENABLE_HARDENED_RUNTIME = YES;
