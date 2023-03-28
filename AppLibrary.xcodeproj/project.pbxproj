@@ -14,7 +14,6 @@
 		AF3180A329A083BB00AE8A35 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3180A229A083BB00AE8A35 /* App.swift */; };
 		AF3180A529A083BB00AE8A35 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3180A429A083BB00AE8A35 /* ContentView.swift */; };
 		AF3180A729A083BD00AE8A35 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AF3180A629A083BD00AE8A35 /* Assets.xcassets */; };
-		AF3180BB29A0863F00AE8A35 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3180BA29A0863F00AE8A35 /* AppState.swift */; };
 		AF3180BD29A0867C00AE8A35 /* AppTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3180BC29A0867C00AE8A35 /* AppTile.swift */; };
 		AF3180C229A096D400AE8A35 /* NSImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3180C129A096D400AE8A35 /* NSImage+Extension.swift */; };
 		AF3180C529A0986100AE8A35 /* LoveCore in Frameworks */ = {isa = PBXBuildFile; productRef = AF3180C429A0986100AE8A35 /* LoveCore */; };
@@ -22,11 +21,9 @@
 		AF4C9BBC29A0A12000BDBEC4 /* GrantPermissionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4C9BBB29A0A12000BDBEC4 /* GrantPermissionsView.swift */; };
 		AF4C9BBF29A0A2B300BDBEC4 /* Bookmarks.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4C9BBE29A0A2B300BDBEC4 /* Bookmarks.swift */; };
 		AF4C9BC129A0A65E00BDBEC4 /* AppListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4C9BC029A0A65E00BDBEC4 /* AppListView.swift */; };
-		AF4C9BC329A0AE5B00BDBEC4 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4C9BC229A0AE5B00BDBEC4 /* SettingsView.swift */; };
-		AF4C9BC529A0AFC600BDBEC4 /* UserDefaults+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4C9BC429A0AFC600BDBEC4 /* UserDefaults+Extension.swift */; };
-		AF4C9BC729A0B41B00BDBEC4 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4C9BC629A0B41B00BDBEC4 /* AppSettings.swift */; };
 		AF4C9BC929A0D68000BDBEC4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4C9BC829A0D68000BDBEC4 /* AppDelegate.swift */; };
 		AF4C9BCC29A19D6200BDBEC4 /* LibraryStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4C9BCB29A19D6200BDBEC4 /* LibraryStyle.swift */; };
+		AF81952129BC6A14003F0A56 /* AppLibraryModules in Frameworks */ = {isa = PBXBuildFile; productRef = AF81952029BC6A14003F0A56 /* AppLibraryModules */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,18 +39,15 @@
 		AF3180B229A0844B00AE8A35 /* LoveCore */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = LoveCore; path = ../../LoveCore; sourceTree = "<group>"; };
 		AF3180B329A0845B00AE8A35 /* MathematicsKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = MathematicsKit; path = ../../MathematicsKit; sourceTree = "<group>"; };
 		AF3180B429A0846A00AE8A35 /* MoreViews */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = MoreViews; path = ../../MoreViews; sourceTree = "<group>"; };
-		AF3180BA29A0863F00AE8A35 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		AF3180BC29A0867C00AE8A35 /* AppTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTile.swift; sourceTree = "<group>"; };
 		AF3180C129A096D400AE8A35 /* NSImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSImage+Extension.swift"; sourceTree = "<group>"; };
 		AF4C9BBB29A0A12000BDBEC4 /* GrantPermissionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrantPermissionsView.swift; sourceTree = "<group>"; };
 		AF4C9BBD29A0A14B00BDBEC4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		AF4C9BBE29A0A2B300BDBEC4 /* Bookmarks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bookmarks.swift; sourceTree = "<group>"; };
 		AF4C9BC029A0A65E00BDBEC4 /* AppListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppListView.swift; sourceTree = "<group>"; };
-		AF4C9BC229A0AE5B00BDBEC4 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
-		AF4C9BC429A0AFC600BDBEC4 /* UserDefaults+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extension.swift"; sourceTree = "<group>"; };
-		AF4C9BC629A0B41B00BDBEC4 /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
 		AF4C9BC829A0D68000BDBEC4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AF4C9BCB29A19D6200BDBEC4 /* LibraryStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryStyle.swift; sourceTree = "<group>"; };
+		AF81951D29BC6151003F0A56 /* AppLibraryModules */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = AppLibraryModules; sourceTree = "<group>"; };
 		AFF3727429B866A700D79FC8 /* SerializationKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = SerializationKit; path = ../../SerializationKit; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -64,6 +58,7 @@
 			files = (
 				AF3180C729A0986100AE8A35 /* MoreViews in Frameworks */,
 				AF3180C529A0986100AE8A35 /* LoveCore in Frameworks */,
+				AF81952129BC6A14003F0A56 /* AppLibraryModules in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -107,6 +102,7 @@
 		AF3180B129A0843F00AE8A35 /* Packages */ = {
 			isa = PBXGroup;
 			children = (
+				AF81951D29BC6151003F0A56 /* AppLibraryModules */,
 				AFF3727429B866A700D79FC8 /* SerializationKit */,
 				AF3180B229A0844B00AE8A35 /* LoveCore */,
 				AF3180B329A0845B00AE8A35 /* MathematicsKit */,
@@ -124,7 +120,6 @@
 				AF4C9BBB29A0A12000BDBEC4 /* GrantPermissionsView.swift */,
 				AF287D2C29B723B400FB344B /* KeyboardHandlerView.swift */,
 				AF287D3029B7277C00FB344B /* SearchBar.swift */,
-				AF4C9BC229A0AE5B00BDBEC4 /* SettingsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -135,7 +130,6 @@
 				AF287D2E29B725CC00FB344B /* Notification.Name+Extension.swift */,
 				AF3180C129A096D400AE8A35 /* NSImage+Extension.swift */,
 				AF287D2A29B720F000FB344B /* NSTextField+Extension.swift */,
-				AF4C9BC429A0AFC600BDBEC4 /* UserDefaults+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -144,8 +138,6 @@
 			isa = PBXGroup;
 			children = (
 				AF4C9BC829A0D68000BDBEC4 /* AppDelegate.swift */,
-				AF4C9BC629A0B41B00BDBEC4 /* AppSettings.swift */,
-				AF3180BA29A0863F00AE8A35 /* AppState.swift */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -192,6 +184,7 @@
 			packageProductDependencies = (
 				AF3180C429A0986100AE8A35 /* LoveCore */,
 				AF3180C629A0986100AE8A35 /* MoreViews */,
+				AF81952029BC6A14003F0A56 /* AppLibraryModules */,
 			);
 			productName = AppLibrary;
 			productReference = AF31809F29A083BB00AE8A35 /* App Library.app */;
@@ -247,20 +240,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				AF287D2F29B725CC00FB344B /* Notification.Name+Extension.swift in Sources */,
-				AF4C9BC729A0B41B00BDBEC4 /* AppSettings.swift in Sources */,
 				AF3180BD29A0867C00AE8A35 /* AppTile.swift in Sources */,
 				AF3180C229A096D400AE8A35 /* NSImage+Extension.swift in Sources */,
 				AF287D3129B7277C00FB344B /* SearchBar.swift in Sources */,
 				AF4C9BC129A0A65E00BDBEC4 /* AppListView.swift in Sources */,
 				AF3180A529A083BB00AE8A35 /* ContentView.swift in Sources */,
 				AF3180A329A083BB00AE8A35 /* App.swift in Sources */,
-				AF4C9BC329A0AE5B00BDBEC4 /* SettingsView.swift in Sources */,
 				AF4C9BC929A0D68000BDBEC4 /* AppDelegate.swift in Sources */,
 				AF4C9BBF29A0A2B300BDBEC4 /* Bookmarks.swift in Sources */,
 				AF4C9BBC29A0A12000BDBEC4 /* GrantPermissionsView.swift in Sources */,
-				AF4C9BC529A0AFC600BDBEC4 /* UserDefaults+Extension.swift in Sources */,
 				AF287D2B29B720F000FB344B /* NSTextField+Extension.swift in Sources */,
-				AF3180BB29A0863F00AE8A35 /* AppState.swift in Sources */,
 				AF287D2D29B723B400FB344B /* KeyboardHandlerView.swift in Sources */,
 				AF4C9BCC29A19D6200BDBEC4 /* LibraryStyle.swift in Sources */,
 			);
@@ -397,8 +386,7 @@
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 575;
-				DEAD_CODE_STRIPPING = YES;
+				CURRENT_PROJECT_VERSION = 579;
 				DEVELOPMENT_TEAM = 838RGQ32CA;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -429,8 +417,7 @@
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 575;
-				DEAD_CODE_STRIPPING = YES;
+				CURRENT_PROJECT_VERSION = 579;
 				DEVELOPMENT_TEAM = 838RGQ32CA;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -483,6 +470,10 @@
 		AF3180C629A0986100AE8A35 /* MoreViews */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = MoreViews;
+		};
+		AF81952029BC6A14003F0A56 /* AppLibraryModules */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = AppLibraryModules;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

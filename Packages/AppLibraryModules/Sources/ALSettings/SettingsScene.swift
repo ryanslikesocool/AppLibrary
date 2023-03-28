@@ -4,19 +4,20 @@ import MoreViews
 import MoreWindows
 import SwiftUI
 
-struct SettingsScene: Scene {
-	@ObservedObject private var appDelegate: AppDelegate
+public struct SettingsScene: Scene {
+	@ObservedObject private var appSettings: AppSettings
+	private var iconTint: Color { .lerp(.gray, .white, t: 0.5) }
 
-	init(delegate: AppDelegate) {
-		appDelegate = delegate
+	public init(appSettings: AppSettings) {
+		self.appSettings = appSettings
 	}
 
-	var body: some Scene {
+	public var body: some Scene {
 		SettingsWindow.Window(
-			SettingsWindow.Pane("General", tint: .gray, systemName: "gearshape.fill", content: { GeneralPane($appDelegate.settings) }),
+			SettingsWindow.Pane("General", tint: iconTint, systemName: "gearshape.fill", content: { GeneralPane($appSettings.general) }),
 			// SettingsWindow.Pane("Layout", tint: .gray, systemName: "circle.grid.2x2.fill", content: { LayoutPane($appDelegate.settings) }),
-			SettingsWindow.Pane("Directories", tint: .gray, systemName: "folder.fill", content: { DirectoriesPane($appDelegate.state) }),
-			SettingsWindow.Pane("Hidden Apps", tint: .gray, systemName: "eye.slash.fill", content: { HiddenAppsPane($appDelegate.settings) }),
+			SettingsWindow.Pane("App Directories", tint: iconTint, systemName: "folder.fill", content: { AppDirectoriesPane($appSettings.appDirectories) }),
+			SettingsWindow.Pane("Hidden Apps", tint: iconTint, systemName: "eye.slash.fill", content: { HiddenAppsPane($appSettings.appDirectories) }),
 			width: SettingsWindow.defaultWidth - 100,
 			sidebarWidth: SettingsWindow.defaultSidebarWidth - 50,
 			background: Background.init
@@ -75,14 +76,14 @@ private struct Background: View {
 // }
 
 private struct GeneralPane: View {
-	@Binding private var appSettings: AppSettings
+	@Binding private var settings: AppSettings.General
 
-	init(_ appSettings: Binding<AppSettings>) {
-		_appSettings = appSettings
+	init(_ settings: Binding<AppSettings.General>) {
+		_settings = settings
 	}
 
 	var body: some View {
-		Picker("Appearance", selection: $appSettings.appearance) {
+		Picker("Appearance", selection: $settings.appearance) {
 			ForEach(Appearance.allCases, id: \.self) { appearance in
 				Text(appearance.description).tag(appearance)
 				if appearance == .system {
@@ -90,20 +91,30 @@ private struct GeneralPane: View {
 				}
 			}
 		}
-		.onChange(of: appSettings.appearance) { newValue in
+		.onChange(of: settings.appearance) { newValue in
 			NotificationCenter.default.post(name: .appearanceChanged, object: nil, userInfo: ["appearance": newValue])
 		}
 	}
 }
 
-private struct DirectoriesPane: View {
-	@Binding private var appState: AppState
+private struct AppDirectoriesPane: View {
+	@Binding private var settings: AppSettings.AppDirectories
 
-	private var directoryURLs: [URL] { appState.bookmarks.urls.sorted(by: \.relativePath) }
-	private var recommendedDirectories: [String] { AppState.recommendedURLs.filter { recommendation in !appState.bookmarks.urls.contains(where: { $0.compressingTildeInPath == recommendation }) } }
+	private var directoryURLs: [URL] {
+		settings.appDirectories
+			.compactMap { $0.url }.sorted(by: \.relativePath)
+	}
 
-	init(_ appState: Binding<AppState>) {
-		_appState = appState
+	private var recommendedDirectories: [AppSettings.AppDirectories.RecommendedDirectory] {
+		AppSettings.AppDirectories.recommendedDirectories
+			.filter { recommendation in
+				!settings.appDirectories
+					.contains(where: { $0.url == recommendation.url })
+			}
+	}
+
+	init(_ settings: Binding<AppSettings.AppDirectories>) {
+		_settings = settings
 	}
 
 	var body: some View {
@@ -119,9 +130,14 @@ private struct DirectoriesPane: View {
 
 					ForEach(urls, id: \.self) { url in
 						ButtonItem(url.compressingTildeInPath) {
-							Button("Remove") { appState.bookmarks.removeBookmark(for: url) }
-								.help("Remove this app directory.")
-								.fontDesign(.default)
+							Button("Remove") {
+								guard let index = settings.appDirectories.firstIndex(where: { $0.url == url }) else {
+									return
+								}
+								settings.appDirectories.remove(at: index)
+							}
+							.help("Remove this app directory.")
+							.fontDesign(.default)
 						}
 
 						if url != urls.last {
@@ -135,7 +151,7 @@ private struct DirectoriesPane: View {
 			HStack {
 				Text("Application Directories")
 				Spacer()
-				Button("Add") { appState.bookmarks.promptForDirectory() }
+				Button("Add") { settings.promptForDirectory() }
 					.font(.body)
 					.help("Add a directory to search for applications.")
 			}
@@ -147,9 +163,9 @@ private struct DirectoriesPane: View {
 				Text("All recommendations have been added.")
 					.opacity(0.5)
 			} else {
-				ForEach(recommendedDirectories, id: \.self) { url in
-					ButtonItem(url) {
-						Button("Add") { appState.bookmarks.promptForDirectory(URL(string: url)) }
+				ForEach(recommendedDirectories, id: \.self) { recommendation in
+					ButtonItem(recommendation.url.path(percentEncoded: false)) {
+						Button("Add") { settings.promptForDirectory(recommendation.url) }
 							.help("Add this recommended directory to the application directory list.")
 							.fontDesign(.default)
 					}
@@ -164,12 +180,12 @@ private struct DirectoriesPane: View {
 }
 
 private struct HiddenAppsPane: View {
-	@Binding private var appSettings: AppSettings
+	@Binding private var settings: AppSettings.AppDirectories
 
-	private var hiddenApps: [String] { appSettings.hiddenApps.sorted() }
+	private var hiddenApps: [AppIdentifier] { settings.appDirectories.flatMap { $0.apps }.filter { $0.isHidden }.sorted(by: \.description) }
 
-	init(_ appSettings: Binding<AppSettings>) {
-		_appSettings = appSettings
+	init(_ settings: Binding<AppSettings.AppDirectories>) {
+		_settings = settings
 	}
 
 	var body: some View {
@@ -179,20 +195,21 @@ private struct HiddenAppsPane: View {
 					.opacity(0.5)
 			} else {
 				LazyVStack {
-					let apps = hiddenApps
-
-					ForEach(apps, id: \.self) { app in
-						ButtonItem(app) {
-							Button("Show") { appSettings.hiddenApps.remove(app) }
-								.help("Reveal this item in the App Library.")
-								.fontDesign(.default)
-						}
-
-						if app != apps.last {
-							Divider()
+					ForEach($settings.appDirectories) { $directory in
+						ForEach($directory.apps) { $app in
+							ButtonItem(app.description) {
+								Button("Show") { app.isHidden = false }
+									.help("Reveal this item in the App Library.")
+									.fontDesign(.default)
+							}
 						}
 					}
 					.fontDesign(.monospaced)
+//					ForEach(apps, id: \.self) { app in
+//						if app != apps.last {
+//							Divider()
+//						}
+//					}
 				}
 			}
 		} header: {

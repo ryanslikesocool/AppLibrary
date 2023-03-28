@@ -1,3 +1,4 @@
+import ALSettings
 import LoveCore
 import MoreViews
 import SwiftUI
@@ -33,15 +34,20 @@ struct AppListView: View {
 private extension AppListView {
 	var settings: AppSettings { appDelegate.settings }
 
-	var viewWidth: Double {
-		let count = Double(settings.columns)
-		return (count * settings.iconSize) + (settings.padding * 2 + settings.spacing) + ((count - 1.0) * settings.spacing)
-	}
+//	var viewWidth: Double {
+//		let count = Double(settings.columns)
+//		return (count * settings.iconSize) + (settings.padding * 2 + settings.spacing) + ((count - 1.0) * settings.spacing)
+//	}
 
 	var applicationURLs: [URL] {
-		let initialResult = appDelegate.state.applicationURLs
+		let initialResult = appDelegate.applicationURLs
 			.filter { $0.pathExtension == "app" }
-			.filter { !appDelegate.settings.hiddenApps.contains($0.lastPathComponent) }
+			.filter { initialURL in
+				let hiddenName = initialURL.lastPathComponent
+				return !appDelegate.settings.hiddenApps.hiddenApps.contains(where: { app in
+					app.name == hiddenName
+				})
+			}
 			.sorted(by: { $0.lastPathComponent < $1.lastPathComponent })
 
 		guard !searchQuery.isEmpty else {

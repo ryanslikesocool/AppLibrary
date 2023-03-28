@@ -1,26 +1,18 @@
+import ALSettings
 import AppKit
 import Foundation
 import LoveCore
 import SwiftUI
 
 final class AppDelegate: NSObject, NSApplicationDelegate, ObservableObject {
-	@Published var state: AppState = AppState()
-	@Published var settings: AppSettings = AppSettings()
+	var settings: AppSettings { AppSettings.shared }
 
 	func applicationDidFinishLaunching(_ notification: Notification) {
-		state.load()
+		settings.appDirectories.restoreBookmarks()
 
-		setAppearance(settings.appearance.colorScheme)
+		Application.setAppearance(settings.general.appearance)
 		NotificationCenter.default.addObserver(.appearanceChanged) { userInfo in
-			self.setAppearance(userInfo?["appearance"] as? ColorScheme)
+			Application.setAppearance(userInfo?["appearance"] as? Appearance)
 		}
-	}
-
-	func applicationWillTerminate(_ notification: Notification) {
-		state.unload()
-	}
-
-	internal func setAppearance(_ colorScheme: ColorScheme?) {
-		NSApp.appearance = colorScheme?.nativeAppearance
 	}
 }

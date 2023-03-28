@@ -1,3 +1,4 @@
+import ALSettings
 import AppKit
 import LoveCore
 import MoreViews
@@ -7,10 +8,10 @@ struct AppTile: View {
 	@EnvironmentObject private var appDelegate: AppDelegate
 	@Environment(\.libraryStyle) private var libraryStyle: LibraryStyle
 
-	private let url: URL
+	@Binding private var app: AppIdentifier
 
-	init(_ url: URL) {
-		self.url = url
+	init(_ app: Binding<AppIdentifier>) {
+		_app = app
 	}
 
 	var body: some View {
@@ -18,10 +19,10 @@ struct AppTile: View {
 			.contextMenu {
 				Button("Open", action: buttonAction)
 				Button("Show in Finder") {
-					NSWorkspace.shared.activateFileViewerSelecting([url])
+					NSWorkspace.shared.activateFileViewerSelecting([app.url])
 				}
 				Divider()
-				Button("Hide") { appDelegate.settings.hiddenApps.append(url.lastPathComponent) }
+				Button("Hide") { app.isHidden = true }
 					.keyboardShortcut("h")
 			}
 	}
@@ -31,13 +32,9 @@ struct AppTile: View {
 
 private extension AppTile {
 	var sourceImage: NSImage? {
-		loadRepresentation(for: Self.retrieveIcon(for: url))
-			?? loadRepresentation(for: NSWorkspace.shared.icon(forFile: url.path()))
+		loadRepresentation(for: Self.retrieveIcon(for: app.url))
+			?? loadRepresentation(for: NSWorkspace.shared.icon(forFile: app.url.path()))
 			?? genericAppIcon
-	}
-
-	var appName: String {
-		url.lastPathComponent.deletingSuffix(".app")
 	}
 }
 
@@ -61,10 +58,10 @@ private extension AppTile {
 		.overlay(alignment: .bottom) {
 			text
 				.font(.footnote)
-				.frame(maxWidth: iconWidth + appDelegate.settings.spacing * 0.5)
+//				.frame(maxWidth: iconWidth + appDelegate.settings.spacing * 0.5)
 				.fixedSize()
 				.multilineTextAlignment(.center)
-				.help(appName)
+				.help(app.description)
 				.offset(y: 16)
 		}
 	}
@@ -83,7 +80,7 @@ private extension AppTile {
 	}
 
 	private var text: some View {
-		Text(appName)
+		Text(app.description)
 	}
 
 	private var iconContent: some View {
@@ -99,7 +96,7 @@ private extension AppTile {
 	}
 
 	private func buttonAction() {
-		Self.openApplication(at: url)
+		Self.openApplication(at: app.url)
 	}
 }
 
@@ -108,7 +105,7 @@ private extension AppTile {
 extension AppTile {
 	var iconWidth: Double {
 		switch libraryStyle {
-			case .tile: return appDelegate.settings.iconSize
+			case .tile: return 48 // appDelegate.settings.iconSize
 			case .list: return 48
 		}
 	}
