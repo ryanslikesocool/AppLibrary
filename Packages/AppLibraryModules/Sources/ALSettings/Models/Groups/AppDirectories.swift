@@ -6,6 +6,9 @@ public extension AppSettings {
 	struct AppDirectories: Hashable, Codable {
 		public var appDirectories: [AppDirectory] = []
 
+		public var applications: [AppIdentifier] { appDirectories.flatMap { $0.apps } }
+//		public var applicationURLs: [URL] { applications.compactMap { $0.url } }
+
 		public init() { }
 
 		public mutating func restoreBookmarks() {

@@ -1,4 +1,5 @@
 import LoveCore
+import MoreShapes
 import MoreViews
 import SwiftUI
 
@@ -14,7 +15,7 @@ struct ContentView: View {
 
 	@ViewBuilder private var content: some View {
 		Group {
-			if appDelegate.state.bookmarks.isEmpty {
+			if appDelegate.settings.appDirectories.appDirectories.isEmpty {
 				GrantPermissionsView()
 			} else {
 				AppListView()
@@ -83,6 +84,6 @@ struct ContentView: View {
 private struct ClippingView: View {
 	var body: some View {
 		Color.clear
-			.superellipseClipShape(radius: 32)
+			.clipShape(Superellipse(radius: 32))
 	}
 }

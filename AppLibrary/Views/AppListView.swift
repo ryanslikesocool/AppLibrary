@@ -24,8 +24,8 @@ struct AppListView: View {
 				}
 			}
 		}
-		.frame(width: viewWidth)
-		.frame(minHeight: viewWidth + settings.iconSize)
+//		.frame(width: viewWidth)
+//		.frame(minHeight: viewWidth + settings.iconSize)
 	}
 }
 
@@ -39,23 +39,17 @@ private extension AppListView {
 //		return (count * settings.iconSize) + (settings.padding * 2 + settings.spacing) + ((count - 1.0) * settings.spacing)
 //	}
 
-	var applicationURLs: [URL] {
-		let initialResult = appDelegate.applicationURLs
-			.filter { $0.pathExtension == "app" }
-			.filter { initialURL in
-				let hiddenName = initialURL.lastPathComponent
-				return !appDelegate.settings.hiddenApps.hiddenApps.contains(where: { app in
-					app.name == hiddenName
-				})
-			}
-			.sorted(by: { $0.lastPathComponent < $1.lastPathComponent })
+	var filteredApplications: [AppIdentifier] {
+		let initialResult = settings.appDirectories.applications
+			.filter { $0.pathExtension == "app" && !$0.isHidden }
+			.sorted(by: { $0.description < $1.description })
 
 		guard !searchQuery.isEmpty else {
 			return initialResult
 		}
 
 		let search = searchQuery.lowercased()
-		return initialResult.filter { $0.lastPathComponent.lowercased().contains(search) }
+		return initialResult.filter { $0.description.lowercased().contains(search) }
 	}
 }
 
@@ -63,37 +57,54 @@ private extension AppListView {
 
 private extension AppListView {
 	@ViewBuilder var scrollContent: some View {
-		switch libraryStyle {
-			case .tile: gridView
-			case .list: listView
-		}
+//		switch libraryStyle {
+//			case .tile: gridView
+//			case .list: listView
+//		}
+
+		listView
 	}
 
 	var iterateURLs: some View {
-		ForEach(applicationURLs, id: \.self) { url in
-			AppTile(url)
-				.id(url.lastPathComponent.first!)
+		let applicationsBinding = Binding(
+			get: { filteredApplications },
+			set: { newValue in
+				for item in newValue {
+					guard
+						let directoryIndex = settings.appDirectories.appDirectories.firstIndex(where: { $0.apps.contains(where: { $0.id == item.id }) }),
+						let appIndex = settings.appDirectories.appDirectories[directoryIndex].apps.firstIndex(where: { $0.id == item.id })
+					else {
+						continue
+					}
+					settings.appDirectories.appDirectories[directoryIndex].apps[appIndex] = item
+				}
+			}
+		)
+
+		return ForEach(applicationsBinding) { $application in
+			AppTile($application)
+				.id(application.description.first!)
 		}
 	}
 }
 
 // MARK: - Grid
 
-private extension AppListView {
-	private var gridColumns: [GridItem] {
-		let preset = GridItem(.flexible(), spacing: settings.spacing, alignment: .center)
-		return [GridItem](repeating: preset, count: settings.columns)
-	}
-
-	var gridView: some View {
-		LazyVGrid(columns: gridColumns, alignment: .leading) {
-			iterateURLs
-				.padding(.vertical, settings.spacing * 0.25)
-		}
-		.padding(horizontal: settings.spacing * 0.5, vertical: settings.spacing * 0.25)
-		.padding(settings.padding)
-	}
-}
+// private extension AppListView {
+//	private var gridColumns: [GridItem] {
+//		let preset = GridItem(.flexible(), spacing: settings.spacing, alignment: .center)
+//		return [GridItem](repeating: preset, count: settings.columns)
+//	}
+//
+//	var gridView: some View {
+//		LazyVGrid(columns: gridColumns, alignment: .leading) {
+//			iterateURLs
+//				.padding(.vertical, settings.spacing * 0.25)
+//		}
+//		.padding(horizontal: settings.spacing * 0.5, vertical: settings.spacing * 0.25)
+//		.padding(settings.padding)
+//	}
+// }
 
 // MARK: - List
 

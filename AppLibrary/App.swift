@@ -5,7 +5,7 @@ import SwiftUI
 	@Environment(\.scenePhase) private var scenePhase
 	@NSApplicationDelegateAdaptor private var appDelegate: AppDelegate
 
-	@StateObject private var appSettings: AppSettings = AppSettings.shared
+	@StateObject private var settings: AppSettings = AppSettings.shared
 
 	var body: some Scene {
 		MenuBarExtra("App Library", systemImage: "square.grid.3x3.fill") {
@@ -15,6 +15,6 @@ import SwiftUI
 		.menuBarExtraStyle(.window)
 		.windowResizability(.contentSize)
 
-		SettingsScene(appSettings: appSettings)
+		SettingsScene(settings: settings)
 	}
 }

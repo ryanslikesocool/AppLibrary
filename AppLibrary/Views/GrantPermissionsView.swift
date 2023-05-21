@@ -8,7 +8,7 @@ struct GrantPermissionsView: View {
 			Text("Add a directory to\nsearch for applications.")
 				.multilineTextAlignment(.center)
 
-			Button("Add Directory") { appDelegate.state.bookmarks.promptForDirectory() }
+			Button("Add Directory") { appDelegate.settings.appDirectories.promptForDirectory() }
 				.controlSize(.large)
 				.buttonStyle(.borderedProminent)
 

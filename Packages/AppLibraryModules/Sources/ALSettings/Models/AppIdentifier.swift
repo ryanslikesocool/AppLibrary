@@ -11,6 +11,7 @@ public struct AppIdentifier: Identifiable, Hashable, Codable, CustomStringConver
 		self.url = url
 	}
 
+	public var pathExtension: String { url.pathExtension }
 	public var description: String { url.lastPathComponent.deletingSuffix(".app") }
 
 	private enum CodingKeys: CodingKey {
