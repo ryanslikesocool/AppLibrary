@@ -5,7 +5,7 @@ final class AppLibraryWindow: NSWindow {
 	init(contentRect: NSRect) {
 		super.init(
 			contentRect: contentRect,
-			styleMask: [.borderless, .utilityWindow, .fullSizeContentView, .titled],
+			styleMask: [.borderless, .fullSizeContentView, .titled],
 			backing: .buffered,
 			defer: false
 		)
@@ -13,8 +13,6 @@ final class AppLibraryWindow: NSWindow {
 		prepareWindow()
 		prepareBackgroundView()
 		prepareMainView()
-
-		invalidateShadow()
 	}
 
 	override var canBecomeMain: Bool { true }
@@ -22,7 +20,7 @@ final class AppLibraryWindow: NSWindow {
 }
 
 private extension AppLibraryWindow {
-	func prepareWindow(){
+	func prepareWindow() {
 		isMovable = false
 		level = .popUpMenu
 		titleVisibility = .hidden
@@ -53,6 +51,8 @@ private extension AppLibraryWindow {
 			visualEffect.topAnchor.constraint(equalTo: constraints.topAnchor).isActive = true
 			visualEffect.bottomAnchor.constraint(equalTo: constraints.bottomAnchor).isActive = true
 		}
+
+		invalidateShadow()
 	}
 
 	func prepareMainView() {

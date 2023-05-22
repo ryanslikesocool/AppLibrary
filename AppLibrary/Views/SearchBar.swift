@@ -6,17 +6,7 @@ struct SearchBar: View {
 
 	var body: some View {
 		ZStack {
-//			if query.isEmpty {
-//				HStack {
-//					Image(systemName: "magnifyingglass")
-//					Text("Search")
-//					Spacer()
-//				}
-//				.opacity(0.5)
-//				.allowsHitTesting(false)
-//			}
-
-			TextField("􀊫 Search", text: $query)
+			TextField("\(Image(systemName: "magnifyingglass")) Search", text: $query)
 				.textFieldStyle(.plain)
 		}
 		.padding(.horizontal, 8)

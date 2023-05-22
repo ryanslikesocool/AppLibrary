@@ -1,3 +1,4 @@
+import Carbon.HIToolbox
 import Cocoa
 import SwiftUI
 
@@ -17,21 +18,37 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 				_ = AXIsProcessTrustedWithOptions(options as CFDictionary)
 			}
 		}
+
+		_ = AppSettings.shared
+
+		NSEvent.addLocalMonitorForEvents(matching: .keyDown) {
+			if self.keyDown(with: $0) {
+				return nil // needed to get rid of purr sound
+			} else {
+				return $0
+			}
+		}
 	}
 
 	func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
 		false
 	}
 
+//	func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
+//		true
+//	}
+
 	func applicationDidBecomeActive(_ notification: Notification) {
-		openWindow()
+		revealWindow()
 	}
 
-//	func applicationDidResignActive(_ notification: Notification) { }
+	func applicationDidResignActive(_ notification: Notification) {
+		dismissWindow()
+	}
 }
 
 private extension AppDelegate {
-	func openWindow() {
+	func revealWindow() {
 		guard let tileLocation = getTileLocation() else {
 			return
 		}
@@ -40,12 +57,27 @@ private extension AppDelegate {
 			x: tileLocation.x - window.frame.width * 0.5,
 			y: tileLocation.y * 2.0 + window.frame.height
 		))
-		DispatchQueue.main.async { [weak self] in
-			self?.window.makeKeyAndOrderFront(nil)
+		window.makeKeyAndOrderFront(nil)
+	}
+
+	func hideApplication() {
+		NSApplication.shared.hide(self)
+	}
+
+	func dismissWindow() {
+		window.orderOut(self)
+	}
+
+	func keyDown(with event: NSEvent) -> Bool {
+		if Int(event.keyCode) == kVK_Escape {
+			hideApplication()
+			return true
+		} else {
+			return false
 		}
 	}
 
-	func getTileLocation() -> CGPoint? {
+	func getTileLocation() -> NSPoint? {
 		guard AXIsProcessTrusted() else {
 			return nil
 		}
