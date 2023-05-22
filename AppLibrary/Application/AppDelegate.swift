@@ -2,7 +2,7 @@ import Cocoa
 import SwiftUI
 
 final class AppDelegate: NSObject, NSApplicationDelegate {
-	private var window: NSWindow!
+	private lazy var window: NSWindow = AppLibraryWindow(contentRect: NSRect(x: 0, y: 0, width: 300, height: 450))
 
 	private let appIconContent: NSImageView = NSImageView(image: NSImage(named: "AppIcon")!)
 
@@ -17,22 +17,6 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 				_ = AXIsProcessTrustedWithOptions(options as CFDictionary)
 			}
 		}
-
-		windowSetup()
-
-//		NSApp.dockTile.contentView = appIconContent
-//		NSApp.dockTile.display()
-
-		// createWindow()
-
-//		NSEvent.addLocalMonitorForEvents(
-//			matching: [.mouseMoved]
-//		) { [weak self] in
-//			guard let self = self else { return $0 }
-//			self.updateDockTile()
-//			NSApp.dockTile.display()
-//			return $0
-//		}
 	}
 
 	func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
@@ -43,13 +27,11 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 		openWindow()
 	}
 
-	func applicationDidResignActive(_ notification: Notification) {
-		closeWindow()
-	}
+//	func applicationDidResignActive(_ notification: Notification) { }
 }
 
-extension AppDelegate {
-	private func openWindow() {
+private extension AppDelegate {
+	func openWindow() {
 		guard let tileLocation = getTileLocation() else {
 			return
 		}
@@ -63,46 +45,12 @@ extension AppDelegate {
 		}
 	}
 
-	private func closeWindow() { }
-
-	private func windowSetup() {
-		window = NSWindow(
-			contentRect: NSRect(x: 0, y: 0, width: 300, height: 450),
-			styleMask: [.borderless, .closable, .titled],
-			backing: .buffered,
-			defer: false
-		)
-		window.isMovable = false
-		window.titleVisibility = .hidden
-		window.titlebarAppearsTransparent = true
-		window.isOpaque = false
-		window.backgroundColor = .clear
-		window.hidesOnDeactivate = true
-
-		window.standardWindowButton(.closeButton)?.isHidden = true
-		window.standardWindowButton(.miniaturizeButton)?.isHidden = true
-		window.standardWindowButton(.zoomButton)?.isHidden = true
-
-		let view = NSHostingView(rootView: ContentView())
-		view.wantsLayer = true
-		view.layer!.cornerRadius = 16
-		view.layer!.cornerCurve = .continuous
-		view.layer!.masksToBounds = true
-
-		window.contentView = view
-
-		window.invalidateShadow()
-	}
-}
-
-extension AppDelegate {
-	private func getTileLocation() -> CGPoint? {
+	func getTileLocation() -> CGPoint? {
 		guard AXIsProcessTrusted() else {
 			return nil
 		}
 
 		var iconOrigin = NSPoint.zero
-//		let mouseLocation = NSEvent.mouseLocation
 
 		if let dockIcon = dockIcon() {
 			var values: CFArray?
@@ -124,21 +72,6 @@ extension AppDelegate {
 					x: position.x + size.width / 2.0,
 					y: NSScreen.main!.frame.height - (position.y + size.height / 2.0)
 				)
-
-				// If the pointer is overlapping the icon
-//				if mouseLocation.x >= position.x
-//					&& mouseLocation.x <= position.x + size.width
-//					&& mouseLocation.y <= NSScreen.main!.frame.height - position.y
-//					&& mouseLocation.y >= NSScreen.main!.frame.height - position.y - size.height
-//				{
-//					performHoverAnimation()
-//					return
-//				} else {
-//					hoverAnimationTimer?.invalidate()
-//					hoverAnimationTimer = nil
-//					eyes.isHidden = false
-//					contentView.image = NSImage(named: .base)
-//				}
 			}
 		}
 

@@ -22,6 +22,6 @@ struct ContentView: View {
 			.padding(.horizontal, 8)
 		}
 		.overlay(alignment: .top) { SearchBar(query: $searchQuery) }
-		.background(.regularMaterial)
+		.ignoresSafeArea()
 	}
 }
