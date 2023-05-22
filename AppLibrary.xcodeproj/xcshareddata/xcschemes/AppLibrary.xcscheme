@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1420"
+   LastUpgradeVersion = "1430"
    version = "1.7">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -9,12 +9,12 @@
          <ExecutionAction
             ActionType = "Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction">
             <ActionContent
-               title = "Update Version"
+               title = "Run Script"
                scriptText = "cd &quot;${PROJECT_DIR}&quot; ; agvtool bump&#10;">
                <EnvironmentBuildable>
                   <BuildableReference
                      BuildableIdentifier = "primary"
-                     BlueprintIdentifier = "AF31809E29A083BB00AE8A35"
+                     BlueprintIdentifier = "AF7C7A182A1A304800545B8B"
                      BuildableName = "App Library.app"
                      BlueprintName = "App Library"
                      ReferencedContainer = "container:AppLibrary.xcodeproj">
@@ -32,7 +32,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "AF31809E29A083BB00AE8A35"
+               BlueprintIdentifier = "AF7C7A182A1A304800545B8B"
                BuildableName = "App Library.app"
                BlueprintName = "App Library"
                ReferencedContainer = "container:AppLibrary.xcodeproj">
@@ -44,9 +44,8 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES">
-      <Testables>
-      </Testables>
+      shouldUseLaunchSchemeArgsEnv = "YES"
+      shouldAutocreateTestPlan = "YES">
    </TestAction>
    <LaunchAction
       buildConfiguration = "Debug"
@@ -62,7 +61,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "AF31809E29A083BB00AE8A35"
+            BlueprintIdentifier = "AF7C7A182A1A304800545B8B"
             BuildableName = "App Library.app"
             BlueprintName = "App Library"
             ReferencedContainer = "container:AppLibrary.xcodeproj">
@@ -86,7 +85,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "AF31809E29A083BB00AE8A35"
+            BlueprintIdentifier = "AF7C7A182A1A304800545B8B"
             BuildableName = "App Library.app"
             BlueprintName = "App Library"
             ReferencedContainer = "container:AppLibrary.xcodeproj">
