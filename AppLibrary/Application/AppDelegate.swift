@@ -3,7 +3,7 @@ import Cocoa
 import SwiftUI
 
 final class AppDelegate: NSObject, NSApplicationDelegate {
-	private lazy var window: NSWindow = AppLibraryWindow(contentRect: NSRect(x: 0, y: 0, width: 300, height: 450))
+	private lazy var window: AppLibraryWindow = AppLibraryWindow(contentRect: NSRect(x: 0, y: 0, width: 300, height: 450))
 
 	private let appIconContent: NSImageView = NSImageView(image: NSImage(named: "AppIcon")!)
 
@@ -43,7 +43,12 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 	}
 
 	func applicationDidResignActive(_ notification: Notification) {
-		dismissWindow()
+		window.dismiss()
+		AppSettings.save()
+	}
+
+	func applicationWillTerminate(_ notification: Notification) {
+		AppSettings.save()
 	}
 }
 
@@ -53,24 +58,15 @@ private extension AppDelegate {
 			return
 		}
 
-		window.setFrameTopLeftPoint(NSPoint(
+		window.reveal(location: NSPoint(
 			x: tileLocation.x - window.frame.width * 0.5,
 			y: tileLocation.y * 2.0 + window.frame.height
 		))
-		window.makeKeyAndOrderFront(nil)
-	}
-
-	func hideApplication() {
-		NSApplication.shared.hide(self)
-	}
-
-	func dismissWindow() {
-		window.orderOut(self)
 	}
 
 	func keyDown(with event: NSEvent) -> Bool {
 		if Int(event.keyCode) == kVK_Escape {
-			hideApplication()
+			window.hide()
 			return true
 		} else {
 			return false

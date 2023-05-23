@@ -23,6 +23,9 @@
 		AFBCC05D2A1B55AC00E2483D /* TileContextMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBCC05C2A1B55AC00E2483D /* TileContextMenu.swift */; };
 		AFBCC0602A1B64A800E2483D /* ApplicationInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBCC05F2A1B64A800E2483D /* ApplicationInformation.swift */; };
 		AFBCC0622A1B6AE700E2483D /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBCC0612A1B6AE700E2483D /* Array+Extension.swift */; };
+		AFBCC0642A1B7DC800E2483D /* FloatingPoint+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBCC0632A1B7DC800E2483D /* FloatingPoint+Extension.swift */; };
+		AFBCC0662A1B7DDF00E2483D /* CGRect+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBCC0652A1B7DDF00E2483D /* CGRect+Extension.swift */; };
+		AFBCC0682A1B7E6200E2483D /* Genie.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBCC0672A1B7E6200E2483D /* Genie.swift */; };
 		AFCE14F02A1A361D00889267 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCE14EF2A1A361D00889267 /* SearchBar.swift */; };
 		AFCE14F32A1A388500889267 /* View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCE14F22A1A388500889267 /* View+Extension.swift */; };
 		AFCE14F52A1A4A7C00889267 /* ListTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCE14F42A1A4A7C00889267 /* ListTile.swift */; };
@@ -48,6 +51,9 @@
 		AFBCC05C2A1B55AC00E2483D /* TileContextMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileContextMenu.swift; sourceTree = "<group>"; };
 		AFBCC05F2A1B64A800E2483D /* ApplicationInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationInformation.swift; sourceTree = "<group>"; };
 		AFBCC0612A1B6AE700E2483D /* Array+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extension.swift"; sourceTree = "<group>"; };
+		AFBCC0632A1B7DC800E2483D /* FloatingPoint+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FloatingPoint+Extension.swift"; sourceTree = "<group>"; };
+		AFBCC0652A1B7DDF00E2483D /* CGRect+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGRect+Extension.swift"; sourceTree = "<group>"; };
+		AFBCC0672A1B7E6200E2483D /* Genie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Genie.swift; sourceTree = "<group>"; };
 		AFCE14EF2A1A361D00889267 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		AFCE14F22A1A388500889267 /* View+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extension.swift"; sourceTree = "<group>"; };
 		AFCE14F42A1A4A7C00889267 /* ListTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTile.swift; sourceTree = "<group>"; };
@@ -132,6 +138,7 @@
 			isa = PBXGroup;
 			children = (
 				AFBCC0542A1B502600E2483D /* TileUtilities.swift */,
+				AFBCC0672A1B7E6200E2483D /* Genie.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -152,6 +159,8 @@
 				AFBCC0482A1B38F300E2483D /* NSMenuItem+Extension.swift */,
 				AFBCC0562A1B504400E2483D /* URL+Extension.swift */,
 				AFCE14F22A1A388500889267 /* View+Extension.swift */,
+				AFBCC0632A1B7DC800E2483D /* FloatingPoint+Extension.swift */,
+				AFBCC0652A1B7DDF00E2483D /* CGRect+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -234,12 +243,15 @@
 				AFBCC0492A1B38F300E2483D /* NSMenuItem+Extension.swift in Sources */,
 				AFBCC0572A1B504400E2483D /* URL+Extension.swift in Sources */,
 				AFBCC0522A1B4B3C00E2483D /* AppSettings.Directories.swift in Sources */,
+				AFBCC0662A1B7DDF00E2483D /* CGRect+Extension.swift in Sources */,
 				AFBCC05D2A1B55AC00E2483D /* TileContextMenu.swift in Sources */,
 				AFCE14F02A1A361D00889267 /* SearchBar.swift in Sources */,
 				AFBCC0472A1B357000E2483D /* AppMenu.swift in Sources */,
 				AFCE14F32A1A388500889267 /* View+Extension.swift in Sources */,
 				AF7C7A1D2A1A304800545B8B /* AppDelegate.swift in Sources */,
 				AFBCC0602A1B64A800E2483D /* ApplicationInformation.swift in Sources */,
+				AFBCC0682A1B7E6200E2483D /* Genie.swift in Sources */,
+				AFBCC0642A1B7DC800E2483D /* FloatingPoint+Extension.swift in Sources */,
 				AFBCC04E2A1B4A7700E2483D /* AppSettings.swift in Sources */,
 				AF7C7A302A1A31FB00545B8B /* ContentView.swift in Sources */,
 				AFBCC0552A1B502600E2483D /* TileUtilities.swift in Sources */,
@@ -370,7 +382,7 @@
 				CODE_SIGN_ENTITLEMENTS = AppLibrary/AppLibrary.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 225;
+				CURRENT_PROJECT_VERSION = 279;
 				DEVELOPMENT_TEAM = 838RGQ32CA;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -400,7 +412,7 @@
 				CODE_SIGN_ENTITLEMENTS = AppLibrary/AppLibrary.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 225;
+				CURRENT_PROJECT_VERSION = 279;
 				DEVELOPMENT_TEAM = 838RGQ32CA;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;

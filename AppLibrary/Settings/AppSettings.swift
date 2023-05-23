@@ -3,12 +3,16 @@ import Foundation
 final class AppSettings: ObservableObject {
 	static let shared: AppSettings = .load()
 
-	var display: Display
-	var directories: Directories
+	@Published var display: Display
+	@Published var directories: Directories
 
 	private init() {
 		display = Display()
 		directories = Directories()
+	}
+
+	static func save() {
+		shared.save()
 	}
 }
 

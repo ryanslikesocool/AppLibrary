@@ -6,7 +6,7 @@ struct SearchBar: View {
 
 	var body: some View {
 		ZStack {
-			TextField("\(Image(systemName: "magnifyingglass")) Search", text: $query)
+			TextField("􀊫 App Library", text: $query)
 				.textFieldStyle(.plain)
 		}
 		.padding(.horizontal, 8)

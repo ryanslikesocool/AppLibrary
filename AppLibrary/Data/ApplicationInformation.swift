@@ -80,11 +80,10 @@ extension ApplicationInformation {
 
 				if
 					let files = primaryIcon["CFBundleIconFiles"] as? [String],
-					let file = files.first
+					let file = files.first,
+					let image = bundle.image(forResource: file)
 				{
-					if let image = bundle.image(forResource: file) {
-						return image
-					}
+					return image
 				}
 			}
 		}
