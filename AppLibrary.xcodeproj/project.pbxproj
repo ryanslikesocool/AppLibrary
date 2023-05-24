@@ -113,11 +113,11 @@
 		AF7C7A2E2A1A31EF00545B8B /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				AFD9270B2A1DCC75005D839F /* AppListView.swift */,
 				AF7C7A2F2A1A31FB00545B8B /* ContentView.swift */,
 				AFCE14F42A1A4A7C00889267 /* ListTile.swift */,
 				AFCE14EF2A1A361D00889267 /* SearchBar.swift */,
 				AFBCC05C2A1B55AC00E2483D /* TileContextMenu.swift */,
-				AFD9270B2A1DCC75005D839F /* AppListView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -331,6 +331,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "© 2023 Ryan Boyer";
 				MACOSX_DEPLOYMENT_TARGET = 13.3;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -385,6 +386,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "© 2023 Ryan Boyer";
 				MACOSX_DEPLOYMENT_TARGET = 13.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -402,14 +404,13 @@
 				CODE_SIGN_ENTITLEMENTS = AppLibrary/AppLibrary.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 313;
+				CURRENT_PROJECT_VERSION = 332;
 				DEVELOPMENT_TEAM = 838RGQ32CA;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = AppLibrary/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "App Library";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -432,14 +433,13 @@
 				CODE_SIGN_ENTITLEMENTS = AppLibrary/AppLibrary.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 313;
+				CURRENT_PROJECT_VERSION = 332;
 				DEVELOPMENT_TEAM = 838RGQ32CA;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = AppLibrary/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "App Library";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

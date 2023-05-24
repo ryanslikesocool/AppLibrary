@@ -14,6 +14,10 @@ final class AppSettings: ObservableObject {
 	static func save() {
 		shared.save()
 	}
+
+	private func prepare() {
+		display.appearance.apply()
+	}
 }
 
 // MARK: - Hashable
@@ -64,7 +68,9 @@ private extension AppSettings {
 	private static var fileURL: URL { URL.applicationSupportDirectory.appendingPathComponent("\(Bundle.main.bundleIdentifier!)/settings.plist", isDirectory: false) }
 
 	static func load() -> AppSettings {
-		load(url: fileURL) ?? AppSettings()
+		let result: AppSettings = load(url: fileURL) ?? AppSettings()
+		result.prepare()
+		return result
 	}
 
 	private static func load(url: URL) -> AppSettings? {

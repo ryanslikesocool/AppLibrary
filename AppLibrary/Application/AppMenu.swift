@@ -15,7 +15,7 @@ final class AppMenu: NSMenu {
 			NSMenuItem.separator(),
 			NSMenuItem(title: "Hide \(applicationName)", action: #selector(NSApplication.hide(_:)), keyEquivalent: "h"),
 			NSMenuItem.separator(),
-			NSMenuItem(title: "Quit \(applicationName)", action: #selector(NSApplication.shared.terminate(_:)), keyEquivalent: "q")
+			NSMenuItem(title: "Quit \(applicationName)", action: #selector(NSApplication.shared.terminate(_:)), keyEquivalent: "q"),
 		]
 
 		let editMenu = NSMenuItem()

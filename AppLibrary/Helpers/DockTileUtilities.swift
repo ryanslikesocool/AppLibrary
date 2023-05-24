@@ -1,6 +1,21 @@
+/// from `https://github.com/neilsardesai/Mouse-Finder`
+
 import Cocoa
 
 enum DockTileUtilities {
+	static func requestAccess() {
+		if !AXIsProcessTrusted() {
+			let alert = NSAlert()
+			alert.messageText = "Accessibility Permission Needed"
+			alert.informativeText = "App Library uses accessibility features to locate the dock icon."
+			alert.addButton(withTitle: "Continue")
+			if alert.runModal() == .alertFirstButtonReturn {
+				let options = [kAXTrustedCheckOptionPrompt.takeRetainedValue(): true]
+				_ = AXIsProcessTrustedWithOptions(options as CFDictionary)
+			}
+		}
+	}
+
 	static func getLocation() -> NSPoint? {
 		guard AXIsProcessTrusted() else {
 			return nil

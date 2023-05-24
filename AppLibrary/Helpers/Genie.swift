@@ -1,4 +1,4 @@
-/// from `https: // harshil.net/blog/recreating-the-mac-genie-effect`
+/// from `https://github.com/HarshilShah/Genie`
 
 import SpriteKit
 

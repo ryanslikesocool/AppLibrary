@@ -44,8 +44,8 @@ private extension AppLibraryWindowController {
 		window.titlebarAppearsTransparent = true
 		window.isOpaque = false
 		window.backgroundColor = .clear
-//		window.hidesOnDeactivate = true // breaks animation
-		window.animationBehavior = .none
+		window.hidesOnDeactivate = true // breaks animation
+//		window.animationBehavior = .none // required for animation
 
 		window.standardWindowButton(.closeButton)?.isHidden = true
 		window.standardWindowButton(.miniaturizeButton)?.isHidden = true
@@ -101,7 +101,7 @@ private extension AppLibraryWindowController {
 extension AppLibraryWindowController {
 	static let reloadApps: Notification.Name = Notification.Name("AppLibraryWindowController.ReloadApps")
 
-	private func reloadApps(_ : Notification) {
+	private func reloadApps(_: Notification) {
 		let query: NSMetadataQuery = NSMetadataQuery()
 		query.searchScopes = [URL](AppSettings.shared.directories.searchScopes)
 		let pred: NSPredicate = NSPredicate(format: "kMDItemContentType == 'com.apple.application-bundle'")
@@ -136,20 +136,84 @@ extension AppLibraryWindowController {
 			return
 		}
 
-		let topLeftPoint: NSPoint = NSPoint(
+		let origin: NSPoint = NSPoint(
 			x: tileLocation.x - window.frame.width * 0.5,
-			y: tileLocation.y * 2.0 + window.frame.height
+			y: tileLocation.y * 2.0
 		)
 
-		window.setFrameTopLeftPoint(topLeftPoint)
+//		window.alphaValue = 0
+//		window.setFrameOrigin(NSPoint(
+//			x: origin.x,
+//			y: origin.y * 0.5
+//		))
+
+		window.setFrameOrigin(origin)
 		window.makeKeyAndOrderFront(self)
+
+//		animate(opacity: 1, origin: origin) { [weak self] in
+//			self?.window?.invalidateShadow()
+//		}
 	}
 
 	func dismiss() {
+//		guard let window else {
+//			print("Could not get \(Self.self).window")
+//			return
+//		}
+//
+//		let origin: NSPoint = NSPoint(
+//			x: window.frame.origin.x,
+//			y: window.frame.origin.y * 0.5
+//		)
+//
+//		animate(opacity: 0, origin: origin) { [weak self] in
+//			self?.window?.orderOut(self)
+//		}
+
 		window?.orderOut(self)
 	}
 
 	func hide() {
+//		guard let window else {
+//			print("Could not get \(Self.self).window")
+//			return
+//		}
+//
+//		let origin: NSPoint = NSPoint(
+//			x: window.frame.origin.x,
+//			y: window.frame.origin.y * 0.5
+//		)
+//
+//		animate(opacity: 0, origin: origin) { [weak self] in
+//			NSApplication.shared.hide(self)
+//		}
+
 		NSApplication.shared.hide(self)
 	}
 }
+
+// MARK: - Animation
+
+// private extension AppLibraryWindowController {
+//	func animate(duration: Double = 1.0, opacity: Double? = nil, origin: NSPoint? = nil, onComplete: (() -> Void)? = nil) {
+//		guard let window else {
+//			print("Could not get \(Self.self).window")
+//			return
+//		}
+//
+//		NSAnimationContext.runAnimationGroup({ context in
+//			context.duration = duration
+//
+//			let animator = window.animator()
+//
+//			if let opacity {
+//				animator.alphaValue = opacity
+//				animator.invalidateShadow()
+//			}
+//
+//			if let origin {
+//				animator.setFrameOrigin(origin)
+//			}
+//		}, completionHandler: onComplete)
+//	}
+// }

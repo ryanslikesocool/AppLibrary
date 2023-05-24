@@ -8,35 +8,14 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 	private let appIconContent: NSImageView = NSImageView(image: NSImage(named: "AppIcon")!)
 
 	func applicationDidFinishLaunching(_ notification: Notification) {
-		if !AXIsProcessTrusted() {
-			let alert = NSAlert()
-			alert.messageText = "Accessibility Permission Needed"
-			alert.informativeText = "App Library uses accessibility features to locate the dock icon."
-			alert.addButton(withTitle: "Continue")
-			if alert.runModal() == .alertFirstButtonReturn {
-				let options = [kAXTrustedCheckOptionPrompt.takeRetainedValue(): true]
-				_ = AXIsProcessTrustedWithOptions(options as CFDictionary)
-			}
-		}
-
 		_ = AppSettings.shared
 
-		NSEvent.addLocalMonitorForEvents(matching: .keyDown) {
-			if self.keyDown(with: $0) {
-				return nil // needed to get rid of purr sound
-			} else {
-				return $0
-			}
+		DockTileUtilities.requestAccess()
+
+		NSEvent.addLocalMonitorForEvents(matching: .keyDown) { event in
+			self.keyDown(with: event) ? nil : event
 		}
 	}
-
-	func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
-		false
-	}
-
-//	func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
-//		true
-//	}
 
 	func applicationDidBecomeActive(_ notification: Notification) {
 		appLibraryWindowController.reveal()
