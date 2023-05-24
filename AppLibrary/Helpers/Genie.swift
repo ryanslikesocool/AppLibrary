@@ -1,6 +1,5 @@
-// from https://harshil.net/blog/recreating-the-mac-genie-effect
+/// from `https: // harshil.net/blog/recreating-the-mac-genie-effect`
 
-/*
 import SpriteKit
 
 enum GenieAnimationEdge {
@@ -45,8 +44,8 @@ func genie(maximized: CGRect, minimized: CGRect, direction: GenieAnimationDirect
 
 				return stride(from: 0, to: frameCount, by: 1).map { frame in
 					let fraction = (frame / (frameCount - 1))
-					let slideProgress = max(0, min(1, fraction/slideAnimationEndFraction))
-					let translateProgress = max(0, min(1, (fraction - translateAnimationStartFraction)/(1 - translateAnimationStartFraction)))
+					let slideProgress = max(0, min(1, fraction / slideAnimationEndFraction))
+					let translateProgress = max(0, min(1, (fraction - translateAnimationStartFraction) / (1 - translateAnimationStartFraction)))
 
 					let translation = translateProgress * verticalDistanceToMove
 					let topEdgeVerticalPosition = Double(maximized.maxY) + translation
@@ -107,8 +106,8 @@ func genie(maximized: CGRect, minimized: CGRect, direction: GenieAnimationDirect
 
 				return stride(from: 0, to: frameCount, by: 1).map { frame in
 					let fraction = (frame / (frameCount - 1))
-					let slideProgress = max(0, min(1, fraction/slideAnimationEndFraction))
-					let translateProgress = max(0, min(1, (fraction - translateAnimationStartFraction)/(1 - translateAnimationStartFraction)))
+					let slideProgress = max(0, min(1, fraction / slideAnimationEndFraction))
+					let translateProgress = max(0, min(1, (fraction - translateAnimationStartFraction) / (1 - translateAnimationStartFraction)))
 
 					let translation = translateProgress * verticalDistanceToMove
 					let topEdgeVerticalPosition = min(
@@ -169,8 +168,8 @@ func genie(maximized: CGRect, minimized: CGRect, direction: GenieAnimationDirect
 
 				return stride(from: 0, to: frameCount, by: 1).map { frame in
 					let fraction = (frame / (frameCount - 1))
-					let slideProgress = max(0, min(1, fraction/slideAnimationEndFraction))
-					let translateProgress = max(0, min(1, (fraction - translateAnimationStartFraction)/(1 - translateAnimationStartFraction)))
+					let slideProgress = max(0, min(1, fraction / slideAnimationEndFraction))
+					let translateProgress = max(0, min(1, (fraction - translateAnimationStartFraction) / (1 - translateAnimationStartFraction)))
 
 					let translation = translateProgress * horizontalDistanceToMove
 					let leftEdgeHorizontalPosition = Double(maximized.minX) + translation
@@ -241,8 +240,8 @@ func genie(maximized: CGRect, minimized: CGRect, direction: GenieAnimationDirect
 
 				return stride(from: 0, to: frameCount, by: 1).map { frame in
 					let fraction = (frame / (frameCount - 1))
-					let slideProgress = max(0, min(1, fraction/slideAnimationEndFraction))
-					let translateProgress = max(0, min(1, (fraction - translateAnimationStartFraction)/(1 - translateAnimationStartFraction)))
+					let slideProgress = max(0, min(1, fraction / slideAnimationEndFraction))
+					let translateProgress = max(0, min(1, (fraction - translateAnimationStartFraction) / (1 - translateAnimationStartFraction)))
 
 					let translation = translateProgress * horizontalDistanceToMove
 					let leftEdgeHorizontalPosition = max(
@@ -314,66 +313,66 @@ func genie(maximized: CGRect, minimized: CGRect, direction: GenieAnimationDirect
 		}
 	)!
 }
-*/
 
+// Playground
 /*
-let frame = CGRect(x: 0, y: 0, width: 800, height: 600)
-let skView = SKView(frame: frame)
-skView.appearance = NSAppearance(named: .aqua)
-PlaygroundPage.current.liveView = skView
+ let frame = CGRect(x: 0, y: 0, width: 800, height: 600)
+ let skView = SKView(frame: frame)
+ skView.appearance = NSAppearance(named: .aqua)
+ PlaygroundPage.current.liveView = skView
 
-let scene = SKScene(size: frame.size)
-scene.backgroundColor = .windowBackgroundColor
+ let scene = SKScene(size: frame.size)
+ scene.backgroundColor = .windowBackgroundColor
 
-let imageNodes = [
-	SKSpriteNode(imageNamed: "SysPrefs.png"),
-	SKSpriteNode(imageNamed: "SysPrefs.png"),
-	SKSpriteNode(imageNamed: "SysPrefs.png"),
-	SKSpriteNode(imageNamed: "SysPrefs.png")
-]
+ let imageNodes = [
+ 	SKSpriteNode(imageNamed: "SysPrefs.png"),
+ 	SKSpriteNode(imageNamed: "SysPrefs.png"),
+ 	SKSpriteNode(imageNamed: "SysPrefs.png"),
+ 	SKSpriteNode(imageNamed: "SysPrefs.png")
+ ]
 
-imageNodes.forEach { imageNode in
-	imageNode.position = CGPoint(x: frame.midX, y: frame.midY)
-	imageNode.size = frame.size
-	scene.addChild(imageNode)
-}
+ imageNodes.forEach { imageNode in
+ 	imageNode.position = CGPoint(x: frame.midX, y: frame.midY)
+ 	imageNode.size = frame.size
+ 	scene.addChild(imageNode)
+ }
 
-skView.presentScene(scene)
+ skView.presentScene(scene)
 
-let initialFrame = CGRect(x: 200, y: 100, width: 400, height: 400)
-	.normalized(in: skView.frame)
-let initialPositions = [
-	SIMD2(Float(initialFrame.minX), Float(initialFrame.minY)),
-	SIMD2(Float(initialFrame.maxX), Float(initialFrame.minY)),
-	SIMD2(Float(initialFrame.minX), Float(initialFrame.maxY)),
-	SIMD2(Float(initialFrame.maxX), Float(initialFrame.maxY))
-]
-imageNodes.forEach { imageNode in
-	imageNode.warpGeometry = SKWarpGeometryGrid(
-		columns: 1,
-		rows: 1,
-		destinationPositions: initialPositions
-	)
-}
+ let initialFrame = CGRect(x: 200, y: 100, width: 400, height: 400)
+ 	.normalized(in: skView.frame)
+ let initialPositions = [
+ 	SIMD2(Float(initialFrame.minX), Float(initialFrame.minY)),
+ 	SIMD2(Float(initialFrame.maxX), Float(initialFrame.minY)),
+ 	SIMD2(Float(initialFrame.minX), Float(initialFrame.maxY)),
+ 	SIMD2(Float(initialFrame.maxX), Float(initialFrame.maxY))
+ ]
+ imageNodes.forEach { imageNode in
+ 	imageNode.warpGeometry = SKWarpGeometryGrid(
+ 		columns: 1,
+ 		rows: 1,
+ 		destinationPositions: initialPositions
+ 	)
+ }
 
-let endStates: [(edge: GenieAnimationEdge, origin: CGPoint)] = [
-	(.top, CGPoint(x: 640, y: 0)),
-	(.bottom, CGPoint(x: 120, y: 560)),
-	(.right, CGPoint(x: 0, y: 80)),
-	(.left, CGPoint(x: 760, y: 480)),
-]
+ let endStates: [(edge: GenieAnimationEdge, origin: CGPoint)] = [
+ 	(.top, CGPoint(x: 640, y: 0)),
+ 	(.bottom, CGPoint(x: 120, y: 560)),
+ 	(.right, CGPoint(x: 0, y: 80)),
+ 	(.left, CGPoint(x: 760, y: 480)),
+ ]
 
-zip(imageNodes, endStates).forEach { imageNode, endState in
-	let finalFrame = CGRect(origin: endState.origin, size: CGSize(width: 40, height: 40))
-		.normalized(in: skView.frame)
-	let action = genie(
-		maximized: initialFrame,
-		minimized: finalFrame,
-		direction: .minimize,
-		edge: endState.edge
-	)
-	imageNode.run(
-		action
-	)
-}
-*/
+ zip(imageNodes, endStates).forEach { imageNode, endState in
+ 	let finalFrame = CGRect(origin: endState.origin, size: CGSize(width: 40, height: 40))
+ 		.normalized(in: skView.frame)
+ 	let action = genie(
+ 		maximized: initialFrame,
+ 		minimized: finalFrame,
+ 		direction: .minimize,
+ 		edge: endState.edge
+ 	)
+ 	imageNode.run(
+ 		action
+ 	)
+ }
+ */

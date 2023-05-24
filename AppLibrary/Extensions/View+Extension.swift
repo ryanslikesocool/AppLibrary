@@ -1,25 +1,16 @@
 import SwiftUI
 
 extension View {
-	func betterShadow(color: Color = Color.black, radius: CGFloat, x: CGFloat = 0, y: CGFloat = 0) -> some View {
-		let offsetSteps: [Double] = [
-			0.2,
-			0.3,
-			0.5,
-		]
-		let opacitySteps: [Double] = [
-			0.5,
-			0.3,
-			0.2,
-		]
-		let radiusSteps: [Double] = [
-			0.2,
-			0.3,
-			0.5,
-		]
+	func shadowRcp(color: Color = Color.black, radius: Double, x: Double = 0, y: Double = 0, steps: Int = 3, base: Double = 1.0) -> some View {
+		let multipliers: [Double] = (0 ..< steps).map { i in
+			base / Double(i + 2)
+		}
 
-		return shadow(color: color.opacity(opacitySteps[0]), radius: radius * radiusSteps[0], x: x * offsetSteps[0], y: y * offsetSteps[0])
-			.shadow(color: color.opacity(opacitySteps[1]), radius: radius * radiusSteps[1], x: x * offsetSteps[1], y: y * offsetSteps[1])
-			.shadow(color: color.opacity(opacitySteps[2]), radius: radius * radiusSteps[2], x: x * offsetSteps[2], y: y * offsetSteps[2])
+		var result: any View = self
+		for i in 0 ..< steps {
+			result = result.shadow(color: color.opacity(multipliers[(steps - 1) - i]), radius: radius * multipliers[i], x: x * multipliers[i], y: y * multipliers[i])
+		}
+
+		return AnyView(result)
 	}
 }
