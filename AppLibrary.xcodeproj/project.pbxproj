@@ -13,11 +13,11 @@
 		AF7C7A302A1A31FB00545B8B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7C7A2F2A1A31FB00545B8B /* ContentView.swift */; };
 		AFBCC0472A1B357000E2483D /* AppMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBCC0462A1B357000E2483D /* AppMenu.swift */; };
 		AFBCC0492A1B38F300E2483D /* NSMenuItem+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBCC0482A1B38F300E2483D /* NSMenuItem+Extension.swift */; };
-		AFBCC04B2A1B3DAC00E2483D /* AppLibraryWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBCC04A2A1B3DAC00E2483D /* AppLibraryWindow.swift */; };
+		AFBCC04B2A1B3DAC00E2483D /* NSWindow+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBCC04A2A1B3DAC00E2483D /* NSWindow+Extension.swift */; };
 		AFBCC04E2A1B4A7700E2483D /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBCC04D2A1B4A7700E2483D /* AppSettings.swift */; };
 		AFBCC0502A1B4B2700E2483D /* AppSettings.Display.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBCC04F2A1B4B2700E2483D /* AppSettings.Display.swift */; };
 		AFBCC0522A1B4B3C00E2483D /* AppSettings.Directories.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBCC0512A1B4B3C00E2483D /* AppSettings.Directories.swift */; };
-		AFBCC0552A1B502600E2483D /* TileUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBCC0542A1B502600E2483D /* TileUtilities.swift */; };
+		AFBCC0552A1B502600E2483D /* DockTileUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBCC0542A1B502600E2483D /* DockTileUtilities.swift */; };
 		AFBCC0572A1B504400E2483D /* URL+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBCC0562A1B504400E2483D /* URL+Extension.swift */; };
 		AFBCC05B2A1B535F00E2483D /* NSImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBCC05A2A1B535F00E2483D /* NSImage+Extension.swift */; };
 		AFBCC05D2A1B55AC00E2483D /* TileContextMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBCC05C2A1B55AC00E2483D /* TileContextMenu.swift */; };
@@ -29,6 +29,9 @@
 		AFCE14F02A1A361D00889267 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCE14EF2A1A361D00889267 /* SearchBar.swift */; };
 		AFCE14F32A1A388500889267 /* View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCE14F22A1A388500889267 /* View+Extension.swift */; };
 		AFCE14F52A1A4A7C00889267 /* ListTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCE14F42A1A4A7C00889267 /* ListTile.swift */; };
+		AFD927082A1DC4BA005D839F /* SettingsWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD927072A1DC4BA005D839F /* SettingsWindowController.swift */; };
+		AFD9270A2A1DC507005D839F /* AppLibraryWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD927092A1DC507005D839F /* AppLibraryWindowController.swift */; };
+		AFD9270C2A1DCC75005D839F /* AppListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD9270B2A1DCC75005D839F /* AppListView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,11 +44,11 @@
 		AF7C7A2F2A1A31FB00545B8B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		AFBCC0462A1B357000E2483D /* AppMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppMenu.swift; sourceTree = "<group>"; };
 		AFBCC0482A1B38F300E2483D /* NSMenuItem+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSMenuItem+Extension.swift"; sourceTree = "<group>"; };
-		AFBCC04A2A1B3DAC00E2483D /* AppLibraryWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLibraryWindow.swift; sourceTree = "<group>"; };
+		AFBCC04A2A1B3DAC00E2483D /* NSWindow+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSWindow+Extension.swift"; sourceTree = "<group>"; };
 		AFBCC04D2A1B4A7700E2483D /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
 		AFBCC04F2A1B4B2700E2483D /* AppSettings.Display.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.Display.swift; sourceTree = "<group>"; };
 		AFBCC0512A1B4B3C00E2483D /* AppSettings.Directories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.Directories.swift; sourceTree = "<group>"; };
-		AFBCC0542A1B502600E2483D /* TileUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileUtilities.swift; sourceTree = "<group>"; };
+		AFBCC0542A1B502600E2483D /* DockTileUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DockTileUtilities.swift; sourceTree = "<group>"; };
 		AFBCC0562A1B504400E2483D /* URL+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Extension.swift"; sourceTree = "<group>"; };
 		AFBCC05A2A1B535F00E2483D /* NSImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSImage+Extension.swift"; sourceTree = "<group>"; };
 		AFBCC05C2A1B55AC00E2483D /* TileContextMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileContextMenu.swift; sourceTree = "<group>"; };
@@ -57,6 +60,9 @@
 		AFCE14EF2A1A361D00889267 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		AFCE14F22A1A388500889267 /* View+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extension.swift"; sourceTree = "<group>"; };
 		AFCE14F42A1A4A7C00889267 /* ListTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTile.swift; sourceTree = "<group>"; };
+		AFD927072A1DC4BA005D839F /* SettingsWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsWindowController.swift; sourceTree = "<group>"; };
+		AFD927092A1DC507005D839F /* AppLibraryWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLibraryWindowController.swift; sourceTree = "<group>"; };
+		AFD9270B2A1DCC75005D839F /* AppListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppListView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +105,7 @@
 				AFBCC0532A1B501D00E2483D /* Helpers */,
 				AFBCC04C2A1B4A6200E2483D /* Settings */,
 				AF7C7A2E2A1A31EF00545B8B /* Views */,
+				AFD927062A1DC4A7005D839F /* Windows */,
 			);
 			path = AppLibrary;
 			sourceTree = "<group>";
@@ -106,11 +113,11 @@
 		AF7C7A2E2A1A31EF00545B8B /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				AFBCC04A2A1B3DAC00E2483D /* AppLibraryWindow.swift */,
 				AF7C7A2F2A1A31FB00545B8B /* ContentView.swift */,
 				AFCE14F42A1A4A7C00889267 /* ListTile.swift */,
 				AFCE14EF2A1A361D00889267 /* SearchBar.swift */,
 				AFBCC05C2A1B55AC00E2483D /* TileContextMenu.swift */,
+				AFD9270B2A1DCC75005D839F /* AppListView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -137,7 +144,7 @@
 		AFBCC0532A1B501D00E2483D /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				AFBCC0542A1B502600E2483D /* TileUtilities.swift */,
+				AFBCC0542A1B502600E2483D /* DockTileUtilities.swift */,
 				AFBCC0672A1B7E6200E2483D /* Genie.swift */,
 			);
 			path = Helpers;
@@ -155,14 +162,24 @@
 			isa = PBXGroup;
 			children = (
 				AFBCC0612A1B6AE700E2483D /* Array+Extension.swift */,
+				AFBCC0652A1B7DDF00E2483D /* CGRect+Extension.swift */,
+				AFBCC0632A1B7DC800E2483D /* FloatingPoint+Extension.swift */,
 				AFBCC05A2A1B535F00E2483D /* NSImage+Extension.swift */,
 				AFBCC0482A1B38F300E2483D /* NSMenuItem+Extension.swift */,
+				AFBCC04A2A1B3DAC00E2483D /* NSWindow+Extension.swift */,
 				AFBCC0562A1B504400E2483D /* URL+Extension.swift */,
 				AFCE14F22A1A388500889267 /* View+Extension.swift */,
-				AFBCC0632A1B7DC800E2483D /* FloatingPoint+Extension.swift */,
-				AFBCC0652A1B7DDF00E2483D /* CGRect+Extension.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		AFD927062A1DC4A7005D839F /* Windows */ = {
+			isa = PBXGroup;
+			children = (
+				AFD927092A1DC507005D839F /* AppLibraryWindowController.swift */,
+				AFD927072A1DC4BA005D839F /* SettingsWindowController.swift */,
+			);
+			path = Windows;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -234,11 +251,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AFD927082A1DC4BA005D839F /* SettingsWindowController.swift in Sources */,
 				AF7C7A2D2A1A315A00545B8B /* main.swift in Sources */,
 				AFCE14F52A1A4A7C00889267 /* ListTile.swift in Sources */,
 				AFBCC05B2A1B535F00E2483D /* NSImage+Extension.swift in Sources */,
 				AFBCC0622A1B6AE700E2483D /* Array+Extension.swift in Sources */,
-				AFBCC04B2A1B3DAC00E2483D /* AppLibraryWindow.swift in Sources */,
+				AFBCC04B2A1B3DAC00E2483D /* NSWindow+Extension.swift in Sources */,
 				AFBCC0502A1B4B2700E2483D /* AppSettings.Display.swift in Sources */,
 				AFBCC0492A1B38F300E2483D /* NSMenuItem+Extension.swift in Sources */,
 				AFBCC0572A1B504400E2483D /* URL+Extension.swift in Sources */,
@@ -252,9 +270,11 @@
 				AFBCC0602A1B64A800E2483D /* ApplicationInformation.swift in Sources */,
 				AFBCC0682A1B7E6200E2483D /* Genie.swift in Sources */,
 				AFBCC0642A1B7DC800E2483D /* FloatingPoint+Extension.swift in Sources */,
+				AFD9270A2A1DC507005D839F /* AppLibraryWindowController.swift in Sources */,
+				AFD9270C2A1DCC75005D839F /* AppListView.swift in Sources */,
 				AFBCC04E2A1B4A7700E2483D /* AppSettings.swift in Sources */,
 				AF7C7A302A1A31FB00545B8B /* ContentView.swift in Sources */,
-				AFBCC0552A1B502600E2483D /* TileUtilities.swift in Sources */,
+				AFBCC0552A1B502600E2483D /* DockTileUtilities.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -382,7 +402,7 @@
 				CODE_SIGN_ENTITLEMENTS = AppLibrary/AppLibrary.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 279;
+				CURRENT_PROJECT_VERSION = 291;
 				DEVELOPMENT_TEAM = 838RGQ32CA;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -412,7 +432,7 @@
 				CODE_SIGN_ENTITLEMENTS = AppLibrary/AppLibrary.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 279;
+				CURRENT_PROJECT_VERSION = 291;
 				DEVELOPMENT_TEAM = 838RGQ32CA;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;

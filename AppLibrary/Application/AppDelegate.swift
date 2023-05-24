@@ -3,7 +3,7 @@ import Cocoa
 import SwiftUI
 
 final class AppDelegate: NSObject, NSApplicationDelegate {
-	private lazy var window: AppLibraryWindow = AppLibraryWindow(contentRect: NSRect(x: 0, y: 0, width: 300, height: 450))
+	private let appLibraryWindowController: AppLibraryWindowController = AppLibraryWindowController()
 
 	private let appIconContent: NSImageView = NSImageView(image: NSImage(named: "AppIcon")!)
 
@@ -39,11 +39,11 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 //	}
 
 	func applicationDidBecomeActive(_ notification: Notification) {
-		revealWindow()
+		appLibraryWindowController.reveal()
 	}
 
 	func applicationDidResignActive(_ notification: Notification) {
-		window.dismiss()
+		appLibraryWindowController.dismiss()
 		AppSettings.save()
 	}
 
@@ -53,95 +53,12 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 }
 
 private extension AppDelegate {
-	func revealWindow() {
-		guard let tileLocation = getTileLocation() else {
-			return
-		}
-
-		window.reveal(location: NSPoint(
-			x: tileLocation.x - window.frame.width * 0.5,
-			y: tileLocation.y * 2.0 + window.frame.height
-		))
-	}
-
 	func keyDown(with event: NSEvent) -> Bool {
 		if Int(event.keyCode) == kVK_Escape {
-			window.hide()
+			appLibraryWindowController.hide()
 			return true
 		} else {
 			return false
 		}
 	}
-
-	func getTileLocation() -> NSPoint? {
-		guard AXIsProcessTrusted() else {
-			return nil
-		}
-
-		var iconOrigin = NSPoint.zero
-
-		if let dockIcon = dockIcon() {
-			var values: CFArray?
-			if AXUIElementCopyMultipleAttributeValues(
-				dockIcon,
-				[kAXPositionAttribute as CFString, kAXSizeAttribute as CFString] as CFArray,
-				.stopOnError,
-				&values
-			) == .success {
-				var position = CGPoint.zero
-				var size = CGSize.zero
-
-				(values as! [AXValue]).forEach { axValue in
-					AXValueGetValue(axValue, .cgPoint, &position)
-					AXValueGetValue(axValue, .cgSize, &size)
-				}
-
-				iconOrigin = NSPoint(
-					x: position.x + size.width / 2.0,
-					y: NSScreen.main!.frame.height - (position.y + size.height / 2.0)
-				)
-			}
-		}
-
-		return iconOrigin
-	}
-}
-
-// MARK: - Accessibility Helpers
-
-extension AppDelegate {
-	/// The accessibility element for the app’s dock tile
-	private func dockIcon() -> AXUIElement? {
-		let appsWithDockBundleID = NSRunningApplication.runningApplications(withBundleIdentifier: .dockBundleID)
-		guard let processID = appsWithDockBundleID.last?.processIdentifier else { return nil }
-		let appElement = AXUIElementCreateApplication(processID)
-		guard let firstChild = subelements(from: appElement, forAttribute: .axChildren)?.first else { return nil }
-		// Reverse to avoid picking up the real Finder in case it’s in the Dock.
-		guard let children = subelements(from: firstChild, forAttribute: .axChildren)?.reversed() else { return nil }
-		for axElement in children {
-			var value: CFTypeRef?
-			if AXUIElementCopyAttributeValue(axElement, kAXTitleAttribute as CFString, &value) == .success {
-				let appName = Bundle.main.object(forInfoDictionaryKey: kCFBundleNameKey as String) as! String
-				if value as? String == appName { return axElement }
-			}
-		}
-		return nil
-	}
-
-	private func subelements(from element: AXUIElement, forAttribute attribute: String) -> [AXUIElement]? {
-		var subElements: CFArray?
-		var count: CFIndex = 0
-		if AXUIElementGetAttributeValueCount(element, attribute as CFString, &count) != .success {
-			return nil
-		}
-		if AXUIElementCopyAttributeValues(element, attribute as CFString, 0, count, &subElements) != .success {
-			return nil
-		}
-		return subElements as? [AXUIElement]
-	}
-}
-
-private extension String {
-	static let axChildren = "AXChildren"
-	static let dockBundleID = "com.apple.dock"
 }
