@@ -13,14 +13,14 @@ Launchpad hasn't recieved any significant updates (or love) from Apple since it 
 - [ ] Grid view
 - [ ] Group by app category
 
+## Installation
+App Library requires macOS 13.0 or later.\
+Download and unzip the latest `App Library.app.zip` [release](https://github.com/ryanslikesocool/AppLibrary/releases/latest).\
+Move the app to your Applications folder (and your dock!)
+
 ## Known Issues
 - App Library cannot be sandboxed due to the way it uses accessibility features to locate the dock icon.
 - App Library currently only works with the dock on the bottom of the screen.
-
-## Installation
-App Library requires macOS 13.0 to run.\
-Download and unzip the latest `App Library.app.zip` [release](https://github.com/ryanslikesocool/AppLibrary/releases/latest).\
-Move the app to your Applications folder, and your dock!
 
 ## Acknowledgements
 [Settings](https://github.com/sindresorhus/Settings) - Settings pane\
