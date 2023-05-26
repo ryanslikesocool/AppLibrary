@@ -15,13 +15,13 @@ struct AppsSettingsPane: View {
 				}
 				.contextMenu(forSelectionType: String.self) { selections in
 					if !selections.isEmpty {
-						Button("Open") { }
-							.disabled(true)
-
-						Divider()
-
-						Button("Show in Finder") { }
-							.disabled(true)
+//						Button("Open") { }
+//							.disabled(true)
+//
+//						Divider()
+//
+//						Button("Show in Finder") { }
+//							.disabled(true)
 
 						Button("Reveal in Library") { showApps(selections) }
 					}
