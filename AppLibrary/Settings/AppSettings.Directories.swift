@@ -12,7 +12,9 @@ extension AppSettings {
 				URL(filePath: "/Applications"),
 				URL.homeDirectory.appending(path: "Applications")
 			]
-			hiddenApps = []
+			hiddenApps = [
+				"com.DevelopedWithLove.AppLibrary"
+			]
 		}
 
 		mutating func tryAdd(scope: URL) {
