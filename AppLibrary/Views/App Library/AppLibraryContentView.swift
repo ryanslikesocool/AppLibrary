@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct ContentView: View {
+struct AppLibraryContentView: View {
 	@ObservedObject private var appSettings: AppSettings = .shared
 	@ObservedObject private var windowController: AppLibraryWindowController
 	@State private var searchQuery: String = ""

@@ -1,9 +1,30 @@
 import Carbon.HIToolbox
 import Cocoa
+import Settings
 import SwiftUI
 
 final class AppDelegate: NSObject, NSApplicationDelegate {
-	private let appLibraryWindowController: AppLibraryWindowController = AppLibraryWindowController()
+	private(set) lazy var appLibraryWindowController: AppLibraryWindowController = AppLibraryWindowController()
+
+	//	private(set) lazy var settingsWindowController: SettingsWindowController = SettingsWindowController()
+	private(set) lazy var settingsWindowController = SettingsWindowController(
+		panes: [
+			Settings.Pane(
+				identifier: .display,
+				title: "Display",
+				toolbarIcon: NSImage(systemSymbolName: "display", accessibilityDescription: "Display")!
+			) {
+				DisplaySettingsPane()
+			},
+			Settings.Pane(
+				identifier: .directories,
+				title: "Directories",
+				toolbarIcon: NSImage(systemSymbolName: "folder", accessibilityDescription: "Directories")!
+			) {
+				DirectoriesSettingsPane()
+			},
+		]
+	)
 
 	private let appIconContent: NSImageView = NSImageView(image: NSImage(named: "AppIcon")!)
 

@@ -7,10 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AF2284E32A209BA400432486 /* Settings in Frameworks */ = {isa = PBXBuildFile; productRef = AF2284E22A209BA400432486 /* Settings */; };
+		AF2284E52A209BCD00432486 /* PaneIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2284E42A209BCD00432486 /* PaneIdentifiers.swift */; };
+		AF35B7012A1DDB0300EA6891 /* SettingsTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF35B7002A1DDB0300EA6891 /* SettingsTab.swift */; };
+		AF35B7052A1DDBF100EA6891 /* DisplaySettingsPane.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF35B7042A1DDBF100EA6891 /* DisplaySettingsPane.swift */; };
+		AF35B7072A1DDC2B00EA6891 /* DirectoriesSettingsPane.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF35B7062A1DDC2B00EA6891 /* DirectoriesSettingsPane.swift */; };
+		AF35B7092A1DDE4100EA6891 /* NSApplication+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF35B7082A1DDE4100EA6891 /* NSApplication+Extension.swift */; };
 		AF7C7A1D2A1A304800545B8B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7C7A1C2A1A304800545B8B /* AppDelegate.swift */; };
 		AF7C7A212A1A304900545B8B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AF7C7A202A1A304900545B8B /* Assets.xcassets */; };
 		AF7C7A2D2A1A315A00545B8B /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7C7A2C2A1A315A00545B8B /* main.swift */; };
-		AF7C7A302A1A31FB00545B8B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7C7A2F2A1A31FB00545B8B /* ContentView.swift */; };
+		AF7C7A302A1A31FB00545B8B /* AppLibraryContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7C7A2F2A1A31FB00545B8B /* AppLibraryContentView.swift */; };
 		AFBCC0472A1B357000E2483D /* AppMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBCC0462A1B357000E2483D /* AppMenu.swift */; };
 		AFBCC0492A1B38F300E2483D /* NSMenuItem+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBCC0482A1B38F300E2483D /* NSMenuItem+Extension.swift */; };
 		AFBCC04B2A1B3DAC00E2483D /* NSWindow+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBCC04A2A1B3DAC00E2483D /* NSWindow+Extension.swift */; };
@@ -35,13 +41,18 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AF2284E42A209BCD00432486 /* PaneIdentifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaneIdentifiers.swift; sourceTree = "<group>"; };
+		AF35B7002A1DDB0300EA6891 /* SettingsTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTab.swift; sourceTree = "<group>"; };
+		AF35B7042A1DDBF100EA6891 /* DisplaySettingsPane.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplaySettingsPane.swift; sourceTree = "<group>"; };
+		AF35B7062A1DDC2B00EA6891 /* DirectoriesSettingsPane.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoriesSettingsPane.swift; sourceTree = "<group>"; };
+		AF35B7082A1DDE4100EA6891 /* NSApplication+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSApplication+Extension.swift"; sourceTree = "<group>"; };
 		AF7C7A192A1A304800545B8B /* App Library.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "App Library.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF7C7A1C2A1A304800545B8B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AF7C7A202A1A304900545B8B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AF7C7A252A1A304900545B8B /* AppLibrary.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AppLibrary.entitlements; sourceTree = "<group>"; };
 		AF7C7A2B2A1A30C200545B8B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		AF7C7A2C2A1A315A00545B8B /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
-		AF7C7A2F2A1A31FB00545B8B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		AF7C7A2F2A1A31FB00545B8B /* AppLibraryContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLibraryContentView.swift; sourceTree = "<group>"; };
 		AFBCC0462A1B357000E2483D /* AppMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppMenu.swift; sourceTree = "<group>"; };
 		AFBCC0482A1B38F300E2483D /* NSMenuItem+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSMenuItem+Extension.swift"; sourceTree = "<group>"; };
 		AFBCC04A2A1B3DAC00E2483D /* NSWindow+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSWindow+Extension.swift"; sourceTree = "<group>"; };
@@ -70,12 +81,35 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF2284E32A209BA400432486 /* Settings in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AF35B6FC2A1DDA9E00EA6891 /* App Library */ = {
+			isa = PBXGroup;
+			children = (
+				AFD9270B2A1DCC75005D839F /* AppListView.swift */,
+				AF7C7A2F2A1A31FB00545B8B /* AppLibraryContentView.swift */,
+				AFCE14F42A1A4A7C00889267 /* ListTile.swift */,
+				AFCE14EF2A1A361D00889267 /* SearchBar.swift */,
+				AFBCC05C2A1B55AC00E2483D /* TileContextMenu.swift */,
+			);
+			path = "App Library";
+			sourceTree = "<group>";
+		};
+		AF35B6FD2A1DDAAA00EA6891 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				AF35B7062A1DDC2B00EA6891 /* DirectoriesSettingsPane.swift */,
+				AF35B7042A1DDBF100EA6891 /* DisplaySettingsPane.swift */,
+				AF2284E42A209BCD00432486 /* PaneIdentifiers.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
 		AF7C7A102A1A304800545B8B = {
 			isa = PBXGroup;
 			children = (
@@ -113,11 +147,8 @@
 		AF7C7A2E2A1A31EF00545B8B /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				AFD9270B2A1DCC75005D839F /* AppListView.swift */,
-				AF7C7A2F2A1A31FB00545B8B /* ContentView.swift */,
-				AFCE14F42A1A4A7C00889267 /* ListTile.swift */,
-				AFCE14EF2A1A361D00889267 /* SearchBar.swift */,
-				AFBCC05C2A1B55AC00E2483D /* TileContextMenu.swift */,
+				AF35B6FD2A1DDAAA00EA6891 /* Settings */,
+				AF35B6FC2A1DDA9E00EA6891 /* App Library */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -154,6 +185,7 @@
 			isa = PBXGroup;
 			children = (
 				AFBCC05F2A1B64A800E2483D /* ApplicationInformation.swift */,
+				AF35B7002A1DDB0300EA6891 /* SettingsTab.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -169,6 +201,7 @@
 				AFBCC04A2A1B3DAC00E2483D /* NSWindow+Extension.swift */,
 				AFBCC0562A1B504400E2483D /* URL+Extension.swift */,
 				AFCE14F22A1A388500889267 /* View+Extension.swift */,
+				AF35B7082A1DDE4100EA6891 /* NSApplication+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -198,6 +231,9 @@
 			dependencies = (
 			);
 			name = "App Library";
+			packageProductDependencies = (
+				AF2284E22A209BA400432486 /* Settings */,
+			);
 			productName = AppLibrary;
 			productReference = AF7C7A192A1A304800545B8B /* App Library.app */;
 			productType = "com.apple.product-type.application";
@@ -226,6 +262,9 @@
 				Base,
 			);
 			mainGroup = AF7C7A102A1A304800545B8B;
+			packageReferences = (
+				AF2284E12A209BA400432486 /* XCRemoteSwiftPackageReference "Settings" */,
+			);
 			productRefGroup = AF7C7A1A2A1A304800545B8B /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -253,6 +292,7 @@
 			files = (
 				AFD927082A1DC4BA005D839F /* SettingsWindowController.swift in Sources */,
 				AF7C7A2D2A1A315A00545B8B /* main.swift in Sources */,
+				AF2284E52A209BCD00432486 /* PaneIdentifiers.swift in Sources */,
 				AFCE14F52A1A4A7C00889267 /* ListTile.swift in Sources */,
 				AFBCC05B2A1B535F00E2483D /* NSImage+Extension.swift in Sources */,
 				AFBCC0622A1B6AE700E2483D /* Array+Extension.swift in Sources */,
@@ -260,20 +300,24 @@
 				AFBCC0502A1B4B2700E2483D /* AppSettings.Display.swift in Sources */,
 				AFBCC0492A1B38F300E2483D /* NSMenuItem+Extension.swift in Sources */,
 				AFBCC0572A1B504400E2483D /* URL+Extension.swift in Sources */,
+				AF35B7012A1DDB0300EA6891 /* SettingsTab.swift in Sources */,
 				AFBCC0522A1B4B3C00E2483D /* AppSettings.Directories.swift in Sources */,
 				AFBCC0662A1B7DDF00E2483D /* CGRect+Extension.swift in Sources */,
 				AFBCC05D2A1B55AC00E2483D /* TileContextMenu.swift in Sources */,
 				AFCE14F02A1A361D00889267 /* SearchBar.swift in Sources */,
 				AFBCC0472A1B357000E2483D /* AppMenu.swift in Sources */,
 				AFCE14F32A1A388500889267 /* View+Extension.swift in Sources */,
+				AF35B7092A1DDE4100EA6891 /* NSApplication+Extension.swift in Sources */,
+				AF35B7072A1DDC2B00EA6891 /* DirectoriesSettingsPane.swift in Sources */,
 				AF7C7A1D2A1A304800545B8B /* AppDelegate.swift in Sources */,
 				AFBCC0602A1B64A800E2483D /* ApplicationInformation.swift in Sources */,
 				AFBCC0682A1B7E6200E2483D /* Genie.swift in Sources */,
 				AFBCC0642A1B7DC800E2483D /* FloatingPoint+Extension.swift in Sources */,
+				AF35B7052A1DDBF100EA6891 /* DisplaySettingsPane.swift in Sources */,
 				AFD9270A2A1DC507005D839F /* AppLibraryWindowController.swift in Sources */,
 				AFD9270C2A1DCC75005D839F /* AppListView.swift in Sources */,
 				AFBCC04E2A1B4A7700E2483D /* AppSettings.swift in Sources */,
-				AF7C7A302A1A31FB00545B8B /* ContentView.swift in Sources */,
+				AF7C7A302A1A31FB00545B8B /* AppLibraryContentView.swift in Sources */,
 				AFBCC0552A1B502600E2483D /* DockTileUtilities.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -404,7 +448,7 @@
 				CODE_SIGN_ENTITLEMENTS = AppLibrary/AppLibrary.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 332;
+				CURRENT_PROJECT_VERSION = 362;
 				DEVELOPMENT_TEAM = 838RGQ32CA;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -417,7 +461,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 0.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.DevelopedWithLove.AppLibrary;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -433,7 +477,7 @@
 				CODE_SIGN_ENTITLEMENTS = AppLibrary/AppLibrary.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 332;
+				CURRENT_PROJECT_VERSION = 362;
 				DEVELOPMENT_TEAM = 838RGQ32CA;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -446,7 +490,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 0.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.DevelopedWithLove.AppLibrary;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -476,6 +520,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		AF2284E12A209BA400432486 /* XCRemoteSwiftPackageReference "Settings" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/sindresorhus/Settings";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		AF2284E22A209BA400432486 /* Settings */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AF2284E12A209BA400432486 /* XCRemoteSwiftPackageReference "Settings" */;
+			productName = Settings;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = AF7C7A112A1A304800545B8B /* Project object */;
 }

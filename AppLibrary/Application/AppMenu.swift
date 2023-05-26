@@ -11,7 +11,7 @@ final class AppMenu: NSMenu {
 		mainMenu.submenu?.items = [
 			NSMenuItem(title: "About \(applicationName)", action: #selector(NSApplication.orderFrontStandardAboutPanel(_:)), keyEquivalent: ""),
 			NSMenuItem.separator(),
-			NSMenuItem(title: "Settings...", action: nil, keyEquivalent: ","),
+			NSMenuItem(title: "Settings...", action: #selector(NSApplication.orderFrontSettingsPanel(_:)), keyEquivalent: ","),
 			NSMenuItem.separator(),
 			NSMenuItem(title: "Hide \(applicationName)", action: #selector(NSApplication.hide(_:)), keyEquivalent: "h"),
 			NSMenuItem.separator(),

@@ -15,12 +15,11 @@ final class AppLibraryWindowController: NSWindowController, ObservableObject {
 
 		super.init(window: window)
 
-		prepareWindow()
-		prepareBackgroundView()
-		prepareMainView()
+		buildWindow()
+		buildBackgroundView()
+		buildMainView()
 
 		NotificationCenter.default.addObserver(forName: Self.reloadApps, object: nil, queue: nil, using: reloadApps)
-//		reloadApps()
 	}
 
 	@available(*, unavailable)
@@ -32,7 +31,7 @@ final class AppLibraryWindowController: NSWindowController, ObservableObject {
 // MARK: - Setup
 
 private extension AppLibraryWindowController {
-	func prepareWindow() {
+	func buildWindow() {
 		guard let window else {
 			print("Could not get \(Self.self).window")
 			return
@@ -52,7 +51,7 @@ private extension AppLibraryWindowController {
 		window.standardWindowButton(.zoomButton)?.isHidden = true
 	}
 
-	func prepareBackgroundView() {
+	func buildBackgroundView() {
 		guard let window else {
 			print("Could not get \(Self.self).window")
 			return
@@ -78,13 +77,13 @@ private extension AppLibraryWindowController {
 		window.invalidateShadow()
 	}
 
-	func prepareMainView() {
+	func buildMainView() {
 		guard let contentView = window?.contentView else {
 			print("Could not get \(Self.self).window.contentView")
 			return
 		}
 
-		let mainView = NSHostingView(rootView: ContentView(windowController: self))
+		let mainView = NSHostingView(rootView: AppLibraryContentView(windowController: self))
 		mainView.translatesAutoresizingMaskIntoConstraints = false
 
 		contentView.addSubview(mainView)
