@@ -2,10 +2,15 @@ import Cocoa
 
 extension NSApplication {
 	@objc func orderFrontSettingsPanel(_ sender: Any?) {
-		if let delegate = delegate as? AppDelegate {
-			_ = delegate.settingsWindowController
+		guard let delegate = delegate as? AppDelegate else {
+			return
 		}
 
-		NotificationCenter.default.post(name: SettingsWindowController.reveal, object: nil)
+		_ = delegate.settingsWindowController
+
+		delegate.settingsWindowController.show()
+
+//		delegate.settingsWindowController.window?.center()
+//		delegate.settingsWindowController.window?.makeKeyAndOrderFront(self)
 	}
 }

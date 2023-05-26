@@ -106,6 +106,6 @@ extension ApplicationInformation {
 	}
 
 	func hide() {
-		AppSettings.shared.directories.hiddenApps.insert(bundleIdentifier)
+		AppSettings.shared.directories.tryAdd(hiddenApp: bundleIdentifier)
 	}
 }

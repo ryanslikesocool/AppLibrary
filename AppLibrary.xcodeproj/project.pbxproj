@@ -13,6 +13,7 @@
 		AF35B7052A1DDBF100EA6891 /* DisplaySettingsPane.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF35B7042A1DDBF100EA6891 /* DisplaySettingsPane.swift */; };
 		AF35B7072A1DDC2B00EA6891 /* DirectoriesSettingsPane.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF35B7062A1DDC2B00EA6891 /* DirectoriesSettingsPane.swift */; };
 		AF35B7092A1DDE4100EA6891 /* NSApplication+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF35B7082A1DDE4100EA6891 /* NSApplication+Extension.swift */; };
+		AF6200202A20A51D00728F7D /* AppsSettingsPane.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF62001F2A20A51D00728F7D /* AppsSettingsPane.swift */; };
 		AF7C7A1D2A1A304800545B8B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7C7A1C2A1A304800545B8B /* AppDelegate.swift */; };
 		AF7C7A212A1A304900545B8B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AF7C7A202A1A304900545B8B /* Assets.xcassets */; };
 		AF7C7A2D2A1A315A00545B8B /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7C7A2C2A1A315A00545B8B /* main.swift */; };
@@ -35,7 +36,6 @@
 		AFCE14F02A1A361D00889267 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCE14EF2A1A361D00889267 /* SearchBar.swift */; };
 		AFCE14F32A1A388500889267 /* View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCE14F22A1A388500889267 /* View+Extension.swift */; };
 		AFCE14F52A1A4A7C00889267 /* ListTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCE14F42A1A4A7C00889267 /* ListTile.swift */; };
-		AFD927082A1DC4BA005D839F /* SettingsWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD927072A1DC4BA005D839F /* SettingsWindowController.swift */; };
 		AFD9270A2A1DC507005D839F /* AppLibraryWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD927092A1DC507005D839F /* AppLibraryWindowController.swift */; };
 		AFD9270C2A1DCC75005D839F /* AppListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD9270B2A1DCC75005D839F /* AppListView.swift */; };
 /* End PBXBuildFile section */
@@ -46,6 +46,7 @@
 		AF35B7042A1DDBF100EA6891 /* DisplaySettingsPane.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplaySettingsPane.swift; sourceTree = "<group>"; };
 		AF35B7062A1DDC2B00EA6891 /* DirectoriesSettingsPane.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoriesSettingsPane.swift; sourceTree = "<group>"; };
 		AF35B7082A1DDE4100EA6891 /* NSApplication+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSApplication+Extension.swift"; sourceTree = "<group>"; };
+		AF62001F2A20A51D00728F7D /* AppsSettingsPane.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppsSettingsPane.swift; sourceTree = "<group>"; };
 		AF7C7A192A1A304800545B8B /* App Library.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "App Library.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF7C7A1C2A1A304800545B8B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AF7C7A202A1A304900545B8B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -71,7 +72,6 @@
 		AFCE14EF2A1A361D00889267 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		AFCE14F22A1A388500889267 /* View+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extension.swift"; sourceTree = "<group>"; };
 		AFCE14F42A1A4A7C00889267 /* ListTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTile.swift; sourceTree = "<group>"; };
-		AFD927072A1DC4BA005D839F /* SettingsWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsWindowController.swift; sourceTree = "<group>"; };
 		AFD927092A1DC507005D839F /* AppLibraryWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLibraryWindowController.swift; sourceTree = "<group>"; };
 		AFD9270B2A1DCC75005D839F /* AppListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppListView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -103,6 +103,7 @@
 		AF35B6FD2A1DDAAA00EA6891 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				AF62001F2A20A51D00728F7D /* AppsSettingsPane.swift */,
 				AF35B7062A1DDC2B00EA6891 /* DirectoriesSettingsPane.swift */,
 				AF35B7042A1DDBF100EA6891 /* DisplaySettingsPane.swift */,
 				AF2284E42A209BCD00432486 /* PaneIdentifiers.swift */,
@@ -210,7 +211,6 @@
 			isa = PBXGroup;
 			children = (
 				AFD927092A1DC507005D839F /* AppLibraryWindowController.swift */,
-				AFD927072A1DC4BA005D839F /* SettingsWindowController.swift */,
 			);
 			path = Windows;
 			sourceTree = "<group>";
@@ -290,7 +290,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AFD927082A1DC4BA005D839F /* SettingsWindowController.swift in Sources */,
 				AF7C7A2D2A1A315A00545B8B /* main.swift in Sources */,
 				AF2284E52A209BCD00432486 /* PaneIdentifiers.swift in Sources */,
 				AFCE14F52A1A4A7C00889267 /* ListTile.swift in Sources */,
@@ -299,6 +298,7 @@
 				AFBCC04B2A1B3DAC00E2483D /* NSWindow+Extension.swift in Sources */,
 				AFBCC0502A1B4B2700E2483D /* AppSettings.Display.swift in Sources */,
 				AFBCC0492A1B38F300E2483D /* NSMenuItem+Extension.swift in Sources */,
+				AF6200202A20A51D00728F7D /* AppsSettingsPane.swift in Sources */,
 				AFBCC0572A1B504400E2483D /* URL+Extension.swift in Sources */,
 				AF35B7012A1DDB0300EA6891 /* SettingsTab.swift in Sources */,
 				AFBCC0522A1B4B3C00E2483D /* AppSettings.Directories.swift in Sources */,
@@ -358,6 +358,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -419,6 +420,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -448,7 +450,8 @@
 				CODE_SIGN_ENTITLEMENTS = AppLibrary/AppLibrary.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 362;
+				CURRENT_PROJECT_VERSION = 384;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 838RGQ32CA;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -477,7 +480,8 @@
 				CODE_SIGN_ENTITLEMENTS = AppLibrary/AppLibrary.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 362;
+				CURRENT_PROJECT_VERSION = 384;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 838RGQ32CA;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;

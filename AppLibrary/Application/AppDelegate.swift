@@ -6,7 +6,6 @@ import SwiftUI
 final class AppDelegate: NSObject, NSApplicationDelegate {
 	private(set) lazy var appLibraryWindowController: AppLibraryWindowController = AppLibraryWindowController()
 
-	//	private(set) lazy var settingsWindowController: SettingsWindowController = SettingsWindowController()
 	private(set) lazy var settingsWindowController = SettingsWindowController(
 		panes: [
 			Settings.Pane(
@@ -22,6 +21,13 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 				toolbarIcon: NSImage(systemSymbolName: "folder", accessibilityDescription: "Directories")!
 			) {
 				DirectoriesSettingsPane()
+			},
+			Settings.Pane(
+				identifier: .apps,
+				title: "Apps",
+				toolbarIcon: NSImage(systemSymbolName: "app", accessibilityDescription: "Apps")!
+			) {
+				AppsSettingsPane()
 			},
 		]
 	)
