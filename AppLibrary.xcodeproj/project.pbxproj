@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AF0AA8402A21FF7900B22A8C /* AppLibraryPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0AA83F2A21FF7900B22A8C /* AppLibraryPanel.swift */; };
 		AF2284E32A209BA400432486 /* Settings in Frameworks */ = {isa = PBXBuildFile; productRef = AF2284E22A209BA400432486 /* Settings */; };
 		AF2284E52A209BCD00432486 /* PaneIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2284E42A209BCD00432486 /* PaneIdentifiers.swift */; };
 		AF35B7012A1DDB0300EA6891 /* SettingsTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF35B7002A1DDB0300EA6891 /* SettingsTab.swift */; };
@@ -40,6 +41,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AF0AA83F2A21FF7900B22A8C /* AppLibraryPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLibraryPanel.swift; sourceTree = "<group>"; };
 		AF2284E42A209BCD00432486 /* PaneIdentifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaneIdentifiers.swift; sourceTree = "<group>"; };
 		AF35B7002A1DDB0300EA6891 /* SettingsTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTab.swift; sourceTree = "<group>"; };
 		AF35B7042A1DDBF100EA6891 /* DisplaySettingsPane.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplaySettingsPane.swift; sourceTree = "<group>"; };
@@ -208,6 +210,7 @@
 			isa = PBXGroup;
 			children = (
 				AFD927092A1DC507005D839F /* AppLibraryWindowController.swift */,
+				AF0AA83F2A21FF7900B22A8C /* AppLibraryPanel.swift */,
 			);
 			path = Windows;
 			sourceTree = "<group>";
@@ -294,6 +297,7 @@
 				AFBCC05B2A1B535F00E2483D /* NSImage+Extension.swift in Sources */,
 				AFBCC0622A1B6AE700E2483D /* Array+Extension.swift in Sources */,
 				AFB272502A21FC1D003F11BD /* KeyedDecodingContainer+Extension.swift in Sources */,
+				AF0AA8402A21FF7900B22A8C /* AppLibraryPanel.swift in Sources */,
 				AFBCC04B2A1B3DAC00E2483D /* NSWindow+Extension.swift in Sources */,
 				AFBCC0502A1B4B2700E2483D /* AppSettings.Display.swift in Sources */,
 				AFBCC0492A1B38F300E2483D /* NSMenuItem+Extension.swift in Sources */,
@@ -446,7 +450,7 @@
 				CODE_SIGN_ENTITLEMENTS = AppLibrary/AppLibrary.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 451;
+				CURRENT_PROJECT_VERSION = 456;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 838RGQ32CA;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -478,7 +482,7 @@
 				CODE_SIGN_ENTITLEMENTS = AppLibrary/AppLibrary.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 451;
+				CURRENT_PROJECT_VERSION = 456;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 838RGQ32CA;
 				ENABLE_HARDENED_RUNTIME = YES;

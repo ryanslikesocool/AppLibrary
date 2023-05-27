@@ -4,9 +4,16 @@ import Foundation
 extension AppSettings {
 	struct Display: Hashable {
 		var appearance: Appearance
+		var activeInDock: Bool
 
 		init() {
 			appearance = .system
+			activeInDock = false
+		}
+
+		func apply() {
+			appearance.apply()
+			NSApp.setActivationPolicy(activeInDock ? .regular : .accessory)
 		}
 	}
 }
@@ -16,6 +23,7 @@ extension AppSettings {
 extension AppSettings.Display: Codable {
 	private enum CodingKeys: CodingKey {
 		case appearance
+		case activeInDock
 	}
 
 	init(from decoder: Decoder) throws {
@@ -24,12 +32,14 @@ extension AppSettings.Display: Codable {
 		let container = try decoder.container(keyedBy: CodingKeys.self)
 
 		appearance = try container.decodeIfPresent(forKey: .appearance) ?? appearance
+		activeInDock = try container.decodeIfPresent(forKey: .activeInDock) ?? activeInDock
 	}
 
 	func encode(to encoder: Encoder) throws {
 		var container = encoder.container(keyedBy: CodingKeys.self)
 
 		try container.encode(appearance, forKey: .appearance)
+		try container.encode(activeInDock, forKey: .activeInDock)
 	}
 }
 

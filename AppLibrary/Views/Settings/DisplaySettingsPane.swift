@@ -14,6 +14,10 @@ struct DisplaySettingsPane: View {
 					Text("Dark").tag(AppSettings.Display.Appearance.dark)
 				}
 				.onChange(of: settings.display.appearance) { $0.apply() }
+
+				Toggle("Active in Dock", isOn: $settings.display.activeInDock)
+					.help("Should App Library display an app icon indicator?")
+					.onChange(of: settings.display.activeInDock) { _ in settings.display.apply() }
 			}
 		}
 	}

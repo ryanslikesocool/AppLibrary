@@ -16,7 +16,7 @@ final class AppSettings: ObservableObject {
 	}
 
 	private func prepare() {
-		display.appearance.apply()
+		display.apply()
 	}
 }
 

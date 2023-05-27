@@ -6,17 +6,13 @@ final class AppLibraryWindowController: NSWindowController, ObservableObject {
 
 	init() {
 		apps = []
-		let window = NSPanel(
-			contentRect: NSRect(x: 0, y: 0, width: 300, height: 450),
-			styleMask: [.borderless, .fullSizeContentView, .nonactivatingPanel, .titled],
-			backing: .buffered,
-			defer: false
+		
+		let window = AppLibraryPanel(
+			contentRect: NSRect(x: 0, y: 0, width: 300, height: 450)
 		)
 
 		super.init(window: window)
 
-		buildWindow()
-		buildBackgroundView()
 		buildMainView()
 
 		NotificationCenter.default.addObserver(forName: Self.reloadApps, object: nil, queue: nil, using: reloadApps)
@@ -31,51 +27,6 @@ final class AppLibraryWindowController: NSWindowController, ObservableObject {
 // MARK: - Setup
 
 private extension AppLibraryWindowController {
-	func buildWindow() {
-		guard let window = window as? NSPanel else {
-			print("Could not get \(Self.self).window")
-			return
-		}
-
-		window.isMovable = false
-		window.isFloatingPanel = true
-		window.titleVisibility = .hidden
-		window.titlebarAppearsTransparent = true
-		window.isOpaque = false
-		window.backgroundColor = .clear
-		window.hidesOnDeactivate = true
-
-		window.standardWindowButton(.closeButton)?.isHidden = true
-		window.standardWindowButton(.miniaturizeButton)?.isHidden = true
-		window.standardWindowButton(.zoomButton)?.isHidden = true
-	}
-
-	func buildBackgroundView() {
-		guard let window else {
-			print("Could not get \(Self.self).window")
-			return
-		}
-
-		let visualEffect = NSVisualEffectView()
-		visualEffect.translatesAutoresizingMaskIntoConstraints = false
-		visualEffect.material = .sidebar
-		visualEffect.state = .active
-		visualEffect.wantsLayer = true
-		visualEffect.layer?.cornerRadius = 16.0
-		visualEffect.layer?.cornerCurve = .continuous
-
-		window.contentView = visualEffect
-
-		if let constraints = window.contentView {
-			visualEffect.leadingAnchor.constraint(equalTo: constraints.leadingAnchor).isActive = true
-			visualEffect.trailingAnchor.constraint(equalTo: constraints.trailingAnchor).isActive = true
-			visualEffect.topAnchor.constraint(equalTo: constraints.topAnchor).isActive = true
-			visualEffect.bottomAnchor.constraint(equalTo: constraints.bottomAnchor).isActive = true
-		}
-
-		window.invalidateShadow()
-	}
-
 	func buildMainView() {
 		guard let contentView = window?.contentView else {
 			print("Could not get \(Self.self).window.contentView")
@@ -140,8 +91,7 @@ extension AppLibraryWindowController {
 		)
 
 		window.setFrameOrigin(origin)
-		window.orderFront(self)
-//		window.makeKeyAndOrderFront(self)
+		window.makeKeyAndOrderFront(self)
 	}
 
 	func dismiss() {
