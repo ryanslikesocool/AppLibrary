@@ -11,14 +11,14 @@ struct SearchBar: View {
 			.padding(.horizontal, 8)
 			.frame(height: 36)
 			.frame(maxWidth: .infinity)
-			.background(.thinMaterial, in: containerShape)
+			.background(.regularMaterial, in: containerShape)
 			.overlay(.separator, in: containerShape.stroke(lineWidth: 1))
-			.padding(8)
 			.compositingGroup()
+			.padding(8)
 			.shadowRcp(color: .black.opacity(colorScheme == .dark ? 0.5 : 0.25), radius: 16, x: 0, y: 8, base: 0.8)
 	}
 
-	private var containerShape: some Shape {
+	private var containerShape: RoundedRectangle {
 		RoundedRectangle(cornerRadius: 8, style: .continuous)
 	}
 }

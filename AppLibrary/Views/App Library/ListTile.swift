@@ -3,8 +3,12 @@ import SwiftUI
 struct ListTile: View {
 	private static let iconAxis: Int = 44
 	private static let iconSize: CGSize = CGSize(width: iconAxis, height: iconAxis)
+//	private static let borderStrokeWidth: Double = 2
 
 	let app: ApplicationInformation
+//	let isSelected: Bool
+
+//	@State private var contextVisible: Bool = false
 
 	private var label: String {
 		if app.displayName.hasSuffix(".app") {
@@ -32,13 +36,16 @@ struct ListTile: View {
 			.contentShape(containerShape)
 		}
 		.buttonStyle(.plain)
-		.contentShape(containerShape)
+//		.background(.selection.opacity(isSelected ? 1 : 0), in: containerShape)
+//		.background(.selection.opacity(contextVisible ? 1 : 0), in: containerShape.inset(by: Self.borderStrokeWidth * 0.5).stroke(lineWidth: Self.borderStrokeWidth))
 		.contextMenu {
 			TileContextMenu(app: app)
+//				.onAppear { contextVisible = true }
+//				.onDisappear { contextVisible = false }
 		}
 	}
 
-	private var containerShape: some Shape {
-		RoundedRectangle(cornerRadius: 12, style: .continuous)
+	private var containerShape: RoundedRectangle {
+		RoundedRectangle(cornerRadius: 8, style: .continuous)
 	}
 }

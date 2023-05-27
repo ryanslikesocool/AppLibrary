@@ -2,6 +2,7 @@ import SwiftUI
 
 struct AppListView: View {
 	let apps: [ApplicationInformation]
+//	@State private var selection: ApplicationInformation.ID? = nil
 
 	var body: some View {
 		ScrollView(showsIndicators: false) {
@@ -10,6 +11,7 @@ struct AppListView: View {
 					.frame(height: 52)
 
 				ForEach(apps) { app in
+					// ListTile(app: app, isSelected: selection == app.id)
 					ListTile(app: app)
 				}
 
