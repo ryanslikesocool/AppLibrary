@@ -10,6 +10,7 @@ Launchpad hasn't recieved any significant updates (or love) from Apple since it 
 - [x] Search installed apps
 - [x] Hide and show apps in the library with a (right) click
 - [x] Add and remove search scopes to look for installed apps
+- [ ] Keyboard navigation
 - [ ] Grid view
 - [ ] Group by app category
 
