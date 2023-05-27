@@ -6,9 +6,9 @@ final class AppLibraryWindowController: NSWindowController, ObservableObject {
 
 	init() {
 		apps = []
-		let window = NSWindow(
+		let window = NSPanel(
 			contentRect: NSRect(x: 0, y: 0, width: 300, height: 450),
-			styleMask: [.borderless, .fullSizeContentView, .titled],
+			styleMask: [.borderless, .fullSizeContentView, .nonactivatingPanel, .titled],
 			backing: .buffered,
 			defer: false
 		)
@@ -32,13 +32,13 @@ final class AppLibraryWindowController: NSWindowController, ObservableObject {
 
 private extension AppLibraryWindowController {
 	func buildWindow() {
-		guard let window else {
+		guard let window = window as? NSPanel else {
 			print("Could not get \(Self.self).window")
 			return
 		}
 
 		window.isMovable = false
-		window.level = .popUpMenu
+		window.isFloatingPanel = true
 		window.titleVisibility = .hidden
 		window.titlebarAppearsTransparent = true
 		window.isOpaque = false

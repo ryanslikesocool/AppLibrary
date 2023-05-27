@@ -20,16 +20,19 @@ struct ListTile: View {
 				Image(nsImage: app.getIcon())
 					.resizable()
 					.frame(width: 44, height: 44)
+					.shadow(color: .black.opacity(0.125), radius: 4, y: 2)
 
 				Text(label)
+					.font(.body)
 
 				Spacer()
 			}
-			.padding(.horizontal, 8)
-			.padding(.vertical, 8)
+			.padding(.horizontal, 4)
+			.padding(.vertical, 4)
 			.contentShape(containerShape)
 		}
 		.buttonStyle(.plain)
+		.contentShape(containerShape)
 		.contextMenu {
 			TileContextMenu(app: app)
 		}
