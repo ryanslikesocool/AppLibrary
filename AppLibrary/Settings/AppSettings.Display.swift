@@ -2,7 +2,7 @@ import Cocoa
 import Foundation
 
 extension AppSettings {
-	struct Display: Hashable, Codable {
+	struct Display: Hashable {
 		var appearance: Appearance
 
 		init() {
@@ -10,6 +10,30 @@ extension AppSettings {
 		}
 	}
 }
+
+// MARK: - Codable
+
+extension AppSettings.Display: Codable {
+	private enum CodingKeys: CodingKey {
+		case appearance
+	}
+
+	init(from decoder: Decoder) throws {
+		self.init()
+
+		let container = try decoder.container(keyedBy: CodingKeys.self)
+
+		appearance = try container.decodeIfPresent(forKey: .appearance) ?? appearance
+	}
+
+	func encode(to encoder: Encoder) throws {
+		var container = encoder.container(keyedBy: CodingKeys.self)
+
+		try container.encode(appearance, forKey: .appearance)
+	}
+}
+
+// MARK: - Backing
 
 extension AppSettings.Display {
 	enum Appearance: String, Identifiable, Codable, CustomStringConvertible {

@@ -46,12 +46,8 @@ extension AppSettings: Codable {
 
 		let container = try decoder.container(keyedBy: CodingKeys.self)
 
-		if let display = try container.decodeIfPresent(Display.self, forKey: .display) {
-			self.display = display
-		}
-		if let directories = try container.decodeIfPresent(Directories.self, forKey: .directories) {
-			self.directories = directories
-		}
+		display = try container.decodeIfPresent(forKey: .display) ?? display
+		directories = try container.decodeIfPresent(forKey: .directories) ?? directories
 	}
 
 	func encode(to encoder: Encoder) throws {
