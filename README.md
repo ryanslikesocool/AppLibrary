@@ -1,5 +1,5 @@
 # App Library
-An app library for macOS.
+A lightweight app launcher for macOS.
 
 ![App Library Screenshots](~images/header.jpg)
 
