@@ -3,20 +3,46 @@
 import PackageDescription
 
 let package = Package(
-	name: "AppLibraryModules",
+	name: "AppLibrary",
 	defaultLocalization: "en",
 	platforms: [
 		.macOS(.v13),
 	],
 	products: [
 		.library(
-			name: "AppLibraryModules",
-			targets: ["AppLibraryModules"]
+			name: "AppLibrary",
+			targets: ["AppLibrary"]
 		),
 	],
 	targets: [
 		.target(
-			name: "AppLibraryModules"
+			name: "AppLibrary",
+			dependencies: [
+				"AppLibraryBrowser",
+				"AppLibraryAbout",
+				"AppLibrarySettings",
+			]
 		),
+
+		.target(
+			name: "AppLibraryBrowser",
+			dependencies: [
+				"AppLibrarySettings",
+			]
+		),
+
+		.target(
+			name: "AppLibraryAbout",
+			dependencies: [
+				"AppLibraryCommon",
+			]
+		),
+
+		.target(
+			name: "AppLibrarySettings",
+			dependencies: ["AppLibraryCommon"]
+		),
+
+		.target(name: "AppLibraryCommon"),
 	]
 )
