@@ -22,25 +22,13 @@ extension AppSettings {
 // MARK: - Codable
 
 extension AppSettings.Directories: Codable {
-	private enum CodingKeys: CodingKey {
-		case searchScopes
-		case hiddenApps
-	}
-
 	init(from decoder: Decoder) throws {
-		self.init()
-
 		let container = try decoder.container(keyedBy: CodingKeys.self)
 
-		searchScopes = try container.decode(forKey: .searchScopes) ?? searchScopes
-		hiddenApps = try container.decode(forKey: .hiddenApps) ?? hiddenApps
-	}
+		let dflt: Self = Self()
 
-	func encode(to encoder: Encoder) throws {
-		var container = encoder.container(keyedBy: CodingKeys.self)
-
-		try container.encode(searchScopes, forKey: .searchScopes)
-		try container.encode(hiddenApps, forKey: .hiddenApps)
+		searchScopes = try container.decodeIfPresent([URL].self, forKey: .searchScopes) ?? dflt.searchScopes
+		hiddenApps = try container.decodeIfPresent([String].self, forKey: .hiddenApps) ?? dflt.hiddenApps
 	}
 }
 
