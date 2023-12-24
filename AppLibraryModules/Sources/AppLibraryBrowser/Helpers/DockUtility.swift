@@ -3,7 +3,7 @@ import Cocoa
 
 /// from `https://github.com/neilsardesai/Mouse-Finder`
 
-public enum DockTileUtility {
+public enum DockUtility {
 	public static var accessGranted: Bool { AXIsProcessTrusted() }
 
 	static func readPrivileges(prompt: Bool) -> Bool {

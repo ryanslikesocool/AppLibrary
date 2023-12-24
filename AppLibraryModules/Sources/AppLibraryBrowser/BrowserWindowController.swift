@@ -15,7 +15,6 @@ public final class BrowserWindowController: NSWindowController, ObservableObject
 		window.titlebarAppearsTransparent = true
 		window.isOpaque = false
 		window.backgroundColor = .clear
-		window.hidesOnDeactivate = true
 		window.standardWindowButton(.closeButton)?.isHidden = true
 		window.standardWindowButton(.miniaturizeButton)?.isHidden = true
 		window.standardWindowButton(.zoomButton)?.isHidden = true
@@ -60,8 +59,8 @@ public extension BrowserWindowController {
 //		NSApp.setActivationPolicy(.regular)
 
 		if
-			let iconRect = DockTileUtility.getIconRect(),
-			let dockPosition = DockTileUtility.estimateDockPosition(),
+			let iconRect = DockUtility.getIconRect(),
+			let dockPosition = DockUtility.estimateDockPosition(),
 			let screen = NSScreen.main
 		{
 			var frameOrigin = switch dockPosition {
@@ -82,8 +81,8 @@ public extension BrowserWindowController {
 						y: iconRect.origin.y + (iconRect.height + Self.windowSize.height) * 0.5
 					)
 			}
-			// invert Y
-			frameOrigin.y = screen.frame.height - frameOrigin.y
+
+			frameOrigin.y = screen.frame.height - frameOrigin.y // invert Y
 
 			window.setFrameOrigin(frameOrigin)
 		} else {

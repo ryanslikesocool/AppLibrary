@@ -1,6 +1,6 @@
 import AppKit
 
-public extension DockTileUtility {
+public extension DockUtility {
 	// private static var menuBarHeight: Double { NSStatusBar.system.thickness }
 
 	/// Estimate the dock position on the screen based on the screen's `visibleFrame`.
@@ -47,7 +47,7 @@ public extension DockTileUtility {
 
 // MARK: - Supporting Data
 
-public extension DockTileUtility {
+public extension DockUtility {
 	enum DockPosition {
 		case left
 		case bottom

@@ -1,17 +1,6 @@
 import Cocoa
 
-public extension DockTileUtility {
-	static func getIconLocation() -> CGPoint? {
-		guard let iconRect = getIconRect() else {
-			return nil
-		}
-
-		return CGPoint(
-			x: iconRect.origin.x + iconRect.width * 0.5,
-			y: NSScreen.main!.frame.height - (iconRect.origin.y + iconRect.height * 0.5)
-		)
-	}
-
+public extension DockUtility {
 	static func getIconRect() -> CGRect? {
 		guard
 			accessGranted,
@@ -42,7 +31,7 @@ public extension DockTileUtility {
 	}
 }
 
-private extension DockTileUtility {
+private extension DockUtility {
 	/// The accessibility element for the app’s dock tile
 	static func dockIcon() -> AXUIElement? {
 		let appsWithDockBundleID = NSRunningApplication.runningApplications(withBundleIdentifier: Self.dockBundleID)
@@ -91,7 +80,7 @@ private extension DockTileUtility {
 
 // MARK: - Constants
 
-private extension DockTileUtility {
+private extension DockUtility {
 	static let axChildren: String = "AXChildren"
 	static let dockBundleID: String = "com.apple.dock"
 }

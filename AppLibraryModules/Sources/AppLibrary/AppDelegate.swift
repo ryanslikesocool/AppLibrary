@@ -9,7 +9,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 	func applicationDidFinishLaunching(_ notification: Notification) {
 		AppSettings.shared.prepare()
 
-		DockTileUtility.requestAccess()
+		DockUtility.requestAccess()
 	}
 
 	func applicationDidBecomeActive(_ notification: Notification) {
