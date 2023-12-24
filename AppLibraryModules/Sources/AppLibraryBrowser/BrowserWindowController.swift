@@ -55,7 +55,7 @@ public extension BrowserWindowController {
 	func reveal() {
 		//		NSApp.setActivationPolicy(.accessory)
 
-		if let dockPosition = DockTileUtility.getLocation() {
+		if let dockPosition = DockTileUtility.getIconLocation() {
 			window?.setFrameOrigin(dockPosition)
 		} else {
 			window?.center()
