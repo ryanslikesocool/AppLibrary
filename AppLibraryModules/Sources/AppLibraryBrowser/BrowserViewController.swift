@@ -9,7 +9,7 @@ final class BrowserViewController: NSViewController {
 			view.material = .sidebar
 			view.state = .active
 			view.wantsLayer = true
-			view.layer?.cornerRadius = 16.0
+			view.layer?.cornerRadius = Self.cornerRadius
 			view.layer?.cornerCurve = .continuous
 
 			NSLayoutConstraint.activate([
@@ -31,4 +31,10 @@ final class BrowserViewController: NSViewController {
 
 		view = background
 	}
+}
+
+// MARK: - Constants
+
+extension BrowserViewController {
+	static let cornerRadius: CGFloat = 16.0
 }

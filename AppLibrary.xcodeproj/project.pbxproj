@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		AF2284E32A209BA400432486 /* Settings in Frameworks */ = {isa = PBXBuildFile; productRef = AF2284E22A209BA400432486 /* Settings */; };
 		AF3800C92AE69E21009D7652 /* AppLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = AF3800C82AE69E21009D7652 /* AppLibrary */; };
 		AF7C7A212A1A304900545B8B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AF7C7A202A1A304900545B8B /* Assets.xcassets */; };
 /* End PBXBuildFile section */
@@ -25,7 +24,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				AF3800C92AE69E21009D7652 /* AppLibrary in Frameworks */,
-				AF2284E32A209BA400432486 /* Settings in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,7 +81,6 @@
 			);
 			name = "App Library";
 			packageProductDependencies = (
-				AF2284E22A209BA400432486 /* Settings */,
 				AF3800C82AE69E21009D7652 /* AppLibrary */,
 			);
 			productName = AppLibrary;
@@ -115,7 +112,6 @@
 			);
 			mainGroup = AF7C7A102A1A304800545B8B;
 			packageReferences = (
-				AF2284E12A209BA400432486 /* XCRemoteSwiftPackageReference "Settings" */,
 			);
 			productRefGroup = AF7C7A1A2A1A304800545B8B /* Products */;
 			projectDirPath = "";
@@ -276,7 +272,7 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 547;
+				CURRENT_PROJECT_VERSION = 619;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 838RGQ32CA;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -307,7 +303,7 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 547;
+				CURRENT_PROJECT_VERSION = 619;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 838RGQ32CA;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -352,23 +348,7 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCRemoteSwiftPackageReference section */
-		AF2284E12A209BA400432486 /* XCRemoteSwiftPackageReference "Settings" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/sindresorhus/Settings";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 3.0.0;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
 /* Begin XCSwiftPackageProductDependency section */
-		AF2284E22A209BA400432486 /* Settings */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = AF2284E12A209BA400432486 /* XCRemoteSwiftPackageReference "Settings" */;
-			productName = Settings;
-		};
 		AF3800C82AE69E21009D7652 /* AppLibrary */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = AppLibrary;

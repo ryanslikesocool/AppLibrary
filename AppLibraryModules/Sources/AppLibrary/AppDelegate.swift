@@ -10,11 +10,6 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 		AppSettings.shared.prepare()
 
 		DockTileUtility.requestAccess()
-
-		Timer.scheduledTimer(withTimeInterval: 2, repeats: false) { t in
-			print(DockTileUtility.accessGranted)
-			t.invalidate()
-		}
 	}
 
 	func applicationDidBecomeActive(_ notification: Notification) {

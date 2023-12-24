@@ -9,7 +9,6 @@ public final class BrowserWindowController: NSWindowController, ObservableObject
 			defer: false
 		)
 
-		window.title = "Browser"
 		window.isMovable = false
 		window.isFloatingPanel = true
 		window.titleVisibility = .hidden
@@ -47,22 +46,52 @@ extension BrowserWindowController: NSWindowDelegate {
 
 extension BrowserWindowController {
 	static let windowSize: NSSize = NSSize(width: 300, height: 450)
+	static let windowPadding: CGFloat = 8
 }
 
 // MARK: -
 
 public extension BrowserWindowController {
 	func reveal() {
-		//		NSApp.setActivationPolicy(.accessory)
+		guard let window else {
+			return
+		}
+//		NSApp.setActivationPolicy(.accessory)
+//		NSApp.setActivationPolicy(.regular)
 
-		if let dockPosition = DockTileUtility.getIconLocation() {
-			window?.setFrameOrigin(dockPosition)
+		if
+			let iconRect = DockTileUtility.getIconRect(),
+			let dockPosition = DockTileUtility.estimateDockPosition(),
+			let screen = NSScreen.main
+		{
+			var frameOrigin = switch dockPosition {
+				case .left:
+					CGPoint(
+						x: iconRect.origin.x + iconRect.width + Self.windowPadding,
+						y: iconRect.origin.y + (iconRect.height + Self.windowSize.height) * 0.5
+					)
+				case .bottom:
+					CGPoint(
+						x: iconRect.origin.x + (iconRect.width - Self.windowSize.width) * 0.5,
+						y: iconRect.origin.y - Self.windowPadding
+					)
+				case .right:
+					// The gap between the dock and window is a little wider due to the accessibility API returning a rect with the origin off a little bit.
+					CGPoint(
+						x: iconRect.origin.x - (Self.windowSize.width + Self.windowPadding),
+						y: iconRect.origin.y + (iconRect.height + Self.windowSize.height) * 0.5
+					)
+			}
+			// invert Y
+			frameOrigin.y = screen.frame.height - frameOrigin.y
+
+			window.setFrameOrigin(frameOrigin)
 		} else {
-			window?.center()
+			window.center()
 		}
 
-		window?.makeKeyAndOrderFront(self)
-//		NSApp.setActivationPolicy(.regular)
+		window.makeKeyAndOrderFront(self)
+		print("reveal")
 	}
 
 	func dismiss() {

@@ -21,8 +21,7 @@ Move the app to your Applications folder (and your dock!)
 
 ## Known Issues
 - App Library cannot be sandboxed due to the way it uses accessibility features to locate the dock icon.
-- App Library currently only works with the dock on the bottom of the screen.
+- When the dock is on the right side of the screen, the spacing between the dock and App Launcher is a little wider.  It's possible to fix with a few magic numbers but this is really Apple's fault.
 
 ## Acknowledgements
-[Settings](https://github.com/sindresorhus/Settings) - Settings pane\
 [Mouse Finder](https://github.com/neilsardesai/Mouse-Finder) - Dock icon location code
