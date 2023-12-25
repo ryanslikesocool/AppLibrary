@@ -28,6 +28,12 @@ struct SearchField: View {
 			}
 			.onSubmit(loseFocus)
 			.onExitCommand(perform: loseFocus)
+
+			.background {
+				Button("Search App Library", action: { focused = true })
+					.keyboardShortcut("f")
+					.opacity(0.01)
+			}
 	}
 
 	private var containerShape: RoundedRectangle {

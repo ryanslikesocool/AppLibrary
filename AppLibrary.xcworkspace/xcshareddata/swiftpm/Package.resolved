@@ -1,0 +1,23 @@
+{
+  "pins" : [
+    {
+      "identity" : "exceptioncatcher",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/sindresorhus/ExceptionCatcher.git",
+      "state" : {
+        "revision" : "a7acaf40f8bd67a1f3a05a14de5b6a861ac3d1ac",
+        "version" : "2.0.1"
+      }
+    },
+    {
+      "identity" : "serializationkit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ryanslikesocool/SerializationKit",
+      "state" : {
+        "branch" : "main",
+        "revision" : "e4eba39a7cce674e533880529a54aa8b99b7b976"
+      }
+    }
+  ],
+  "version" : 2
+}

@@ -2,6 +2,8 @@ import AppKit
 
 public final class BrowserWindowController: NSWindowController, ObservableObject {
 	public init() {
+		_ = BrowserCache.shared
+
 		let window = NSPanel(
 			contentRect: NSRect(origin: .zero, size: BrowserWindowController.windowSize),
 			styleMask: [.borderless, .fullSizeContentView, .nonactivatingPanel, .titled],
@@ -25,6 +27,11 @@ public final class BrowserWindowController: NSWindowController, ObservableObject
 		super.init(window: window)
 
 		window.delegate = self
+
+		DispatchQueue.main.async {
+			NSApplication.shared.hide(nil)
+//			window.orderOut(self)
+		}
 	}
 
 	@available(*, unavailable)

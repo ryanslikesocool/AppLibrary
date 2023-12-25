@@ -6,7 +6,7 @@ final class BrowserViewController: NSViewController {
 		let background: NSView = {
 			let view = NSVisualEffectView()
 			view.translatesAutoresizingMaskIntoConstraints = false
-			view.material = .sidebar
+			view.material = .popover
 			view.state = .active
 			view.wantsLayer = true
 			view.layer?.cornerRadius = Self.cornerRadius

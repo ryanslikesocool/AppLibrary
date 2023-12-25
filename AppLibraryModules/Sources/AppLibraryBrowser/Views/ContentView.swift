@@ -1,17 +1,18 @@
 import SwiftUI
+import AppLibrarySettings
 
 struct ContentView: View {
+	@ObservedObject private var appSettings: AppSettings = .shared
 	@State private var searchQuery: String = ""
 
 	var body: some View {
-		ZStack {
-			containerShape
-				.stroke(.separator, lineWidth: 1)
-		}
-		.overlay(alignment: .top) { // because containerRelativeFrame isn't available in macOS 13
-			SearchField(searchQuery: $searchQuery)
-		}
-		.ignoresSafeArea()
+		AppList(searchQuery: searchQuery)
+			.background(.separator, in: containerShape.stroke(lineWidth: 1))
+			.overlay(alignment: .top) {
+				SearchField(searchQuery: $searchQuery)
+			}
+			.ignoresSafeArea()
+			.appView(appSettings.display.appView)
 	}
 
 	private var containerShape: RoundedRectangle {

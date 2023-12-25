@@ -25,3 +25,4 @@ Move the app to your Applications folder (and your dock!)
 
 ## Acknowledgements
 [Mouse Finder](https://github.com/neilsardesai/Mouse-Finder) - Dock icon location code
+[ExceptionCatcher](https://github.com/sindresorhus/ExceptionCatcher) - Obj-C Exception handling

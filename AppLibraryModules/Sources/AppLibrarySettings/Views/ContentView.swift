@@ -7,10 +7,15 @@ struct ContentView: View {
 	var body: some View {
 		TabView(selection: $tabSelection) {
 			DisplaySettingsPane(model: $appSettings.display)
+				.tag(SettingsTab.display)
+				.scrollDisabled(true)
 			DirectoriesSettingsPane(model: $appSettings.directories)
+				.tag(SettingsTab.directories)
 			AppsSettingsPane(model: $appSettings.apps)
+				.tag(SettingsTab.apps)
 		}
 		.frame(width: 450)
+		.frame(maxHeight: 500)
 		.fixedSize()
 		.formStyle(.grouped)
 	}

@@ -1,6 +1,6 @@
 import AppKit
 
-public enum Appearance: UInt8, Hashable, Codable, CaseIterable {
+public enum Appearance: String, Hashable, Codable, CaseIterable, Sendable {
 	case system
 	case light
 	case dark
@@ -9,22 +9,16 @@ public enum Appearance: UInt8, Hashable, Codable, CaseIterable {
 // MARK: - Identifiable
 
 extension Appearance: Identifiable {
-	public var id: UInt8 { rawValue }
+	public var id: String { rawValue }
 }
 
 // MARK: - CustomStringConvertible
 
 extension Appearance: CustomStringConvertible {
-	public var description: String {
-		switch self {
-			case .system: "System"
-			case .light: "Light"
-			case .dark: "Dark"
-		}
-	}
+	public var description: String { rawValue.capitalized }
 }
 
-// MARK: - Supporting
+// MARK: -
 
 extension Appearance {
 	var nsApperance: NSAppearance? {

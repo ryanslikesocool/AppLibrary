@@ -15,6 +15,14 @@ public final class AppSettings: ObservableObject {
 	}
 }
 
+// MARK: - Equatable
+
+extension AppSettings: Equatable {
+	public static func == (lhs: AppSettings, rhs: AppSettings) -> Bool {
+		lhs.hashValue == rhs.hashValue
+	}
+}
+
 // MARK: - Hashable
 
 extension AppSettings: Hashable {
@@ -22,10 +30,6 @@ extension AppSettings: Hashable {
 		hasher.combine(display)
 		hasher.combine(directories)
 		hasher.combine(apps)
-	}
-
-	public static func == (lhs: AppSettings, rhs: AppSettings) -> Bool {
-		lhs.hashValue == rhs.hashValue
 	}
 }
 
@@ -43,7 +47,7 @@ extension AppSettings {
 	}()
 }
 
-// MARK: - Supporting
+// MARK: -
 
 public extension AppSettings {
 	func prepare() {

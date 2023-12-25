@@ -18,7 +18,6 @@ extension SettingsPaneView {
 			content
 		}
 		.tabItem { tabLabel }
-
 		.onChange(of: model) { newValue in
 			newValue.save()
 		}

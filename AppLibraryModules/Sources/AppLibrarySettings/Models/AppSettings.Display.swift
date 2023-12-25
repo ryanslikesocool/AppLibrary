@@ -1,14 +1,23 @@
 import AppKit
+import SerializationKit
 
 public extension AppSettings {
-	struct Display: Hashable {
+	struct Display {
 		public var appearance: Appearance
+		public var appView: AppViewMode
+		public var autoGroup: Bool
 
 		init() {
 			appearance = .system
+			appView = .list
+			autoGroup = true
 		}
 	}
 }
+
+// MARK: - Hashable
+
+extension AppSettings.Display: Hashable { }
 
 // MARK: - Codable
 
@@ -18,16 +27,21 @@ extension AppSettings.Display: Codable {
 
 		let defaultSettings: Self = Self()
 
-		appearance = try container.decodeIfPresent(Appearance.self, forKey: .appearance) ?? defaultSettings.appearance
+		appearance = try container.decodeIfPresent(forKey: .appearance) ?? defaultSettings.appearance
+		appView = try container.decodeIfPresent(forKey: .appView) ?? defaultSettings.appView
+		autoGroup = try container.decodeIfPresent(forKey: .autoGroup) ?? defaultSettings.autoGroup
 	}
 }
 
 // MARK: - Settings File
 
 extension AppSettings.Display: SettingsFile {
-	static let fileName: String = "display.plist"
+	public static let fileName: String = "display.plist"
 
-	func prepare() {
+	public mutating func prepare() {
 		NSApp.appearance = appearance.nsApperance
+		if appView == .list {
+			autoGroup = false
+		}
 	}
 }
