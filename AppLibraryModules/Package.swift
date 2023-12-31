@@ -15,7 +15,7 @@ let package = Package(
 		),
 	],
 	dependencies: [
-		.package(url: "https://github.com/ryanslikesocool/SerializationKit", branch: "main"),
+		.package(url: "https://github.com/ryanslikesocool/SerializationKit", from: "0.1.0-pre.6"),
 		.package(url: "https://github.com/sindresorhus/ExceptionCatcher.git", from: "2.0.1"),
 	],
 	targets: [
