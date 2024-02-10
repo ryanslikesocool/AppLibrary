@@ -46,6 +46,14 @@ extension BrowserWindowController: NSWindowDelegate {
 	override public func windowDidLoad() {
 		window?.invalidateShadow()
 	}
+
+	public func windowDidResignKey(_ notification: Notification) {
+		BrowserCache.shared.destroyEventMonitor()
+	}
+
+	public func windowDidBecomeKey(_ notification: Notification) {
+		BrowserCache.shared.createEventMonitor()
+	}
 }
 
 // MARK: - Constants

@@ -6,7 +6,6 @@ struct AppList: View {
 	@ObservedObject private var browserCache: BrowserCache = .shared
 	@ObservedObject private var appSettings: AppSettings = .shared
 //	@State private var appSelection: String? = nil
-	let searchQuery: String
 
 	var body: some View {
 		switch browserCache.queryState {
@@ -20,7 +19,7 @@ struct AppList: View {
 
 private extension AppList {
 	func searchFilter(application: Application) -> Bool {
-		application.displayName.localizedStandardContains(searchQuery)
+		application.displayName.localizedStandardContains(browserCache.searchQuery)
 	}
 
 	func hiddenAppsFilter(application: Application) -> Bool {
@@ -62,7 +61,7 @@ private extension AppList {
 						.frame(height: AppTile.listIconSize + Self.listPadding * 0.5)
 				}
 
-				if searchQuery.isEmpty {
+				if browserCache.searchQuery.isEmpty {
 					let filteredApps = browserCache.apps.filter(hiddenAppsFilter)
 
 					switch appView {
@@ -94,14 +93,15 @@ private extension AppList {
 				}
 			}
 			.onReceive(browserCache.keyboardKeyEventPublisher, perform: { notification in
-				guard let string = notification.userInfo?[BrowserCache.eventValueKey] as? String else {
+				guard
+					!browserCache.isSearchFocused,
+					let string = notification.userInfo?[BrowserCache.eventValueKey] as? String
+				else {
 					return
 				}
 				browserCache.jumpTo(string: string, in: proxy)
 			})
 		}
-		.onAppear(perform: browserCache.createEventMonitor)
-		.onDisappear(perform: browserCache.destroyEventMonitor)
 	}
 }
 

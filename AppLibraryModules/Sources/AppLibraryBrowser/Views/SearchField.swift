@@ -1,14 +1,15 @@
 import SwiftUI
 
 struct SearchField: View {
+	@ObservedObject private var browserCache: BrowserCache = .shared
+
 	@FocusState private var focused: Bool
-	@Binding var searchQuery: String
 
 	private var shadowA: Shadow { focused ? Self.focusedShadowA : Self.unfocusedShadowA }
 	private var shadowB: Shadow { focused ? Self.focusedShadowB : Self.unfocusedShadowB }
 
 	var body: some View {
-		TextField(text: $searchQuery, prompt: Text("􀊫 App Library"), label: EmptyView.init)
+		TextField(text: $browserCache.searchQuery, prompt: Text("􀊫 App Library"), label: EmptyView.init)
 			.focused($focused)
 			.font(.title3)
 			.textFieldStyle(.plain)
@@ -26,11 +27,7 @@ struct SearchField: View {
 			}
 			.onSubmit(loseFocus)
 			.onExitCommand(perform: loseFocus)
-			.background {
-				Button("Search App Library", action: { focused = true })
-					.keyboardShortcut("f")
-					.opacity(0.01)
-			}
+			.sync($browserCache.isSearchFocused, with: _focused)
 	}
 
 	private var containerShape: RoundedRectangle {
@@ -49,7 +46,7 @@ private extension SearchField {
 
 	static let unfocusedShadowA: Shadow = (0.1, 1, 0.5)
 	static let unfocusedShadowB: Shadow = (0.05, 2, 1)
-	
+
 	static let focusedShadowA: Shadow = (0.2, 2, 1)
 	static let focusedShadowB: Shadow = (0.1, 4, 2)
 
