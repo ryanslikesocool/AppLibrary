@@ -1,3 +1,4 @@
+import AppLibraryCommon
 import SwiftUI
 
 struct DirectoriesSettingsPane: SettingsPaneView {
@@ -25,14 +26,7 @@ private extension DirectoriesSettingsPane {
 			if model.searchScopes.isEmpty {
 				Text("No search directories...")
 			} else {
-				ForEach(model.searchScopes.indices, id: \.self) { index in
-					LabeledContent(model.searchScopes[index].path(percentEncoded: false)) {
-						Button(action: { model.removeSearchScope(at: index) }) {
-							Image(systemName: "minus")
-						}
-					}
-				}
-				.controlSize(.small)
+				ForEach(model.searchScopes.indices, id: \.self, content: listElement)
 			}
 		} header: {
 			Text("Search Directories")
@@ -43,6 +37,32 @@ private extension DirectoriesSettingsPane {
 			}
 		}
 		.fileImporter(isPresented: $showDirectoryPicker, allowedContentTypes: [.folder], onCompletion: completeDirectorySelection)
+	}
+
+	@ViewBuilder private func listElement(index: Int) -> some View {
+		let text: String = model.searchScopes[index].path(percentEncoded: false)
+
+		LabeledContent {
+			listElementMenuContent(index: index)
+		} label: {
+			Text(text)
+				.lineLimit(1)
+				.truncationMode(.tail)
+				.help(text)
+		}
+	}
+
+	private func listElementMenuContent(index: Int) -> some View {
+		Menu {
+			Button("Remove") { model.removeSearchScope(at: index) }
+			Divider()
+			Button("Show in Finder") { model.searchScopes[index].showInFinder() }
+		} label: {
+			Image(systemName: "minus")
+		} primaryAction: {
+			model.removeSearchScope(at: index)
+		}
+		.fixedSize()
 	}
 }
 

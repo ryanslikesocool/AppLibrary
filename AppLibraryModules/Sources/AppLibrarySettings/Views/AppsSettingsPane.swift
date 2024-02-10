@@ -25,11 +25,16 @@ private extension AppsSettingsPane {
 				Text("No hidden apps...")
 			} else {
 				ForEach(model.hiddenApps.indices, id: \.self) { index in
-					LabeledContent(model.hiddenApps[index]) {
+					let text: String = model.hiddenApps[index]
+					LabeledContent {
 						Button("Show") { model.removeHiddenApp(at: index) }
+					} label: {
+						Text(text)
+							.lineLimit(1)
+							.truncationMode(.tail)
+							.help(text)
 					}
 				}
-				.controlSize(.small)
 			}
 		} header: {
 			Text("Hidden Apps")

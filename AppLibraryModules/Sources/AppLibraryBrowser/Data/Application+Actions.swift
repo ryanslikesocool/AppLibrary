@@ -10,10 +10,7 @@ extension Application {
 	}
 
 	func showInFinder() {
-		guard let url = getURL() else {
-			return
-		}
-		NSWorkspace.shared.activateFileViewerSelecting([url])
+		getURL()?.showInFinder()
 	}
 
 	func hide() {
