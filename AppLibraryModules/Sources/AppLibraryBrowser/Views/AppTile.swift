@@ -12,6 +12,7 @@ struct AppTile: View {
 			}
 		}
 		.contextMenu(menuItems: contextMenu)
+		.id(application.id)
 	}
 }
 

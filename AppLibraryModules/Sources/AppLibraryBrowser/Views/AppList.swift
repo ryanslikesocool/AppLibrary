@@ -55,29 +55,53 @@ private extension AppList {
 	}
 
 	var queryCompleteView: some View {
-		ScrollView(.vertical) {
-			Spacer()
-				.frame(height: AppTile.listIconSize + Self.listPadding * 0.5)
-
-			if searchQuery.isEmpty {
-				let filteredApps = browserCache.apps.filter(hiddenAppsFilter)
-
-				switch appView {
-					case .list: listView(filteredApps)
-					case .grid: gridView(filteredApps)
+		ScrollViewReader { proxy in
+			ScrollView(.vertical) {
+				if #unavailable(macOS 14) {
+					Spacer()
+						.frame(height: AppTile.listIconSize + Self.listPadding * 0.5)
 				}
-			} else {
-				let filteredApps = browserCache.apps.filter(hiddenAppsFilter).filter(searchFilter)
 
-				listView(filteredApps)
-					.appView(.list)
+				if searchQuery.isEmpty {
+					let filteredApps = browserCache.apps.filter(hiddenAppsFilter)
+
+					switch appView {
+						case .list: listView(filteredApps)
+						case .grid: gridView(filteredApps)
+					}
+				} else {
+					let filteredApps = browserCache.apps.filter(hiddenAppsFilter).filter(searchFilter)
+
+					listView(filteredApps)
+						.appView(.list)
+				}
+
+				if #unavailable(macOS 14) {
+					Spacer()
+						.frame(height: Self.listPadding)
+				}
 			}
-
-			Spacer()
-				.frame(height: Self.listPadding)
+			.frame(maxWidth: .infinity)
+			.buttonStyle(.plain)
+			.wrap { view in
+				if #available(macOS 14, *) {
+					view
+						.scrollClipDisabled()
+						.padding(.top, AppTile.listIconSize + Self.listPadding * 0.5)
+						.padding(.bottom, Self.listPadding)
+				} else {
+					view
+				}
+			}
+			.onReceive(browserCache.keyboardKeyEventPublisher, perform: { notification in
+				guard let string = notification.userInfo?[BrowserCache.eventValueKey] as? String else {
+					return
+				}
+				browserCache.jumpTo(string: string, in: proxy)
+			})
 		}
-		.frame(maxWidth: .infinity)
-		.buttonStyle(.plain)
+		.onAppear(perform: browserCache.createEventMonitor)
+		.onDisappear(perform: browserCache.destroyEventMonitor)
 	}
 }
 
@@ -88,7 +112,6 @@ private extension AppList {
 		LazyVStack {
 			ForEach(apps) { app in
 				AppTile(application: app)
-//					.tag(app.id)
 			}
 		}
 		.padding(.horizontal, Self.listPadding)
@@ -102,7 +125,6 @@ private extension AppList {
 		LazyVGrid(columns: Self.gridColumns) {
 			ForEach(apps) { app in
 				AppTile(application: app)
-//					.tag(app.id)
 			}
 		}
 		.padding(.horizontal, Self.gridPadding)

@@ -20,15 +20,12 @@ struct SearchField: View {
 			.compositingGroup()
 			.shadow(color: .black.opacity(shadowA.opacity), radius: shadowA.radius, y: shadowA.y)
 			.shadow(color: .black.opacity(shadowB.opacity), radius: shadowB.radius, y: shadowB.y)
-
 			.animation(.easeOut(duration: 0.2), value: focused)
-
 			.onAppear {
 				DispatchQueue.main.async(execute: loseFocus)
 			}
 			.onSubmit(loseFocus)
 			.onExitCommand(perform: loseFocus)
-
 			.background {
 				Button("Search App Library", action: { focused = true })
 					.keyboardShortcut("f")
