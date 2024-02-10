@@ -1,4 +1,5 @@
 import Foundation
+import OSLog
 import SerializationKit
 
 public protocol SettingsFile: Hashable, PlistCodable, SerializedFileConvertible {
@@ -22,7 +23,7 @@ public extension SettingsFile {
 		do {
 			try self.init(url: url)
 		} catch {
-			print("Failed to load \(Self.fileName) from \(directory).")
+			Logger.appLibrarySettings.error("Failed to load \(Self.fileName) from \(directory): \(error.localizedDescription)")
 			return nil
 		}
 	}
@@ -38,7 +39,7 @@ public extension SettingsFile {
 		do {
 			try save(to: url)
 		} catch {
-			print("Failed to save \(Self.fileName) to \(directory).")
+			Logger.appLibrarySettings.error("Failed to save \(Self.fileName) to \(directory): \(error.localizedDescription).")
 		}
 	}
 

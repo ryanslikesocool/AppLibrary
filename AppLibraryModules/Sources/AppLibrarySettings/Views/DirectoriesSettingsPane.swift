@@ -1,4 +1,5 @@
 import AppLibraryCommon
+import OSLog
 import SwiftUI
 
 struct DirectoriesSettingsPane: SettingsPaneView {
@@ -72,7 +73,7 @@ private extension DirectoriesSettingsPane {
 	func completeDirectorySelection(_ result: Result<URL, Error>) {
 		switch result {
 			case let .success(url): model.tryAdd(searchScope: url)
-			case let .failure(error): print(error)
+			case let .failure(error): Logger.appLibrarySettings.error("Failed to select new search directory: \(error.localizedDescription)")
 		}
 	}
 }

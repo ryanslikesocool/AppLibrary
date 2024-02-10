@@ -1,4 +1,5 @@
 import AppKit
+import OSLog
 
 public final class BrowserWindowController: NSWindowController, ObservableObject {
 	public init() {
@@ -105,11 +106,11 @@ public extension BrowserWindowController {
 		}
 
 		window.makeKeyAndOrderFront(self)
-		print("reveal")
+		Logger.appLibraryBrowser.info("Reveal browser")
 	}
 
 	func dismiss() {
-		print("dismiss")
+		Logger.appLibraryBrowser.info("Dismiss browser")
 //		window?.orderOut(self) // handled by window.hidesOnDeactivate = true
 	}
 }
