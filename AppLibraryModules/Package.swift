@@ -6,7 +6,7 @@ let package = Package(
 	name: "AppLibrary",
 	defaultLocalization: "en",
 	platforms: [
-		.macOS(.v13),
+		.macOS(.v14),
 	],
 	products: [
 		.library(
@@ -15,7 +15,7 @@ let package = Package(
 		),
 	],
 	dependencies: [
-		.package(url: "https://github.com/ryanslikesocool/SerializationKit", from: "0.1.0-pre.6"),
+		.package(url: "https://github.com/ryanslikesocool/SerializationKit.git", from: "0.1.0-pre.6"),
 		.package(url: "https://github.com/sindresorhus/ExceptionCatcher.git", from: "2.0.1"),
 	],
 	targets: [

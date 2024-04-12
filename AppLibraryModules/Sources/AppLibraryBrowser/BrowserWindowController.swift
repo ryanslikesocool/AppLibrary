@@ -106,11 +106,11 @@ public extension BrowserWindowController {
 		}
 
 		window.makeKeyAndOrderFront(self)
-		Logger.appLibraryBrowser.info("Reveal browser")
+		Logger.appLibraryBrowser.debug("Reveal browser")
 	}
 
 	func dismiss() {
-		Logger.appLibraryBrowser.info("Dismiss browser")
+		Logger.appLibraryBrowser.debug("Dismiss browser")
 //		window?.orderOut(self) // handled by window.hidesOnDeactivate = true
 	}
 }

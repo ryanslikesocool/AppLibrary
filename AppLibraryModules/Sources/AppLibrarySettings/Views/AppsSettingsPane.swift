@@ -27,7 +27,13 @@ private extension AppsSettingsPane {
 				ForEach(model.hiddenApps.indices, id: \.self) { index in
 					let text: String = model.hiddenApps[index]
 					LabeledContent {
-						Button("Show") { model.removeHiddenApp(at: index) }
+						Menu("Options", systemImage: "ellipsis.circle") {
+							optionMenuContent(at: index)
+						}
+						.labelStyle(.iconOnly)
+						.fixedSize()
+						.menuIndicator(.hidden)
+						.buttonStyle(.plain)
 					} label: {
 						Text(text)
 							.lineLimit(1)
@@ -43,5 +49,12 @@ private extension AppsSettingsPane {
 			Apps can be hidden by right-clicking on one in the App Library and selecting "Hide".
 			""")
 		}
+	}
+
+	func optionMenuContent(at index: Int) -> some View {
+		Group {
+			Button("Show", systemImage: "eye") { model.removeHiddenApp(at: index) }
+		}
+		.labelStyle(.titleAndIcon)
 	}
 }

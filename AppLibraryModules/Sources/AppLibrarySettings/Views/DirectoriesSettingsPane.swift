@@ -44,7 +44,13 @@ private extension DirectoriesSettingsPane {
 		let text: String = model.searchScopes[index].path(percentEncoded: false)
 
 		LabeledContent {
-			listElementMenuContent(index: index)
+			Menu("Options", systemImage: "ellipsis.circle") {
+				listElementMenuContent(at: index)
+			}
+			.labelStyle(.iconOnly)
+			.fixedSize()
+			.menuIndicator(.hidden)
+			.buttonStyle(.plain)
 		} label: {
 			Text(text)
 				.lineLimit(1)
@@ -53,17 +59,17 @@ private extension DirectoriesSettingsPane {
 		}
 	}
 
-	private func listElementMenuContent(index: Int) -> some View {
-		Menu {
-			Button("Remove") { model.removeSearchScope(at: index) }
-			Divider()
-			Button("Show in Finder") { model.searchScopes[index].showInFinder() }
-		} label: {
-			Image(systemName: "minus")
-		} primaryAction: {
-			model.removeSearchScope(at: index)
+	private func listElementMenuContent(at index: Int) -> some View {
+		Group {
+			Section {
+				Button("Remove", systemImage: "minus") { model.removeSearchScope(at: index) }
+			}
+
+			Section {
+				Button("Show in Finder", systemImage: "doc") { model.searchScopes[index].showInFinder() }
+			}
 		}
-		.fixedSize()
+		.labelStyle(.titleAndIcon)
 	}
 }
 

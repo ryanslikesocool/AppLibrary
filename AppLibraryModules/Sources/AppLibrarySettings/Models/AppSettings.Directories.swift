@@ -16,6 +16,14 @@ public extension AppSettings {
 	}
 }
 
+// MARK: - Sendable
+
+extension AppSettings.Directories: Sendable { }
+
+// MARK: - Equatable
+
+extension AppSettings.Directories: Equatable { }
+
 // MARK: - Hashable
 
 extension AppSettings.Directories: Hashable { }

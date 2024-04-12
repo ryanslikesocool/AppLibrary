@@ -4,7 +4,7 @@ A lightweight app launcher for macOS.
 ![App Library Screenshots](~images/header.jpg)
 
 Launchpad hasn't recieved any significant updates (or love) from Apple since it was released with Mac OS X Lion in 2011.  App Library aims to fix that oversight.
-
+n
 ## Features
 - [x] Launch apps
 - [x] Search installed apps

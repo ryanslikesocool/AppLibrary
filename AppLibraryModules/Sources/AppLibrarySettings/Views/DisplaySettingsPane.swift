@@ -29,8 +29,8 @@ extension DisplaySettingsPane {
 			Text(Appearance.light.description).tag(Appearance.light)
 			Text(Appearance.dark.description).tag(Appearance.dark)
 		}
-		.onChange(of: model.appearance) { newValue in
-			NSApp.appearance = newValue.nsApperance
+		.onChange(of: model.appearance) {
+			NSApp.appearance = model.appearance.nsApperance
 		}
 	}
 
@@ -40,8 +40,8 @@ extension DisplaySettingsPane {
 				Text(mode.description).tag(mode)
 			}
 		}
-		.onChange(of: model.appView) { newValue in
-			if newValue == .list {
+		.onChange(of: model.appView) {
+			if model.appView == .list {
 				model.autoGroup = false
 			}
 		}

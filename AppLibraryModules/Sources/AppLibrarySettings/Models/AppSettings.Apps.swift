@@ -13,6 +13,14 @@ public extension AppSettings {
 	}
 }
 
+// MARK: - Sendable
+
+extension AppSettings.Apps: Sendable { }
+
+// MARK: - Equatable
+
+extension AppSettings.Apps: Equatable { }
+
 // MARK: - Hashable
 
 extension AppSettings.Apps: Hashable { }
