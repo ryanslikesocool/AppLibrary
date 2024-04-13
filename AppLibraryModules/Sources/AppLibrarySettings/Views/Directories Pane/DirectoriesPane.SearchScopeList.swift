@@ -36,9 +36,7 @@ private extension DirectoriesPane.SearchScopeList {
 		ForEach(model.searchScopes.sorted(), content: listElement)
 	}
 
-	private func listElement(for searchScope: URL) -> some View {
-		let text: String = searchScope.path(percentEncoded: false)
-
+	private func listElement(for searchScope: String) -> some View {
 		return LabeledContent {
 			Menu("Options", systemImage: "ellipsis.circle") {
 				optionMenuContent(for: searchScope)
@@ -48,10 +46,10 @@ private extension DirectoriesPane.SearchScopeList {
 			.menuIndicator(.hidden)
 			.buttonStyle(.plain)
 		} label: {
-			Text(text)
+			Text(searchScope)
 				.lineLimit(1)
 				.truncationMode(.tail)
-				.help(text)
+				.help(searchScope)
 		}
 	}
 
@@ -61,21 +59,33 @@ private extension DirectoriesPane.SearchScopeList {
 	}
 
 	var sectionFooter: some View {
-		Button(action: { showDirectoryPicker = true }) {
-			Image(systemName: "plus")
-		}
+		Menu("Add Directory", systemImage: "plus",  content: {
+			Section {
+				Button("Add Custom Directory") { showDirectoryPicker = true }
+			}
+			Section("Default") {
+				ForEach(AppSettings.Directories.defaultSearchScopes.sorted()) { path in
+					Button(path) { model.tryAddSearchScope(withPath: path) }
+						.disabled(model.searchScopes.contains(path))
+				}
+			}
+		}, primaryAction: {
+			showDirectoryPicker = true
+		})
+		.labelStyle(.iconOnly)
+		.fixedSize()
 	}
 
-	private func optionMenuContent(for searchScope: URL) -> some View {
+	private func optionMenuContent(for searchScope: String) -> some View {
 		Group {
 			Section {
-				Button("Remove", systemImage: "minus") { model.removeSearchScope(withURL: searchScope) }
+				Button("Remove", systemImage: "minus") { model.removeSearchScope(withPath: searchScope) }
 			}
 			Section {
-				Button("Show in Finder", systemImage: "doc") { searchScope.showInFinder() }
+				Button("Show in Finder", systemImage: "doc") { model.getURL(forPath: searchScope)?.showInFinder() }
 			}
 		}
-		.labelStyle(.titleAndIcon)
+		.labelStyle(.titleOnly)
 	}
 }
 

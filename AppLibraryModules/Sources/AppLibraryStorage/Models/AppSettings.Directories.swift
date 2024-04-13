@@ -4,7 +4,7 @@ import SerializationKit
 
 public extension AppSettings {
 	struct Directories {
-		public private(set) var searchScopes: Set<URL>
+		public private(set) var searchScopes: Set<String>
 
 		init() {
 			searchScopes = Self.defaultSearchScopes
@@ -45,11 +45,11 @@ extension AppSettings.Directories: SettingsFile {
 // MARK: - Constants
 
 public extension AppSettings.Directories {
-	static var defaultSearchScopes: Set<URL> { [
-		URL(filePath: "/System/Applications"),
-		URL(filePath: "/System/Library/CoreServices/Applications"),
-		URL(filePath: "/Applications"),
-		URL.homeDirectory.appending(path: "Applications"),
+	static var defaultSearchScopes: Set<String> { [
+		"/System/Applications",
+		"/System/Library/CoreServices/Applications",
+		"/Applications",
+		"~/Applications",
 	] }
 }
 
@@ -57,14 +57,23 @@ public extension AppSettings.Directories {
 
 public extension AppSettings.Directories {
 	mutating func tryAddSearchScope(withURL searchScopeURL: URL) {
-		if searchScopes.insert(searchScopeURL).inserted {
-			Logger.module.debug("Added new search scope \(searchScopeURL.path(percentEncoded: false)).")
+		let searchScopePath = (searchScopeURL.path(percentEncoded: false) as NSString).abbreviatingWithTildeInPath
+		tryAddSearchScope(withPath: searchScopePath)
+	}
+
+	mutating func tryAddSearchScope(withPath searchScopePath: String) {
+		if searchScopes.insert(searchScopePath).inserted {
+			Logger.module.debug("Added new search scope \(searchScopePath).")
 		}
 	}
 
-	mutating func removeSearchScope(withURL searchScopeURL: URL) {
-		if searchScopes.remove(searchScopeURL) != nil {
-			Logger.module.debug("Removed search scope \(searchScopeURL.path(percentEncoded: false)).")
+	mutating func removeSearchScope(withPath searchScopePath: String) {
+		if searchScopes.remove(searchScopePath) != nil {
+			Logger.module.debug("Removed search scope \(searchScopePath).")
 		}
+	}
+
+	func getURL(forPath searchScopePath: String) -> URL? {
+		URL(filePath: (searchScopePath as NSString).expandingTildeInPath)
 	}
 }

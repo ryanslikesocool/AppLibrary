@@ -60,6 +60,6 @@ private extension AppsPane.HiddenAppsList {
 		Group {
 			Button("Show", systemImage: "eye") { model.removeHiddenApp(withIdentifier: appIdentifier) }
 		}
-		.labelStyle(.titleAndIcon)
+		.labelStyle(.titleOnly)
 	}
 }
