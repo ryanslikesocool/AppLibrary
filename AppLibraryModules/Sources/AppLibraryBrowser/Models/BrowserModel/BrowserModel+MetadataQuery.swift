@@ -1,5 +1,6 @@
 import AppKit
 import AppLibraryStorage
+import OSLog
 
 extension BrowserModel {
 	func reloadApps(notification: Notification) {
@@ -30,6 +31,8 @@ extension BrowserModel {
 			stopQuery(query)
 			queryState = .failed(reason: .queryStartFailure)
 		}
+
+		Logger.module.debug("Now reloading apps...")
 	}
 
 	private func finishMetadataQuery(notification: Notification) {

@@ -1,4 +1,5 @@
 import AppLibraryStorage
+import OSLog
 import SwiftUI
 
 final class BrowserModel: ObservableObject {
@@ -41,10 +42,12 @@ private extension BrowserModel {
 
 extension BrowserModel {
 	func onSearchShortcut() {
+		Logger.keyboardEvents.debug("Search Shortcut: Focusing search.")
 		isSearchFocused = true
 	}
 
 	func onRefreshShortcut() {
+		Logger.keyboardEvents.debug("Refresh Shortcut: Reloading apps.")
 		reloadApps()
 	}
 
@@ -52,29 +55,50 @@ extension BrowserModel {
 		if isSearchFocused {
 			searchQuery = ""
 			isSearchFocused = false
+			Logger.keyboardEvents.debug("Escape Key: Unfocusing search.")
 		} else {
 			NSApplication.shared.hide(nil)
+			Logger.keyboardEvents.debug("Escape Key: Hiding app.")
 		}
 	}
 
 	func onReturnKey() -> Bool {
 		if isSearchFocused {
-			isSearchFocused = false
-			return true
+			if !searchQuery.isEmpty {
+				if let bestMatch = filteredApps.first {
+					bestMatch.open()
+					searchQuery = ""
+					Logger.keyboardEvents.debug("Return Key: Opening app for best match.")
+					return true
+				} else {
+					Logger.keyboardEvents.debug("Return Key: Best match for search was not found.")
+					return false
+				}
+			} else {
+				isSearchFocused = false
+				Logger.keyboardEvents.debug("Return Key: Search was focused, query was empty.")
+				return true
+			}
 		} else {
+			Logger.keyboardEvents.debug("Return Key: Search was not focused.")
 			return false
 		}
 	}
 
 	func onAnyKey(_ value: String?) -> Bool {
-		guard
-			!isSearchFocused,
-			let lowercasedString = value?.lowercased(),
-			let firstResult = apps.first(where: { $0.displayName.lowercased().starts(with: lowercasedString) })
-		else {
+		guard !isSearchFocused else {
 			return false
 		}
 
+		guard
+			let lowercasedString = value?.lowercased(),
+			let firstResult = filteredApps.first(where: { $0.displayName.lowercased().starts(with: lowercasedString) })
+		else {
+			Logger.keyboardEvents.debug("Any Key: No app results to scroll to.")
+			return false
+		}
+
+		Logger.keyboardEvents.debug("Any Key: Scrolling to apps starting with \"\(lowercasedString)\".")
 		NotificationCenter.default.post(name: Event.scrollToApp, object: nil, userInfo: [0: firstResult.id])
 		return true
 	}
