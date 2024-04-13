@@ -4,6 +4,7 @@ import SerializationKit
 public extension AppSettings {
 	struct Display {
 		public var appearance: Appearance
+		public var reduceMotion: Bool
 		public var reduceTransparency: Bool
 
 		public var libraryLayout: LibraryLayout
@@ -11,6 +12,7 @@ public extension AppSettings {
 
 		init() {
 			appearance = .system
+			reduceMotion = false
 			reduceTransparency = false
 			libraryLayout = .list
 			autoGroup = true
@@ -39,6 +41,7 @@ extension AppSettings.Display: Codable {
 		let defaultSettings: Self = Self()
 
 		appearance = try container.decodeIfPresent(forKey: .appearance) ?? defaultSettings.appearance
+		reduceMotion = try container.decodeIfPresent(forKey: .reduceMotion) ?? defaultSettings.reduceMotion
 		reduceTransparency = try container.decodeIfPresent(forKey: .reduceTransparency) ?? defaultSettings.reduceTransparency
 		libraryLayout = try container.decodeIfPresent(forKey: .libraryLayout) ?? defaultSettings.libraryLayout
 		autoGroup = try container.decodeIfPresent(forKey: .autoGroup) ?? defaultSettings.autoGroup

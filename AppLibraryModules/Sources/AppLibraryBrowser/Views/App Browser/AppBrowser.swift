@@ -77,7 +77,7 @@ private extension AppBrowser {
 		guard let id = notification.userInfo?.values.first as? ApplicationIdentifier else {
 			return
 		}
-		withAnimation {
+		withAnimation(appSettings.display.willReduceMotion ? nil : .default) {
 			proxy.scrollTo(id, anchor: .top)
 		}
 	}

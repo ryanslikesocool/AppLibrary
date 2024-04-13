@@ -8,7 +8,7 @@ final class BrowserViewController: NSViewController {
 	private var receiveReduceTransparencyChangedSubscriber: AnyCancellable?
 
 	override var acceptsFirstResponder: Bool { true }
-	
+
 	override func loadView() {
 		let background: NSView = {
 			let view = NSVisualEffectView()
@@ -39,12 +39,11 @@ final class BrowserViewController: NSViewController {
 
 		Logger.module.debug("Finished executing \(#function).")
 	}
-	
+
 	override func viewDidLoad() {
 		receiveReduceTransparencyChangedSubscriber = AppSettings.shared.$display
 			.sink { [weak self] display in
-				let material = Self.getBackgroundMaterial(for: display.reduceTransparency)
-				self?.setBackgroundMaterial(to: material)
+				self?.setBackgroundMaterial(to: display.launcherBackgroundMaterial)
 			}
 	}
 }
@@ -65,9 +64,5 @@ private extension BrowserViewController {
 		}
 		visualEffectView.material = material
 		Logger.module.debug("Changed browser background material.")
-	}
-
-	static func getBackgroundMaterial(for reduceTransparencySetting: Bool) -> NSVisualEffectView.Material {
-		reduceTransparencySetting ? .windowBackground : .underWindowBackground
 	}
 }
