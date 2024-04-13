@@ -3,7 +3,7 @@ import OSLog
 
 public final class BrowserWindowController: NSWindowController, ObservableObject {
 	public init() {
-		_ = BrowserCache.shared
+		_ = BrowserModel.shared
 
 		let window = NSPanel(
 			contentRect: NSRect(origin: .zero, size: BrowserWindowController.windowSize),
@@ -52,11 +52,11 @@ extension BrowserWindowController: NSWindowDelegate {
 	}
 
 	public func windowDidResignKey(_ notification: Notification) {
-		BrowserCache.shared.destroyEventMonitor()
+		BrowserModel.shared.keyboardObserver.destroyEventMonitor()
 	}
 
 	public func windowDidBecomeKey(_ notification: Notification) {
-		BrowserCache.shared.createEventMonitor()
+		BrowserModel.shared.keyboardObserver.createEventMonitor()
 	}
 }
 

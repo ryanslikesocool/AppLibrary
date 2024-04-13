@@ -1,7 +1,7 @@
 import AppKit
 import AppLibraryStorage
 
-extension BrowserCache {
+extension BrowserModel {
 	func reloadApps(notification: Notification) {
 		reloadApps()
 	}
@@ -87,7 +87,7 @@ extension BrowserCache {
 
 // MARK: - Constants
 
-extension BrowserCache {
+extension BrowserModel {
 	private static var searchPredicate: NSPredicate { NSPredicate(format: "\(contentTypeKey) == '\(desiredContentType)'") }
 
 	static var contentTypeKey: String { NSMetadataItemContentTypeKey }

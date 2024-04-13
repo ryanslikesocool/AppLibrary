@@ -6,10 +6,10 @@ struct ContentView: View {
 	@Environment(\.openWindow) private var openWindow
 
 	@ObservedObject private var appSettings: AppSettings = .shared
-	@ObservedObject private var browserCache: BrowserCache = .shared
+	@ObservedObject private var browserModel: BrowserModel = .shared
 
 	var body: some View {
-		AppList()
+		AppBrowser()
 			.background(.separator, in: containerShape.stroke(lineWidth: 1))
 			.overlay(alignment: .top) {
 				SearchField()

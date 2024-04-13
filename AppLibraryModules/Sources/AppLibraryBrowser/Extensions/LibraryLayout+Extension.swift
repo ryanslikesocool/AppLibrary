@@ -15,4 +15,11 @@ extension LibraryLayout {
 			case .grid: .caption
 		}
 	}
+
+	var padding: CGFloat {
+		switch self {
+			case .list: 16
+			case .grid: 0
+		}
+	}
 }

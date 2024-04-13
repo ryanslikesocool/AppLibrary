@@ -1,40 +1,38 @@
 import SwiftUI
 
 struct SearchField: View {
-	@ObservedObject private var browserCache: BrowserCache = .shared
+	@ObservedObject private var browserModel: BrowserModel = .shared
+	@FocusState private var isFocused: Bool
 
-	@FocusState private var focused: Bool
-
-	private var shadowA: Shadow { focused ? Self.focusedShadowA : Self.unfocusedShadowA }
-	private var shadowB: Shadow { focused ? Self.focusedShadowB : Self.unfocusedShadowB }
+	private var shadowA: Shadow { isFocused ? Self.focusedShadowA : Self.unfocusedShadowA }
+	private var shadowB: Shadow { isFocused ? Self.focusedShadowB : Self.unfocusedShadowB }
 
 	var body: some View {
-		TextField(text: $browserCache.searchQuery, prompt: Text("􀊫 App Library"), label: EmptyView.init)
-			.focused($focused)
+		TextField(text: $browserModel.searchQuery, prompt: Text("􀊫 App Library"), label: EmptyView.init)
+			.focused($isFocused)
+
 			.font(.title3)
 			.textFieldStyle(.plain)
+
 			.padding(Self.innerPadding)
 			.background(.separator, in: containerShape.stroke(lineWidth: 1))
 			.background(.ultraThinMaterial, in: containerShape)
 			.padding(Self.outerPadding)
 			.fixedSize(horizontal: false, vertical: true)
 			.compositingGroup()
+
 			.shadow(color: .black.opacity(shadowA.opacity), radius: shadowA.radius, y: shadowA.y)
 			.shadow(color: .black.opacity(shadowB.opacity), radius: shadowB.radius, y: shadowB.y)
-			.animation(.easeOut(duration: 0.2), value: focused)
-			.onAppear {
-				DispatchQueue.main.async(execute: loseFocus)
-			}
-			.onSubmit(loseFocus)
-			.sync($browserCache.isSearchFocused, with: _focused)
+
+			.animation(.easeOut(duration: 0.2), value: isFocused)
+
+			.onAppear { isFocused = browserModel.isSearchFocused }
+			.onChange(of: isFocused) { browserModel.isSearchFocused = isFocused }
+			.onChange(of: browserModel.isSearchFocused) { isFocused = browserModel.isSearchFocused }
 	}
 
 	private var containerShape: RoundedRectangle {
 		RoundedRectangle(cornerRadius: 12)
-	}
-
-	private func loseFocus() {
-		focused = false
 	}
 }
 
