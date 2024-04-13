@@ -1,3 +1,4 @@
+#if DEBUG
 import AppKit
 
 extension NSEvent.ModifierFlags: CustomStringConvertible {
@@ -15,3 +16,4 @@ extension NSEvent.ModifierFlags: CustomStringConvertible {
 		}
 	}
 }
+#endif

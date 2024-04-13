@@ -48,13 +48,13 @@ extension BrowserWindowController: NSWindowDelegate {
 		window?.invalidateShadow()
 	}
 
-	public func windowDidResignKey(_ notification: Notification) {
-		BrowserCache.shared.destroyEventMonitor()
-	}
-
-	public func windowDidBecomeKey(_ notification: Notification) {
-		BrowserCache.shared.createEventMonitor()
-	}
+//	public func windowDidResignKey(_ notification: Notification) {
+//		BrowserCache.shared.destroyEventMonitor()
+//	}
+//
+//	public func windowDidBecomeKey(_ notification: Notification) {
+//		BrowserCache.shared.createEventMonitor()
+//	}
 }
 
 // MARK: - Constants
@@ -68,7 +68,10 @@ extension BrowserWindowController {
 
 public extension BrowserWindowController {
 	func reveal() {
+		Logger.module.debug("Revealing browser window...")
+	
 		guard let window else {
+			Logger.module.debug("Browser window does not exist.  This should never happen.")
 			return
 		}
 //		NSApp.setActivationPolicy(.accessory)
@@ -103,14 +106,15 @@ public extension BrowserWindowController {
 			window.setFrameOrigin(frameOrigin)
 		} else {
 			window.center()
+			Logger.module.debug("Failed to get dock icon location for window positioning.  The window was centered instead.")
 		}
 
 		window.makeKeyAndOrderFront(self)
-		Logger.appLibraryBrowser.debug("Reveal browser")
+		Logger.module.debug("Revealed browser.")
 	}
 
 	func dismiss() {
-		Logger.appLibraryBrowser.debug("Dismiss browser")
+		Logger.module.debug("Dismissed browser.")
 //		window?.orderOut(self) // handled by window.hidesOnDeactivate = true
 	}
 }

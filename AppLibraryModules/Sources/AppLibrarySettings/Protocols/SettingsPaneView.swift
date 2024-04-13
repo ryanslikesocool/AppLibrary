@@ -1,13 +1,15 @@
+import AppLibraryStorage
 import SwiftUI
 
 protocol SettingsPaneView: View {
 	associatedtype Settings: SettingsFile
 	associatedtype Content: View
 
+	static var tab: SettingsTab { get }
+
 	var model: Settings { get set }
 
 	@ViewBuilder var content: Content { get }
-	var tabLabel: Label<Text, Image> { get }
 }
 
 // MARK: - Default Implementation
@@ -18,8 +20,12 @@ extension SettingsPaneView {
 			content
 		}
 		.tabItem { tabLabel }
-		.onChange(of: model) { newValue in
-			newValue.save()
+		.onChange(of: model) {
+			model.save()
 		}
+	}
+
+	var tabLabel: Label<Text, Image> {
+		Label(Self.tab.description, systemImage: Self.tab.symbolName)
 	}
 }

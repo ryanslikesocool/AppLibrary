@@ -47,8 +47,14 @@ let package = Package(
 		.target(
 			name: "AppLibrarySettings",
 			dependencies: [
-				"SerializationKit",
+				"AppLibraryStorage",
+			]
+		),
 
+		.target(
+			name: "AppLibraryStorage",
+			dependencies: [
+				"SerializationKit",
 				"AppLibraryCommon",
 			]
 		),

@@ -23,7 +23,10 @@ public extension SettingsFile {
 		do {
 			try self.init(url: url)
 		} catch {
-			Logger.appLibrarySettings.error("Failed to load \(Self.fileName) from \(directory): \(error.localizedDescription)")
+			Logger.module.warning("""
+			Failed to load \(Self.fileName) from \(directory.path(percentEncoded: false)):
+			\(error.localizedDescription)
+			""")
 			return nil
 		}
 	}
@@ -39,7 +42,10 @@ public extension SettingsFile {
 		do {
 			try save(to: url)
 		} catch {
-			Logger.appLibrarySettings.error("Failed to save \(Self.fileName) to \(directory): \(error.localizedDescription).")
+			Logger.module.warning("""
+			Failed to save \(Self.fileName) to \(directory.path(percentEncoded: false)):
+			\(error.localizedDescription).
+			""")
 		}
 	}
 

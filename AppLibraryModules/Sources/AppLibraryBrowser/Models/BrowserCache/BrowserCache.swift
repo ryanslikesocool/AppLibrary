@@ -1,3 +1,4 @@
+import AppLibraryStorage
 import SwiftUI
 
 final class BrowserCache: ObservableObject {

@@ -20,8 +20,9 @@ Download and unzip the latest `App Library.app.zip` [release](https://github.com
 Move the app to your Applications folder (and your dock!)
 
 ## Known Issues
+- Apps that may have multiple installations, such as Unity, are not supported yet.
 - App Library cannot be sandboxed due to the way it uses accessibility features to locate the dock icon.
-- When the dock is on the right side of the screen, the spacing between the dock and App Launcher is a little wider.  It's possible to fix with a few magic numbers but this is really Apple's fault.
+- When the dock is on the right side of the screen, the spacing between the dock and App Launcher is a little wider.  It's possible to fix with a few magic numbers, but this is really Apple's fault.
 
 ## Acknowledgements
 [Mouse Finder](https://github.com/neilsardesai/Mouse-Finder) - Dock icon location code

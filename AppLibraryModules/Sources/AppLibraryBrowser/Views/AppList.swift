@@ -1,4 +1,4 @@
-import AppLibrarySettings
+import AppLibraryStorage
 import SwiftUI
 
 struct AppList: View {
@@ -23,7 +23,7 @@ private extension AppList {
 	}
 
 	func hiddenAppsFilter(application: Application) -> Bool {
-		!appSettings.apps.hiddenApps.contains(application.bundleIdentifier)
+		!appSettings.apps.hiddenApps.contains(application.id)
 	}
 }
 

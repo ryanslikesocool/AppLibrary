@@ -1,5 +1,5 @@
 import AppKit
-import AppLibrarySettings
+import AppLibraryStorage
 
 extension Application {
 	func open() {
@@ -14,7 +14,7 @@ extension Application {
 	}
 
 	func hide() {
-		AppSettings.shared.apps.tryAdd(hiddenApp: bundleIdentifier)
+		AppSettings.shared.apps.tryAddHiddenApp(withIdentifier: id)
 		AppSettings.shared.apps.save()
 	}
 }

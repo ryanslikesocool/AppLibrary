@@ -1,5 +1,6 @@
-import SwiftUI
 import AppLibrarySettings
+import AppLibraryStorage
+import SwiftUI
 
 struct ContentView: View {
 	@Environment(\.openWindow) private var openWindow

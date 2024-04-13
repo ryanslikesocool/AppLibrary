@@ -1,7 +1,10 @@
 import AppKit
+import AppLibraryStorage
 import SwiftUI
 
-struct DisplaySettingsPane: SettingsPaneView {
+struct DisplayPane: SettingsPaneView {
+	static var tab: SettingsTab { .display }
+
 	@Binding var model: AppSettings.Display
 
 	var content: some View {
@@ -11,23 +14,16 @@ struct DisplaySettingsPane: SettingsPaneView {
 	}
 }
 
-// MARK: - SettingsPaneView
-
-extension DisplaySettingsPane {
-	var tabLabel: Label<Text, Image> {
-		Label("Display", systemImage: "display")
-	}
-}
-
 // MARK: - Supporting Views
 
-extension DisplaySettingsPane {
+extension DisplayPane {
 	var appearancePicker: some View {
 		Picker("Appearance", selection: $model.appearance) {
 			Text(Appearance.system.description).tag(Appearance.system)
-			Divider()
-			Text(Appearance.light.description).tag(Appearance.light)
-			Text(Appearance.dark.description).tag(Appearance.dark)
+			Section {
+				Text(Appearance.light.description).tag(Appearance.light)
+				Text(Appearance.dark.description).tag(Appearance.dark)
+			}
 		}
 		.onChange(of: model.appearance) {
 			NSApp.appearance = model.appearance.nsApperance
@@ -37,7 +33,8 @@ extension DisplaySettingsPane {
 	var appViewPicker: some View {
 		Picker("App View", selection: $model.appView) {
 			ForEach(AppViewMode.allCases) { mode in
-				Text(mode.description).tag(mode)
+				Text(mode.description)
+					.tag(mode)
 			}
 		}
 		.onChange(of: model.appView) {

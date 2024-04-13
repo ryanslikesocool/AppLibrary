@@ -1,5 +1,5 @@
 import OSLog
 
 public extension Logger {
-	static let appLibrarySubsystem: String = AppLibraryInformation.bundleIdentifier
+	static var appLibrarySubsystem: String { AppLibraryInformation.bundleIdentifier }
 }

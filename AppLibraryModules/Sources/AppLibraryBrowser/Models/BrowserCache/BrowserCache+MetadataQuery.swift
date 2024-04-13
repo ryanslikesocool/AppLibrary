@@ -1,8 +1,8 @@
 import AppKit
-import AppLibrarySettings
+import AppLibraryStorage
 
 extension BrowserCache {
-	func reloadApps(_: Notification) {
+	func reloadApps(notification: Notification) {
 		reloadApps()
 	}
 
@@ -44,12 +44,13 @@ extension BrowserCache {
 	private func processMetadata(query: NSMetadataQuery) {
 		let metadata = query.results.compactMap { $0 as? NSMetadataItem }
 
-		let sourceApps: [Application] = metadata.compactMap(Application.init)
+		var sourceApps: [Application] = metadata.compactMap(Application.init)
 		var filteredApps: [Application] = []
 		filteredApps.reserveCapacity(sourceApps.count)
 
-		for app in sourceApps {
-			guard let existingIndex = filteredApps.firstIndex(where: { $0.bundleIdentifier == app.bundleIdentifier }) else {
+		for index in sourceApps.indices {
+			var app: Application = sourceApps[index]
+			guard let existingIndex = filteredApps.firstIndex(where: { $0.id == app.id }) else {
 				filteredApps.append(app)
 				continue
 			}
@@ -61,11 +62,14 @@ extension BrowserCache {
 			{
 				filteredApps[existingIndex] = app
 			}
+			sourceApps[index] = app
 		}
-		filteredApps.sort(by: { $0.displayName.lowercased() < $1.displayName.lowercased() })
+		filteredApps.sort(by: { $0.displayName.localizedStandardCompare($1.displayName) == .orderedAscending })
 
 		DispatchQueue.main.async { [weak self] in
-			guard let self else { return }
+			guard let self else {
+				return
+			}
 			self.apps = filteredApps
 			queryState = .complete
 		}
@@ -84,8 +88,8 @@ extension BrowserCache {
 // MARK: - Constants
 
 extension BrowserCache {
-	private static let searchPredicate: NSPredicate = NSPredicate(format: "\(contentTypeKey) == '\(desiredContentType)'")
+	private static var searchPredicate: NSPredicate { NSPredicate(format: "\(contentTypeKey) == '\(desiredContentType)'") }
 
-	static let contentTypeKey: String = NSMetadataItemContentTypeKey
-	static let desiredContentType: String = "com.apple.application-bundle"
+	static var contentTypeKey: String { NSMetadataItemContentTypeKey }
+	static var desiredContentType: String { "com.apple.application-bundle" }
 }

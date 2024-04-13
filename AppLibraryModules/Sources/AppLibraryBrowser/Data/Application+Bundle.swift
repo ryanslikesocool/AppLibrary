@@ -1,8 +1,9 @@
 import AppKit
+import AppLibraryStorage
 
 extension Application {
 	func getURL() -> URL? {
-		NSWorkspace.shared.urlForApplication(withBundleIdentifier: bundleIdentifier)
+		NSWorkspace.shared.urlForApplication(withBundleIdentifier: id.bundleIdentifier)
 	}
 
 	func getBundle() -> Bundle? {
@@ -64,5 +65,5 @@ extension Application {
 // MARK: - Constants
 
 private extension Application {
-	static let genericIcon: NSImage = NSImage(named: "GenericAppIcon")!
+	static var genericIcon: NSImage { NSImage(named: "GenericAppIcon")! }
 }

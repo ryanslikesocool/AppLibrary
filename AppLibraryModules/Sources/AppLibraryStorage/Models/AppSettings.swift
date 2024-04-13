@@ -36,7 +36,7 @@ extension AppSettings: Hashable {
 // MARK: - Constants
 
 extension AppSettings {
-	static let directoryURL: URL = URL.applicationSupportDirectory.appending(path: AppLibraryInformation.bundleIdentifier, directoryHint: .isDirectory)
+	static var directoryURL: URL { URL.applicationSupportDirectory.appending(path: AppLibraryInformation.appName, directoryHint: .isDirectory) }
 
 	static let plistDecoder: PropertyListDecoder = PropertyListDecoder()
 

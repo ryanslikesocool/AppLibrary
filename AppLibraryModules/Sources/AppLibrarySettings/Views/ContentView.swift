@@ -1,4 +1,5 @@
 import SwiftUI
+import AppLibraryStorage
 
 struct ContentView: View {
 	@ObservedObject private var appSettings: AppSettings = AppSettings.shared
@@ -6,29 +7,17 @@ struct ContentView: View {
 
 	var body: some View {
 		TabView(selection: $tabSelection) {
-			DisplaySettingsPane(model: $appSettings.display)
+			DisplayPane(model: $appSettings.display)
 				.tag(SettingsTab.display)
 				.scrollDisabled(true)
-			DirectoriesSettingsPane(model: $appSettings.directories)
+			DirectoriesPane(model: $appSettings.directories)
 				.tag(SettingsTab.directories)
-			AppsSettingsPane(model: $appSettings.apps)
+			AppsPane(model: $appSettings.apps)
 				.tag(SettingsTab.apps)
 		}
 		.frame(width: 450)
 		.frame(maxHeight: 500)
 		.fixedSize()
 		.formStyle(.grouped)
-	}
-}
-
-// MARK: - Supporting Data
-
-private extension ContentView {
-	enum SettingsTab: UInt8, Hashable, Identifiable {
-		case display
-		case directories
-		case apps
-
-		var id: UInt8 { rawValue }
 	}
 }

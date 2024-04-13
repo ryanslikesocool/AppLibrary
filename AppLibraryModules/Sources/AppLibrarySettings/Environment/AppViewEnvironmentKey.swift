@@ -1,4 +1,5 @@
 import SwiftUI
+import AppLibraryStorage
 
 private enum AppViewEnvironmentKey: EnvironmentKey {
 	static var defaultValue: AppViewMode = .list

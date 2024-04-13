@@ -1,8 +1,11 @@
 import AppLibraryCommon
+import AppLibraryStorage
 import OSLog
 import SwiftUI
 
-struct DirectoriesSettingsPane: SettingsPaneView {
+struct DirectoriesPane: SettingsPaneView {
+	static var tab: SettingsTab { .directories }
+
 	@Binding var model: AppSettings.Directories
 	@State private var showDirectoryPicker: Bool = false
 
@@ -11,17 +14,9 @@ struct DirectoriesSettingsPane: SettingsPaneView {
 	}
 }
 
-// MARK: - SettingsPaneView
-
-extension DirectoriesSettingsPane {
-	var tabLabel: Label<Text, Image> {
-		Label("Directories", systemImage: "folder")
-	}
-}
-
 // MARK: - Supporting Views
 
-private extension DirectoriesSettingsPane {
+private extension DirectoriesPane {
 	var searchScopesSection: some View {
 		Section {
 			if model.searchScopes.isEmpty {
@@ -75,11 +70,11 @@ private extension DirectoriesSettingsPane {
 
 // MARK: - Actions
 
-private extension DirectoriesSettingsPane {
+private extension DirectoriesPane {
 	func completeDirectorySelection(_ result: Result<URL, Error>) {
 		switch result {
 			case let .success(url): model.tryAdd(searchScope: url)
-			case let .failure(error): Logger.appLibrarySettings.error("Failed to select new search directory: \(error.localizedDescription)")
+			case let .failure(error): Logger.module.error("Failed to select new search directory: \(error.localizedDescription)")
 		}
 	}
 }
