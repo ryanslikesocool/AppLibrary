@@ -17,5 +17,5 @@ public struct AboutWindow: Scene {
 // MARK: - Constants
 
 public extension AboutWindow {
-	static let windowID: String = "about"
+	static var windowID: String { "about" }
 }

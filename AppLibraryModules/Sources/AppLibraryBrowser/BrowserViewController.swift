@@ -7,6 +7,8 @@ import SwiftUI
 final class BrowserViewController: NSViewController {
 	private var receiveReduceTransparencyChangedSubscriber: AnyCancellable?
 
+	override var acceptsFirstResponder: Bool { true }
+	
 	override func loadView() {
 		let background: NSView = {
 			let view = NSVisualEffectView()
@@ -44,17 +46,6 @@ final class BrowserViewController: NSViewController {
 				let material = Self.getBackgroundMaterial(for: display.reduceTransparency)
 				self?.setBackgroundMaterial(to: material)
 			}
-	}
-
-	override func performKeyEquivalent(with event: NSEvent) -> Bool {
-		switch event.charactersIgnoringModifiers {
-			case "f":
-				BrowserCache.shared.isSearchFocused = true
-				Logger.module.debug("Activate search.")
-				return true
-			default:
-				return super.performKeyEquivalent(with: event)
-		}
 	}
 }
 

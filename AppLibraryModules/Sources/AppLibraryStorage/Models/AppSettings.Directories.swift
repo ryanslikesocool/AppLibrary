@@ -4,7 +4,7 @@ import SerializationKit
 
 public extension AppSettings {
 	struct Directories {
-		public private(set) var searchScopes: [URL]
+		public private(set) var searchScopes: Set<URL>
 
 		init() {
 			searchScopes = Self.defaultSearchScopes
@@ -45,7 +45,7 @@ extension AppSettings.Directories: SettingsFile {
 // MARK: - Constants
 
 public extension AppSettings.Directories {
-	static var defaultSearchScopes: [URL] { [
+	static var defaultSearchScopes: Set<URL> { [
 		URL(filePath: "/System/Applications"),
 		URL(filePath: "/System/Library/CoreServices/Applications"),
 		URL(filePath: "/Applications"),
@@ -56,15 +56,15 @@ public extension AppSettings.Directories {
 // MARK: -
 
 public extension AppSettings.Directories {
-	mutating func tryAdd(searchScope newSearchScope: URL) {
-		if !searchScopes.contains(newSearchScope) {
-			searchScopes.append(newSearchScope)
-			Logger.module.debug("Added new search scope \(newSearchScope.path(percentEncoded: false)).")
+	mutating func tryAddSearchScope(withURL searchScopeURL: URL) {
+		if searchScopes.insert(searchScopeURL).inserted {
+			Logger.module.debug("Added new search scope \(searchScopeURL.path(percentEncoded: false)).")
 		}
 	}
 
-	mutating func removeSearchScope(at index: Int) {
-		let removedSearchScope: URL = searchScopes.remove(at: index)
-		Logger.module.debug("Removed search scope \(removedSearchScope.path(percentEncoded: false)).")
+	mutating func removeSearchScope(withURL searchScopeURL: URL) {
+		if searchScopes.remove(searchScopeURL) != nil {
+			Logger.module.debug("Removed search scope \(searchScopeURL.path(percentEncoded: false)).")
+		}
 	}
 }

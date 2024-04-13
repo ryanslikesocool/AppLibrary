@@ -26,7 +26,6 @@ struct SearchField: View {
 				DispatchQueue.main.async(execute: loseFocus)
 			}
 			.onSubmit(loseFocus)
-			.onExitCommand(perform: loseFocus)
 			.sync($browserCache.isSearchFocused, with: _focused)
 	}
 

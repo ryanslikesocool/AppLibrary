@@ -44,13 +44,3 @@ public extension DockUtility {
 		return (dockPosition, shortAxis)
 	}
 }
-
-// MARK: - Supporting Data
-
-public extension DockUtility {
-	enum DockPosition {
-		case left
-		case bottom
-		case right
-	}
-}

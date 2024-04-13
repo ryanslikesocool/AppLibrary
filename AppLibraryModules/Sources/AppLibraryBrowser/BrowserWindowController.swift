@@ -12,6 +12,9 @@ public final class BrowserWindowController: NSWindowController, ObservableObject
 			defer: false
 		)
 
+		window.title = Self.windowTitle
+		window.identifier = Self.windowIdentifier
+
 		window.isMovable = false
 		window.isFloatingPanel = true
 		window.titleVisibility = .hidden
@@ -48,13 +51,13 @@ extension BrowserWindowController: NSWindowDelegate {
 		window?.invalidateShadow()
 	}
 
-//	public func windowDidResignKey(_ notification: Notification) {
-//		BrowserCache.shared.destroyEventMonitor()
-//	}
-//
-//	public func windowDidBecomeKey(_ notification: Notification) {
-//		BrowserCache.shared.createEventMonitor()
-//	}
+	public func windowDidResignKey(_ notification: Notification) {
+		BrowserCache.shared.destroyEventMonitor()
+	}
+
+	public func windowDidBecomeKey(_ notification: Notification) {
+		BrowserCache.shared.createEventMonitor()
+	}
 }
 
 // MARK: - Constants
@@ -62,14 +65,15 @@ extension BrowserWindowController: NSWindowDelegate {
 extension BrowserWindowController {
 	static let windowSize: NSSize = NSSize(width: 300, height: 450)
 	static let windowPadding: CGFloat = 8
+
+	static var windowTitle: String { "App Library" }
+	static let windowIdentifier: NSUserInterfaceItemIdentifier = NSUserInterfaceItemIdentifier("com.DevelopedWithLove.AppLibrary")
 }
 
 // MARK: -
 
 public extension BrowserWindowController {
 	func reveal() {
-		Logger.module.debug("Revealing browser window...")
-	
 		guard let window else {
 			Logger.module.debug("Browser window does not exist.  This should never happen.")
 			return
@@ -109,8 +113,10 @@ public extension BrowserWindowController {
 			Logger.module.debug("Failed to get dock icon location for window positioning.  The window was centered instead.")
 		}
 
-		window.makeKeyAndOrderFront(self)
-		Logger.module.debug("Revealed browser.")
+		DispatchQueue.main.async {
+			window.makeKeyAndOrderFront(self)
+			Logger.module.debug("Revealed browser.")
+		}
 	}
 
 	func dismiss() {

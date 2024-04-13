@@ -21,7 +21,7 @@ extension BrowserCache {
 
 		NotificationCenter.default.addObserver(forName: .NSMetadataQueryDidFinishGathering, object: query, queue: nil, using: finishMetadataQuery)
 
-		query.searchScopes = AppSettings.shared.directories.searchScopes
+		query.searchScopes = Array(AppSettings.shared.directories.searchScopes)
 		query.predicate = Self.searchPredicate
 
 		activeMetadataQuery = query

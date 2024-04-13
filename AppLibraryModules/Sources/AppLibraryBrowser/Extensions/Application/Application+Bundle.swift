@@ -2,12 +2,8 @@ import AppKit
 import AppLibraryStorage
 
 extension Application {
-	func getURL() -> URL? {
-		NSWorkspace.shared.urlForApplication(withBundleIdentifier: id.bundleIdentifier)
-	}
-
 	func getBundle() -> Bundle? {
-		guard let url = getURL() else {
+		guard let url else {
 			return nil
 		}
 		return Bundle(url: url)
@@ -18,7 +14,7 @@ extension Application {
 	}
 
 	func getIcon() -> NSImage {
-		guard let url = getURL() else {
+		guard let url else {
 			return Self.genericIcon
 		}
 

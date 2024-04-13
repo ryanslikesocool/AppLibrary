@@ -78,9 +78,9 @@ extension BrowserCache {
 			return event
 		}
 
-		activateSearch: do { // cmd + f -> search
+		activateSearch: do { // command + f
 			// TODO: how to localize "f"?
-			guard matchingKeyboardShortcut(key: "f", modifier: .command, event: event) else {
+			guard matchingKeyboardShortcut(event, key: "f", modifier: .command) else {
 				break activateSearch
 			}
 
@@ -88,7 +88,30 @@ extension BrowserCache {
 			return nil
 		}
 
-		jumpToCharacter: do { // jump to character
+		startReload: do { // command + r
+			// TODO: how to localize "r"?
+			guard matchingKeyboardShortcut(event, key: "r", modifier: .command) else {
+				break startReload
+			}
+
+			reloadApps()
+			return nil
+		}
+
+		dismissWindow: do { // escape
+			guard matchingKeyboardShortcut(event, keyCode: 53, modifier: []) else {
+				break dismissWindow
+			}
+			
+			if isSearchFocused {
+				isSearchFocused = false
+			} else {
+				NSApplication.shared.hide(nil)
+			}
+			return nil
+		}
+
+		jumpToCharacter: do { // [character]
 			guard !isSearchFocused else {
 				break jumpToCharacter
 			}
@@ -100,7 +123,7 @@ extension BrowserCache {
 		return event
 	}
 
-	private func matchingKeyboardShortcut(key: String, modifier: NSEvent.ModifierFlags, event: NSEvent) -> Bool {
+	private func matchingKeyboardShortcut(_ event: NSEvent, key: String, modifier: NSEvent.ModifierFlags) -> Bool {
 		guard
 			let characters = event.characters,
 			characters.count == 1,
@@ -110,6 +133,10 @@ extension BrowserCache {
 			return false
 		}
 		return true
+	}
+
+	private func matchingKeyboardShortcut(_ event: NSEvent, keyCode: CGKeyCode, modifier: NSEvent.ModifierFlags) -> Bool {
+		event.keyCode == keyCode && modifierFlags == modifier
 	}
 }
 

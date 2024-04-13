@@ -44,6 +44,6 @@ extension ApplicationIdentifier: Identifiable {
 
 extension ApplicationIdentifier: Comparable {
 	public static func < (lhs: Self, rhs: Self) -> Bool {
-		lhs.displayName < rhs.displayName
+		lhs.displayName.localizedStandardCompare(rhs.displayName) == .orderedAscending
 	}
 }

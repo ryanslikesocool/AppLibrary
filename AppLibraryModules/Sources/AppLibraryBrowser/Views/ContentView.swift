@@ -15,7 +15,7 @@ struct ContentView: View {
 				SearchField()
 			}
 			.ignoresSafeArea()
-			.appView(appSettings.display.appView)
+			.libraryLayout(appSettings.display.libraryLayout)
 	}
 
 	private var containerShape: RoundedRectangle {

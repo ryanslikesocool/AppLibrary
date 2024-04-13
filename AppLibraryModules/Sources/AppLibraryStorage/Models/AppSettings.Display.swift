@@ -6,13 +6,13 @@ public extension AppSettings {
 		public var appearance: Appearance
 		public var reduceTransparency: Bool
 
-		public var appView: AppViewMode
+		public var libraryLayout: LibraryLayout
 		public var autoGroup: Bool
 
 		init() {
 			appearance = .system
 			reduceTransparency = false
-			appView = .list
+			libraryLayout = .list
 			autoGroup = true
 		}
 	}
@@ -40,7 +40,7 @@ extension AppSettings.Display: Codable {
 
 		appearance = try container.decodeIfPresent(forKey: .appearance) ?? defaultSettings.appearance
 		reduceTransparency = try container.decodeIfPresent(forKey: .reduceTransparency) ?? defaultSettings.reduceTransparency
-		appView = try container.decodeIfPresent(forKey: .appView) ?? defaultSettings.appView
+		libraryLayout = try container.decodeIfPresent(forKey: .libraryLayout) ?? defaultSettings.libraryLayout
 		autoGroup = try container.decodeIfPresent(forKey: .autoGroup) ?? defaultSettings.autoGroup
 	}
 }

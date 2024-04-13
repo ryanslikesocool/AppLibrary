@@ -1,33 +1,33 @@
-public enum AppViewMode: UInt8 {
+public enum LibraryLayout: UInt8 {
 	case list
 	case grid
 }
 
 // MARK: - Sendable
 
-extension AppViewMode: Sendable { }
+extension LibraryLayout: Sendable { }
 
 // MARK: - Equatable
 
-extension AppViewMode: Equatable { }
+extension LibraryLayout: Equatable { }
 
 // MARK: - Hashable
 
-extension AppViewMode: Hashable { }
+extension LibraryLayout: Hashable { }
 
 // MARK: - Codable
 
-extension AppViewMode: Codable { }
+extension LibraryLayout: Codable { }
 
 // MARK: - Identifiable
 
-extension AppViewMode: Identifiable {
+extension LibraryLayout: Identifiable {
 	public var id: RawValue { rawValue }
 }
 
 // MARK: - CustomStringConvertible
 
-extension AppViewMode: CustomStringConvertible {
+extension LibraryLayout: CustomStringConvertible {
 	public var description: String {
 		switch self {
 			case .list: "List"
@@ -38,4 +38,4 @@ extension AppViewMode: CustomStringConvertible {
 
 // MARK: - CaseIterable
 
-extension AppViewMode: CaseIterable { }
+extension LibraryLayout: CaseIterable { }

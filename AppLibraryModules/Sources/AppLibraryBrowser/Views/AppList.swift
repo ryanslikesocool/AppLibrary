@@ -2,7 +2,7 @@ import AppLibraryStorage
 import SwiftUI
 
 struct AppList: View {
-	@Environment(\.appView) private var appView
+	@Environment(\.libraryLayout) private var libraryLayout
 	@ObservedObject private var browserCache: BrowserCache = .shared
 	@ObservedObject private var appSettings: AppSettings = .shared
 //	@State private var appSelection: String? = nil
@@ -56,15 +56,10 @@ private extension AppList {
 	var queryCompleteView: some View {
 		ScrollViewReader { proxy in
 			ScrollView(.vertical) {
-				if #unavailable(macOS 14) {
-					Spacer()
-						.frame(height: AppTile.listIconSize + Self.listPadding * 0.5)
-				}
-
 				if browserCache.searchQuery.isEmpty {
 					let filteredApps = browserCache.apps.filter(hiddenAppsFilter)
 
-					switch appView {
+					switch libraryLayout {
 						case .list: listView(filteredApps)
 						case .grid: gridView(filteredApps)
 					}
@@ -72,7 +67,7 @@ private extension AppList {
 					let filteredApps = browserCache.apps.filter(hiddenAppsFilter).filter(searchFilter)
 
 					listView(filteredApps)
-						.appView(.list)
+						.libraryLayout(.list)
 				}
 
 				if #unavailable(macOS 14) {
@@ -86,7 +81,7 @@ private extension AppList {
 				if #available(macOS 14, *) {
 					view
 						.scrollClipDisabled()
-						.padding(.top, AppTile.listIconSize + Self.listPadding * 0.5)
+						.padding(.top, LibraryLayout.list.iconSize + Self.listPadding * 0.5)
 						.padding(.bottom, Self.listPadding)
 				} else {
 					view

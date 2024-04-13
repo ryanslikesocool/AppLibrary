@@ -8,7 +8,7 @@ extension AppsPane {
 		var body: some View {
 			Section {
 				if model.hiddenApps.isEmpty {
-					noAppsLabel
+					emptyListLabel
 				} else {
 					listContent
 				}
@@ -22,18 +22,19 @@ extension AppsPane {
 // MARK: - Supporting Views
 
 private extension AppsPane.HiddenAppsList {
-	var noAppsLabel: some View {
+	var emptyListLabel: some View {
 		Text("No hidden apps...")
+			.foregroundStyle(.secondary)
 	}
 
 	var listContent: some View {
-		ForEach(model.hiddenApps.sorted(), content: listItem)
+		ForEach(model.hiddenApps.sorted(), content: listElement)
 	}
 
-	func listItem(withIdentifier appIdentifier: ApplicationIdentifier) -> some View {
+	func listElement(for appIdentifier: ApplicationIdentifier) -> some View {
 		return LabeledContent {
 			Menu("Options", systemImage: "ellipsis.circle") {
-				optionMenuContent(withIdentifier: appIdentifier)
+				optionMenuContent(for: appIdentifier)
 			}
 			.labelStyle(.iconOnly)
 			.fixedSize()
@@ -54,12 +55,8 @@ private extension AppsPane.HiddenAppsList {
 		Apps can be hidden by right-clicking on one in the App Library and selecting "Hide".
 		""")
 	}
-}
 
-// MARK: - Functions
-
-private extension AppsPane.HiddenAppsList {
-	func optionMenuContent(withIdentifier appIdentifier: ApplicationIdentifier) -> some View {
+	func optionMenuContent(for appIdentifier: ApplicationIdentifier) -> some View {
 		Group {
 			Button("Show", systemImage: "eye") { model.removeHiddenApp(withIdentifier: appIdentifier) }
 		}

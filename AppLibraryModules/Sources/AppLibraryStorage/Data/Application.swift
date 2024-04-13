@@ -85,3 +85,9 @@ private extension Application {
 		""")
 	}
 }
+
+public extension Application {
+	var url: URL? {
+		NSWorkspace.shared.urlForApplication(withBundleIdentifier: id.bundleIdentifier)
+	}
+}
