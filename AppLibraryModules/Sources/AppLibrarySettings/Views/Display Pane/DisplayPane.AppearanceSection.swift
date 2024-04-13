@@ -8,6 +8,7 @@ extension DisplayPane {
 		var body: some View {
 			Section {
 				appearancePicker
+				reduceTransparencyToggle
 			} header: {
 				sectionHeader
 			}
@@ -32,6 +33,13 @@ private extension DisplayPane.AppearanceSection {
 		}
 		.onChange(of: model.appearance) {
 			NSApp.appearance = model.appearance.nsApperance
+		}
+	}
+
+	var reduceTransparencyToggle: some View {
+		Toggle(isOn: $model.reduceTransparency) {
+			Text("Reduce Transparency")
+			Text("Reduces the transparency of the launcher background.")
 		}
 	}
 }
