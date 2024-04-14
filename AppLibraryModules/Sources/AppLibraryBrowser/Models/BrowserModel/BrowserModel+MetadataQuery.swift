@@ -3,11 +3,7 @@ import AppLibraryStorage
 import OSLog
 
 extension BrowserModel {
-	func reloadApps(notification: Notification) {
-		reloadApps()
-	}
-
-	func reloadApps() {
+	func refreshApps() {
 		guard queryState != .loading else {
 			return
 		}
@@ -34,17 +30,19 @@ extension BrowserModel {
 
 		Logger.module.debug("Now reloading apps...")
 	}
+}
 
-	private func finishMetadataQuery(notification: Notification) {
+private extension BrowserModel {
+	func finishMetadataQuery(notification: Notification) {
 		guard let query = notification.object as? NSMetadataQuery else {
-			fatalError("Received \(notification.name) from an invalid object.")
+			preconditionFailure("Received \(notification.name) from an invalid object.")
 		}
 
 		processMetadata(query: query)
 		stopQuery(query)
 	}
 
-	private func processMetadata(query: NSMetadataQuery) {
+	func processMetadata(query: NSMetadataQuery) {
 		let metadata = query.results.compactMap { $0 as? NSMetadataItem }
 
 		var sourceApps: [Application] = metadata.compactMap(Application.init)
@@ -78,7 +76,7 @@ extension BrowserModel {
 		}
 	}
 
-	private func stopQuery(_ query: NSMetadataQuery) {
+	func stopQuery(_ query: NSMetadataQuery) {
 		if query.isStarted {
 			query.stop()
 		}

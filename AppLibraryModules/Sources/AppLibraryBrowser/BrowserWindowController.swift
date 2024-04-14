@@ -1,4 +1,5 @@
 import AppKit
+import AppLibraryCommon
 import OSLog
 
 public final class BrowserWindowController: NSWindowController, ObservableObject {
@@ -32,10 +33,7 @@ public final class BrowserWindowController: NSWindowController, ObservableObject
 
 		window.delegate = self
 
-		DispatchQueue.main.async {
-			NSApplication.shared.hide(nil)
-//			window.orderOut(self)
-		}
+		positionWindow(window)
 	}
 
 	@available(*, unavailable)
@@ -67,7 +65,7 @@ extension BrowserWindowController {
 	static let windowPadding: CGFloat = 8
 
 	static var windowTitle: String { "App Library" }
-	static let windowIdentifier: NSUserInterfaceItemIdentifier = NSUserInterfaceItemIdentifier("com.DevelopedWithLove.AppLibrary")
+	static let windowIdentifier: NSUserInterfaceItemIdentifier = NSUserInterfaceItemIdentifier("\(AppLibraryInformation.bundleIdentifier!).Browser")
 }
 
 // MARK: -
@@ -81,6 +79,31 @@ public extension BrowserWindowController {
 //		NSApp.setActivationPolicy(.accessory)
 //		NSApp.setActivationPolicy(.regular)
 
+		positionWindow(window)
+
+		DispatchQueue.main.async {
+			window.makeKeyAndOrderFront(self)
+			Logger.module.debug("Revealed browser.")
+		}
+	}
+
+	func dismiss() {
+		Logger.module.debug("Dismissed browser.")
+//		window?.orderOut(self) // handled by window.hidesOnDeactivate = true
+	}
+}
+
+private extension BrowserWindowController {
+	func positionWindow(_ window: NSWindow) {
+		if let windowOrigin = calculateWindowOrigin() {
+			window.setFrameOrigin(windowOrigin)
+		} else {
+			window.center()
+			Logger.module.debug("Failed to get dock icon location for window positioning.  The window was centered instead.")
+		}
+	}
+
+	func calculateWindowOrigin() -> CGPoint? {
 		if
 			let iconRect = DockUtility.getIconRect(),
 			let dockPosition = DockUtility.estimateDockPosition(),
@@ -107,20 +130,9 @@ public extension BrowserWindowController {
 
 			frameOrigin.y = screen.frame.height - frameOrigin.y // invert Y
 
-			window.setFrameOrigin(frameOrigin)
+			return frameOrigin
 		} else {
-			window.center()
-			Logger.module.debug("Failed to get dock icon location for window positioning.  The window was centered instead.")
+			return nil
 		}
-
-		DispatchQueue.main.async {
-			window.makeKeyAndOrderFront(self)
-			Logger.module.debug("Revealed browser.")
-		}
-	}
-
-	func dismiss() {
-		Logger.module.debug("Dismissed browser.")
-//		window?.orderOut(self) // handled by window.hidesOnDeactivate = true
 	}
 }

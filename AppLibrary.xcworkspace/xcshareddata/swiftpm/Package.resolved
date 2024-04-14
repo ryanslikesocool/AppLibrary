@@ -17,6 +17,15 @@
         "revision" : "e4eba39a7cce674e533880529a54aa8b99b7b976",
         "version" : "0.1.0-pre.6"
       }
+    },
+    {
+      "identity" : "settingsaccess",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/orchetect/SettingsAccess.git",
+      "state" : {
+        "revision" : "0fd73c8b5892e88acb13adb7f36a4ba9293a0061",
+        "version" : "1.4.0"
+      }
     }
   ],
   "version" : 2

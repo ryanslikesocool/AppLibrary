@@ -1,4 +1,6 @@
+import AppLibraryCommon
 import AppLibraryStorage
+import Combine
 import OSLog
 import SwiftUI
 
@@ -9,6 +11,10 @@ final class BrowserModel: ObservableObject {
 	@Published var queryState: BrowserQueryState?
 	@Published var searchQuery: String
 	@Published var isSearchFocused: Bool
+
+	var isSearchDisplayed: Bool {
+		!AppSettings.shared.directories.searchScopes.isEmpty && !apps.isEmpty 
+	}
 
 	var filteredApps: [Application] {
 		var filtered = apps.filter(hiddenAppsFilter)
@@ -22,11 +28,16 @@ final class BrowserModel: ObservableObject {
 
 	private(set) lazy var keyboardObserver: KeyboardObserver = KeyboardObserver(model: self)
 
+	private lazy var refreshAppsSubscription: AnyCancellable? = Event.refreshApps
+		.sink(receiveValue: refreshApps)
+
 	private init() {
 		apps = []
 		searchQuery = ""
 		isSearchFocused = false
-		reloadApps()
+		refreshApps()
+
+		_ = refreshAppsSubscription
 	}
 }
 
@@ -48,7 +59,7 @@ extension BrowserModel {
 
 	func onRefreshShortcut() {
 		Logger.keyboardEvents.debug("Refresh Shortcut: Reloading apps.")
-		reloadApps()
+		refreshApps()
 	}
 
 	func onEscapeKey() {
@@ -99,7 +110,7 @@ extension BrowserModel {
 		}
 
 		Logger.keyboardEvents.debug("Any Key: Scrolling to apps starting with \"\(lowercasedString)\".")
-		NotificationCenter.default.post(name: Event.scrollToApp, object: nil, userInfo: [0: firstResult.id])
+		Event.scrollToApp.send(firstResult.id)
 		return true
 	}
 }

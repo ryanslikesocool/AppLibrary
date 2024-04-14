@@ -1,5 +1,6 @@
 import AppLibrarySettings
 import AppLibraryStorage
+import SettingsAccess
 import SwiftUI
 
 struct ContentView: View {
@@ -12,10 +13,13 @@ struct ContentView: View {
 		AppBrowser()
 			.background(.separator, in: containerShape.stroke(lineWidth: 1))
 			.overlay(alignment: .top) {
-				SearchField()
+				if browserModel.isSearchDisplayed {
+					SearchField()
+				}
 			}
 			.ignoresSafeArea()
 			.libraryLayout(appSettings.display.libraryLayout)
+			.openSettingsAccess()
 	}
 
 	private var containerShape: RoundedRectangle {

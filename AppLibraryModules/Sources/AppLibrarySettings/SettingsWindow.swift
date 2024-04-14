@@ -1,3 +1,4 @@
+import AppLibraryCommon
 import SwiftUI
 
 public struct SettingsWindow: Scene {
@@ -8,4 +9,8 @@ public struct SettingsWindow: Scene {
 			ContentView()
 		}
 	}
+}
+
+public extension SettingsWindow {
+	static let windowIdentifier: NSUserInterfaceItemIdentifier = NSUserInterfaceItemIdentifier("\(AppLibraryInformation.bundleIdentifier!).Settings")
 }

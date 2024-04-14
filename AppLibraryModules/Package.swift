@@ -17,6 +17,7 @@ let package = Package(
 	dependencies: [
 		.package(url: "https://github.com/ryanslikesocool/SerializationKit.git", from: "0.1.0-pre.6"),
 		.package(url: "https://github.com/sindresorhus/ExceptionCatcher.git", from: "2.0.1"),
+		.package(url: "https://github.com/orchetect/SettingsAccess.git", from: "1.4.0"),
 	],
 	targets: [
 		.target(
@@ -32,6 +33,7 @@ let package = Package(
 			name: "AppLibraryBrowser",
 			dependencies: [
 				"ExceptionCatcher",
+				"SettingsAccess",
 
 				"AppLibrarySettings",
 			]

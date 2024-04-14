@@ -1,4 +1,5 @@
 import AppLibraryStorage
+import AppLibraryCommon
 import OSLog
 import SwiftUI
 
@@ -20,6 +21,7 @@ extension DirectoriesPane {
 				sectionFooter
 			}
 			.fileImporter(isPresented: $showDirectoryPicker, allowedContentTypes: [.folder], onCompletion: completeDirectorySelection)
+			.onChange(of: model.searchScopes) { Event.refreshApps.send() }
 		}
 	}
 }

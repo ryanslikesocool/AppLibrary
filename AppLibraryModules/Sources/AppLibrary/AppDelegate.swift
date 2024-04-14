@@ -18,8 +18,4 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 	func applicationDidBecomeActive(_ notification: Notification) {
 		browserWindowController.reveal()
 	}
-
-	func applicationDidResignActive(_ notification: Notification) {
-		browserWindowController.dismiss()
-	}
 }

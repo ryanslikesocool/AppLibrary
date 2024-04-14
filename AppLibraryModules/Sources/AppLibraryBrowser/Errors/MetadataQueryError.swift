@@ -14,4 +14,11 @@ extension MetadataQueryError: LocalizedError {
 			case .noSearchDirectories: "No directories to search in."
 		}
 	}
+
+	var recoverySuggestion: String? {
+		switch self {
+			case .queryStartFailure: nil
+			case .noSearchDirectories: "Add search directories from the settings pane."
+		}
+	}
 }

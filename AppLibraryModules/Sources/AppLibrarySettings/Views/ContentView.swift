@@ -1,5 +1,6 @@
-import SwiftUI
+import AppLibraryCommon
 import AppLibraryStorage
+import SwiftUI
 
 struct ContentView: View {
 	@ObservedObject private var appSettings: AppSettings = AppSettings.shared
@@ -19,5 +20,7 @@ struct ContentView: View {
 		.frame(maxHeight: 500)
 		.fixedSize()
 		.formStyle(.grouped)
+
+		.onReceive(Event.goToSettingsTab) { tab in tabSelection = tab }
 	}
 }

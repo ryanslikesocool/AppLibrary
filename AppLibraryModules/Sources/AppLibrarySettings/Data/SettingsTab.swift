@@ -1,4 +1,4 @@
-enum SettingsTab: UInt8 {
+public enum SettingsTab: UInt8 {
 	case display
 	case directories
 	case apps
@@ -25,7 +25,7 @@ extension SettingsTab: Identifiable {
 // MARK: - CustomStringConvertible
 
 extension SettingsTab: CustomStringConvertible {
-	var description: String {
+	public var description: String {
 		switch self {
 			case .display: "Display"
 			case .directories: "Directories"
