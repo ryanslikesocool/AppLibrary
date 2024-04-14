@@ -11,7 +11,15 @@ extension AppTile {
 				Label(application: application)
 				Spacer()
 			}
-			.contentShape(Rectangle())
+			.contentShape(containerShape)
 		}
+	}
+}
+
+// MARK: - Supporting Views
+
+private extension AppTile.ListDisplay {
+	var containerShape: RoundedRectangle {
+		RoundedRectangle(cornerRadius: 14)
 	}
 }

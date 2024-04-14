@@ -1,5 +1,5 @@
-import SwiftUI
 import AppLibraryStorage
+import SwiftUI
 
 struct SearchField: View {
 	@ObservedObject private var appSettings: AppSettings = .shared
@@ -8,11 +8,14 @@ struct SearchField: View {
 
 	private var shadowA: Shadow { isFocused ? Self.focusedShadowA : Self.unfocusedShadowA }
 	private var shadowB: Shadow { isFocused ? Self.focusedShadowB : Self.unfocusedShadowB }
-	private var stroke: Stroke { isFocused ? Self.focusedStroke : Self.unfocusedStroke }
+	private var stroke: Stroke { /* isFocused ? Self.focusedStroke : Self.unfocusedStroke */ Self.unfocusedStroke }
 
 	var body: some View {
 		TextField(text: $browserModel.searchQuery, prompt: Text("􀊫 App Library"), label: EmptyView.init)
+
+			.focusable()
 			.focused($isFocused)
+//			.focusEffectDisabled()
 
 			.font(.title3)
 			.textFieldStyle(.plain)
@@ -22,6 +25,7 @@ struct SearchField: View {
 			.background(appSettings.display.searchBackgroundMaterial, in: containerShape)
 			.fixedSize(horizontal: false, vertical: true)
 			.compositingGroup()
+			.contentShape(containerShape)
 			.padding(Self.outerPadding)
 
 			.shadow(color: .black.opacity(shadowA.opacity), radius: shadowA.radius, y: shadowA.y)
@@ -30,11 +34,22 @@ struct SearchField: View {
 			.animation(.easeOut(duration: 0.2), value: isFocused)
 
 			.onAppear { isFocused = browserModel.isSearchFocused }
-			.onChange(of: isFocused) { browserModel.isSearchFocused = isFocused }
-			.onChange(of: browserModel.isSearchFocused) { isFocused = browserModel.isSearchFocused }
+			.onChange(of: isFocused) { _, newValue in
+				browserModel.isSearchFocused = newValue
+			}
+			.onChange(of: browserModel.isSearchFocused) { _, newValue in
+				isFocused = newValue
+				if isFocused {
+					browserModel.focusedIndex = nil
+				}
+			}
 	}
+}
 
-	private var containerShape: RoundedRectangle {
+// MARK: - Supporting Views
+
+private extension SearchField {
+	var containerShape: RoundedRectangle {
 		RoundedRectangle(cornerRadius: 12)
 	}
 }
@@ -42,9 +57,6 @@ struct SearchField: View {
 // MARK: - Constants
 
 private extension SearchField {
-	typealias Shadow = (opacity: Double, radius: Double, y: Double)
-	typealias Stroke = (style: AnyShapeStyle, width: Double)
-
 	static let unfocusedShadowA: Shadow = (0.1, 1, 0.5)
 	static let unfocusedShadowB: Shadow = (0.05, 2, 1)
 

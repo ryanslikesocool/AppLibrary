@@ -1,4 +1,5 @@
 import AppKit
+import AppLibraryStorage
 import OSLog
 
 final class KeyboardObserver {
@@ -56,59 +57,80 @@ private extension KeyboardObserver {
 	}
 
 	func onKeyEvent(_ event: NSEvent) -> NSEvent? {
-		guard let characters = event.charactersIgnoringModifiers else {
-			return event
-		}
-
-		searchShortcut: do { // (command + f) -> (activate search)
-			// TODO: how to localize "f"?
-			guard matchingKeyboardShortcut(event, key: "f", modifier: .command) else {
-				break searchShortcut
-			}
-
-			model.onSearchShortcut()
-			return nil
-		}
-
-		refreshShortcut: do { // (command + r) -> (refresh apps)
-			// TODO: how to localize "r"?
-			guard matchingKeyboardShortcut(event, key: "r", modifier: .command) else {
-				break refreshShortcut
-			}
-
-			model.onRefreshShortcut()
-			return nil
-		}
-
-		escapeKey: do { // (escape) -> (dismiss + clear search) | (dismiss window)
-			guard matchingKeyboardShortcut(event, keyCode: 53, modifier: []) else {
-				break escapeKey
-			}
-
-			model.onEscapeKey()
-			return nil
-		}
-
-		returnKey: do { // (return) -> (dismiss search)
-			guard
-				matchingKeyboardShortcut(event, keyCode: 36, modifier: []),
-				model.onReturnKey()
-			else {
-				break returnKey
-			}
-
-			return nil
-		}
-
-		characterKey: do { // (characters) -> (scroll to character)
-			guard model.onAnyKey(characters) else {
-				break characterKey
-			}
-
+		if
+			matchSearchShortcut(in: event)
+			|| matchRefreshShortcut(in: event)
+			|| matchEscapeKey(in: event)
+			|| matchReturnKey(in: event)
+			|| matchArrowKey(in: event)
+			|| matchAlphanumericKey(in: event)
+		{
 			return nil
 		}
 
 		return event
+	}
+}
+
+private extension KeyboardObserver {
+	// (command + f) -> (activate search)
+	func matchSearchShortcut(in event: NSEvent) -> Bool {
+		// TODO: how to localize "f"?
+		guard matchingKeyboardShortcut(event, key: "f", modifier: .command) else {
+			return false
+		}
+
+		model.onSearchShortcut()
+		return true
+	}
+
+	// (command + r) -> (refresh apps)
+	func matchRefreshShortcut(in event: NSEvent) -> Bool {
+		// TODO: how to localize "r"?
+		guard matchingKeyboardShortcut(event, key: "r", modifier: .command) else {
+			return false
+		}
+
+		model.onRefreshShortcut()
+		return true
+	}
+
+	// (escape) -> (dismiss + clear search) | (dismiss window)
+	func matchEscapeKey(in event: NSEvent) -> Bool {
+		guard matchingKeyboardShortcut(event, keyCode: Self.escapeKey, modifier: []) else {
+			return false
+		}
+
+		model.onEscapeKey()
+		return true
+	}
+
+	// (return) -> (dismiss search)
+	func matchReturnKey(in event: NSEvent) -> Bool {
+		matchingKeyboardShortcut(event, keyCode: Self.returnKey, modifier: [])
+			&& model.onReturnKey()
+	}
+
+	// (arrow keys) -> (navigate)
+	func matchArrowKey(in event: NSEvent) -> Bool {
+		guard
+			let direction = NavigationDirection(keyCode: event.keyCode),
+			!model.isSearchFocused || direction.isVertical
+		else {
+			return false
+		}
+
+		model.onArrowKey(direction)
+		return true
+	}
+
+	// (characters) -> (scroll to character)
+	func matchAlphanumericKey(in event: NSEvent) -> Bool {
+		guard let characters = event.charactersIgnoringModifiers else {
+			return false
+		}
+
+		return model.onAlphanumericKey(characters)
 	}
 }
 
@@ -128,4 +150,11 @@ private extension KeyboardObserver {
 	func matchingKeyboardShortcut(_ event: NSEvent, keyCode: CGKeyCode, modifier: NSEvent.ModifierFlags) -> Bool {
 		event.keyCode == keyCode && modifierFlags == modifier
 	}
+}
+
+// MARK: - Constants
+
+private extension KeyboardObserver {
+	static let escapeKey: UInt16 = 0x35
+	static let returnKey: UInt16 = 0x24
 }

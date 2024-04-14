@@ -4,8 +4,6 @@ import SettingsAccess
 import SwiftUI
 
 struct ContentView: View {
-	@Environment(\.openWindow) private var openWindow
-
 	@ObservedObject private var appSettings: AppSettings = .shared
 	@ObservedObject private var browserModel: BrowserModel = .shared
 
@@ -13,7 +11,7 @@ struct ContentView: View {
 		Group {
 			switch browserModel.state {
 				case .some(.loading): queryLoadingView
-				case .some(.complete): BrowserView()
+				case .some(.complete): LibraryView()
 				case let .some(.failed(reason)): ErrorView(reason: reason)
 				case .none: EmptyView()
 			}

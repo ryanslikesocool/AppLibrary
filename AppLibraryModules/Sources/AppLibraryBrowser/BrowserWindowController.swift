@@ -18,6 +18,7 @@ public final class BrowserWindowController: NSWindowController, ObservableObject
 
 		window.isMovable = false
 		window.isFloatingPanel = true
+		window.becomesKeyOnlyIfNeeded = true
 		window.titleVisibility = .hidden
 		window.titlebarAppearsTransparent = true
 		window.isOpaque = false

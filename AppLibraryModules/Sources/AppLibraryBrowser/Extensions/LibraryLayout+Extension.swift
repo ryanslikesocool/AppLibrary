@@ -22,4 +22,11 @@ extension LibraryLayout {
 			case .grid: 8
 		}
 	}
+
+	var xDimension: Int {
+		switch self {
+			case .list: 1
+			case .grid: 4
+		}
+	}
 }

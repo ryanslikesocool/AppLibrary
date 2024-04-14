@@ -12,6 +12,15 @@ extension AppTile {
 			}
 			.contentShape(Rectangle())
 			.multilineTextAlignment(.center)
+			.contentShape(containerShape)
 		}
+	}
+}
+
+// MARK: - Supporting Views
+
+private extension AppTile.GridDisplay {
+	var containerShape: RoundedRectangle {
+		RoundedRectangle(cornerRadius: 12)
 	}
 }

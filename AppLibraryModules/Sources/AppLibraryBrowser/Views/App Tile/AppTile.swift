@@ -3,6 +3,9 @@ import SwiftUI
 
 struct AppTile: View {
 	@Environment(\.libraryLayout) private var libraryLayout
+
+	@ObservedObject private var browserModel: BrowserModel = .shared
+
 	let application: Application
 
 	var body: some View {
@@ -13,6 +16,7 @@ struct AppTile: View {
 			}
 		}
 		.contextMenu(menuItems: contextMenu)
+		.focusable()
 		.id(application.id)
 	}
 }
