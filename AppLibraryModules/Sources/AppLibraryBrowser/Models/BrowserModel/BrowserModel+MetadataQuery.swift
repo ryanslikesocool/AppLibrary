@@ -4,15 +4,15 @@ import OSLog
 
 extension BrowserModel {
 	func refreshApps() {
-		guard queryState != .loading else {
+		guard state != .loading else {
 			return
 		}
 		guard !AppSettings.shared.directories.searchScopes.isEmpty else {
-			queryState = .failed(reason: .noSearchDirectories)
+			state = .failed(reason: .noSearchDirectories)
 			return
 		}
 
-		queryState = .loading
+		state = .loading
 
 		let query = NSMetadataQuery()
 
@@ -25,7 +25,7 @@ extension BrowserModel {
 
 		if !query.start() {
 			stopQuery(query)
-			queryState = .failed(reason: .queryStartFailure)
+			state = .failed(reason: .queryStartFailure)
 		}
 
 		Logger.module.debug("Now reloading apps...")
@@ -71,8 +71,12 @@ private extension BrowserModel {
 			guard let self else {
 				return
 			}
-			self.apps = filteredApps
-			queryState = .complete
+			apps = filteredApps
+			state = if filteredApps.isEmpty {
+				.failed(reason: .noApps)
+			} else {
+				.complete
+			}
 		}
 	}
 

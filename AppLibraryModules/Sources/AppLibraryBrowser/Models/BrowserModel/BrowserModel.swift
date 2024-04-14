@@ -7,13 +7,13 @@ import SwiftUI
 final class BrowserModel: ObservableObject {
 	static let shared: BrowserModel = BrowserModel()
 
+	@Published var state: BrowserState?
 	@Published var apps: [Application]
-	@Published var queryState: BrowserQueryState?
 	@Published var searchQuery: String
 	@Published var isSearchFocused: Bool
 
 	var isSearchDisplayed: Bool {
-		!AppSettings.shared.directories.searchScopes.isEmpty && !apps.isEmpty 
+		!AppSettings.shared.directories.searchScopes.isEmpty && !filteredApps.isEmpty
 	}
 
 	var filteredApps: [Application] {

@@ -4,12 +4,12 @@ import OSLog
 import SettingsAccess
 import SwiftUI
 
-struct QueryFailedView: View {
+struct ErrorView: View {
 	@Environment(\.openSettings) private var openSettings
 
-	private let error: MetadataQueryError?
+	private let error: BrowserError?
 
-	init(reason error: MetadataQueryError?) {
+	init(reason error: BrowserError?) {
 		self.error = error
 	}
 
@@ -35,11 +35,15 @@ struct QueryFailedView: View {
 
 // MARK: - Supporting View
 
-private extension QueryFailedView {
+private extension ErrorView {
 	@ViewBuilder var errorTitle: some View {
 		switch error {
 			case .some(.noSearchDirectories):
 				Text("No Search Directories")
+			case .some(.noApps):
+				Text("No Apps")
+			case .some(.allHidden):
+				Text("All Apps Hidden")
 			default:
 				Text("Failed to Load Apps")
 		}
@@ -48,20 +52,31 @@ private extension QueryFailedView {
 	@ViewBuilder var recoveryLabel: some View {
 		switch error {
 			case .some(.noSearchDirectories):
-				Text("Add search directories from the settings pane.")
-				Button("Settings...", systemImage: "gear") {
-					do {
-						try openSettings()
-						Event.goToSettingsTab.send(SettingsTab.directories)
-					} catch {
-						Logger.module.error("""
-						Failed to open settings window:
-						\(error.localizedDescription)
-						""")
-					}
-				}
+				Text("Add search directories in the settings pane.")
+				settingsButton(destination: .directories)
+			case .some(.noApps):
+				Text("Add more search directories in the settings pane.")
+				settingsButton(destination: .directories)
+			case .some(.allHidden):
+				Text("Reveal apps in the settings pane.")
+				settingsButton(destination: .apps)
 			default:
 				Button("Retry", systemImage: "arrow.clockwise", action: Event.refreshApps.send)
 		}
+	}
+
+	func settingsButton(destination: SettingsTab) -> some View {
+		Button("Settings...", systemImage: "gear") {
+			do {
+				try openSettings()
+				Event.goToSettingsTab.send(destination)
+			} catch {
+				Logger.module.error("""
+				Failed to open settings window:
+				\(error.localizedDescription)
+				""")
+			}
+		}
+		.controlSize(.large)
 	}
 }

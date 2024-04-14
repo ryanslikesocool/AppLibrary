@@ -10,19 +10,47 @@ struct ContentView: View {
 	@ObservedObject private var browserModel: BrowserModel = .shared
 
 	var body: some View {
-		AppBrowser()
-			.background(.separator, in: containerShape.stroke(lineWidth: 1))
-			.overlay(alignment: .top) {
-				if browserModel.isSearchDisplayed {
-					SearchField()
+		Group {
+			switch browserModel.state {
+				case .some(.loading): queryLoadingView
+				case .some(.complete): BrowserView()
+				case let .some(.failed(reason)): ErrorView(reason: reason)
+				case .none: EmptyView()
+			}
+		}
+
+		.background(.separator, in: containerShape.stroke(lineWidth: 1))
+		.overlay(alignment: .top) {
+			if browserModel.isSearchDisplayed {
+				SearchField()
+			}
+		}
+		.ignoresSafeArea()
+
+		.libraryLayout(appSettings.display.libraryLayout)
+		.openSettingsAccess()
+
+		.onChange(of: browserModel.filteredApps) { _, newValue in
+			if browserModel.searchQuery.isEmpty {
+				browserModel.state = if newValue.isEmpty {
+					.failed(reason: .allHidden)
+				} else {
+					.complete
 				}
 			}
-			.ignoresSafeArea()
-			.libraryLayout(appSettings.display.libraryLayout)
-			.openSettingsAccess()
+		}
+	}
+}
+
+// MARK: - Supporting Views
+
+extension ContentView {
+	var containerShape: RoundedRectangle {
+		RoundedRectangle(cornerRadius: BrowserViewController.cornerRadius)
 	}
 
-	private var containerShape: RoundedRectangle {
-		RoundedRectangle(cornerRadius: BrowserViewController.cornerRadius)
+	var queryLoadingView: some View {
+		ProgressView()
+			.frame(maxWidth: .infinity, maxHeight: .infinity)
 	}
 }

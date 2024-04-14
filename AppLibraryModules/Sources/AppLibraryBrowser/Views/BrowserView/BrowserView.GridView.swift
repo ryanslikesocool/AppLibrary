@@ -1,7 +1,7 @@
 import AppLibraryStorage
 import SwiftUI
 
-extension AppBrowser {
+extension BrowserView {
 	struct GridView: View {
 		let apps: [Application]
 
@@ -11,7 +11,7 @@ extension AppBrowser {
 					AppTile(application: app)
 				}
 			}
-			.padding(.horizontal, Self.gridPadding)
+			.padding(.horizontal, LibraryLayout.grid.padding)
 			.libraryLayout(.grid)
 		}
 	}
@@ -19,7 +19,6 @@ extension AppBrowser {
 
 // MARK: - Constants
 
-private extension AppBrowser.GridView {
-	static let gridPadding: Double = 8
+private extension BrowserView.GridView {
 	static let gridColumns: [GridItem] = [GridItem](repeating: GridItem(), count: 4)
 }

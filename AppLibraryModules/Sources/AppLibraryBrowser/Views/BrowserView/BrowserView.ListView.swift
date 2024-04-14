@@ -1,7 +1,7 @@
 import AppLibraryStorage
 import SwiftUI
 
-extension AppBrowser {
+extension BrowserView {
 	struct ListView: View {
 		let apps: [Application]
 

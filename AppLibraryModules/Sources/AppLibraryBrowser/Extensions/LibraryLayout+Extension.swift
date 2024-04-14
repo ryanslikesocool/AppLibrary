@@ -19,7 +19,7 @@ extension LibraryLayout {
 	var padding: CGFloat {
 		switch self {
 			case .list: 16
-			case .grid: 0
+			case .grid: 8
 		}
 	}
 }
