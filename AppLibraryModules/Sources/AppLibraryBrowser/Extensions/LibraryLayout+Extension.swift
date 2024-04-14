@@ -12,7 +12,7 @@ extension LibraryLayout {
 	var font: Font {
 		switch self {
 			case .list: .body
-			case .grid: .caption
+			case .grid: .footnote
 		}
 	}
 

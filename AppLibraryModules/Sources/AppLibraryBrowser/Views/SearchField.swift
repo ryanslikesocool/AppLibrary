@@ -18,11 +18,11 @@ struct SearchField: View {
 			.textFieldStyle(.plain)
 
 			.padding(Self.innerPadding)
-			.overlay(stroke.style, in: containerShape.stroke(lineWidth: stroke.width))
+			.overlay(stroke.style, in: containerShape.inset(by: -stroke.width * 0.5).stroke(lineWidth: stroke.width))
 			.background(appSettings.display.searchBackgroundMaterial, in: containerShape)
-			.padding(Self.outerPadding)
 			.fixedSize(horizontal: false, vertical: true)
 			.compositingGroup()
+			.padding(Self.outerPadding)
 
 			.shadow(color: .black.opacity(shadowA.opacity), radius: shadowA.radius, y: shadowA.y)
 			.shadow(color: .black.opacity(shadowB.opacity), radius: shadowB.radius, y: shadowB.y)

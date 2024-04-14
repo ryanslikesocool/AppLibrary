@@ -7,7 +7,7 @@ extension AppSettings.Display {
 		reduceTransparency ? .windowBackground : .underWindowBackground
 	}
 	var searchBackgroundMaterial: AnyShapeStyle {
-		reduceTransparency ? AnyShapeStyle(.background) : AnyShapeStyle( .thinMaterial)
+		reduceTransparency ? AnyShapeStyle(.background) : AnyShapeStyle(.regularMaterial)
 	}
 
 	var willReduceMotion: Bool { NSWorkspace.shared.accessibilityDisplayShouldReduceMotion || reduceMotion }

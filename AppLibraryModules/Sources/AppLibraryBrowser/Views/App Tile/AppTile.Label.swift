@@ -16,8 +16,7 @@ extension AppTile {
 					content
 				case .grid:
 					content
-						.truncationMode(.tail)
-						.fixedSize(horizontal: true, vertical: false)
+						.lineLimit(2, reservesSpace: true)
 			}
 		}
 	}
@@ -26,8 +25,10 @@ extension AppTile {
 // MARK: - Supporting Views
 
 private extension AppTile.Label {
-	var content: Text {
+	var content: some View {
 		Text(text)
 			.font(libraryLayout.font)
+			.truncationMode(.tail)
+			.help(text)
 	}
 }
