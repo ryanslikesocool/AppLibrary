@@ -5,12 +5,14 @@ public final class AppSettings: ObservableObject {
 	public static let shared: AppSettings = AppSettings()
 
 	@Published public var display: Display
-	@Published public var directories: Directories
+	@Published public var layout: Layout
+	@Published public var discovery: Discovery
 	@Published public var apps: Apps
 
 	private init() {
 		display = Display(directory: Self.directoryURL) ?? Display()
-		directories = Directories(directory: Self.directoryURL) ?? Directories()
+		layout = Layout(directory: Self.directoryURL) ?? Layout()
+		discovery = Discovery(directory: Self.directoryURL) ?? Discovery()
 		apps = Apps(directory: Self.directoryURL) ?? Apps()
 	}
 }
@@ -28,7 +30,8 @@ extension AppSettings: Equatable {
 extension AppSettings: Hashable {
 	public func hash(into hasher: inout Hasher) {
 		hasher.combine(display)
-		hasher.combine(directories)
+		hasher.combine(layout)
+		hasher.combine(discovery)
 		hasher.combine(apps)
 	}
 }
@@ -52,7 +55,8 @@ extension AppSettings {
 public extension AppSettings {
 	func prepare() {
 		display.prepare()
-		directories.prepare()
+		layout.prepare()
+		discovery.prepare()
 		apps.prepare()
 	}
 }

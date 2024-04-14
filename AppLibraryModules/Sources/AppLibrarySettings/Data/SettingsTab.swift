@@ -1,6 +1,7 @@
 public enum SettingsTab: UInt8 {
 	case display
-	case directories
+	case layout
+	case discovery
 	case apps
 }
 
@@ -28,7 +29,8 @@ extension SettingsTab: CustomStringConvertible {
 	public var description: String {
 		switch self {
 			case .display: "Display"
-			case .directories: "Directories"
+			case .layout: "Layout"
+			case .discovery: "Discovery"
 			case .apps: "Apps"
 		}
 	}
@@ -44,7 +46,8 @@ extension SettingsTab {
 	var symbolName: String {
 		switch self {
 			case .display: "display"
-			case .directories: "folder"
+			case .layout: "square.grid.3x3"
+			case .discovery: "magnifyingglass"
 			case .apps: "app"
 		}
 	}

@@ -27,7 +27,7 @@ struct ContentView: View {
 		}
 		.ignoresSafeArea()
 
-		.libraryLayout(appSettings.display.libraryLayout)
+		.libraryLayout(appSettings.layout.layout)
 		.openSettingsAccess()
 
 		.onChange(of: browserModel.filteredApps) { _, newValue in

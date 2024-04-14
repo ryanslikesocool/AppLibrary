@@ -7,15 +7,10 @@ public extension AppSettings {
 		public var reduceMotion: Bool
 		public var reduceTransparency: Bool
 
-		public var libraryLayout: LibraryLayout
-		public var autoGroup: Bool
-
 		init() {
 			appearance = .system
 			reduceMotion = false
 			reduceTransparency = false
-			libraryLayout = .list
-			autoGroup = true
 		}
 	}
 }
@@ -43,8 +38,6 @@ extension AppSettings.Display: Codable {
 		appearance = try container.decodeIfPresent(forKey: .appearance) ?? defaultSettings.appearance
 		reduceMotion = try container.decodeIfPresent(forKey: .reduceMotion) ?? defaultSettings.reduceMotion
 		reduceTransparency = try container.decodeIfPresent(forKey: .reduceTransparency) ?? defaultSettings.reduceTransparency
-		libraryLayout = try container.decodeIfPresent(forKey: .libraryLayout) ?? defaultSettings.libraryLayout
-		autoGroup = try container.decodeIfPresent(forKey: .autoGroup) ?? defaultSettings.autoGroup
 	}
 }
 

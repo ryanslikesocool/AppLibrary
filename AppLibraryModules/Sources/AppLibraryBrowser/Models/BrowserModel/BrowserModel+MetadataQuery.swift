@@ -7,8 +7,8 @@ extension BrowserModel {
 		guard state != .loading else {
 			return
 		}
-		guard !AppSettings.shared.directories.searchScopes.isEmpty else {
-			state = .failed(reason: .noSearchDirectories)
+		guard !AppSettings.shared.discovery.searchScopes.isEmpty else {
+			state = .failed(reason: .noSearchScopes)
 			return
 		}
 
@@ -18,7 +18,7 @@ extension BrowserModel {
 
 		NotificationCenter.default.addObserver(forName: .NSMetadataQueryDidFinishGathering, object: query, queue: nil, using: finishMetadataQuery)
 
-		query.searchScopes = Array(AppSettings.shared.directories.searchScopes)
+		query.searchScopes = Array(AppSettings.shared.discovery.searchScopes)
 		query.predicate = Self.searchPredicate
 
 		activeMetadataQuery = query

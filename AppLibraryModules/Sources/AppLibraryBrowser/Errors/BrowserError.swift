@@ -2,7 +2,7 @@ import Foundation
 
 enum BrowserError {
 	case queryStartFailure
-	case noSearchDirectories
+	case noSearchScopes
 	case noApps
 	case allHidden
 }
@@ -13,7 +13,7 @@ extension BrowserError: LocalizedError {
 	var errorDescription: String? {
 		switch self {
 			case .queryStartFailure: "Failed to start query."
-			case .noSearchDirectories: "No directories to search in."
+			case .noSearchScopes: "No scopes to search in."
 			case .noApps: "No apps could be found."
 			case .allHidden: "All apps are hidden."
 		}
@@ -22,8 +22,8 @@ extension BrowserError: LocalizedError {
 	var recoverySuggestion: String? {
 		switch self {
 			case .queryStartFailure: nil
-			case .noSearchDirectories: "Add search directories from the settings pane."
-			case .noApps: "Add more search directories from the settings pane."
+			case .noSearchScopes: "Add search scopes from the settings pane."
+			case .noApps: "Add more search scopes from the settings pane."
 			case .allHidden: "Unhide apps from the settings pane."
 		}
 	}

@@ -38,8 +38,8 @@ struct ErrorView: View {
 private extension ErrorView {
 	@ViewBuilder var errorTitle: some View {
 		switch error {
-			case .some(.noSearchDirectories):
-				Text("No Search Directories")
+			case .some(.noSearchScopes):
+				Text("No Search Scopes")
 			case .some(.noApps):
 				Text("No Apps")
 			case .some(.allHidden):
@@ -51,12 +51,12 @@ private extension ErrorView {
 
 	@ViewBuilder var recoveryLabel: some View {
 		switch error {
-			case .some(.noSearchDirectories):
-				Text("Add search directories in the settings pane.")
-				settingsButton(destination: .directories)
+			case .some(.noSearchScopes):
+				Text("Add search scopes in the settings pane.")
+				settingsButton(destination: .discovery)
 			case .some(.noApps):
-				Text("Add more search directories in the settings pane.")
-				settingsButton(destination: .directories)
+				Text("Add more search scopes in the settings pane.")
+				settingsButton(destination: .discovery)
 			case .some(.allHidden):
 				Text("Reveal apps in the settings pane.")
 				settingsButton(destination: .apps)

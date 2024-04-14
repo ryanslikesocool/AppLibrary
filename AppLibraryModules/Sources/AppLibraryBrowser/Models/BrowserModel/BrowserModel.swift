@@ -13,7 +13,7 @@ final class BrowserModel: ObservableObject {
 	@Published var isSearchFocused: Bool
 
 	var isSearchDisplayed: Bool {
-		!AppSettings.shared.directories.searchScopes.isEmpty && !filteredApps.isEmpty
+		!AppSettings.shared.discovery.searchScopes.isEmpty && !filteredApps.isEmpty
 	}
 
 	var filteredApps: [Application] {

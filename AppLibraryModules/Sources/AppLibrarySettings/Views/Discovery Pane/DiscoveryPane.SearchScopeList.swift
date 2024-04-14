@@ -1,11 +1,11 @@
-import AppLibraryStorage
 import AppLibraryCommon
+import AppLibraryStorage
 import OSLog
 import SwiftUI
 
-extension DirectoriesPane {
+extension DiscoveryPane {
 	struct SearchScopeList: View {
-		@Binding var model: AppSettings.Directories
+		@Binding var model: AppSettings.Discovery
 		@State private var showDirectoryPicker: Bool = false
 
 		var body: some View {
@@ -20,7 +20,11 @@ extension DirectoriesPane {
 			} footer: {
 				sectionFooter
 			}
+
 			.fileImporter(isPresented: $showDirectoryPicker, allowedContentTypes: [.folder], onCompletion: completeDirectorySelection)
+			.fileDialogDefaultDirectory(.homeDirectory)
+			.fileDialogMessage("Add a Search Scope")
+
 			.onChange(of: model.searchScopes) { Event.refreshApps.send() }
 		}
 	}
@@ -28,9 +32,9 @@ extension DirectoriesPane {
 
 // MARK: - Supporting Views
 
-private extension DirectoriesPane.SearchScopeList {
+private extension DiscoveryPane.SearchScopeList {
 	var emptyListLabel: some View {
-		Text("No search directories...")
+		Text("No search scopes...")
 			.foregroundStyle(.secondary)
 	}
 
@@ -49,6 +53,7 @@ private extension DirectoriesPane.SearchScopeList {
 			.buttonStyle(.plain)
 		} label: {
 			Text(searchScope)
+				.monospaced()
 				.lineLimit(1)
 				.truncationMode(.tail)
 				.help(searchScope)
@@ -56,17 +61,17 @@ private extension DirectoriesPane.SearchScopeList {
 	}
 
 	@ViewBuilder var sectionHeader: some View {
-		Text("Search Directories")
-		Text("App Library will look for apps in these directories.")
+		Text("Search Scopes")
+		Text("The Library will look for apps in these directories.")
 	}
 
 	var sectionFooter: some View {
-		Menu("Add Directory", systemImage: "plus",  content: {
+		Menu("Add Scope", systemImage: "plus", content: {
 			Section {
-				Button("Add Custom Directory") { showDirectoryPicker = true }
+				Button("Add Custom Scope") { showDirectoryPicker = true }
 			}
-			Section("Default") {
-				ForEach(AppSettings.Directories.defaultSearchScopes.sorted()) { path in
+			Section("Default Scopes") {
+				ForEach(AppSettings.Discovery.defaultSearchScopes.sorted()) { path in
 					Button(path) { model.tryAddSearchScope(withPath: path) }
 						.disabled(model.searchScopes.contains(path))
 				}
@@ -81,10 +86,10 @@ private extension DirectoriesPane.SearchScopeList {
 	private func optionMenuContent(for searchScope: String) -> some View {
 		Group {
 			Section {
-				Button("Remove", systemImage: "minus") { model.removeSearchScope(withPath: searchScope) }
+				Button("Remove") { model.removeSearchScope(withPath: searchScope) }
 			}
 			Section {
-				Button("Show in Finder", systemImage: "doc") { model.getURL(forPath: searchScope)?.showInFinder() }
+				Button("Show in Finder") { model.getURL(forPath: searchScope)?.showInFinder() }
 			}
 		}
 		.labelStyle(.titleOnly)
@@ -93,7 +98,7 @@ private extension DirectoriesPane.SearchScopeList {
 
 // MARK: - Functions
 
-private extension DirectoriesPane.SearchScopeList {
+private extension DiscoveryPane.SearchScopeList {
 	func completeDirectorySelection(_ result: Result<URL, Error>) {
 		switch result {
 			case let .success(url): model.tryAddSearchScope(withURL: url)

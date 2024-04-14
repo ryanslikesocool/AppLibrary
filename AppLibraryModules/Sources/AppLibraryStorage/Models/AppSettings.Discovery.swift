@@ -3,7 +3,7 @@ import OSLog
 import SerializationKit
 
 public extension AppSettings {
-	struct Directories {
+	struct Discovery {
 		public private(set) var searchScopes: Set<String>
 
 		init() {
@@ -14,19 +14,19 @@ public extension AppSettings {
 
 // MARK: - Sendable
 
-extension AppSettings.Directories: Sendable { }
+extension AppSettings.Discovery: Sendable { }
 
 // MARK: - Equatable
 
-extension AppSettings.Directories: Equatable { }
+extension AppSettings.Discovery: Equatable { }
 
 // MARK: - Hashable
 
-extension AppSettings.Directories: Hashable { }
+extension AppSettings.Discovery: Hashable { }
 
 // MARK: - Codable
 
-extension AppSettings.Directories: Codable {
+extension AppSettings.Discovery: Codable {
 	public init(from decoder: Decoder) throws {
 		let container = try decoder.container(keyedBy: CodingKeys.self)
 
@@ -38,13 +38,13 @@ extension AppSettings.Directories: Codable {
 
 // MARK: - SettingsFile
 
-extension AppSettings.Directories: SettingsFile {
-	public static var fileName: String { "directories.plist" }
+extension AppSettings.Discovery: SettingsFile {
+	public static var fileName: String { "discovery.plist" }
 }
 
 // MARK: - Constants
 
-public extension AppSettings.Directories {
+public extension AppSettings.Discovery {
 	static var defaultSearchScopes: Set<String> { [
 		"/System/Applications",
 		"/System/Library/CoreServices/Applications",
@@ -55,7 +55,7 @@ public extension AppSettings.Directories {
 
 // MARK: -
 
-public extension AppSettings.Directories {
+public extension AppSettings.Discovery {
 	mutating func tryAddSearchScope(withURL searchScopeURL: URL) {
 		let searchScopePath = (searchScopeURL.path(percentEncoded: false) as NSString).abbreviatingWithTildeInPath
 		tryAddSearchScope(withPath: searchScopePath)

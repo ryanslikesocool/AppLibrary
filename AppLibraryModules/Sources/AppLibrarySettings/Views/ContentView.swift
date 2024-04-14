@@ -10,9 +10,10 @@ struct ContentView: View {
 		TabView(selection: $tabSelection) {
 			DisplayPane(model: $appSettings.display)
 				.tag(SettingsTab.display)
-				.scrollDisabled(true)
-			DirectoriesPane(model: $appSettings.directories)
-				.tag(SettingsTab.directories)
+			LayoutPane(model: $appSettings.layout)
+				.tag(SettingsTab.layout)
+			DiscoveryPane(model: $appSettings.discovery)
+				.tag(SettingsTab.discovery)
 			AppsPane(model: $appSettings.apps)
 				.tag(SettingsTab.apps)
 		}

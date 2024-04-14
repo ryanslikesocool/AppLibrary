@@ -51,14 +51,14 @@ private extension AppsPane.HiddenAppsList {
 	@ViewBuilder var sectionHeader: some View {
 		Text("Hidden Apps")
 		Text("""
-		Apps listed here will not appear in the App Library.
-		Apps can be hidden by right-clicking on one in the App Library and selecting "Hide".
+		Apps listed here will not appear in the Library.
+		Apps can be hidden by right-clicking in the Library and selecting "Hide".
 		""")
 	}
 
 	func optionMenuContent(for appIdentifier: ApplicationIdentifier) -> some View {
 		Group {
-			Button("Show", systemImage: "eye") { model.removeHiddenApp(withIdentifier: appIdentifier) }
+			Button("Reveal") { model.removeHiddenApp(withIdentifier: appIdentifier) }
 		}
 		.labelStyle(.titleOnly)
 	}

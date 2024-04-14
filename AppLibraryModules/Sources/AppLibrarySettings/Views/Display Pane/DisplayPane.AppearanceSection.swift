@@ -8,8 +8,6 @@ extension DisplayPane {
 		var body: some View {
 			Section {
 				appearancePicker
-				reduceMotionToggle
-				reduceTransparencyToggle
 			} header: {
 				sectionHeader
 			}
@@ -22,7 +20,6 @@ extension DisplayPane {
 private extension DisplayPane.AppearanceSection {
 	@ViewBuilder var sectionHeader: some View {
 		Text("Appearance")
-		Text("Any modified system-level accessibility settings will take priority.")
 	}
 
 	var appearancePicker: some View {
@@ -35,20 +32,6 @@ private extension DisplayPane.AppearanceSection {
 		}
 		.onChange(of: model.appearance) {
 			NSApp.appearance = model.appearance.nsApperance
-		}
-	}
-
-	var reduceMotionToggle: some View {
-		Toggle(isOn: $model.reduceMotion) {
-			Text("Reduce Motion")
-			Text("Reduce motion, such as when jumping to letters in the launcher.")
-		}
-	}
-
-	var reduceTransparencyToggle: some View {
-		Toggle(isOn: $model.reduceTransparency) {
-			Text("Reduce Transparency")
-			Text("Reduce the transparency of the launcher background.")
 		}
 	}
 }
