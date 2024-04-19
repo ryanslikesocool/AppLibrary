@@ -15,7 +15,6 @@ struct SearchField: View {
 
 			.focusable()
 			.focused($isFocused)
-//			.focusEffectDisabled()
 
 			.font(.title3)
 			.textFieldStyle(.plain)

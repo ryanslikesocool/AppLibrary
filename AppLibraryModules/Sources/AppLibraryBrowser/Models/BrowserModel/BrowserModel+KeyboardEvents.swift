@@ -39,7 +39,7 @@ extension BrowserModel {
 				return true
 			}
 		} else if let focusedIndex {
-//			filteredApps[focusedIndex].open()
+			filteredApps[focusedIndex].open()
 			return true
 		} else {
 			Logger.keyboardEvents.debug("Return Key: Search was not focused.")

@@ -27,8 +27,10 @@ final class BrowserModel: ObservableObject {
 
 	private(set) lazy var keyboardObserver: KeyboardObserver = KeyboardObserver(model: self)
 
-	private lazy var refreshAppsSubscription: AnyCancellable? = Event.refreshApps
+	private lazy var refreshAppsSubscriber: AnyCancellable? = Event.refreshApps
 		.sink(receiveValue: refreshApps)
+	private lazy var activateSearchSubscriber: AnyCancellable? = Event.activateSearch
+		.sink(receiveValue: activateSearch)
 
 	private init() {
 		apps = []
@@ -37,7 +39,8 @@ final class BrowserModel: ObservableObject {
 		focusedIndex = nil
 		refreshApps()
 
-		_ = refreshAppsSubscription
+		_ = refreshAppsSubscriber
+		_ = activateSearchSubscriber
 	}
 }
 
@@ -48,5 +51,9 @@ private extension BrowserModel {
 
 	func hiddenAppsFilter(application: Application) -> Bool {
 		!AppSettings.shared.apps.hiddenApps.contains(application.id)
+	}
+
+	func activateSearch() {
+		isSearchFocused = true
 	}
 }
