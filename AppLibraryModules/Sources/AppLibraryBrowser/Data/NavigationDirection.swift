@@ -7,14 +7,6 @@ enum NavigationDirection: UInt8 {
 	case up
 }
 
-// MARK: - Sendable
-
-extension NavigationDirection: Sendable { }
-
-// MARK: - Equatable
-
-extension NavigationDirection: Equatable { }
-
 // MARK: - Hashable
 
 extension NavigationDirection: Hashable { }
@@ -58,17 +50,15 @@ extension NavigationDirection {
 			case (.right, _): 1
 			case let (.down, some): some.xDimension
 			case let (.up, some): -some.xDimension
-			default: preconditionFailure()
 		}
 	}
 
-	var entryIndex: KeyPath<Range<Int>, Int?> {
+	func getEntry<S: BidirectionalCollection>(ofType: S.Element.Type = S.Element.self) -> KeyPath<S, S.Element?> {
 		switch self {
 			case .left: \.last
 			case .right: \.first
 			case .down: \.first
 			case .up: \.last
-			default: preconditionFailure()
 		}
 	}
 
@@ -76,7 +66,6 @@ extension NavigationDirection {
 		switch self {
 			case .left, .right: true
 			case .down, .up: false
-			default: preconditionFailure()
 		}
 	}
 
@@ -84,7 +73,6 @@ extension NavigationDirection {
 		switch self {
 			case .left, .right: false
 			case .down, .up: true
-			default: preconditionFailure()
 		}
 	}
 }

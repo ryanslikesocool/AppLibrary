@@ -1,23 +1,22 @@
-// swift-tools-version: 5.9
+// swift-tools-version: 5.10
 
 import PackageDescription
 
 let package = Package(
-	name: "AppLibrary",
+	name: "AppLibraryModules",
 	defaultLocalization: "en",
 	platforms: [
 		.macOS(.v14),
 	],
 	products: [
 		.library(
-			name: "AppLibrary",
+			name: "AppLibraryModules",
 			targets: ["AppLibrary"]
 		),
 	],
 	dependencies: [
-		.package(url: "https://github.com/ryanslikesocool/SerializationKit.git", from: "0.1.0-pre.6"),
 		.package(url: "https://github.com/sindresorhus/ExceptionCatcher.git", from: "2.0.1"),
-		.package(url: "https://github.com/orchetect/SettingsAccess.git", from: "1.4.0"),
+		.package(url: "https://github.com/orchetect/SettingsAccess.git", from: "2.0.0"),
 	],
 	targets: [
 		.target(
@@ -25,7 +24,7 @@ let package = Package(
 			dependencies: [
 				"AppLibraryBrowser",
 				"AppLibraryAbout",
-				"AppLibrarySettings",
+				"AppLibrarySettingsViews",
 			]
 		),
 
@@ -35,19 +34,28 @@ let package = Package(
 				"ExceptionCatcher",
 				"SettingsAccess",
 
-				"AppLibrarySettings",
+				"AppLibrarySettingsViews",
 			]
 		),
 
 		.target(
 			name: "AppLibraryAbout",
 			dependencies: [
-				"AppLibraryCommon",
+				"AppLibraryCommonViews",
 			]
 		),
 
 		.target(
-			name: "AppLibrarySettings",
+			name: "AppLibrarySettingsViews",
+			dependencies: [
+				"AppLibraryCommonViews",
+			]
+		),
+
+		// MARK: -
+
+		.target(
+			name: "AppLibraryCommonViews",
 			dependencies: [
 				"AppLibraryStorage",
 			]
@@ -56,7 +64,6 @@ let package = Package(
 		.target(
 			name: "AppLibraryStorage",
 			dependencies: [
-				"SerializationKit",
 				"AppLibraryCommon",
 			]
 		),

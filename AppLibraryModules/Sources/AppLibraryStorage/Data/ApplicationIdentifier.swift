@@ -8,10 +8,6 @@ public struct ApplicationIdentifier {
 	}
 }
 
-// MARK: - Sendable
-
-extension ApplicationIdentifier: Sendable { }
-
 // MARK: - Equatable
 
 extension ApplicationIdentifier: Equatable {
@@ -30,15 +26,15 @@ extension ApplicationIdentifier: Hashable {
 	}
 }
 
-// MARK: - Codable
-
-extension ApplicationIdentifier: Codable { }
-
 // MARK: - Identifiable
 
 extension ApplicationIdentifier: Identifiable {
 	public var id: String { bundleIdentifier }
 }
+
+// MARK: - Codable
+
+extension ApplicationIdentifier: Codable { }
 
 // MARK: - Comparable
 

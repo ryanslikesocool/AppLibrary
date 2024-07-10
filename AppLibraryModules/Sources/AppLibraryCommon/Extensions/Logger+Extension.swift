@@ -1,5 +1,9 @@
 import OSLog
 
-public extension Logger {
-	static var appLibrarySubsystem: String { AppLibraryInformation.bundleIdentifier }
+package extension Logger {
+	private static let subsystem: String = Bundle.main.bundleIdentifier!
+
+	init(category: String) {
+		self.init(subsystem: Self.subsystem, category: category)
+	}
 }

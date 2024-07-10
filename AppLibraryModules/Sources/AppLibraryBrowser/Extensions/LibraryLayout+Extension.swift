@@ -9,13 +9,6 @@ extension LibraryLayout {
 		}
 	}
 
-	var font: Font {
-		switch self {
-			case .list: .body
-			case .grid: .footnote
-		}
-	}
-
 	var padding: CGFloat {
 		switch self {
 			case .list: 16
@@ -27,6 +20,13 @@ extension LibraryLayout {
 		switch self {
 			case .list: 1
 			case .grid: 4
+		}
+	}
+
+	var appTileStyle: AnyAppTileStyle {
+		switch self {
+			case .list: AnyAppTileStyle(style: .list)
+			case .grid: AnyAppTileStyle(style: .grid)
 		}
 	}
 }

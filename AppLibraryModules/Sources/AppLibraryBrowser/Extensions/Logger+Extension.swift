@@ -2,7 +2,7 @@ import AppLibraryCommon
 import OSLog
 
 extension Logger {
-	static let module: Logger = Logger(subsystem: Self.appLibrarySubsystem, category: "Browser")
+	@usableFromInline static let module: Logger = Logger(category: "AppLibraryBrowser")
 
-	static let keyboardEvents: Logger = Logger(subsystem: Self.appLibrarySubsystem, category: "Keyboard Events")
+	@usableFromInline static let keyboardEvents: Logger = Logger(category: "AppLibraryBrowser.KeyboardEvents")
 }

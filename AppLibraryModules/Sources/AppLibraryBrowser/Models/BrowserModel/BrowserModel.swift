@@ -5,19 +5,19 @@ import OSLog
 import SwiftUI
 
 final class BrowserModel: ObservableObject {
-	static let shared: BrowserModel = BrowserModel()
-
 	@Published var state: BrowserState?
 	@Published var apps: [Application]
 	@Published var searchQuery: String
-	@Published var isSearchFocused: Bool // TODO: convert to nil check on searchQuery?
-	@Published var focusedIndex: Int?
+	@Published var focus: FocusElement?
 
 	var isSearchDisplayed: Bool { state == .complete }
 
 	var filteredApps: [Application] {
-		var filtered = apps.filter(hiddenAppsFilter)
-		if !searchQuery.isEmpty {
+		var filtered: [Application]
+		if searchQuery.isEmpty {
+			filtered = apps.filter(Self.hiddenAppsFilterBrowser)
+		} else {
+			filtered = apps.filter(Self.hiddenAppsFilterSearch)
 			filtered = filtered.filter(searchFilter)
 		}
 		return filtered
@@ -32,11 +32,10 @@ final class BrowserModel: ObservableObject {
 	private lazy var activateSearchSubscriber: AnyCancellable? = Event.activateSearch
 		.sink(receiveValue: activateSearch)
 
-	private init() {
+	init() {
 		apps = []
 		searchQuery = ""
-		isSearchFocused = false
-		focusedIndex = nil
+		focus = nil
 		refreshApps()
 
 		_ = refreshAppsSubscriber
@@ -49,11 +48,23 @@ private extension BrowserModel {
 		application.displayName.localizedStandardContains(searchQuery)
 	}
 
-	func hiddenAppsFilter(application: Application) -> Bool {
-		!AppSettings.shared.apps.hiddenApps.contains(application.id)
+	static func hiddenAppsFilterBrowser(application: Application) -> Bool {
+		if let hideFlags = AppsSettings.shared.applicationHideFlags[application.id] {
+			!hideFlags.contains(.hiddenInBrowser)
+		} else {
+			true
+		}
+	}
+
+	static func hiddenAppsFilterSearch(application: Application) -> Bool {
+		if let hideFlags = AppsSettings.shared.applicationHideFlags[application.id] {
+			!hideFlags.contains(.hiddenInSearch)
+		} else {
+			true
+		}
 	}
 
 	func activateSearch() {
-		isSearchFocused = true
+		focus = .search
 	}
 }

@@ -3,5 +3,5 @@ import AppLibraryStorage
 import Combine
 
 extension Event {
-	static let scrollToApp = PassthroughSubject<ApplicationIdentifier, Never>()
+	static let scrollToApp = Passthrough<ApplicationIdentifier>()
 }

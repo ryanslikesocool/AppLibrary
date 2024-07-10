@@ -2,8 +2,7 @@ import AppLibraryStorage
 import SwiftUI
 
 struct SearchField: View {
-	@ObservedObject private var appSettings: AppSettings = .shared
-	@ObservedObject private var browserModel: BrowserModel = .shared
+	@EnvironmentObject private var browserModel: BrowserModel
 	@FocusState private var isFocused: Bool
 
 	private var shadowA: Shadow { isFocused ? Self.focusedShadowA : Self.unfocusedShadowA }
@@ -12,6 +11,9 @@ struct SearchField: View {
 
 	var body: some View {
 		TextField(text: $browserModel.searchQuery, prompt: Text("􀊫 App Library"), label: EmptyView.init)
+//			.onSubmit(of: .text) {
+//				browserModel.filteredApps.first?.open()
+//			}
 
 			.focusable()
 			.focused($isFocused)
@@ -21,7 +23,7 @@ struct SearchField: View {
 
 			.padding(Self.innerPadding)
 			.overlay(stroke.style, in: containerShape.inset(by: -stroke.width * 0.5).stroke(lineWidth: stroke.width))
-			.background(appSettings.display.searchBackgroundMaterial, in: containerShape)
+			.background(.regularMaterial, in: containerShape)
 			.fixedSize(horizontal: false, vertical: true)
 			.compositingGroup()
 			.contentShape(containerShape)
@@ -32,16 +34,16 @@ struct SearchField: View {
 
 			.animation(.easeOut(duration: 0.2), value: isFocused)
 
-			.onAppear { isFocused = browserModel.isSearchFocused }
-			.onChange(of: isFocused) { _, newValue in
-				browserModel.isSearchFocused = newValue
-			}
-			.onChange(of: browserModel.isSearchFocused) { _, newValue in
-				isFocused = newValue
-				if isFocused {
-					browserModel.focusedIndex = nil
-				}
-			}
+//			.onAppear { isFocused = browserModel.isSearchFocused }
+//			.onChange(of: isFocused) { _, newValue in
+//				browserModel.isSearchFocused = newValue
+//			}
+//			.onChange(of: browserModel.isSearchFocused) { _, newValue in
+//				isFocused = newValue
+//				if isFocused {
+//					browserModel.focusedIndex = nil
+//				}
+//			}
 	}
 }
 
@@ -49,7 +51,7 @@ struct SearchField: View {
 
 private extension SearchField {
 	var containerShape: RoundedRectangle {
-		RoundedRectangle(cornerRadius: 12)
+		RoundedRectangle(cornerRadius: 10)
 	}
 }
 
@@ -67,5 +69,5 @@ private extension SearchField {
 
 	static let innerPadding: CGFloat = 8
 	static let outerPadding: CGFloat = 8
-	static let cornerRadius: CGFloat = BrowserViewController.cornerRadius - outerPadding
+	static let cornerRadius: CGFloat = BrowserWindow.cornerRadius - outerPadding
 }

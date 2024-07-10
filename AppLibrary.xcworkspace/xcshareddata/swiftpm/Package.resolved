@@ -1,4 +1,5 @@
 {
+  "originHash" : "194d3e1185bf9df8d5c86f945155e0b2ed51b426dfbb44d64ab58ca85c2e994c",
   "pins" : [
     {
       "identity" : "exceptioncatcher",
@@ -10,23 +11,14 @@
       }
     },
     {
-      "identity" : "serializationkit",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/ryanslikesocool/SerializationKit",
-      "state" : {
-        "revision" : "e4eba39a7cce674e533880529a54aa8b99b7b976",
-        "version" : "0.1.0-pre.6"
-      }
-    },
-    {
       "identity" : "settingsaccess",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/orchetect/SettingsAccess.git",
       "state" : {
-        "revision" : "0fd73c8b5892e88acb13adb7f36a4ba9293a0061",
-        "version" : "1.4.0"
+        "revision" : "f0b57b4c4c0de66b9f4d6c41d39f1d6ede0c9891",
+        "version" : "2.0.0"
       }
     }
   ],
-  "version" : 2
+  "version" : 3
 }

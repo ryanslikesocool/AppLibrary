@@ -10,12 +10,12 @@ public struct Application {
 	public var displayName: String { id.displayName }
 	public var bundleIdentifier: String { id.bundleIdentifier }
 
-	public private(set) lazy var version: String? = try? Self.unwrap(metadata: metadata, with: Self.versionKey, as: String.self)
-	public private(set) lazy var copyright: String? = try? Self.unwrap(metadata: metadata, with: Self.copyrightKey, as: String.self)
-	public private(set) lazy var categories: [String]? = try? Self.unwrap(metadata: metadata, with: Self.categoryKey, as: [String].self)
+	public private(set) lazy var version: String? = try? Self.unwrap(metadata: metadata, with: Constant.Application.versionKey, as: String.self)
+	public private(set) lazy var copyright: String? = try? Self.unwrap(metadata: metadata, with: Constant.Application.copyrightKey, as: String.self)
+	public private(set) lazy var categories: [String]? = try? Self.unwrap(metadata: metadata, with: Constant.Application.categoryKey, as: [String].self)
 
-	public private(set) lazy var creationDate: Date? = try? Self.unwrap(metadata: metadata, with: Self.creationDateKey, as: Date.self)
-	public private(set) lazy var updatedDate: Date? = try? Self.unwrap(metadata: metadata, with: Self.updatedDateKey, as: Date.self)
+	public private(set) lazy var creationDate: Date? = try? Self.unwrap(metadata: metadata, with: Constant.Application.creationDateKey, as: Date.self)
+	public private(set) lazy var updatedDate: Date? = try? Self.unwrap(metadata: metadata, with: Constant.Application.updatedDateKey, as: Date.self)
 //	public private(set) lazy var openedDate: Date?
 
 	public init?(metadata: NSMetadataItem) {
@@ -25,14 +25,14 @@ public struct Application {
 		let displayName: String
 
 		do {
-			bundleIdentifier = try Self.unwrap(metadata: metadata, with: Self.bundleIdentifierKey, as: String.self)
+			bundleIdentifier = try Self.unwrap(metadata: metadata, with: Constant.Application.bundleIdentifierKey, as: String.self)
 		} catch {
 			Self.logUnwrapFailure(error: error, objectDescription: "bundle identifier")
 			return nil
 		}
 
 		do {
-			displayName = try Self.unwrap(metadata: metadata, with: Self.displayNameKey, as: String.self)
+			displayName = try Self.unwrap(metadata: metadata, with: Constant.Application.displayNameKey, as: String.self)
 				.components(separatedBy: ".").dropLast().joined(separator: ".")
 		} catch {
 			Self.logUnwrapFailure(error: error, objectDescription: "display name")
@@ -43,10 +43,6 @@ public struct Application {
 	}
 }
 
-// MARK: - Equatable
-
-extension Application: Equatable { }
-
 // MARK: - Hashable
 
 extension Application: Hashable { }
@@ -54,18 +50,6 @@ extension Application: Hashable { }
 // MARK: - Identifiable
 
 extension Application: Identifiable { }
-
-// MARK: - Constants
-
-private extension Application {
-	static var bundleIdentifierKey: String { NSMetadataItemCFBundleIdentifierKey }
-	static var displayNameKey: String { NSMetadataItemDisplayNameKey }
-	static var categoryKey: String { NSMetadataItemApplicationCategoriesKey }
-	static var creationDateKey: String { NSMetadataItemFSCreationDateKey }
-	static var updatedDateKey: String { NSMetadataItemFSContentChangeDateKey }
-	static var copyrightKey: String { NSMetadataItemCopyrightKey }
-	static var versionKey: String { NSMetadataItemVersionKey }
-}
 
 // MARK: -
 

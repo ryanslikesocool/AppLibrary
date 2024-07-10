@@ -1,6 +1,6 @@
-import OSLog
 import AppLibraryCommon
+import OSLog
 
 extension Logger {
-	static let module: Logger = Logger(subsystem: Self.appLibrarySubsystem, category: "Storage")
+	@usableFromInline static let module: Logger = Logger(category: "AppLibraryStorage")
 }

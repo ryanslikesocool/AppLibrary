@@ -1,11 +1,13 @@
 import AppLibraryCommon
-import AppLibrarySettings
+import AppLibraryCommonViews
+import AppLibrarySettingsViews
+import AppLibraryStorage
 import OSLog
 import SettingsAccess
 import SwiftUI
 
 struct ErrorView: View {
-	@Environment(\.openSettings) private var openSettings
+	@Environment(\.openSettingsLegacy) private var openSettings
 
 	private let error: BrowserError?
 
@@ -15,7 +17,7 @@ struct ErrorView: View {
 
 	var body: some View {
 		VStack {
-			Image(systemName: "exclamationmark.octagon")
+			Image(systemName: Constant.Symbol.exclamationMark_octagon)
 				.resizable()
 				.fontWeight(.semibold)
 				.frame(width: 48, height: 48)
@@ -53,23 +55,23 @@ private extension ErrorView {
 		switch error {
 			case .some(.noSearchScopes):
 				Text("Add search scopes in the settings pane.")
-				settingsButton(destination: .discovery)
+				settingsButton(destination: .apps)
 			case .some(.noApps):
 				Text("Add more search scopes in the settings pane.")
-				settingsButton(destination: .discovery)
+				settingsButton(destination: .apps)
 			case .some(.allHidden):
 				Text("Reveal apps in the settings pane.")
 				settingsButton(destination: .apps)
 			default:
-				Button("Retry", systemImage: "arrow.clockwise", action: Event.refreshApps.send)
+				Button("Retry", systemImage: Constant.Symbol.arrow_clockwise, action: Event.refreshApps.send)
 		}
 	}
 
-	func settingsButton(destination: SettingsTab) -> some View {
-		Button("Settings...", systemImage: "gear") {
+	func settingsButton(destination: SettingsCategory) -> some View {
+		Button("Settings...", systemImage: Constant.Symbol.gear) {
 			do {
 				try openSettings()
-				Event.goToSettingsTab.send(destination)
+				Event.goToSettingsTab(destination)
 			} catch {
 				Logger.module.error("""
 				Failed to open settings window:

@@ -4,9 +4,7 @@ import SwiftUI
 
 struct LibraryView: View {
 	@Environment(\.libraryLayout) private var libraryLayout
-
-	@ObservedObject private var browserModel: BrowserModel = .shared
-	@ObservedObject private var appSettings: AppSettings = .shared
+	@EnvironmentObject private var browserModel: BrowserModel
 
 	var body: some View {
 		ScrollViewReader { proxy in
@@ -22,8 +20,8 @@ struct LibraryView: View {
 			.onReceive(Event.scrollToApp) { id in
 				scrollToApp(id: id, in: proxy)
 			}
-			.onChange(of: browserModel.focusedIndex) { _, newValue in
-				scrollToApp(index: newValue, in: proxy)
+			.onChange(of: browserModel.focus) { _, newValue in
+				receiveFocus(newValue: newValue, in: proxy)
 			}
 		}
 	}
@@ -47,18 +45,14 @@ private extension LibraryView {
 // MARK: - Event Receivers
 
 private extension LibraryView {
-	func scrollToApp(id: ApplicationIdentifier, in proxy: ScrollViewProxy) {
-		withAnimation(appSettings.display.willReduceMotion ? nil : .default) {
-			proxy.scrollTo(id, anchor: .top)
+	func receiveFocus(newValue: FocusElement?, in proxy: ScrollViewProxy) {
+		switch newValue {
+			case let .some(.app(app)): scrollToApp(id: app, in: proxy)
+			default: break
 		}
 	}
 
-	func scrollToApp(index: Int?, in proxy: ScrollViewProxy) {
-		guard let index else {
-			return
-		}
-		withAnimation(appSettings.display.willReduceMotion ? nil : .default) {
-			proxy.scrollTo(browserModel.filteredApps[index].id, anchor: nil)
-		}
+	func scrollToApp(id: ApplicationIdentifier, in proxy: ScrollViewProxy) {
+		proxy.scrollTo(id, anchor: .top)
 	}
 }

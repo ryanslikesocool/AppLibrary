@@ -26,7 +26,7 @@ final class KeyboardObserver {
 		/// Cannot combine event monitors for some reason.
 		/// Obj-C exceptions get thrown when trying to access `NSEvent.characters`.
 		modifierEventMonitor = NSEvent.addLocalMonitorForEvents(matching: .flagsChanged, handler: onModifierEvent)
-		keyEventMonitor = NSEvent.addLocalMonitorForEvents(matching: .keyDown, handler: onKeyEvent)
+//		keyEventMonitor = NSEvent.addLocalMonitorForEvents(matching: .keyDown, handler: onKeyEvent)
 
 		Logger.module.debug("Created event monitor.")
 	}
@@ -56,20 +56,20 @@ private extension KeyboardObserver {
 		return event
 	}
 
-	func onKeyEvent(_ event: NSEvent) -> NSEvent? {
-		if
-			matchSearchShortcut(in: event)
-			|| matchRefreshShortcut(in: event)
-			|| matchEscapeKey(in: event)
-			|| matchReturnKey(in: event)
-			|| matchArrowKey(in: event)
-			|| matchAlphanumericKey(in: event)
-		{
-			return nil
-		}
-
-		return event
-	}
+//	func onKeyEvent(_ event: NSEvent) -> NSEvent? {
+//		if
+//			matchSearchShortcut(in: event)
+//			|| matchRefreshShortcut(in: event)
+//			|| matchEscapeKey(in: event)
+//			|| matchReturnKey(in: event)
+//			|| matchArrowKey(in: event)
+//			|| matchAlphanumericKey(in: event)
+//		{
+//			return nil
+//		}
+//
+//		return event
+//	}
 }
 
 private extension KeyboardObserver {
@@ -115,7 +115,7 @@ private extension KeyboardObserver {
 	func matchArrowKey(in event: NSEvent) -> Bool {
 		guard
 			let direction = NavigationDirection(keyCode: event.keyCode),
-			!model.isSearchFocused || direction.isVertical
+			!model.isSearchDisplayed || direction.isVertical
 		else {
 			return false
 		}

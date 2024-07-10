@@ -1,36 +1,43 @@
+import AppLibraryCommon
+import AppLibraryCommonViews
 import AppLibraryStorage
 import SwiftUI
 
 struct AppTile: View {
 	@Environment(\.libraryLayout) private var libraryLayout
 
-	@ObservedObject private var browserModel: BrowserModel = .shared
+	private let application: Application
 
-	let application: Application
+	init(for application: Application) {
+		self.application = application
+	}
 
 	var body: some View {
 		Button(action: application.open) {
-			switch libraryLayout {
-				case .list: ListDisplay(application: application)
-				case .grid: GridDisplay(application: application)
-			}
+			libraryLayout.appTileStyle.makeBody(
+				configuration: AnyAppTileStyle.Configuration(
+					label: label,
+					icon: icon
+				)
+			)
 		}
-		.contextMenu(menuItems: contextMenu)
 		.focusable()
+		.focusEffectDisabled()
+		.contextMenu { ContextMenu(for: application) }
 		.id(application.id)
 	}
 }
 
-// MARK: - Supporting Views
-
 private extension AppTile {
-	@ViewBuilder func contextMenu() -> some View {
-		Section {
-			Button("Open", action: application.open)
-		}
-		Section {
-			Button("Hide", action: application.hide)
-			Button("Show in Finder", action: application.showInFinder)
-		}
+	func label() -> some View {
+		Text(application.displayName)
+			.truncationMode(.tail)
+			.help(application.displayName)
+	}
+
+	func icon() -> some View {
+		Image(nsImage: application.getIcon())
+			.resizable()
+			.aspectRatio(contentMode: .fit)
 	}
 }

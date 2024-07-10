@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		AF3800C92AE69E21009D7652 /* AppLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = AF3800C82AE69E21009D7652 /* AppLibrary */; };
+		AF0929052C2B20DC00B95B96 /* AppLibraryModules in Frameworks */ = {isa = PBXBuildFile; productRef = AF0929042C2B20DC00B95B96 /* AppLibraryModules */; };
 		AF7C7A212A1A304900545B8B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AF7C7A202A1A304900545B8B /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
@@ -23,7 +23,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AF3800C92AE69E21009D7652 /* AppLibrary in Frameworks */,
+				AF0929052C2B20DC00B95B96 /* AppLibraryModules in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,7 +81,7 @@
 			);
 			name = "App Library";
 			packageProductDependencies = (
-				AF3800C82AE69E21009D7652 /* AppLibrary */,
+				AF0929042C2B20DC00B95B96 /* AppLibraryModules */,
 			);
 			productName = AppLibrary;
 			productReference = AF7C7A192A1A304800545B8B /* App Library.app */;
@@ -95,7 +95,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1430;
-				LastUpgradeCheck = 1530;
+				LastUpgradeCheck = 1540;
 				TargetAttributes = {
 					AF7C7A182A1A304800545B8B = {
 						CreatedOnToolsVersion = 14.3;
@@ -272,7 +272,7 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1059;
+				CURRENT_PROJECT_VERSION = 1114;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 838RGQ32CA;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -285,7 +285,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 0.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.DevelopedWithLove.AppLibrary;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -303,7 +303,7 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1059;
+				CURRENT_PROJECT_VERSION = 1114;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 838RGQ32CA;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -316,7 +316,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 0.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.DevelopedWithLove.AppLibrary;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -349,9 +349,9 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		AF3800C82AE69E21009D7652 /* AppLibrary */ = {
+		AF0929042C2B20DC00B95B96 /* AppLibraryModules */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = AppLibrary;
+			productName = AppLibraryModules;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

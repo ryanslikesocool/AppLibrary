@@ -6,7 +6,7 @@ import OSLog
 extension BrowserModel {
 	func onSearchShortcut() {
 		Logger.keyboardEvents.debug("Search Shortcut: Focusing search.")
-		isSearchFocused = true
+		focus = .search
 	}
 
 	func onRefreshShortcut() {
@@ -16,58 +16,68 @@ extension BrowserModel {
 
 	func onEscapeKey() {
 		searchQuery = ""
-		isSearchFocused = false
-		focusedIndex = nil
+		focus = nil
 		NSApplication.shared.hide(nil)
 	}
 
 	func onReturnKey() -> Bool {
-		if isSearchFocused {
-			if !searchQuery.isEmpty {
-				if let bestMatch = filteredApps.first {
-					bestMatch.open()
-					searchQuery = ""
-					Logger.keyboardEvents.debug("Return Key: Opening app for best match.")
-					return true
+		switch focus {
+			case .search:
+				if !searchQuery.isEmpty {
+					if let bestMatch = filteredApps.first {
+						bestMatch.open()
+						searchQuery = ""
+						Logger.keyboardEvents.debug("Return Key: Opening app for best match.")
+						return true
+					} else {
+						Logger.keyboardEvents.debug("Return Key: Best match for search was not found.")
+						return false
+					}
 				} else {
-					Logger.keyboardEvents.debug("Return Key: Best match for search was not found.")
-					return false
+					focus = nil
+					Logger.keyboardEvents.debug("Return Key: Search was focused, query was empty.")
+					return true
 				}
-			} else {
-				isSearchFocused = false
-				Logger.keyboardEvents.debug("Return Key: Search was focused, query was empty.")
-				return true
-			}
-		} else if let focusedIndex {
-			filteredApps[focusedIndex].open()
-			return true
-		} else {
-			Logger.keyboardEvents.debug("Return Key: Search was not focused.")
-			return false
+			case let .app(app):
+				if let app = filteredApps.first(where: { $0.id == app }) {
+					app.open()
+					return true
+				}
+			default:
+				Logger.keyboardEvents.debug("Return Key: Search was not focused.")
 		}
+
+		return false
 	}
 
 	func onArrowKey(_ direction: NavigationDirection) {
-		guard let currentFocus = focusedIndex else {
-			focusedIndex = filteredApps.indices[keyPath: direction.entryIndex]
+		guard
+			case let .app(appID) = focus,
+			let currentFocus = filteredApps.firstIndex(where: { $0.id == appID })
+		else {
+			focus = if let entry: Application = filteredApps[keyPath: direction.getEntry()] {
+				.app(entry.id)
+			} else {
+				nil
+			}
 			return
 		}
 
-		let offset = direction.offset(for: AppSettings.shared.layout.layout)
+		let offset = direction.offset(for: LayoutSettings.shared.layout)
 		let targetIndex = currentFocus + offset
 
 		if targetIndex < 0 {
-			isSearchFocused = true
+			focus = .search
 		} else if targetIndex >= filteredApps.count {
-			focusedIndex = nil
+			focus = nil
 		} else {
-			focusedIndex = targetIndex
+			focus = .app(filteredApps[targetIndex].id)
 		}
 	}
 
 	func onAlphanumericKey(_ value: String?) -> Bool {
 		guard
-			!isSearchFocused,
+			focus != .search,
 			let lowercasedString = value?.lowercased(),
 			lowercasedString.isAlphanumeric
 		else {

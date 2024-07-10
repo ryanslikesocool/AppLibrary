@@ -1,11 +1,16 @@
-import AppLibrarySettings
+import AppLibraryCommonViews
+import AppLibrarySettingsViews
 import AppLibraryStorage
 import SettingsAccess
 import SwiftUI
 
 struct ContentView: View {
-	@ObservedObject private var appSettings: AppSettings = .shared
-	@ObservedObject private var browserModel: BrowserModel = .shared
+	@Setting(layout: \.layout) private var layout
+	@ObservedObject private var browserModel: BrowserModel
+
+	init(browserModel: BrowserModel) {
+		self.browserModel = browserModel
+	}
 
 	var body: some View {
 		Group {
@@ -25,7 +30,7 @@ struct ContentView: View {
 		}
 		.ignoresSafeArea()
 
-		.libraryLayout(appSettings.layout.layout)
+		.libraryLayout(layout)
 		.openSettingsAccess()
 
 		.onChange(of: browserModel.filteredApps) { _, newValue in
@@ -37,6 +42,8 @@ struct ContentView: View {
 				}
 			}
 		}
+
+		.environmentObject(browserModel)
 	}
 }
 
@@ -44,7 +51,7 @@ struct ContentView: View {
 
 extension ContentView {
 	var containerShape: RoundedRectangle {
-		RoundedRectangle(cornerRadius: BrowserViewController.cornerRadius)
+		.rect(cornerRadius: BrowserWindow.cornerRadius)
 	}
 
 	var queryLoadingView: some View {

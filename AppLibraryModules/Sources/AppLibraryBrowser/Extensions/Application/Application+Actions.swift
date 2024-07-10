@@ -14,8 +14,8 @@ extension Application {
 	}
 
 	func hide() {
-		AppSettings.shared.apps.tryAddHiddenApp(withIdentifier: id)
-		AppSettings.shared.apps.save()
+		AppsSettings.shared.hideApplication(with: id)
+		AppsSettings.shared.save()
 	}
 }
 

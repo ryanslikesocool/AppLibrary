@@ -3,24 +3,20 @@ import SwiftUI
 
 extension LibraryView {
 	struct AppIterator: View {
+		@EnvironmentObject private var browserModel: BrowserModel
 		@Environment(\.libraryLayout) private var libraryLayout
-		@ObservedObject private var browserModel: BrowserModel = .shared
 
 		private var apps: [Application] { browserModel.filteredApps }
 
-		@FocusState private var focusedIndex: Int?
+		@FocusState private var focusedApp: FocusElement?
 
 		var body: some View {
-			ForEach(apps.indices, id: \.self) { index in
-				AppTile(application: apps[index])
-					.focused($focusedIndex, equals: index)
+			ForEach(apps) { app in
+				AppTile(for: app)
+					.focused($focusedApp, equals: .app(app.id))
 			}
-
-			.onChange(of: browserModel.focusedIndex) { _, newValue in
-				if newValue != nil {
-					browserModel.isSearchFocused = false
-				}
-				focusedIndex = newValue
+			.onChange(of: browserModel.focus) {
+				focusedApp = browserModel.focus
 			}
 		}
 	}

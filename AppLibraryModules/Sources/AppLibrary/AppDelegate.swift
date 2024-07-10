@@ -10,7 +10,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 	func applicationDidFinishLaunching(_ notification: Notification) {
 		Logger.module.debug("Did finish launching \(AppLibraryInformation.appName).app")
 
-		AppSettings.shared.prepare()
+		_ = GeneralSettings.shared
+		_ = AppsSettings.shared
+		_ = LayoutSettings.shared
 
 		DockUtility.requestAccess()
 

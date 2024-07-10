@@ -1,14 +1,17 @@
 import AppKit
+import SwiftUI
 import AppLibraryCommon
 import OSLog
 
 public final class BrowserWindowController: NSWindowController, ObservableObject {
-	public init() {
-		_ = BrowserModel.shared
+	private let browserModel: BrowserModel
 
-		let window = NSPanel(
+	public init() {
+		browserModel = BrowserModel()
+
+		let window = BrowserWindow(
 			contentRect: NSRect(origin: .zero, size: BrowserWindowController.windowSize),
-			styleMask: [.borderless, .fullSizeContentView, .nonactivatingPanel, .titled],
+			styleMask: [.borderless, .nonactivatingPanel],
 			backing: .buffered,
 			defer: false
 		)
@@ -16,19 +19,7 @@ public final class BrowserWindowController: NSWindowController, ObservableObject
 		window.title = Self.windowTitle
 		window.identifier = Self.windowIdentifier
 
-		window.isMovable = false
-		window.isFloatingPanel = true
-		window.becomesKeyOnlyIfNeeded = true
-		window.titleVisibility = .hidden
-		window.titlebarAppearsTransparent = true
-		window.isOpaque = false
-		window.backgroundColor = .clear
-		window.standardWindowButton(.closeButton)?.isHidden = true
-		window.standardWindowButton(.miniaturizeButton)?.isHidden = true
-		window.standardWindowButton(.zoomButton)?.isHidden = true
-		window.hidesOnDeactivate = true
-
-		window.contentViewController = BrowserViewController()
+		window.contentView = NSHostingView(rootView: ContentView(browserModel: browserModel))
 
 		super.init(window: window)
 
@@ -51,11 +42,11 @@ extension BrowserWindowController: NSWindowDelegate {
 	}
 
 	public func windowDidResignKey(_ notification: Notification) {
-		BrowserModel.shared.keyboardObserver.destroyEventMonitor()
+		browserModel.keyboardObserver.destroyEventMonitor()
 	}
 
 	public func windowDidBecomeKey(_ notification: Notification) {
-		BrowserModel.shared.keyboardObserver.createEventMonitor()
+		browserModel.keyboardObserver.createEventMonitor()
 	}
 }
 
@@ -65,7 +56,7 @@ extension BrowserWindowController {
 	static let windowSize: NSSize = NSSize(width: 300, height: 450)
 	static let windowPadding: CGFloat = 8
 
-	static var windowTitle: String { "App Library" }
+	static let windowTitle: String = "App Library"
 	static let windowIdentifier: NSUserInterfaceItemIdentifier = NSUserInterfaceItemIdentifier("\(AppLibraryInformation.bundleIdentifier!).Browser")
 }
 
