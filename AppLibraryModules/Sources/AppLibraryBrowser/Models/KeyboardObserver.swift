@@ -85,6 +85,7 @@ private extension KeyboardObserver {
 	}
 
 	// (command + r) -> (refresh apps)
+	@MainActor
 	func matchRefreshShortcut(in event: NSEvent) -> Bool {
 		// TODO: how to localize "r"?
 		guard matchingKeyboardShortcut(event, key: "r", modifier: .command) else {
@@ -106,16 +107,18 @@ private extension KeyboardObserver {
 	}
 
 	// (return) -> (dismiss search)
+	@MainActor
 	func matchReturnKey(in event: NSEvent) -> Bool {
 		matchingKeyboardShortcut(event, keyCode: Self.returnKey, modifier: [])
 			&& model.onReturnKey()
 	}
 
 	// (arrow keys) -> (navigate)
+	@MainActor
 	func matchArrowKey(in event: NSEvent) -> Bool {
 		guard
 			let direction = NavigationDirection(keyCode: event.keyCode),
-			!model.isSearchDisplayed || direction.isVertical
+			!model.isSearchDisplayed || direction.axis == .vertical
 		else {
 			return false
 		}
@@ -125,6 +128,7 @@ private extension KeyboardObserver {
 	}
 
 	// (characters) -> (scroll to character)
+	@MainActor
 	func matchAlphanumericKey(in event: NSEvent) -> Bool {
 		guard let characters = event.charactersIgnoringModifiers else {
 			return false

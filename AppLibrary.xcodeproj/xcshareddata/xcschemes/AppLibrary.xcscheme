@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1540"
+   LastUpgradeVersion = "1610"
    version = "1.7">
    <BuildAction
       parallelizeBuildables = "YES"
-      buildImplicitDependencies = "YES">
+      buildImplicitDependencies = "YES"
+      buildArchitectures = "Automatic">
       <PostActions>
          <ExecutionAction
             ActionType = "Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction">
             <ActionContent
-               title = "Run Script"
+               title = "Bump Version"
                scriptText = "cd &quot;${PROJECT_DIR}&quot; ; agvtool bump&#10;">
                <EnvironmentBuildable>
                   <BuildableReference
                      BuildableIdentifier = "primary"
-                     BlueprintIdentifier = "AF7C7A182A1A304800545B8B"
+                     BlueprintIdentifier = "AF33F06A2CFAF53F00767656"
                      BuildableName = "App Library.app"
                      BlueprintName = "App Library"
                      ReferencedContainer = "container:AppLibrary.xcodeproj">
@@ -32,7 +33,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "AF7C7A182A1A304800545B8B"
+               BlueprintIdentifier = "AF33F06A2CFAF53F00767656"
                BuildableName = "App Library.app"
                BlueprintName = "App Library"
                ReferencedContainer = "container:AppLibrary.xcodeproj">
@@ -61,19 +62,12 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "AF7C7A182A1A304800545B8B"
+            BlueprintIdentifier = "AF33F06A2CFAF53F00767656"
             BuildableName = "App Library.app"
             BlueprintName = "App Library"
             ReferencedContainer = "container:AppLibrary.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
-      <EnvironmentVariables>
-         <EnvironmentVariable
-            key = "OS_ACTIVITY_MODE"
-            value = "disable"
-            isEnabled = "NO">
-         </EnvironmentVariable>
-      </EnvironmentVariables>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
@@ -85,7 +79,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "AF7C7A182A1A304800545B8B"
+            BlueprintIdentifier = "AF33F06A2CFAF53F00767656"
             BuildableName = "App Library.app"
             BlueprintName = "App Library"
             ReferencedContainer = "container:AppLibrary.xcodeproj">
@@ -97,7 +91,6 @@
    </AnalyzeAction>
    <ArchiveAction
       buildConfiguration = "Release"
-      customArchiveName = "App Library"
       revealArchiveInOrganizer = "YES">
    </ArchiveAction>
 </Scheme>

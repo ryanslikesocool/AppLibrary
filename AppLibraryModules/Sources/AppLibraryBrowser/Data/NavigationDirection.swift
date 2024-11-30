@@ -7,6 +7,10 @@ enum NavigationDirection: UInt8 {
 	case up
 }
 
+// MARK: - Equatable
+
+extension NavigationDirection: Equatable { }
+
 // MARK: - Hashable
 
 extension NavigationDirection: Hashable { }
@@ -14,7 +18,7 @@ extension NavigationDirection: Hashable { }
 // MARK: - Identifiable
 
 extension NavigationDirection: Identifiable {
-	var id: RawValue { rawValue }
+	public var id: RawValue { rawValue }
 }
 
 // MARK: - CaseIterable
@@ -53,7 +57,11 @@ extension NavigationDirection {
 		}
 	}
 
-	func getEntry<S: BidirectionalCollection>(ofType: S.Element.Type = S.Element.self) -> KeyPath<S, S.Element?> {
+	func getEntry<S>(
+		ofType: S.Element.Type = S.Element.self
+	) -> KeyPath<S, S.Element?> where
+		S: BidirectionalCollection
+	{
 		switch self {
 			case .left: \.last
 			case .right: \.first
@@ -62,17 +70,10 @@ extension NavigationDirection {
 		}
 	}
 
-	var isHorizontal: Bool {
+	var axis: NavigationAxis {
 		switch self {
-			case .left, .right: true
-			case .down, .up: false
-		}
-	}
-
-	var isVertical: Bool {
-		switch self {
-			case .left, .right: false
-			case .down, .up: true
+			case .left, .right: .horizontal
+			case .down, .up: .vertical
 		}
 	}
 }

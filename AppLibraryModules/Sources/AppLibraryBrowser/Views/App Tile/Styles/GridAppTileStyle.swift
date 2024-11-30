@@ -1,7 +1,9 @@
 import SwiftUI
 
 struct GridAppTileStyle: AppTileStyle {
-	func makeBody(configuration: Configuration) -> some View {
+	public init() { }
+
+	public func makeBody(configuration: Configuration) -> some View {
 		VStack(alignment: .center, spacing: 4) {
 			configuration.icon
 				.frame(height: 48)
@@ -15,6 +17,12 @@ struct GridAppTileStyle: AppTileStyle {
 	}
 }
 
-extension AppTileStyle where Self == GridAppTileStyle {
-	static var grid: Self { Self() }
+// MARK: - Convenience
+
+extension AppTileStyle where
+	Self == GridAppTileStyle
+{
+	static var grid: Self {
+		Self()
+	}
 }

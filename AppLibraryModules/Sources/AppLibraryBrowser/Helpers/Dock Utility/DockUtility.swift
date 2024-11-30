@@ -21,27 +21,38 @@ public enum DockUtility {
 			return
 		}
 
-		let alert = NSAlert()
 
-		alert.messageText = "Accessibility Permission Requested"
-		alert.informativeText = """
-		\(AppLibraryInformation.appName) uses accessibility features to locate the dock icon.
-		\(AppLibraryInformation.appName) will continue to function if access is denied.
-		"""
-		alert.addButton(withTitle: "Cancel")
-		alert.addButton(withTitle: "Continue")
+		let alert = createAlert()
 
 		Logger.module.debug("Presenting accessibility permission alert.")
 
-		switch alert.runModal() {
-			case .alertFirstButtonReturn:
-				Logger.module.debug("Accessibility permission was denied.")
-			case .alertSecondButtonReturn:
-				let options = [kAXTrustedCheckOptionPrompt.takeRetainedValue(): true]
-				_ = AXIsProcessTrustedWithOptions(options as CFDictionary)
-				Logger.module.debug("Accessibility permission was granted.")
-			case let otherOption:
-				Logger.module.error("Unsupported alert button '\(String(describing: otherOption))'.")
+		presentAlert()
+
+		func createAlert() -> NSAlert {
+			let alert = NSAlert()
+
+			alert.messageText = "Accessibility Permission Requested"
+			alert.informativeText = """
+			\(NSApplication.shared.appName) uses accessibility features to locate the dock icon.
+			This is not required for basic app functionality.
+			"""
+			alert.addButton(withTitle: "Cancel")
+			alert.addButton(withTitle: "Continue")
+
+			return alert
+		}
+
+		func presentAlert() {
+			switch alert.runModal() {
+				case .alertFirstButtonReturn:
+					Logger.module.debug("Accessibility permission was denied.")
+				case .alertSecondButtonReturn:
+					let options = [kAXTrustedCheckOptionPrompt.takeRetainedValue(): true]
+					_ = AXIsProcessTrustedWithOptions(options as CFDictionary)
+					Logger.module.debug("Accessibility permission was granted.")
+				case let otherOption:
+					Logger.module.error("Unsupported alert button '\(String(describing: otherOption))'.")
+			}
 		}
 	}
 }

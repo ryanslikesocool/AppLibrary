@@ -46,7 +46,7 @@ final class BrowserWindow: NSWindow {
 				backgroundView.layer?.masksToBounds = true
 				backgroundView.layer?.backgroundColor = .clear
 				backgroundView.layer?.cornerCurve = .continuous
-				backgroundView.layer?.cornerRadius = Self.cornerRadius
+				backgroundView.layer?.cornerRadius = BrowserWindowShape.cornerRadius
 				backgroundView.layer?.borderColor = NSColor.separatorColor.cgColor
 				backgroundView.layer?.borderWidth = 1
 
@@ -64,10 +64,4 @@ final class BrowserWindow: NSWindow {
 			frameView?.addSubview(childContentView!)
 		}
 	}
-}
-
-// MARK: - Constants
-
-extension BrowserWindow {
-	static let cornerRadius: CGFloat = 16
 }

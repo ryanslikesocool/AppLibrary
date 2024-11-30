@@ -1,7 +1,9 @@
 import SwiftUI
 
 struct ListAppTileStyle: AppTileStyle {
-	func makeBody(configuration: Configuration) -> some View {
+	public init() { }
+
+	public func makeBody(configuration: Configuration) -> some View {
 		HStack {
 			configuration.icon
 				.frame(height: 56)
@@ -15,6 +17,12 @@ struct ListAppTileStyle: AppTileStyle {
 	}
 }
 
-extension AppTileStyle where Self == ListAppTileStyle {
-	static var list: Self { Self() }
+// MARK: - Convenience
+
+extension AppTileStyle where
+	Self == ListAppTileStyle
+{
+	static var list: Self {
+		Self()
+	}
 }

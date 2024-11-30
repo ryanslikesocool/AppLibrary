@@ -8,11 +8,11 @@ struct AppTile: View {
 
 	private let application: Application
 
-	init(for application: Application) {
+	public init(for application: Application) {
 		self.application = application
 	}
 
-	var body: some View {
+	public var body: some View {
 		Button(action: application.open) {
 			libraryLayout.appTileStyle.makeBody(
 				configuration: AnyAppTileStyle.Configuration(
@@ -23,19 +23,23 @@ struct AppTile: View {
 		}
 		.focusable()
 		.focusEffectDisabled()
-		.contextMenu { ContextMenu(for: application) }
+		.contextMenu {
+			ContextMenu(for: application)
+		}
 		.id(application.id)
 	}
 }
 
+// MARK: - Supporting Views
+
 private extension AppTile {
-	func label() -> some View {
+	var label: some View {
 		Text(application.displayName)
 			.truncationMode(.tail)
 			.help(application.displayName)
 	}
 
-	func icon() -> some View {
+	var icon: some View {
 		Image(nsImage: application.getIcon())
 			.resizable()
 			.aspectRatio(contentMode: .fit)

@@ -12,5 +12,5 @@ public struct SettingsWindow: Scene {
 }
 
 public extension SettingsWindow {
-	static let windowIdentifier: NSUserInterfaceItemIdentifier = NSUserInterfaceItemIdentifier("\(AppLibraryInformation.bundleIdentifier!).Settings")
+	static let windowIdentifier: NSUserInterfaceItemIdentifier = NSUserInterfaceItemIdentifier(WindowIdentifier.settings)
 }

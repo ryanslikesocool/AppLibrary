@@ -6,6 +6,10 @@ enum FocusElement {
 	case group(ApplicationGroup)
 }
 
+// MARK: - Equatable
+
+extension FocusElement: Equatable { }
+
 // MARK: - Hashable
 
 extension FocusElement: Hashable { }

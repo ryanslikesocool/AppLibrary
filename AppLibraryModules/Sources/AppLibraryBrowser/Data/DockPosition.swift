@@ -4,6 +4,10 @@ public enum DockPosition: UInt8 {
 	case right
 }
 
+// MARK: - Equatable
+
+extension DockPosition: Equatable { }
+
 // MARK: - Hashable
 
 extension DockPosition: Hashable { }

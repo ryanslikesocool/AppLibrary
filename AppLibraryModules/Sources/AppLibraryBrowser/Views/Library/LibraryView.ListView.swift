@@ -3,7 +3,9 @@ import SwiftUI
 
 extension LibraryView {
 	struct ListView: View {
-		var body: some View {
+		public init() { }
+
+		public var body: some View {
 			LazyVStack {
 				AppIterator()
 			}

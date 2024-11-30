@@ -25,8 +25,8 @@ extension LibraryLayout {
 
 	var appTileStyle: AnyAppTileStyle {
 		switch self {
-			case .list: AnyAppTileStyle(style: .list)
-			case .grid: AnyAppTileStyle(style: .grid)
+			case .list: AnyAppTileStyle(.list)
+			case .grid: AnyAppTileStyle(.grid)
 		}
 	}
 }

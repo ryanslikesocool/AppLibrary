@@ -12,6 +12,7 @@ final class BrowserModel: ObservableObject {
 
 	var isSearchDisplayed: Bool { state == .complete }
 
+	@MainActor
 	var filteredApps: [Application] {
 		var filtered: [Application]
 		if searchQuery.isEmpty {
@@ -27,11 +28,15 @@ final class BrowserModel: ObservableObject {
 
 	private(set) lazy var keyboardObserver: KeyboardObserver = KeyboardObserver(model: self)
 
+	@MainActor
 	private lazy var refreshAppsSubscriber: AnyCancellable? = Event.refreshApps
 		.sink(receiveValue: refreshApps)
+
+	@MainActor
 	private lazy var activateSearchSubscriber: AnyCancellable? = Event.activateSearch
 		.sink(receiveValue: activateSearch)
 
+	@MainActor
 	init() {
 		apps = []
 		searchQuery = ""
@@ -48,6 +53,7 @@ private extension BrowserModel {
 		application.displayName.localizedStandardContains(searchQuery)
 	}
 
+	@MainActor
 	static func hiddenAppsFilterBrowser(application: Application) -> Bool {
 		if let hideFlags = AppsSettings.shared.applicationHideFlags[application.id] {
 			!hideFlags.contains(.hiddenInBrowser)
@@ -56,6 +62,7 @@ private extension BrowserModel {
 		}
 	}
 
+	@MainActor
 	static func hiddenAppsFilterSearch(application: Application) -> Bool {
 		if let hideFlags = AppsSettings.shared.applicationHideFlags[application.id] {
 			!hideFlags.contains(.hiddenInSearch)
@@ -66,5 +73,19 @@ private extension BrowserModel {
 
 	func activateSearch() {
 		focus = .search
+	}
+}
+
+extension BrowserModel {
+	func filteredAppsChanged(_ newValue: borrowing [Application]) {
+		guard searchQuery.isEmpty else {
+			return
+		}
+
+		state = if newValue.isEmpty {
+			.failed(reason: .allHidden)
+		} else {
+			.complete
+		}
 	}
 }

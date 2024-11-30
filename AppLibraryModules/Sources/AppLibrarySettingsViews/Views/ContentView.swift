@@ -17,6 +17,8 @@ struct ContentView: View {
 		.fixedSize()
 		.formStyle(.grouped)
 
-		.onReceive(Event.goToSettingsTab) { tab in tabSelection = tab }
+		.onReceive(Event.goToSettingsTab) { tab in
+			tabSelection = tab
+		}
 	}
 }

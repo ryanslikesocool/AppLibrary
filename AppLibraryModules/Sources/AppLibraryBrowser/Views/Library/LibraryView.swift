@@ -6,7 +6,9 @@ struct LibraryView: View {
 	@Environment(\.libraryLayout) private var libraryLayout
 	@EnvironmentObject private var browserModel: BrowserModel
 
-	var body: some View {
+	public init() { }
+
+	public var body: some View {
 		ScrollViewReader { proxy in
 			ScrollView(.vertical) {
 				scrollContent
@@ -30,7 +32,8 @@ struct LibraryView: View {
 // MARK: - Supporting Views
 
 private extension LibraryView {
-	@ViewBuilder var scrollContent: some View {
+	@ViewBuilder
+	var scrollContent: some View {
 		if browserModel.searchQuery.isEmpty {
 			switch libraryLayout {
 				case .list: ListView()

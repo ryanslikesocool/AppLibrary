@@ -6,11 +6,15 @@ extension LibraryView {
 		@EnvironmentObject private var browserModel: BrowserModel
 		@Environment(\.libraryLayout) private var libraryLayout
 
-		private var apps: [Application] { browserModel.filteredApps }
-
 		@FocusState private var focusedApp: FocusElement?
 
-		var body: some View {
+		private var apps: [Application] {
+			browserModel.filteredApps
+		}
+
+		public init() { }
+
+		public var body: some View {
 			ForEach(apps) { app in
 				AppTile(for: app)
 					.focused($focusedApp, equals: .app(app.id))

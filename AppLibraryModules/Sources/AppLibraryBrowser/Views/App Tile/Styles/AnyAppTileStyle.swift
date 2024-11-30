@@ -1,11 +1,17 @@
 import SwiftUI
 
 struct AnyAppTileStyle: AppTileStyle {
-	private var _makeBody: (Configuration) -> AnyView
+	private let _makeBody: @MainActor (Configuration) -> AnyView
 
-	init(style: some AppTileStyle) {
-		_makeBody = { configuration in
-			AnyView(style.makeBody(configuration: configuration))
+	public init<S>(_ style: S) where
+		S: AppTileStyle
+	{
+		_makeBody = if let style = style as? Self {
+			style._makeBody
+		} else {
+			{ @MainActor configuration in
+				AnyView(style.makeBody(configuration: configuration))
+			}
 		}
 	}
 

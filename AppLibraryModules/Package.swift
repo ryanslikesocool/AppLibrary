@@ -1,4 +1,4 @@
-// swift-tools-version: 5.10
+// swift-tools-version: 6.0
 
 import PackageDescription
 
@@ -17,14 +17,18 @@ let package = Package(
 	dependencies: [
 		.package(url: "https://github.com/sindresorhus/ExceptionCatcher.git", from: "2.0.1"),
 		.package(url: "https://github.com/orchetect/SettingsAccess.git", from: "2.0.0"),
+
+		.package(path: "../AppLibraryCommonModules"),
+		.package(path: "../AppLibraryStorageModules"),
+		.package(path: "../AppLibraryAboutWindowModules"),
 	],
 	targets: [
 		.target(
 			name: "AppLibrary",
 			dependencies: [
 				"AppLibraryBrowser",
-				"AppLibraryAbout",
 				"AppLibrarySettingsViews",
+				.product(name: "AppLibraryAboutWindow", package: "AppLibraryAboutWindowModules"),
 			]
 		),
 
@@ -35,13 +39,9 @@ let package = Package(
 				"SettingsAccess",
 
 				"AppLibrarySettingsViews",
-			]
-		),
-
-		.target(
-			name: "AppLibraryAbout",
-			dependencies: [
-				"AppLibraryCommonViews",
+			],
+			swiftSettings: [
+				.swiftLanguageMode(.v5),
 			]
 		),
 
@@ -57,17 +57,8 @@ let package = Package(
 		.target(
 			name: "AppLibraryCommonViews",
 			dependencies: [
-				"AppLibraryStorage",
+				.product(name: "AppLibraryStorage", package: "AppLibraryStorageModules"),
 			]
 		),
-
-		.target(
-			name: "AppLibraryStorage",
-			dependencies: [
-				"AppLibraryCommon",
-			]
-		),
-
-		.target(name: "AppLibraryCommon"),
 	]
 )

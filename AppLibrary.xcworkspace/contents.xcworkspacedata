@@ -2,15 +2,24 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:AppLibraryModules">
+      location = "group:README.md">
+   </FileRef>
+   <FileRef
+      location = "group:LICENSE.md">
    </FileRef>
    <FileRef
       location = "group:AppLibrary.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:README.md">
+      location = "group:AppLibraryCommonModules">
    </FileRef>
    <FileRef
-      location = "group:LICENSE.md">
+      location = "group:AppLibraryStorageModules">
+   </FileRef>
+   <FileRef
+      location = "group:AppLibraryAboutWindowModules">
+   </FileRef>
+   <FileRef
+      location = "group:AppLibraryModules">
    </FileRef>
 </Workspace>

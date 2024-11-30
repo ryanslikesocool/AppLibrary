@@ -4,11 +4,12 @@ import AppLibraryCommon
 import AppLibraryStorage
 import OSLog
 
+@MainActor
 final class AppDelegate: NSObject, NSApplicationDelegate {
 	private(set) lazy var browserWindowController: BrowserWindowController = BrowserWindowController()
 
 	func applicationDidFinishLaunching(_ notification: Notification) {
-		Logger.module.debug("Did finish launching \(AppLibraryInformation.appName).app")
+		Logger.module.debug("Did finish launching \(NSApplication.shared.appName).app")
 
 		_ = GeneralSettings.shared
 		_ = AppsSettings.shared
@@ -39,11 +40,13 @@ private extension AppDelegate {
 		}
 	}
 
-	@objc func activateSearchAction() {
+	@objc
+	func activateSearchAction() {
 		Event.activateSearch.send()
 	}
 
-	@objc func refreshLibraryAction() {
+	@objc
+	func refreshLibraryAction() {
 		Event.refreshApps.send()
 	}
 }

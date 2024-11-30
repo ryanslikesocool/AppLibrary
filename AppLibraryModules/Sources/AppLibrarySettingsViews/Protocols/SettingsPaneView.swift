@@ -2,11 +2,10 @@ import AppLibraryStorage
 import SwiftUI
 
 protocol SettingsPaneView: View {
-	associatedtype Model: SettingsFile
 	associatedtype Content: View
 	associatedtype Label: View
 
-	var model: Model { get set }
+	static var category: SettingsCategory { get }
 
 	@ViewBuilder func makeLabel() -> Label
 
@@ -18,8 +17,7 @@ protocol SettingsPaneView: View {
 extension SettingsPaneView {
 	var body: some View {
 		Form(content: makeContent)
-			.onChange(of: model, model.save)
 			.tabItem(makeLabel)
-			.tag(Model.category)
+			.tag(Self.category)
 	}
 }

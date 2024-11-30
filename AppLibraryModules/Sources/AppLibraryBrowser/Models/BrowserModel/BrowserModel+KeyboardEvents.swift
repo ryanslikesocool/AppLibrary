@@ -9,6 +9,7 @@ extension BrowserModel {
 		focus = .search
 	}
 
+	@MainActor
 	func onRefreshShortcut() {
 		Logger.keyboardEvents.debug("Refresh Shortcut: Reloading apps.")
 		refreshApps()
@@ -20,6 +21,7 @@ extension BrowserModel {
 		NSApplication.shared.hide(nil)
 	}
 
+	@MainActor
 	func onReturnKey() -> Bool {
 		switch focus {
 			case .search:
@@ -50,6 +52,7 @@ extension BrowserModel {
 		return false
 	}
 
+	@MainActor
 	func onArrowKey(_ direction: NavigationDirection) {
 		guard
 			case let .app(appID) = focus,
@@ -75,6 +78,7 @@ extension BrowserModel {
 		}
 	}
 
+	@MainActor
 	func onAlphanumericKey(_ value: String?) -> Bool {
 		guard
 			focus != .search,

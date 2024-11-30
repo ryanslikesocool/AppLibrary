@@ -4,5 +4,7 @@ protocol AppTileStyle {
 	associatedtype Body: View
 	typealias Configuration = AppTileStyleConfiguration
 
-	@ViewBuilder func makeBody(configuration: Self.Configuration) -> Self.Body
+	@ViewBuilder
+	@MainActor
+	func makeBody(configuration: Self.Configuration) -> Self.Body
 }

@@ -3,6 +3,7 @@ import AppLibraryStorage
 import OSLog
 
 extension BrowserModel {
+	@MainActor
 	func refreshApps() {
 		guard state != .loading else {
 			return
@@ -35,6 +36,7 @@ extension BrowserModel {
 }
 
 private extension BrowserModel {
+	@Sendable
 	func finishMetadataQuery(notification: Notification) {
 		guard let query = notification.object as? NSMetadataQuery else {
 			preconditionFailure("Received \(notification.name) from an invalid object.")

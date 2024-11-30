@@ -57,7 +57,7 @@ extension BrowserWindowController {
 	static let windowPadding: CGFloat = 8
 
 	static let windowTitle: String = "App Library"
-	static let windowIdentifier: NSUserInterfaceItemIdentifier = NSUserInterfaceItemIdentifier("\(AppLibraryInformation.bundleIdentifier!).Browser")
+	static let windowIdentifier: NSUserInterfaceItemIdentifier = NSUserInterfaceItemIdentifier(WindowIdentifier.appLibrary)
 }
 
 // MARK: -

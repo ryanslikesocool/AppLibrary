@@ -5,20 +5,20 @@ import SettingsAccess
 import SwiftUI
 
 struct ContentView: View {
-	@Setting(layout: \.layout) private var layout
+	@Storage(layout: \.layout) private var layout
 	@ObservedObject private var browserModel: BrowserModel
 
-	init(browserModel: BrowserModel) {
+	public init(browserModel: BrowserModel) {
 		self.browserModel = browserModel
 	}
 
-	var body: some View {
+	public var body: some View {
 		Group {
 			switch browserModel.state {
-				case .some(.loading): queryLoadingView
-				case .some(.complete): LibraryView()
+				case .loading?: queryLoadingView
+				case .complete?: LibraryView()
 				case let .some(.failed(reason)): ErrorView(reason: reason)
-				case .none: EmptyView()
+				case nil: EmptyView()
 			}
 		}
 
@@ -34,13 +34,7 @@ struct ContentView: View {
 		.openSettingsAccess()
 
 		.onChange(of: browserModel.filteredApps) { _, newValue in
-			if browserModel.searchQuery.isEmpty {
-				browserModel.state = if newValue.isEmpty {
-					.failed(reason: .allHidden)
-				} else {
-					.complete
-				}
-			}
+			browserModel.filteredAppsChanged(newValue)
 		}
 
 		.environmentObject(browserModel)
@@ -50,8 +44,8 @@ struct ContentView: View {
 // MARK: - Supporting Views
 
 extension ContentView {
-	var containerShape: RoundedRectangle {
-		.rect(cornerRadius: BrowserWindow.cornerRadius)
+	var containerShape: some InsettableShape {
+		BrowserWindowShape()
 	}
 
 	var queryLoadingView: some View {

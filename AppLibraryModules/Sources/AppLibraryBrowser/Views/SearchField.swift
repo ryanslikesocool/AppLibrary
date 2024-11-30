@@ -9,7 +9,9 @@ struct SearchField: View {
 	private var shadowB: Shadow { isFocused ? Self.focusedShadowB : Self.unfocusedShadowB }
 	private var stroke: Stroke { /* isFocused ? Self.focusedStroke : Self.unfocusedStroke */ Self.unfocusedStroke }
 
-	var body: some View {
+	public init() { }
+
+	public var body: some View {
 		TextField(text: $browserModel.searchQuery, prompt: Text("􀊫 App Library"), label: EmptyView.init)
 //			.onSubmit(of: .text) {
 //				browserModel.filteredApps.first?.open()
@@ -51,6 +53,8 @@ struct SearchField: View {
 
 private extension SearchField {
 	var containerShape: RoundedRectangle {
+		// TODO: replace with Self.shape
+		// hopefully?
 		RoundedRectangle(cornerRadius: 10)
 	}
 }
@@ -69,5 +73,7 @@ private extension SearchField {
 
 	static let innerPadding: CGFloat = 8
 	static let outerPadding: CGFloat = 8
-	static let cornerRadius: CGFloat = BrowserWindow.cornerRadius - outerPadding
+	static let cornerRadius: CGFloat = BrowserWindowShape.cornerRadius - outerPadding
+
+	static let shape: BrowserWindowShape = BrowserWindowShape().inset(by: outerPadding)
 }
