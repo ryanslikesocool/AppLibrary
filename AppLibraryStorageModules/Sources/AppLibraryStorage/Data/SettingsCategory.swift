@@ -18,3 +18,7 @@ extension SettingsCategory: Hashable { }
 extension SettingsCategory: Identifiable {
 	public var id: RawValue { rawValue }
 }
+
+// MARK: - CaseIterable
+
+extension SettingsCategory: CaseIterable { }

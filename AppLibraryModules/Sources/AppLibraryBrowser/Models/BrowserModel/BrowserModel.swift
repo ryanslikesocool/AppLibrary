@@ -83,7 +83,7 @@ extension BrowserModel {
 		}
 
 		state = if newValue.isEmpty {
-			.failed(reason: .allHidden)
+			.failed(reason: .allAppsHidden)
 		} else {
 			.complete
 		}

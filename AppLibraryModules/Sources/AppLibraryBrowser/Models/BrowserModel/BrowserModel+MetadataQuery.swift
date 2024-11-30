@@ -69,7 +69,9 @@ private extension BrowserModel {
 			}
 			sourceApps[index] = app
 		}
-		filteredApps.sort(by: { $0.displayName.localizedStandardCompare($1.displayName) == .orderedAscending })
+		filteredApps.sort(by: { lhs, rhs in
+			lhs.displayName.localizedStandardCompare(rhs.displayName) == .orderedAscending
+		})
 
 		DispatchQueue.main.async { [weak self] in
 			guard let self else {
@@ -100,5 +102,5 @@ extension BrowserModel {
 	private static var searchPredicate: NSPredicate { NSPredicate(format: "\(contentTypeKey) == '\(desiredContentType)'") }
 
 	static var contentTypeKey: String { NSMetadataItemContentTypeKey }
-	static var desiredContentType: String { "com.apple.application-bundle" }
+	static let desiredContentType: String = "com.apple.application-bundle"
 }

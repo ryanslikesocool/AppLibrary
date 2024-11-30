@@ -20,6 +20,9 @@
       location = "group:AppLibraryAboutWindowModules">
    </FileRef>
    <FileRef
+      location = "group:AppLibrarySettingsWindowModules">
+   </FileRef>
+   <FileRef
       location = "group:AppLibraryModules">
    </FileRef>
 </Workspace>

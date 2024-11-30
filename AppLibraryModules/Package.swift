@@ -18,17 +18,21 @@ let package = Package(
 		.package(url: "https://github.com/sindresorhus/ExceptionCatcher.git", from: "2.0.1"),
 		.package(url: "https://github.com/orchetect/SettingsAccess.git", from: "2.0.0"),
 
+		.package(url: "https://github.com/ryanslikesocool/LocalizationTable.git", branch: "main"),
+
 		.package(path: "../AppLibraryCommonModules"),
 		.package(path: "../AppLibraryStorageModules"),
 		.package(path: "../AppLibraryAboutWindowModules"),
+		.package(path: "../AppLibrarySettingsWindowModules"),
 	],
 	targets: [
 		.target(
 			name: "AppLibrary",
 			dependencies: [
-				"AppLibraryBrowser",
-				"AppLibrarySettingsViews",
 				.product(name: "AppLibraryAboutWindow", package: "AppLibraryAboutWindowModules"),
+				.product(name: "AppLibrarySettingsWindow", package: "AppLibrarySettingsWindowModules"),
+
+				"AppLibraryBrowser",
 			]
 		),
 
@@ -38,26 +42,13 @@ let package = Package(
 				"ExceptionCatcher",
 				"SettingsAccess",
 
-				"AppLibrarySettingsViews",
+				"LocalizationTable",
+
+				.product(name: "AppLibraryCommonViews", package: "AppLibraryCommonModules"),
+				.product(name: "AppLibrarySettingsWindow", package: "AppLibrarySettingsWindowModules"),
 			],
 			swiftSettings: [
 				.swiftLanguageMode(.v5),
-			]
-		),
-
-		.target(
-			name: "AppLibrarySettingsViews",
-			dependencies: [
-				"AppLibraryCommonViews",
-			]
-		),
-
-		// MARK: -
-
-		.target(
-			name: "AppLibraryCommonViews",
-			dependencies: [
-				.product(name: "AppLibraryStorage", package: "AppLibraryStorageModules"),
 			]
 		),
 	]

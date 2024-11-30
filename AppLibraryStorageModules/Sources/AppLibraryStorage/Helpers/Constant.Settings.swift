@@ -11,7 +11,9 @@ public extension Constant {
 			"/System/Library/CoreServices/Applications",
 			"/Applications",
 			"~/Applications",
-		].map { filePath in
+		]
+		.sorted(using: .localizedStandard)
+		.map { filePath in
 			URL(filePath: filePath, directoryHint: .isDirectory)
 		}
 

@@ -43,6 +43,10 @@ public struct Application {
 	}
 }
 
+// MARK: - Equatable
+
+extension Application: Equatable { }
+
 // MARK: - Hashable
 
 extension Application: Hashable { }

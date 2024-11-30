@@ -1,4 +1,4 @@
-import AppLibraryCore
+import AppLibraryCommon
 import OSLog
 
 extension Logger {

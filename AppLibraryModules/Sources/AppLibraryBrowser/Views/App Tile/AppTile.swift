@@ -34,7 +34,7 @@ struct AppTile: View {
 
 private extension AppTile {
 	var label: some View {
-		Text(application.displayName)
+		Text(verbatim: application.displayName)
 			.truncationMode(.tail)
 			.help(application.displayName)
 	}

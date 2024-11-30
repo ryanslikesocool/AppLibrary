@@ -1,11 +1,14 @@
 import AppLibraryCommon
 import Cocoa
+import LocalizationTable
 import OSLog
 
 /// from `https://github.com/neilsardesai/Mouse-Finder`
 
 public enum DockUtility {
-	public static var accessGranted: Bool { AXIsProcessTrusted() }
+	public static var accessGranted: Bool {
+		AXIsProcessTrusted()
+	}
 
 	static func readPrivileges(prompt: Bool) -> Bool {
 		let options: NSDictionary = [kAXTrustedCheckOptionPrompt.takeRetainedValue() as NSString: prompt]
@@ -14,30 +17,28 @@ public enum DockUtility {
 	}
 
 	public static func requestAccess() {
-		Logger.module.debug("Requesting accessibility permission...")
+		Logger.dockUtility.debug("Requesting accessibility permission...")
 
 		guard !accessGranted else {
-			Logger.module.debug("Accessibility permission was already granted!")
+			Logger.dockUtility.debug("Accessibility permission was already granted!")
 			return
 		}
 
-
 		let alert = createAlert()
 
-		Logger.module.debug("Presenting accessibility permission alert.")
+		Logger.dockUtility.debug("Presenting accessibility permission alert.")
 
 		presentAlert()
 
 		func createAlert() -> NSAlert {
 			let alert = NSAlert()
 
-			alert.messageText = "Accessibility Permission Requested"
-			alert.informativeText = """
-			\(NSApplication.shared.appName) uses accessibility features to locate the dock icon.
-			This is not required for basic app functionality.
-			"""
-			alert.addButton(withTitle: "Cancel")
-			alert.addButton(withTitle: "Continue")
+			let localizationTable = LocalizationTableResource("AccessibilityRequest")
+
+			alert.messageText = String(localized: "TITLE", table: localizationTable)
+			alert.informativeText = String(localized: "DESCRIPTION", table: localizationTable)
+			alert.addButton(withTitle: String(localized: "ACTION.DENY", table: localizationTable))
+			alert.addButton(withTitle: String(localized: "ACTION.ALLOW", table: localizationTable))
 
 			return alert
 		}
@@ -45,13 +46,13 @@ public enum DockUtility {
 		func presentAlert() {
 			switch alert.runModal() {
 				case .alertFirstButtonReturn:
-					Logger.module.debug("Accessibility permission was denied.")
+					Logger.dockUtility.debug("Accessibility permission was denied.")
 				case .alertSecondButtonReturn:
 					let options = [kAXTrustedCheckOptionPrompt.takeRetainedValue(): true]
 					_ = AXIsProcessTrustedWithOptions(options as CFDictionary)
-					Logger.module.debug("Accessibility permission was granted.")
+					Logger.dockUtility.debug("Accessibility permission was granted.")
 				case let otherOption:
-					Logger.module.error("Unsupported alert button '\(String(describing: otherOption))'.")
+					Logger.dockUtility.error("Unsupported alert button '\(String(describing: otherOption))'.")
 			}
 		}
 	}

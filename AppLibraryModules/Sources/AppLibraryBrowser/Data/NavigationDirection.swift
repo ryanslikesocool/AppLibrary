@@ -38,7 +38,10 @@ extension NavigationDirection {
 	}
 
 	init?(keyCode: UInt16) {
-		guard let value = Self.allCases.first(where: { $0.keyCode == keyCode }) else {
+		guard let value = Self
+			.allCases
+			.first(where: { $0.keyCode == keyCode })
+		else {
 			return nil
 		}
 		self = value

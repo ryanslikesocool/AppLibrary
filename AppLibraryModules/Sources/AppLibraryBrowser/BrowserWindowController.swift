@@ -1,7 +1,7 @@
 import AppKit
-import SwiftUI
 import AppLibraryCommon
 import OSLog
+import SwiftUI
 
 public final class BrowserWindowController: NSWindowController, ObservableObject {
 	private let browserModel: BrowserModel
@@ -91,40 +91,43 @@ private extension BrowserWindowController {
 			window.setFrameOrigin(windowOrigin)
 		} else {
 			window.center()
-			Logger.module.debug("Failed to get dock icon location for window positioning.  The window was centered instead.")
+			Logger.module.debug("""
+			Failed to get dock icon location for window positioning.
+			The window will be centered instead.
+			""")
 		}
 	}
 
 	func calculateWindowOrigin() -> CGPoint? {
-		if
+		guard
 			let iconRect = DockUtility.getIconRect(),
 			let dockPosition = DockUtility.estimateDockPosition(),
 			let screen = NSScreen.main
-		{
-			var frameOrigin = switch dockPosition {
-				case .left:
-					CGPoint(
-						x: iconRect.origin.x + iconRect.width + Self.windowPadding,
-						y: iconRect.origin.y + (iconRect.height + Self.windowSize.height) * 0.5
-					)
-				case .bottom:
-					CGPoint(
-						x: iconRect.origin.x + (iconRect.width - Self.windowSize.width) * 0.5,
-						y: iconRect.origin.y - Self.windowPadding
-					)
-				case .right:
-					// The gap between the dock and window is a little wider due to the accessibility API returning a rect with the origin off a little bit.
-					CGPoint(
-						x: iconRect.origin.x - (Self.windowSize.width + Self.windowPadding),
-						y: iconRect.origin.y + (iconRect.height + Self.windowSize.height) * 0.5
-					)
-			}
-
-			frameOrigin.y = screen.frame.height - frameOrigin.y // invert Y
-
-			return frameOrigin
-		} else {
+		else {
 			return nil
 		}
+
+		var frameOrigin = switch dockPosition {
+			case .left:
+				CGPoint(
+					x: iconRect.origin.x + iconRect.width + Self.windowPadding,
+					y: iconRect.origin.y + (iconRect.height + Self.windowSize.height) * 0.5
+				)
+			case .bottom:
+				CGPoint(
+					x: iconRect.origin.x + (iconRect.width - Self.windowSize.width) * 0.5,
+					y: iconRect.origin.y - Self.windowPadding
+				)
+			case .right:
+				// The gap between the dock and window is a little wider due to the accessibility API returning a rect with the origin off a little bit.
+				CGPoint(
+					x: iconRect.origin.x - (Self.windowSize.width + Self.windowPadding),
+					y: iconRect.origin.y + (iconRect.height + Self.windowSize.height) * 0.5
+				)
+		}
+
+		frameOrigin.y = screen.frame.height - frameOrigin.y // invert Y
+
+		return frameOrigin
 	}
 }

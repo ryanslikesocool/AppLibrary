@@ -10,17 +10,30 @@ let package = Package(
 	],
 	products: [
 		.library(
+			name: "AppLibraryCommonViews",
+			targets: ["AppLibraryCommonViews"]
+		),
+		.library(
 			name: "AppLibraryCommon",
 			targets: ["AppLibraryCommon"]
 		),
-		.library(
-			name: "AppLibraryCore",
-			targets: ["AppLibraryCore"]
-		),
+	],
+	dependencies: [
+		.package(url: "https://github.com/ryanslikesocool/LocalizationTable.git", branch: "main"),
 	],
 	targets: [
-		.target(name: "AppLibraryCommon"),
+		.target(
+			name: "AppLibraryCommonViews",
+			dependencies: [
+				"AppLibraryCommon",
+			]
+		),
 
-		.target(name: "AppLibraryCore"),
+		.target(
+			name: "AppLibraryCommon",
+			dependencies: [
+				"LocalizationTable",
+			]
+		),
 	]
 )

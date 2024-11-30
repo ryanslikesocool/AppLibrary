@@ -20,3 +20,7 @@ extension ApplicationHideFlag: Identifiable {
 // MARK: - Codable
 
 extension ApplicationHideFlag: Codable { }
+
+// MARK: - CaseIterable
+
+extension ApplicationHideFlag: CaseIterable { }

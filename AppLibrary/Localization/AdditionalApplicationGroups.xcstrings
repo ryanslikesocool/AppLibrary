@@ -1,0 +1,72 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "ITEM.RECENTLY_ADDED.DESCRIPTION" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add a group with apps that have been added in the last week."
+          }
+        }
+      }
+    },
+    "ITEM.RECENTLY_ADDED.LABEL" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recently Added"
+          }
+        }
+      }
+    },
+    "ITEM.RECENTLY_UPDATED.DESCRIPTION" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add a group with apps that have been updated in the last week."
+          }
+        }
+      }
+    },
+    "ITEM.RECENTLY_UPDATED.LABEL" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recently Updated"
+          }
+        }
+      }
+    },
+    "SECTION.DESCRIPTION" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add additional groups to the top of the library.\nGrouping is only available in the \"Grid\" layout."
+          }
+        }
+      }
+    },
+    "SECTION.TITLE" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Additional Groups"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

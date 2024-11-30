@@ -1,13 +1,22 @@
 {
-  "originHash" : "ec5efd7c6a8cb35812c3040bc3dff7312bcb367530250f187234a78b4cf318f6",
+  "originHash" : "4379e7fdbb76f2db480c678e35c2bb600c728d3a18dd0326a3b75f6d7b9508e6",
   "pins" : [
     {
       "identity" : "exceptioncatcher",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/sindresorhus/ExceptionCatcher.git",
       "state" : {
-        "revision" : "a7acaf40f8bd67a1f3a05a14de5b6a861ac3d1ac",
-        "version" : "2.0.1"
+        "revision" : "3cd1997e3663078812efca8652af06104b5160bb",
+        "version" : "2.1.0"
+      }
+    },
+    {
+      "identity" : "localizationtable",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ryanslikesocool/LocalizationTable.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "66c04a96654dd365d2e1b4eead61be45982e8c76"
       }
     },
     {
@@ -15,8 +24,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/orchetect/SettingsAccess.git",
       "state" : {
-        "revision" : "f0b57b4c4c0de66b9f4d6c41d39f1d6ede0c9891",
-        "version" : "2.0.0"
+        "revision" : "08e80c35501f273afa2f5d6f737429bbe395ff81",
+        "version" : "2.1.0"
       }
     }
   ],

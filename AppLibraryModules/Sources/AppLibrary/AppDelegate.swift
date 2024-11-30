@@ -9,7 +9,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 	private(set) lazy var browserWindowController: BrowserWindowController = BrowserWindowController()
 
 	func applicationDidFinishLaunching(_ notification: Notification) {
-		Logger.module.debug("Did finish launching \(NSApplication.shared.appName).app")
+		Logger.module.debug("Finished launching \(NSApplication.shared.appName).app")
 
 		_ = GeneralSettings.shared
 		_ = AppsSettings.shared

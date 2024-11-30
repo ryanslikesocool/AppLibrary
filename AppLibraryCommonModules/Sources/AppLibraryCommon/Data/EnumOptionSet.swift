@@ -29,14 +29,6 @@ extension EnumOptionSet: Encodable where RawValue: Encodable { }
 
 extension EnumOptionSet: Decodable where RawValue: Decodable { }
 
-// MARK: - Constants
-
-// public extension EnumBitMask where Enum: CaseIterable {
-//	static var all: Self = Enum.allCases.reduce(into: []) { partialResult, element in
-//		partialResult.insert(Self(element))
-//	}
-// }
-
 // MARK: - Convenience
 
 public extension EnumOptionSet {
@@ -44,5 +36,16 @@ public extension EnumOptionSet {
 		precondition(element.rawValue < Enum.RawValue.bitWidth)
 
 		self.init(rawValue: 1 << element.rawValue)
+	}
+}
+
+// MARK: -
+
+public extension EnumOptionSet where Enum: CaseIterable {
+	var components: [Enum] {
+		Enum.allCases
+			.filter { item in
+				self.contains(Self(item))
+			}
 	}
 }

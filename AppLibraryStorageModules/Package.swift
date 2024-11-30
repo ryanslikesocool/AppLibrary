@@ -15,9 +15,11 @@ let package = Package(
 		.package(path: "../AppLibraryCommonModules"),
 	],
 	targets: [
-		.target(name: "AppLibraryStorage", dependencies: [
-			.product(name: "AppLibraryCommon", package: "AppLibraryCommonModules"),
-			.product(name: "AppLibraryCore", package: "AppLibraryCommonModules"),
-		]),
+		.target(
+			name: "AppLibraryStorage",
+			dependencies: [
+				.product(name: "AppLibraryCommon", package: "AppLibraryCommonModules"),
+			]
+		),
 	]
 )

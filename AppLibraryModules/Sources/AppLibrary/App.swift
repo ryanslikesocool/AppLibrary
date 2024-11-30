@@ -1,7 +1,7 @@
 import AppLibraryAboutWindow
 import AppLibraryBrowser
 import AppLibraryCommon
-import AppLibrarySettingsViews
+import AppLibrarySettingsWindow
 import OSLog
 import SwiftUI
 

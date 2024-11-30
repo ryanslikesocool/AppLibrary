@@ -28,7 +28,7 @@ final class KeyboardObserver {
 		modifierEventMonitor = NSEvent.addLocalMonitorForEvents(matching: .flagsChanged, handler: onModifierEvent)
 //		keyEventMonitor = NSEvent.addLocalMonitorForEvents(matching: .keyDown, handler: onKeyEvent)
 
-		Logger.module.debug("Created event monitor.")
+		Logger.keyboardEvents.debug("Created event monitor.")
 	}
 
 	func destroyEventMonitor() {
@@ -44,7 +44,7 @@ final class KeyboardObserver {
 			self.keyEventMonitor = nil
 		}
 
-		Logger.module.debug("Destroyed event monitor.")
+		Logger.keyboardEvents.debug("Destroyed event monitor.")
 	}
 }
 

@@ -1,3 +1,4 @@
+import LocalizationTable
 import SwiftUI
 
 extension ErrorView {
@@ -20,12 +21,14 @@ extension ErrorView {
 
 private extension BrowserError? {
 	var errorTitle: String {
-		switch self {
-			case .noSearchScopes?: "No Search Scopes"
-			case .noApps?: "No Apps"
-			case .allHidden?: "All Apps Hidden"
+		let localizationTable: LocalizationTableResource = .browserError
+
+		return switch self {
+			case .noSearchScopes?: String(localized: "TITLE.NO_SEARCH_SCOPES", table: localizationTable)
+			case .noApps?: String(localized: "TITLE.NO_APPS", table: localizationTable)
+			case .allAppsHidden?: String(localized: "TITLE.ALL_APPS_HIDDEN", table: localizationTable)
 			case .queryStartFailure?,
-			     nil: "Failed to Load Apps"
+			     nil: String(localized: "TITLE.LOAD_FAILURE", table: localizationTable)
 		}
 	}
 }

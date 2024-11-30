@@ -19,9 +19,9 @@ public extension DefaultableStorageFile {
 			result = try Self(contentsOf: url)
 		} catch {
 			Logger.module.error("""
-			[\(Self.self)]: Read failure
-			- URL: \(url)
-			- \(error)
+			Failed to read \(Self.self).
+			- URL:   \(url)
+			- Error: \(error)
 			""")
 			result = Self()
 		}

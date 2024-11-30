@@ -6,7 +6,11 @@ extension Application {
 		guard let url else {
 			return
 		}
-		NSWorkspace.shared.openApplication(at: url, configuration: Self.openApplicationConfiguration)
+		
+		NSWorkspace.shared.openApplication(
+			at: url,
+			configuration: Self.openApplicationConfiguration
+		)
 	}
 
 	func showInFinder() {
