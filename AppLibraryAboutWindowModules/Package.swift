@@ -14,7 +14,15 @@ let package = Package(
 			targets: ["AppLibraryAboutWindow"]
 		),
 	],
+	dependencies: [
+		.package(path: "../AppLibraryCommonModules"),
+	],
 	targets: [
-		.target(name: "AppLibraryAboutWindow"),
+		.target(
+			name: "AppLibraryAboutWindow",
+			dependencies: [
+				.product(name: "AppLibraryCommon", package: "AppLibraryCommonModules"),
+			]
+		),
 	]
 )

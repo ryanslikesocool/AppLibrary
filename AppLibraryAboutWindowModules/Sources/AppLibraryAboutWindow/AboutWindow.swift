@@ -1,6 +1,8 @@
 import SwiftUI
 
 public struct AboutWindow: Scene {
+	@StateObject private var model: AboutWindowModel = AboutWindowModel()
+
 	public init() { }
 
 	public var body: some Scene {
@@ -11,6 +13,7 @@ public struct AboutWindow: Scene {
 		.defaultPosition(.center)
 		.windowStyle(.hiddenTitleBar)
 		.windowResizability(.contentSize)
+		.environmentObject(model)
 	}
 }
 
