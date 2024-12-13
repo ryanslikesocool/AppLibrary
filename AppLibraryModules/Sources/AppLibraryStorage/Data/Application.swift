@@ -12,37 +12,33 @@ public struct Application {
 	public var bundleIdentifier: String { id.bundleIdentifier }
 	public var version: String? { id.version }
 
+	// TODO: `lazy` properties on structs are causing some headaches...
+
 	public private(set) lazy var copyright: String? = try? metadata.copyright
 	public private(set) lazy var categories: [String]? = try? metadata.applicationCategories
 	public private(set) lazy var creationDate: Date? = try? metadata.fsCreationDate
 	public private(set) lazy var updatedDate: Date? = try? metadata.fsContentChangeDate
 //	public private(set) lazy var openedDate: Date?
 
-	public init?(metadata: NSMetadataItem) {
+//	public private(set) lazy var url: URL? = NSWorkspace.shared.urlForApplication(withBundleIdentifier: id.bundleIdentifier)
+	public var url: URL? { NSWorkspace.shared.urlForApplication(withBundleIdentifier: id.bundleIdentifier) }
+
+	public init(metadata: NSMetadataItem) throws {
 		self.metadata = metadata
 
 		let bundleIdentifier: String
 		let version: String? = try? metadata.version
 
-		do {
-			bundleIdentifier = try metadata.cfBundleIdentifier
-		} catch {
-			Self.logUnwrapFailure(error: error, objectDescription: "bundle identifier")
-			return nil
-		}
+		bundleIdentifier = try metadata.cfBundleIdentifier
 
-		do {
-			let separator: String = "."
-			displayName = try metadata.displayName
-				.components(separatedBy: separator)
-				.dropLast()
-				.joined(separator: separator)
-		} catch {
-			Self.logUnwrapFailure(error: error, objectDescription: "display name")
-			return nil
-		}
+		let separator: String = "."
+		displayName = try metadata.displayName
+			.components(separatedBy: separator)
+			.dropLast()
+			.joined(separator: separator)
 
 		id = ApplicationIdentifier(bundleIdentifier, displayName: displayName, version: version)
+//		id = ApplicationIdentifier(bundleIdentifier, version: version)
 	}
 }
 
@@ -70,10 +66,6 @@ private extension Application {
 }
 
 public extension Application {
-	var url: URL? {
-		NSWorkspace.shared.urlForApplication(withBundleIdentifier: id.bundleIdentifier)
-	}
-
 //	var urls: [URL] {
 //		// NOTE: this seems to be unrelated to `urlForApplication(withBundleIdentifier:)`,
 //		// and more akin to `urlsForApplications(toOpen:)`

@@ -1,6 +1,15 @@
 {
-  "originHash" : "4379e7fdbb76f2db480c678e35c2bb600c728d3a18dd0326a3b75f6d7b9508e6",
+  "originHash" : "8744409b950914029a937336bc84182141fb3f0e52bd74813e625970d57b4f85",
   "pins" : [
+    {
+      "identity" : "asyncnsmetadataquery",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ryanslikesocool/AsyncNSMetadataQuery.git",
+      "state" : {
+        "revision" : "8b94d8a16db6a8e334d7e00b5dcc4ebce4c57c2b",
+        "version" : "0.0.1"
+      }
+    },
     {
       "identity" : "exceptioncatcher",
       "kind" : "remoteSourceControl",

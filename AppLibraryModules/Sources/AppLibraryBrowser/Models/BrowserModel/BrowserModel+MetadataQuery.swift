@@ -2,6 +2,7 @@ import AppKit
 import AppLibraryStorage
 import AsyncNSMetadataQuery
 import OSLog
+import UniformTypeIdentifiers
 
 @MainActor
 extension BrowserModel {
@@ -71,7 +72,7 @@ private extension BrowserModel {
 		query.results
 			.compactMap { element in
 				if let element = element as? NSMetadataItem {
-					Application(metadata: element)
+					try? Application(metadata: element)
 				} else {
 					nil
 				}
@@ -104,7 +105,7 @@ private extension BrowserModel {
 private extension BrowserModel {
 	static var searchPredicate: NSPredicate {
 		let contentTypeKey: String = NSMetadataItemContentTypeKey
-		let desiredContentType: String = "com.apple.application-bundle"
+		let desiredContentType = UTType.applicationBundle.identifier
 
 		// TODO: figure out why format with arguments throws an Obj-C exception
 //		let format: String = "%@ == '%@'"

@@ -1,8 +1,27 @@
-import AppLibraryCommon
+import ExceptionCatcher
 import Foundation
 
 public extension NSMetadataItem {
-	// MARK: - cfBundleIdentifier
+	subscript<Key>(key: Key.Type) -> Key.Value where
+		Key: NSMetadataItemKey
+	{
+		get throws {
+			let metadataValue = try ExceptionCatcher.catch {
+				self.value(forKey: Key.key)
+			}
+
+			guard let safeValue = metadataValue as? Key.Value else {
+				throw CommonError.castFailure(from: metadataValue, to: Key.Value.self)
+			}
+			return safeValue
+		}
+	}
+}
+
+// MARK: - NSMetadataItemKey
+
+public extension NSMetadataItem {
+	// MARK: cfBundleIdentifier
 
 	var cfBundleIdentifier: String {
 		get throws {
@@ -16,7 +35,7 @@ public extension NSMetadataItem {
 		public static let key: String = NSMetadataItemCFBundleIdentifierKey
 	}
 
-	// MARK: - displayName
+	// MARK: displayName
 
 	var displayName: String {
 		get throws {
@@ -30,7 +49,7 @@ public extension NSMetadataItem {
 		public static let key: String = NSMetadataItemDisplayNameKey
 	}
 
-	// MARK: - applicationCategories
+	// MARK: applicationCategories
 
 	var applicationCategories: [String] {
 		get throws {
@@ -44,7 +63,7 @@ public extension NSMetadataItem {
 		public static let key: String = NSMetadataItemApplicationCategoriesKey
 	}
 
-	// MARK: - fsCreationDate
+	// MARK: fsCreationDate
 
 	var fsCreationDate: Date {
 		get throws {
@@ -58,7 +77,7 @@ public extension NSMetadataItem {
 		public static let key: String = NSMetadataItemFSCreationDateKey
 	}
 
-	// MARK: - fsContentChangeDate
+	// MARK: fsContentChangeDate
 
 	var fsContentChangeDate: Date {
 		get throws {
@@ -72,7 +91,7 @@ public extension NSMetadataItem {
 		public static let key: String = NSMetadataItemFSContentChangeDateKey
 	}
 
-	// MARK: - copyright
+	// MARK: copyright
 
 	var copyright: String {
 		get throws {
@@ -86,7 +105,7 @@ public extension NSMetadataItem {
 		public static let key: String = NSMetadataItemCopyrightKey
 	}
 
-	// MARK: - version
+	// MARK: version
 
 	var version: String {
 		get throws {

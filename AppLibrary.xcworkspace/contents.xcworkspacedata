@@ -11,21 +11,6 @@
       location = "group:AppLibrary.xcodeproj">
    </FileRef>
    <FileRef
-      location = "container:../AsyncNSMetadataQuery">
-   </FileRef>
-   <FileRef
-      location = "group:AppLibraryCommonModules">
-   </FileRef>
-   <FileRef
-      location = "group:AppLibraryStorageModules">
-   </FileRef>
-   <FileRef
-      location = "group:AppLibraryAboutWindowModules">
-   </FileRef>
-   <FileRef
-      location = "group:AppLibrarySettingsWindowModules">
-   </FileRef>
-   <FileRef
       location = "group:AppLibraryModules">
    </FileRef>
 </Workspace>

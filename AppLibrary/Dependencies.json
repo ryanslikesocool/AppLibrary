@@ -5,11 +5,6 @@
 		"licenseURL" : "https://github.com/sindresorhus/ExceptionCatcher/blob/main/license"
 	},
 	{
-		"name" : "LocalizationTable",
-		"projectURL" : "https://github.com/ryanslikesocool/LocalizationTable",
-		"licenseURL" : "https://github.com/ryanslikesocool/LocalizationTable/blob/main/LICENSE.md"
-	},
-	{
 		"name" : "SettingsAccess",
 		"projectURL" : "https://github.com/orchetect/SettingsAccess",
 		"licenseURL" : "https://github.com/orchetect/SettingsAccess/blob/main/LICENSE"
@@ -18,5 +13,10 @@
 		"name" : "AsyncNSMetadataQuery",
 		"projectURL" : "https://github.com/ryanslikesocool/AsyncNSMetadataQuery",
 		"licenseURL" : "https://github.com/ryanslikesocool/AsyncNSMetadataQuery/blob/main/LICENSE.md"
+	},
+	{
+		"name" : "LocalizationTable",
+		"projectURL" : "https://github.com/ryanslikesocool/LocalizationTable",
+		"licenseURL" : "https://github.com/ryanslikesocool/LocalizationTable/blob/main/LICENSE.md"
 	}
 ]

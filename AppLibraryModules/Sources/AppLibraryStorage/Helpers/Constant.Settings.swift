@@ -7,6 +7,7 @@ public extension Constant {
 		static let settingsDirectoryURL: URL = Constant.applicationSupportDirectory
 			.appending(components: "settings", directoryHint: .isDirectory)
 
+		// VALIDATE: Do these directories need to be localized?
 		public static let defaultSearchScopes: [URL] = [
 			"/System/Applications",
 			"/System/Library/CoreServices/Applications",
@@ -19,8 +20,8 @@ public extension Constant {
 		}
 
 		public static let defaultApplicationVisibility: [ApplicationIdentifier: ApplicationHideFlag.Set] = [
-//			ApplicationIdentifier(Bundle.main.bundleIdentifier!): .all,
-			ApplicationIdentifier(Bundle.main.bundleIdentifier!, displayName: "App Library"): .all,
+//			ApplicationIdentifier(Bundle.main.bundleIdentifier!, version: try? Bundle.main.cfBundleShortVersionString): .all,
+			ApplicationIdentifier(Bundle.main.bundleIdentifier!, displayName: "App Library", version: try? Bundle.main.cfBundleShortVersionString): .all,
 		]
 	}
 }

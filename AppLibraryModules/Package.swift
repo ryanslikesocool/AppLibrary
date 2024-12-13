@@ -9,49 +9,161 @@ let package = Package(
 		.macOS(.v14),
 	],
 	products: [
-		.library(
-			name: "AppLibraryModules",
-			targets: ["AppLibrary"]
-		),
+		.library(name: "AppLibraryModules", targets: ["AppLibrary"]),
+
+		.library(name: "AppLibraryBrowser", targets: ["AppLibraryBrowser"]),
+		.library(name: "AppLibraryAboutWindow", targets: ["AppLibraryAboutWindow"]),
+		.library(name: "AppLibrarySettingsWindow", targets: ["AppLibrarySettingsWindow"]),
+
+		.library(name: "AppLibraryStorage", targets: ["AppLibraryStorage"]),
+		.library(name: "AppLibraryCommon", targets: ["AppLibraryCommon"]),
+		.library(name: "AppLibraryCommonViews", targets: ["AppLibraryCommonViews"]),
 	],
 	dependencies: [
 		.package(url: "https://github.com/sindresorhus/ExceptionCatcher.git", from: "2.0.1"),
 		.package(url: "https://github.com/orchetect/SettingsAccess.git", from: "2.0.0"),
 
-		.package(url: "https://github.com/ryanslikesocool/AsyncNSMetadataQuery.git", branch: "main"),
+		.package(url: "https://github.com/ryanslikesocool/AsyncNSMetadataQuery.git", from: "0.0.1"),
 		.package(url: "https://github.com/ryanslikesocool/LocalizationTable.git", branch: "main"),
-
-		.package(path: "../AppLibraryCommonModules"),
-		.package(path: "../AppLibraryStorageModules"),
-		.package(path: "../AppLibraryAboutWindowModules"),
-		.package(path: "../AppLibrarySettingsWindowModules"),
 	],
 	targets: [
 		.target(
 			name: "AppLibrary",
 			dependencies: [
-				.product(name: "AppLibraryAboutWindow", package: "AppLibraryAboutWindowModules"),
-				.product(name: "AppLibrarySettingsWindow", package: "AppLibrarySettingsWindowModules"),
-
 				"AppLibraryBrowser",
+				"AppLibraryAboutWindow",
+				"AppLibrarySettingsWindow",
 			]
 		),
 
 		.target(
 			name: "AppLibraryBrowser",
 			dependencies: [
-				"ExceptionCatcher",
 				"SettingsAccess",
 
 				"AsyncNSMetadataQuery",
 				"LocalizationTable",
 
-				.product(name: "AppLibraryCommonViews", package: "AppLibraryCommonModules"),
-				.product(name: "AppLibrarySettingsWindow", package: "AppLibrarySettingsWindowModules"),
+				"AppLibraryCommonViews",
+				"AppLibrarySettingsWindow",
 			],
 			swiftSettings: [
 				.swiftLanguageMode(.v5),
 			]
 		),
+
+		.target(
+			name: "AppLibraryAboutWindow",
+			dependencies: [
+				"AppLibraryCommon",
+			]
+		),
+
+		.target(
+			name: "AppLibraryStorage",
+			dependencies: [
+				"AppLibraryCommon",
+			]
+		),
 	]
+		+ settingsWindowTargets
+		+ commonTargets
 )
+
+// MARK: - Target Groups
+
+var settingsWindowTargets: [Target] {
+	[
+		.target(
+			name: "AppLibrarySettingsWindow",
+			dependencies: [
+				"SettingsAccess",
+
+				"AppLibraryCommon",
+
+				"AppLibrarySettingsGeneralPane",
+				"AppLibrarySettingsLayoutPane",
+				"AppLibrarySettingsLocationPane",
+				"AppLibrarySettingsAppsPane",
+			]
+		),
+
+		.target(
+			name: "AppLibrarySettingsGeneralPane",
+			dependencies: [
+				"LocalizationTable",
+
+				"AppLibraryStorage",
+			]
+		),
+
+		.target(
+			name: "AppLibrarySettingsLayoutPane",
+			dependencies: [
+				"LocalizationTable",
+
+				"AppLibraryStorage",
+			]
+		),
+
+		.target(
+			name: "AppLibrarySettingsLocationPane",
+			dependencies: [
+				"LocalizationTable",
+
+				"AppLibraryStorage",
+				"AppLibraryCommon",
+				"AppLibraryCommonViews",
+			]
+		),
+
+		.target(
+			name: "AppLibrarySettingsAppsPane",
+			dependencies: [
+				"LocalizationTable",
+
+				"AppLibraryStorage",
+				"AppLibraryCommon",
+				"AppLibraryCommonViews",
+			]
+		),
+	]
+	.formatPaths(using: "Sources/SettingsWindow/%@")
+}
+
+var commonTargets: [Target] {
+	[
+		.target(
+			name: "AppLibraryCommonViews",
+			dependencies: [
+				"AppLibraryCommon",
+			]
+		),
+
+		.target(
+			name: "AppLibraryCommon",
+			dependencies: [
+				"ExceptionCatcher",
+
+				"LocalizationTable",
+			]
+		),
+	]
+}
+
+// MARK: - Utility
+
+extension [Target] {
+	func formatPaths(using format: String) -> Self {
+		map { target in
+			target.formatPath(using: format)
+			return target
+		}
+	}
+}
+
+extension Target {
+	func formatPath(using format: String) {
+		path = String(format: format, path ?? name)
+	}
+}
