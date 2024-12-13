@@ -8,47 +8,47 @@ extension BrowserModel {
 		guard state != .loading else {
 			return
 		}
-		let searchScopes = LocationSettings.shared.searchScopes
 
-		guard !searchScopes.isEmpty else {
-			state = .failed(reason: .noSearchScopes)
-			return
+		do {
+			let searchScopes = try validateSearchScopes()
+
+			state = .loading
+
+			try startQuery { query in
+				query.searchScopes = searchScopes
+				query.predicate = BrowserModel.searchPredicate
+			}
+
+			Logger.module.debug("Reloading apps...")
+		} catch {
+			state = .failed(reason: error)
 		}
 
-		state = .loading
-
-		let query = NSMetadataQuery()
-
-		NotificationCenter.default.addObserver(forName: .NSMetadataQueryDidFinishGathering, object: query, queue: nil, using: finishMetadataQuery)
-
-		query.searchScopes = Array(searchScopes)
-		query.predicate = Self.searchPredicate
-
-		activeMetadataQuery = query
-
-		if !query.start() {
-			stopQuery(query)
-			state = .failed(reason: .queryStartFailure)
+		func validateSearchScopes() throws(BrowserError) -> [URL] {
+			let searchScopes = LocationSettings.shared.searchScopes
+			guard !searchScopes.isEmpty else {
+				throw .noSearchScopes
+			}
+			return Array(searchScopes)
 		}
 
-		Logger.module.debug("Now reloading apps...")
-	}
-}
-
-private extension BrowserModel {
-	@Sendable
-	func finishMetadataQuery(notification: Notification) {
-		guard let query = notification.object as? NSMetadataQuery else {
-			preconditionFailure("Received \(notification.name) from an invalid object.")
+		func startQuery(configureQuery: (NSMetadataQuery) -> Void) throws(BrowserError) {
+			do {
+				try metadataQuery.start(configureQuery: configureQuery, completionHandler: processMetadata)
+			} catch {
+				throw BrowserError.queryFailure(error)
+			}
 		}
-
-		processMetadata(query: query)
-		stopQuery(query)
 	}
 
 	func processMetadata(query: NSMetadataQuery) {
-		let metadata = query.results.compactMap { $0 as? NSMetadataItem }
+		let metadata = query.results.compactMap { element in
+			element as? NSMetadataItem
+		}
+		processMetadata(metadata: metadata)
+	}
 
+	func processMetadata(metadata: [NSMetadataItem]) {
 		var sourceApps: [Application] = metadata.compactMap(Application.init)
 		var filteredApps: [Application] = []
 		filteredApps.reserveCapacity(sourceApps.count)
@@ -85,22 +85,20 @@ private extension BrowserModel {
 			}
 		}
 	}
-
-	func stopQuery(_ query: NSMetadataQuery) {
-		if query.isStarted {
-			query.stop()
-		}
-		activeMetadataQuery = nil
-
-		NotificationCenter.default.removeObserver(finishMetadataQuery, name: .NSMetadataQueryDidFinishGathering, object: nil)
-	}
 }
 
 // MARK: - Constants
 
 extension BrowserModel {
-	private static var searchPredicate: NSPredicate { NSPredicate(format: "\(contentTypeKey) == '\(desiredContentType)'") }
+	static let metadataQueryNotificationName: Notification.Name = .NSMetadataQueryDidFinishGathering
 
-	static var contentTypeKey: String { NSMetadataItemContentTypeKey }
-	static let desiredContentType: String = "com.apple.application-bundle"
+	static var searchPredicate: NSPredicate {
+		let contentTypeKey: String = NSMetadataItemContentTypeKey
+		let desiredContentType: String = "com.apple.application-bundle"
+
+		// TODO: figure out why format with arguments throws an Obj-C exception
+//		let format: String = "%@ == '%@'"
+
+		return NSPredicate(format: "\(contentTypeKey) == '\(desiredContentType)'")
+	}
 }

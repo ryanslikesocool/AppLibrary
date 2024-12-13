@@ -3,7 +3,7 @@ import LocalizationTable
 import SwiftUI
 
 struct AppearancePicker: View {
-	fileprivate typealias SelectionValue = Appearance?
+	fileprivate typealias SelectionValue = Appearance
 
 	@Storage(general: \.appearance) private var selection: SelectionValue
 
@@ -11,7 +11,7 @@ struct AppearancePicker: View {
 
 	public var body: some View {
 		Picker(selection: $selection) {
-			makeItem(.none)
+			makeItem(.system)
 
 			Section {
 				makeItem(.light)
@@ -40,9 +40,9 @@ private extension AppearancePicker {
 private extension AppearancePicker.SelectionValue {
 	var labelKey: LocalizedStringKey {
 		switch self {
-			case .light?: "ITEM.LIGHT.LABEL"
-			case .dark?: "ITEM.DARK.LABEL"
-			case .none: "ITEM.SYSTEM.LABEL"
+			case .system: "ITEM.SYSTEM.LABEL"
+			case .light: "ITEM.LIGHT.LABEL"
+			case .dark: "ITEM.DARK.LABEL"
 		}
 	}
 }

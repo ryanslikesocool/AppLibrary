@@ -1,7 +1,7 @@
 enum BrowserState {
 	case loading
 	case complete
-	case failed(reason: BrowserError?)
+	case failed(reason: BrowserError)
 }
 
 // MARK: - Sendable

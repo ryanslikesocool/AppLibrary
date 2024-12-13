@@ -1,30 +1,54 @@
 import Foundation
 
-enum BrowserError {
-	case queryStartFailure
+enum BrowserError: Swift.Error {
 	case noSearchScopes
 	case noApps
 	case allAppsHidden
+	case queryFailure(String)
 }
+
+// MARK: - Equatable
+
+extension BrowserError: Equatable { }
+
+// MARK: - Hashable
+
+extension BrowserError: Hashable { }
 
 // MARK: - LocalizedError
 
-//extension BrowserError: LocalizedError {
-//	var errorDescription: String? {
-//		switch self {
-//			case .queryStartFailure: "Failed to start query."
-//			case .noSearchScopes: "No scopes to search in."
-//			case .noApps: "No apps could be found."
-//			case .allAppsHidden: "All apps are hidden."
-//		}
-//	}
-//
-//	var recoverySuggestion: String? {
-//		switch self {
-//			case .queryStartFailure: nil
-//			case .noSearchScopes: "Add search scopes from the settings pane."
-//			case .noApps: "Add more search scopes from the settings pane."
-//			case .allAppsHidden: "Unhide apps from the settings pane."
-//		}
-//	}
-//}
+extension BrowserError: LocalizedError {
+	var errorDescription: String? {
+		let localizationKey: String.LocalizationValue = switch self {
+			case .noSearchScopes: "TITLE.NO_SEARCH_SCOPES"
+			case .noApps: "TITLE.NO_APPS"
+			case .allAppsHidden: "TITLE.ALL_APPS_HIDDEN"
+			case .queryFailure: "TITLE.LOAD_FAILURE"
+		}
+
+		return String(localized: localizationKey, table: .browserError)
+	}
+
+	var recoverySuggestion: String? {
+		let localizationKey: String.LocalizationValue? = switch self {
+			case .noSearchScopes: "RECOVERY_SUGGESTION.NO_SEARCH_SCOPES"
+			case .noApps: "RECOVERY_SUGGESTION.NO_APPS"
+			case .allAppsHidden: "RECOVERY_SUGGESTION.ALL_APPS_HIDDEN"
+			case .queryFailure: nil
+		}
+
+		return if let localizationKey {
+			String(localized: localizationKey, table: .browserError)
+		} else {
+			nil
+		}
+	}
+}
+
+// MARK: -
+
+extension BrowserError {
+	static func queryFailure(_ error: any Error) -> Self {
+		.queryFailure(String(describing: error))
+	}
+}

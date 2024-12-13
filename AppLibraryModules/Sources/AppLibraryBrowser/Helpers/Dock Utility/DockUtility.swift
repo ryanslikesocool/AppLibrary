@@ -17,16 +17,16 @@ public enum DockUtility {
 	}
 
 	public static func requestAccess() {
-		Logger.dockUtility.debug("Requesting accessibility permission...")
+		logger.debug("Requesting accessibility permission...")
 
 		guard !accessGranted else {
-			Logger.dockUtility.debug("Accessibility permission was already granted!")
+			logger.debug("Accessibility permission was already granted!")
 			return
 		}
 
 		let alert = createAlert()
 
-		Logger.dockUtility.debug("Presenting accessibility permission alert.")
+		logger.debug("Presenting accessibility permission alert.")
 
 		presentAlert()
 
@@ -46,14 +46,20 @@ public enum DockUtility {
 		func presentAlert() {
 			switch alert.runModal() {
 				case .alertFirstButtonReturn:
-					Logger.dockUtility.debug("Accessibility permission was denied.")
+					logger.debug("Accessibility permission was denied.")
 				case .alertSecondButtonReturn:
 					let options = [kAXTrustedCheckOptionPrompt.takeRetainedValue(): true]
 					_ = AXIsProcessTrustedWithOptions(options as CFDictionary)
-					Logger.dockUtility.debug("Accessibility permission was granted.")
+					logger.debug("Accessibility permission was granted.")
 				case let otherOption:
-					Logger.dockUtility.error("Unsupported alert button '\(String(describing: otherOption))'.")
+					logger.error("Unsupported alert button '\(String(describing: otherOption))'.")
 			}
 		}
 	}
+}
+
+// MARK: - Constants
+
+private extension DockUtility {
+	static let logger: Logger = Logger(category: Self.self)
 }

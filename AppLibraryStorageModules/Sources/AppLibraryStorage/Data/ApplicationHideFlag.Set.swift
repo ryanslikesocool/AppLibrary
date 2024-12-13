@@ -7,7 +7,7 @@ public extension ApplicationHideFlag {
 // MARK: - Constants
 
 public extension ApplicationHideFlag.Set {
-	static let none: Self = Self(rawValue: 0)
+	static let none: Self = []
 
 	static let hiddenInBrowser: Self = Self(.hiddenInBrowser)
 	static let hiddenInSearch: Self = Self(.hiddenInSearch)

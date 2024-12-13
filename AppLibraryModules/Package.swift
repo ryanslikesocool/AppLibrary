@@ -18,6 +18,7 @@ let package = Package(
 		.package(url: "https://github.com/sindresorhus/ExceptionCatcher.git", from: "2.0.1"),
 		.package(url: "https://github.com/orchetect/SettingsAccess.git", from: "2.0.0"),
 
+		.package(url: "https://github.com/ryanslikesocool/AsyncNSMetadataQuery.git", branch: "main"),
 		.package(url: "https://github.com/ryanslikesocool/LocalizationTable.git", branch: "main"),
 
 		.package(path: "../AppLibraryCommonModules"),
@@ -42,6 +43,7 @@ let package = Package(
 				"ExceptionCatcher",
 				"SettingsAccess",
 
+				"AsyncNSMetadataQuery",
 				"LocalizationTable",
 
 				.product(name: "AppLibraryCommonViews", package: "AppLibraryCommonModules"),

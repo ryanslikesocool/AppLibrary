@@ -24,7 +24,7 @@ final class BrowserModel: ObservableObject {
 		return filtered
 	}
 
-	var activeMetadataQuery: NSMetadataQuery?
+	private(set) lazy var metadataQuery: MetadataQueryV1 = MetadataQueryV1()
 
 	private(set) lazy var keyboardObserver: KeyboardObserver = KeyboardObserver(model: self)
 

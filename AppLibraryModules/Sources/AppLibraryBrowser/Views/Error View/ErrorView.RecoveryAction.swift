@@ -54,10 +54,10 @@ private extension BrowserError? {
 
 	var recoveryActionKind: RecoveryActionKind {
 		switch self {
-			case .queryStartFailure?: .retry
 			case .noSearchScopes?: .settings(.location)
 			case .noApps?: .settings(.location)
 			case .allAppsHidden?: .settings(.apps)
+			case .queryFailure?: .retry
 			case nil: .retry
 		}
 	}

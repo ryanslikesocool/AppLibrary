@@ -1,14 +1,13 @@
 import AppLibraryCommon
 import AppLibraryCommonViews
-import AppLibrarySettingsViews
 import AppLibraryStorage
 import OSLog
 import SwiftUI
 
 struct ErrorView: View {
-	private let error: BrowserError?
+	private let error: BrowserError
 
-	public init(reason error: BrowserError?) {
+	public init(reason error: BrowserError) {
 		self.error = error
 	}
 

@@ -9,7 +9,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 	private(set) lazy var browserWindowController: BrowserWindowController = BrowserWindowController()
 
 	func applicationDidFinishLaunching(_ notification: Notification) {
-		Logger.module.debug("Finished launching \(NSApplication.shared.appName).app")
+		Logger.module.debug("Finished launching \(NSApplication.shared.appName)")
 
 		_ = GeneralSettings.shared
 		_ = AppsSettings.shared
@@ -29,13 +29,13 @@ private extension AppDelegate {
 	func createMainMenuItems() {
 		// TODO: how to localize "Edit"?
 		if let editSubmenu = NSApp.mainMenu?.item(withTitle: "Edit")?.submenu {
-			print("create edit submenu items")
+			Logger.module.debug("Create \"Edit\" submenu items.")
 			editSubmenu.addItem(withTitle: "Search", action: #selector(activateSearchAction), keyEquivalent: "f")
 		}
 
 		// TODO: how to localize "View"?
 		if let viewSubmenu = NSApp.mainMenu?.item(withTitle: "View")?.submenu {
-			print("create view submenu items")
+			Logger.module.debug("Create \"View\" submenu items.")
 			viewSubmenu.addItem(withTitle: "Refresh", action: #selector(refreshLibraryAction), keyEquivalent: "r")
 		}
 	}

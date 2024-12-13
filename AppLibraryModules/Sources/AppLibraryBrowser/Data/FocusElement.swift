@@ -20,8 +20,8 @@ extension FocusElement: Identifiable {
 	var id: String {
 		switch self {
 			case .search: "AppLibrary.Search"
-			case let .app(app): app.id
-			case let .group(group): group.id
+			case let .app(app): app.bundleIdentifier
+			case let .group(group): group.rawValue
 		}
 	}
 }

@@ -1,10 +1,18 @@
 public struct ApplicationIdentifier {
 	public let bundleIdentifier: String
-	public let displayName: String
+	public let version: String?
 
-	public init(_ bundleIdentifier: String, named displayName: String) {
+	@available(*, deprecated)
+	public let displayName: String // TODO: remove
+
+	public init(
+		_ bundleIdentifier: String,
+		displayName: String,
+		version: String? = nil
+	) {
 		self.bundleIdentifier = bundleIdentifier
 		self.displayName = displayName
+		self.version = version
 	}
 }
 
@@ -14,36 +22,30 @@ extension ApplicationIdentifier: Sendable { }
 
 // MARK: - Equatable
 
+@available(*, deprecated)
 extension ApplicationIdentifier: Equatable {
 	public static func == (lhs: Self, rhs: Self) -> Bool {
 		lhs.bundleIdentifier == rhs.bundleIdentifier
-		// NOTE: displayName is intentionally not used for equality.
+		&& lhs.version == rhs.version
 	}
 }
 
 // MARK: - Hashable
 
+@available(*, deprecated)
 extension ApplicationIdentifier: Hashable {
 	public func hash(into hasher: inout Hasher) {
 		hasher.combine(bundleIdentifier)
-		// NOTE: displayName is intentionally not hashed.
+		hasher.combine(version)
 	}
 }
 
 // MARK: - Identifiable
 
 extension ApplicationIdentifier: Identifiable {
-	public var id: String { bundleIdentifier }
+	public var id: Self { self }
 }
 
 // MARK: - Codable
 
 extension ApplicationIdentifier: Codable { }
-
-// MARK: - Comparable
-
-extension ApplicationIdentifier: Comparable {
-	public static func < (lhs: Self, rhs: Self) -> Bool {
-		lhs.displayName.localizedStandardCompare(rhs.displayName) == .orderedAscending
-	}
-}

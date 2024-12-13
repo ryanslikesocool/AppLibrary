@@ -3,10 +3,10 @@ import Combine
 import Foundation
 
 public struct GeneralSettings {
-	public var appearance: Appearance?
+	public var appearance: Appearance
 
 	public init() {
-		appearance = nil
+		appearance = .system
 	}
 }
 

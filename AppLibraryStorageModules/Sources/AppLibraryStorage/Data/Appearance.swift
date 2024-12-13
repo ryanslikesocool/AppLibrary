@@ -1,6 +1,7 @@
 import AppKit
 
 public enum Appearance: String {
+	case system
 	case light
 	case dark
 }
@@ -29,7 +30,7 @@ extension Appearance: Codable { }
 
 // MARK: -
 
-public extension Optional<Appearance> {
+public extension Appearance {
 	@MainActor
 	func apply() {
 		NSApplication.shared.appearance = switch self {

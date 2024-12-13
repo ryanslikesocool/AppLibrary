@@ -1,5 +1,4 @@
 import AppLibraryCommonViews
-import AppLibrarySettingsViews
 import AppLibraryStorage
 import SettingsAccess
 import SwiftUI
@@ -17,7 +16,7 @@ struct ContentView: View {
 			switch browserModel.state {
 				case .loading?: queryLoadingView
 				case .complete?: LibraryView()
-				case let .some(.failed(reason)): ErrorView(reason: reason)
+				case let .failed(reason)?: ErrorView(reason: reason)
 				case nil: EmptyView()
 			}
 		}

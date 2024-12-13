@@ -62,14 +62,14 @@ private extension SearchField {
 // MARK: - Constants
 
 private extension SearchField {
-	static let unfocusedShadowA: Shadow = (0.1, 1, 0.5)
-	static let unfocusedShadowB: Shadow = (0.05, 2, 1)
+	static let unfocusedShadowA: Shadow = Shadow(opacity: 0.1, radius: 1, y: 0.5)
+	static let unfocusedShadowB: Shadow = Shadow(opacity: 0.05, radius: 2, y: 1)
 
-	static let focusedShadowA: Shadow = (0.25, 4, 2)
-	static let focusedShadowB: Shadow = (0.125, 8, 4)
+	static let focusedShadowA: Shadow = Shadow(opacity: 0.25, radius: 4, y: 2)
+	static let focusedShadowB: Shadow = Shadow(opacity: 0.125, radius: 8, y: 4)
 
-	static let unfocusedStroke: Stroke = (AnyShapeStyle(.separator), 1)
-	static let focusedStroke: Stroke = (AnyShapeStyle(Color.accentColor), 2)
+	static let unfocusedStroke: Stroke = Stroke(style: .separator, width: 1)
+	static let focusedStroke: Stroke = Stroke(style: Color.accentColor, width: 2)
 
 	static let innerPadding: CGFloat = 8
 	static let outerPadding: CGFloat = 8

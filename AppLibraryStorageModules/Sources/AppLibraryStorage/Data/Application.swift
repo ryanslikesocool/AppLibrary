@@ -7,39 +7,42 @@ public struct Application {
 	private let metadata: NSMetadataItem
 
 	public let id: ApplicationIdentifier
-	public var displayName: String { id.displayName }
+	public let displayName: String
+
 	public var bundleIdentifier: String { id.bundleIdentifier }
+	public var version: String? { id.version }
 
-	public private(set) lazy var version: String? = try? Self.unwrap(metadata: metadata, with: Constant.Application.versionKey, as: String.self)
-	public private(set) lazy var copyright: String? = try? Self.unwrap(metadata: metadata, with: Constant.Application.copyrightKey, as: String.self)
-	public private(set) lazy var categories: [String]? = try? Self.unwrap(metadata: metadata, with: Constant.Application.categoryKey, as: [String].self)
-
-	public private(set) lazy var creationDate: Date? = try? Self.unwrap(metadata: metadata, with: Constant.Application.creationDateKey, as: Date.self)
-	public private(set) lazy var updatedDate: Date? = try? Self.unwrap(metadata: metadata, with: Constant.Application.updatedDateKey, as: Date.self)
+	public private(set) lazy var copyright: String? = try? metadata.copyright
+	public private(set) lazy var categories: [String]? = try? metadata.applicationCategories
+	public private(set) lazy var creationDate: Date? = try? metadata.fsCreationDate
+	public private(set) lazy var updatedDate: Date? = try? metadata.fsContentChangeDate
 //	public private(set) lazy var openedDate: Date?
 
 	public init?(metadata: NSMetadataItem) {
 		self.metadata = metadata
 
 		let bundleIdentifier: String
-		let displayName: String
+		let version: String? = try? metadata.version
 
 		do {
-			bundleIdentifier = try Self.unwrap(metadata: metadata, with: Constant.Application.bundleIdentifierKey, as: String.self)
+			bundleIdentifier = try metadata.cfBundleIdentifier
 		} catch {
 			Self.logUnwrapFailure(error: error, objectDescription: "bundle identifier")
 			return nil
 		}
 
 		do {
-			displayName = try Self.unwrap(metadata: metadata, with: Constant.Application.displayNameKey, as: String.self)
-				.components(separatedBy: ".").dropLast().joined(separator: ".")
+			let separator: String = "."
+			displayName = try metadata.displayName
+				.components(separatedBy: separator)
+				.dropLast()
+				.joined(separator: separator)
 		} catch {
 			Self.logUnwrapFailure(error: error, objectDescription: "display name")
 			return nil
 		}
 
-		id = ApplicationIdentifier(bundleIdentifier, named: displayName)
+		id = ApplicationIdentifier(bundleIdentifier, displayName: displayName, version: version)
 	}
 }
 
@@ -58,14 +61,6 @@ extension Application: Identifiable { }
 // MARK: -
 
 private extension Application {
-	static func unwrap<R>(metadata: NSMetadataItem, with key: String, as type: R.Type) throws -> R {
-		let metadataValue = try ExceptionCatcher.catch(callback: { metadata.value(forKey: key) })
-		guard let safeValue = metadataValue as? R else {
-			throw CommonError.castFailure(from: metadataValue, to: R.self)
-		}
-		return safeValue
-	}
-
 	static func logUnwrapFailure(error: some Error, objectDescription: String) {
 		Logger.module.error("""
 		Failed to retrieve \(objectDescription) from \(NSMetadataItem.self):
@@ -78,4 +73,10 @@ public extension Application {
 	var url: URL? {
 		NSWorkspace.shared.urlForApplication(withBundleIdentifier: id.bundleIdentifier)
 	}
+
+//	var urls: [URL] {
+//		// NOTE: this seems to be unrelated to `urlForApplication(withBundleIdentifier:)`,
+//		// and more akin to `urlsForApplications(toOpen:)`
+//		NSWorkspace.shared.urlsForApplications(withBundleIdentifier: id.bundleIdentifier)
+//	}
 }

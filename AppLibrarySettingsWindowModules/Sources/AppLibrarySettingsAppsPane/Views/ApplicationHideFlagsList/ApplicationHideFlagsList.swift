@@ -30,7 +30,7 @@ struct ApplicationHideFlagsList: View {
 
 private extension ApplicationHideFlagsList {
 	var listContent: some View {
-		ForEach(applicationHideFlags.keys.sorted()) { application in
+		ForEach(applicationHideFlags.keys.sorted(by: \.displayName)) { application in
 			let activeFlags = Binding<ApplicationHideFlag.Set>(
 				get: { applicationHideFlags[application] ?? .none },
 				set: { newValue in applicationHideFlags[application] = newValue }
