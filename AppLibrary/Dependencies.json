@@ -13,5 +13,10 @@
 		"name" : "SettingsAccess",
 		"projectURL" : "https://github.com/orchetect/SettingsAccess",
 		"licenseURL" : "https://github.com/orchetect/SettingsAccess/blob/main/LICENSE"
+	},
+	{
+		"name" : "AsyncNSMetadataQuery",
+		"projectURL" : "https://github.com/ryanslikesocool/AsyncNSMetadataQuery",
+		"licenseURL" : "https://github.com/ryanslikesocool/AsyncNSMetadataQuery/blob/main/LICENSE.md"
 	}
 ]

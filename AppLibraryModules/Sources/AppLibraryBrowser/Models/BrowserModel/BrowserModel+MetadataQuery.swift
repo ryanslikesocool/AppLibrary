@@ -1,5 +1,6 @@
 import AppKit
 import AppLibraryStorage
+import AsyncNSMetadataQuery
 import OSLog
 
 @MainActor
@@ -10,81 +11,53 @@ extension BrowserModel {
 			default: break
 		}
 
-		let asynchronous: Bool = true
-
 		do {
-			let metadataQuery = try Self.createMetadataQuery()
-			Logger.module.debug("Refreshing apps (\(asynchronous ? "async" : "classic"))")
+			let metadataQuery = try createMetadataQuery()
+			Logger.module.debug("Refreshing apps.")
 			start(query: metadataQuery)
 		} catch {
 			state = .failed(reason: error)
 		}
 
+		func getSearchScopes() throws(BrowserError) -> [URL] {
+			let searchScopes = LocationSettings.shared.searchScopes
+			guard !searchScopes.isEmpty else {
+				throw .noSearchScopes
+			}
+			return Array(searchScopes)
+		}
+
+		func createMetadataQuery() throws(BrowserError) -> NSMetadataQuery {
+			let searchScopes = try getSearchScopes()
+
+			let query = NSMetadataQuery()
+			query.searchScopes = searchScopes
+			query.predicate = Self.searchPredicate
+			return query
+		}
+
 		func start(query: NSMetadataQuery) {
-			if asynchronous {
-				refreshApps_async(query: query)
+			let task = Task {
+				await query.gatherResults()
+				complete(query: query)
+			}
+			state = .loading(task: task)
+		}
+
+		func complete(query: NSMetadataQuery) {
+			let applications = Self.processApplications(query)
+
+			apps = applications
+			state = if applications.isEmpty {
+				.failed(reason: .noApps)
 			} else {
-				refreshApps_classic(query: query)
+				.complete
 			}
+
+			Logger.module.debug("""
+			Finished refreshing applications.
+			""")
 		}
-	}
-
-	private func refreshApps_classic(query: NSMetadataQuery) {
-		do {
-			let metadataQuery = try startMetadataQuery()
-			state = .loading(metadataQuery)
-		} catch {
-			state = .failed(reason: error)
-		}
-
-		func startMetadataQuery() throws(BrowserError) -> MetadataQuery {
-			do {
-				let metadataQuery = MetadataQuery()
-				try metadataQuery.start(query: query, completionHandler: processMetadata)
-				return metadataQuery
-			} catch {
-				throw BrowserError.queryFailure(error)
-			}
-		}
-	}
-
-	private func refreshApps_async(query: NSMetadataQuery) {
-		let metadataQuery = MetadataQuery()
-		state = .loading(metadataQuery)
-
-		Task {
-			do {
-				try await metadataQuery.run(query: query)
-				processMetadata(query: query)
-			} catch {
-				Logger.module.error("""
-				Failed to complete metadata query:
-				- Error: \(error)
-				""")
-			}
-		}
-	}
-}
-
-// MARK: - Utility
-
-@MainActor
-private extension BrowserModel {
-	static func getSearchScopes() throws(BrowserError) -> [URL] {
-		let searchScopes = LocationSettings.shared.searchScopes
-		guard !searchScopes.isEmpty else {
-			throw .noSearchScopes
-		}
-		return Array(searchScopes)
-	}
-
-	static func createMetadataQuery() throws(BrowserError) -> NSMetadataQuery {
-		let searchScopes = try Self.getSearchScopes()
-
-		let query = NSMetadataQuery()
-		query.searchScopes = searchScopes
-		query.predicate = Self.searchPredicate
-		return query
 	}
 }
 
@@ -92,21 +65,6 @@ private extension BrowserModel {
 
 @MainActor
 private extension BrowserModel {
-	func processMetadata(query: NSMetadataQuery) {
-		let applications = Self.processApplications(query)
-
-		apps = applications
-		state = if applications.isEmpty {
-			.failed(reason: .noApps)
-		} else {
-			.complete
-		}
-
-		Logger.module.info("""
-		Finished refreshing applications.
-		""")
-	}
-
 	static func processApplications(
 		_ query: NSMetadataQuery
 	) -> [Application] {

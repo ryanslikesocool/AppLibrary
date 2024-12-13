@@ -10,7 +10,13 @@ final class BrowserModel: ObservableObject {
 	@Published var searchQuery: String
 	@Published var focus: FocusElement?
 
-	var isSearchDisplayed: Bool { state == .complete }
+	var isSearchDisplayed: Bool {
+		if case .complete = state {
+			true
+		} else {
+			false
+		}
+	}
 
 	@MainActor
 	var filteredApps: [Application] {
