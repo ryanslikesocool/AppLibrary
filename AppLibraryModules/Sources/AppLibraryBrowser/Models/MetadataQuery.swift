@@ -2,17 +2,29 @@ import AppLibraryStorage
 import Foundation
 import OSLog
 
-final class MetadataQueryV1 {
+final class MetadataQuery {
 	private var state: State
 
 	init() {
 		state = .inactive
 	}
+
+	deinit {
+		stop()
+	}
+}
+
+// MARK: - Constants
+
+private extension MetadataQuery {
+	nonisolated static let logger: Logger = Logger(category: MetadataQuery.self)
+
+	nonisolated static var notificationName: Notification.Name { .NSMetadataQueryDidFinishGathering }
 }
 
 // MARK: - Supporting Data
 
-private extension MetadataQueryV1 {
+private extension MetadataQuery {
 	enum State {
 		case inactive
 		case active(query: NSMetadataQuery, observer: any NSObjectProtocol, completionHandler: (NSMetadataQuery) -> Void)
@@ -21,7 +33,7 @@ private extension MetadataQueryV1 {
 
 // MARK: - Properties
 
-extension MetadataQueryV1 {
+extension MetadataQuery {
 	public var isRunning: Bool {
 		switch state {
 			case .inactive: false
@@ -32,13 +44,13 @@ extension MetadataQueryV1 {
 
 // MARK: -
 
-extension MetadataQueryV1 {
+extension MetadataQuery {
 	public func start(
 		query: NSMetadataQuery,
 		completionHandler: @escaping (NSMetadataQuery) -> Void
 	) throws {
 		let observer = NotificationCenter.default.addObserver(
-			forName: BrowserModel.metadataQueryNotificationName,
+			forName: Self.notificationName,
 			object: query,
 			queue: nil,
 			using: finish
@@ -47,12 +59,14 @@ extension MetadataQueryV1 {
 		state = .active(query: query, observer: observer, completionHandler: completionHandler)
 
 		guard query.start() else {
+			Self.logger.debug("Failed to start query.")
 			stop(query: query, observer: observer)
 			throw Failure.queryStartFailure
 		}
+
+		Self.logger.debug("Started query.")
 	}
 
-	@Sendable
 	private func finish(notification: Notification) {
 		guard case let .active(query, observer, completionHandler) = state else {
 			preconditionFailure("Received a notification while the query was not active.")
@@ -69,32 +83,52 @@ extension MetadataQueryV1 {
 	}
 
 	private func stop(query: NSMetadataQuery, observer: any NSObjectProtocol) {
-		if query.isStarted {
-			query.stop()
-		}
+		query.stop()
 		state = .inactive
 
-		NotificationCenter.default.removeObserver(observer, name: BrowserModel.metadataQueryNotificationName, object: query)
+		NotificationCenter.default.removeObserver(observer, name: Self.notificationName, object: query)
+
+		Self.logger.debug("Stopped query.")
 	}
 }
 
 // MARK: - Convenience
 
-extension MetadataQueryV1 {
-	public func start(
-		configureQuery: (NSMetadataQuery) throws -> Void,
-		completionHandler: @escaping (NSMetadataQuery) -> Void
-	) throws {
-		let query = NSMetadataQuery()
-		try configureQuery(query)
-
-		try start(query: query, completionHandler: completionHandler)
-	}
-
+extension MetadataQuery {
 	public func stop() {
 		guard case let .active(query, observer, _) = state else {
 			return
 		}
 		stop(query: query, observer: observer)
+	}
+}
+
+// MARK: - Async
+
+extension MetadataQuery {
+	public func run(
+		isolation: isolated (any Actor)? = #isolation,
+		query: NSMetadataQuery
+	) async throws {
+//		try await withTaskCancellationHandler {
+			try await withCheckedThrowingContinuation { continuation in
+				do {
+					try start(query: query) { _ in
+						continuation.resume()
+					}
+				} catch {
+					continuation.resume(throwing: error)
+				}
+			}
+//		} onCancel: {
+//			stop()
+//		}
+	}
+
+	public static func run(
+		isolation: isolated (any Actor)? = #isolation,
+		query: NSMetadataQuery
+	) async throws {
+		try await MetadataQuery().run(query: query)
 	}
 }

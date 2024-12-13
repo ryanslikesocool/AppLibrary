@@ -2,96 +2,148 @@ import AppKit
 import AppLibraryStorage
 import OSLog
 
+@MainActor
 extension BrowserModel {
-	@MainActor
 	func refreshApps() {
-		guard state != .loading else {
-			return
+		switch state {
+			case .loading: return
+			default: break
 		}
 
+		let asynchronous: Bool = true
+
 		do {
-			let searchScopes = try validateSearchScopes()
-
-			state = .loading
-
-			try startQuery { query in
-				query.searchScopes = searchScopes
-				query.predicate = BrowserModel.searchPredicate
-			}
-
-			Logger.module.debug("Reloading apps...")
+			let metadataQuery = try Self.createMetadataQuery()
+			Logger.module.debug("Refreshing apps (\(asynchronous ? "async" : "classic"))")
+			start(query: metadataQuery)
 		} catch {
 			state = .failed(reason: error)
 		}
 
-		func validateSearchScopes() throws(BrowserError) -> [URL] {
-			let searchScopes = LocationSettings.shared.searchScopes
-			guard !searchScopes.isEmpty else {
-				throw .noSearchScopes
+		func start(query: NSMetadataQuery) {
+			if asynchronous {
+				refreshApps_async(query: query)
+			} else {
+				refreshApps_classic(query: query)
 			}
-			return Array(searchScopes)
+		}
+	}
+
+	private func refreshApps_classic(query: NSMetadataQuery) {
+		do {
+			let metadataQuery = try startMetadataQuery()
+			state = .loading(metadataQuery)
+		} catch {
+			state = .failed(reason: error)
 		}
 
-		func startQuery(configureQuery: (NSMetadataQuery) -> Void) throws(BrowserError) {
+		func startMetadataQuery() throws(BrowserError) -> MetadataQuery {
 			do {
-				try metadataQuery.start(configureQuery: configureQuery, completionHandler: processMetadata)
+				let metadataQuery = MetadataQuery()
+				try metadataQuery.start(query: query, completionHandler: processMetadata)
+				return metadataQuery
 			} catch {
 				throw BrowserError.queryFailure(error)
 			}
 		}
 	}
 
-	func processMetadata(query: NSMetadataQuery) {
-		let metadata = query.results.compactMap { element in
-			element as? NSMetadataItem
-		}
-		processMetadata(metadata: metadata)
-	}
+	private func refreshApps_async(query: NSMetadataQuery) {
+		let metadataQuery = MetadataQuery()
+		state = .loading(metadataQuery)
 
-	func processMetadata(metadata: [NSMetadataItem]) {
-		var sourceApps: [Application] = metadata.compactMap(Application.init)
-		var filteredApps: [Application] = []
-		filteredApps.reserveCapacity(sourceApps.count)
-
-		for index in sourceApps.indices {
-			var app: Application = sourceApps[index]
-			guard let existingIndex = filteredApps.firstIndex(where: { $0.id == app.id }) else {
-				filteredApps.append(app)
-				continue
-			}
-
-			if
-				let existingCreationDate = filteredApps[existingIndex].creationDate,
-				let newCreationDate = app.creationDate,
-				existingCreationDate < newCreationDate
-			{
-				filteredApps[existingIndex] = app
-			}
-			sourceApps[index] = app
-		}
-		filteredApps.sort(by: { lhs, rhs in
-			lhs.displayName.localizedStandardCompare(rhs.displayName) == .orderedAscending
-		})
-
-		DispatchQueue.main.async { [weak self] in
-			guard let self else {
-				return
-			}
-			apps = filteredApps
-			state = if filteredApps.isEmpty {
-				.failed(reason: .noApps)
-			} else {
-				.complete
+		Task {
+			do {
+				try await metadataQuery.run(query: query)
+				processMetadata(query: query)
+			} catch {
+				Logger.module.error("""
+				Failed to complete metadata query:
+				- Error: \(error)
+				""")
 			}
 		}
 	}
 }
 
+// MARK: - Utility
+
+@MainActor
+private extension BrowserModel {
+	static func getSearchScopes() throws(BrowserError) -> [URL] {
+		let searchScopes = LocationSettings.shared.searchScopes
+		guard !searchScopes.isEmpty else {
+			throw .noSearchScopes
+		}
+		return Array(searchScopes)
+	}
+
+	static func createMetadataQuery() throws(BrowserError) -> NSMetadataQuery {
+		let searchScopes = try Self.getSearchScopes()
+
+		let query = NSMetadataQuery()
+		query.searchScopes = searchScopes
+		query.predicate = Self.searchPredicate
+		return query
+	}
+}
+
+// MARK: - Process Metadata
+
+@MainActor
+private extension BrowserModel {
+	func processMetadata(query: NSMetadataQuery) {
+		let applications = Self.processApplications(query)
+
+		apps = applications
+		state = if applications.isEmpty {
+			.failed(reason: .noApps)
+		} else {
+			.complete
+		}
+
+		Logger.module.info("""
+		Finished refreshing applications.
+		""")
+	}
+
+	static func processApplications(
+		_ query: NSMetadataQuery
+	) -> [Application] {
+		query.results
+			.compactMap { element in
+				if let element = element as? NSMetadataItem {
+					Application(metadata: element)
+				} else {
+					nil
+				}
+			}
+			.reduce(
+				into: [ApplicationIdentifier: Application]()
+			) { partialResult, element in
+				if var existingApp = partialResult[element.id] {
+					// already exists.  resolve merge conflict
+					var element = element
+					if
+						let existingCreationDate = existingApp.creationDate,
+						let newCreationDate = element.creationDate,
+						newCreationDate < existingCreationDate
+					{
+						partialResult[element.id] = element
+					}
+				} else {
+					// doesn't exist.  push
+					partialResult[element.id] = element
+				}
+			}
+			.map(\.value)
+			.sorted(using: .localizedStandard(\.displayName))
+	}
+}
+
 // MARK: - Constants
 
-extension BrowserModel {
-	static let metadataQueryNotificationName: Notification.Name = .NSMetadataQueryDidFinishGathering
-
+private extension BrowserModel {
 	static var searchPredicate: NSPredicate {
 		let contentTypeKey: String = NSMetadataItemContentTypeKey
 		let desiredContentType: String = "com.apple.application-bundle"
