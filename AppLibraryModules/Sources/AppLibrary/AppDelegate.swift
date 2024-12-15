@@ -15,7 +15,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 		_ = AppsSettings.shared
 		_ = LayoutSettings.shared
 
-		DockUtility.requestAccess()
+		AccessibilityUtility.requestAccess()
 
 		createMainMenuItems()
 	}

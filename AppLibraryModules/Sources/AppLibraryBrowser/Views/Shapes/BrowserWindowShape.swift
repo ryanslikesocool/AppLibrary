@@ -36,5 +36,6 @@ extension BrowserWindowShape: InsettableShape {
 // MARK: - Constants
 
 extension BrowserWindowShape {
-	public static let cornerRadius: CGFloat = 16
+//	public static let cornerRadius: CGFloat = 16
+	public static let cornerRadius: CGFloat = 12
 }

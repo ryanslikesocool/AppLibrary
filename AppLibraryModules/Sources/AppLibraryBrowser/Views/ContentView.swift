@@ -21,7 +21,6 @@ struct ContentView: View {
 			}
 		}
 
-		.background(.separator, in: containerShape.stroke(lineWidth: 1))
 		.overlay(alignment: .top) {
 			if browserModel.isSearchDisplayed {
 				SearchField()
@@ -43,10 +42,6 @@ struct ContentView: View {
 // MARK: - Supporting Views
 
 extension ContentView {
-	var containerShape: some InsettableShape {
-		BrowserWindowShape()
-	}
-
 	var queryLoadingView: some View {
 		ProgressView()
 			.frame(maxWidth: .infinity, maxHeight: .infinity)

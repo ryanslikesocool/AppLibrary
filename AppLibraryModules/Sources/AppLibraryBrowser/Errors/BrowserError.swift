@@ -1,4 +1,5 @@
 import Foundation
+import LocalizationTable
 
 enum BrowserError: Swift.Error {
 	case noSearchScopes
@@ -43,6 +44,12 @@ extension BrowserError: LocalizedError {
 			nil
 		}
 	}
+}
+
+// MARK: - Constants
+
+private extension LocalizationTableResource {
+	static let browserError = Self("BrowserError")
 }
 
 // MARK: -

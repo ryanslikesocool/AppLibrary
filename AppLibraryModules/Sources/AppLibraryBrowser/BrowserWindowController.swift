@@ -1,5 +1,7 @@
 import AppKit
 import AppLibraryCommon
+import AppLibraryCommonViews
+import LocalizationTable
 import OSLog
 import SwiftUI
 
@@ -9,21 +11,28 @@ public final class BrowserWindowController: NSWindowController, ObservableObject
 	public init() {
 		browserModel = BrowserModel()
 
-		let window = BrowserWindow(
+		let window = NSVisualEffectWindow(
 			contentRect: NSRect(origin: .zero, size: BrowserWindowController.windowSize),
-			styleMask: [.borderless, .nonactivatingPanel],
-			backing: .buffered,
+			styleMask: [.titled, .fullSizeContentView, .nonactivatingPanel],
 			defer: false
 		)
-
-		window.title = Self.windowTitle
 		window.identifier = Self.windowIdentifier
-
-		window.contentView = NSHostingView(rootView: ContentView(browserModel: browserModel))
 
 		super.init(window: window)
 
 		window.delegate = self
+		window.title = String(localized: "BROWSER_WINDOW.TITLE", table: .common)
+		window.titleVisibility = .hidden
+		window.titlebarAppearsTransparent = true
+		window.isExcludedFromWindowsMenu = true
+		window.level = .floating
+		window.isMovable = false
+
+		window.material = .menu
+
+		window.contentView = NSHostingView(rootView:
+			ContentView(browserModel: browserModel)
+		)
 
 		positionWindow(window)
 	}
@@ -37,11 +46,8 @@ public final class BrowserWindowController: NSWindowController, ObservableObject
 // MARK: - NSWindowDelegate
 
 extension BrowserWindowController: NSWindowDelegate {
-	override public func windowDidLoad() {
-		window?.invalidateShadow()
-	}
-
 	public func windowDidResignKey(_ notification: Notification) {
+		dismiss()
 		browserModel.keyboardObserver.destroyEventMonitor()
 	}
 
@@ -56,7 +62,6 @@ extension BrowserWindowController {
 	static let windowSize: NSSize = NSSize(width: 300, height: 450)
 	static let windowPadding: CGFloat = 8
 
-	static let windowTitle: String = "App Library"
 	static let windowIdentifier: NSUserInterfaceItemIdentifier = NSUserInterfaceItemIdentifier(WindowIdentifier.appLibrary)
 }
 
@@ -81,13 +86,15 @@ public extension BrowserWindowController {
 
 	func dismiss() {
 		Logger.module.debug("Dismissed browser.")
-//		window?.orderOut(self) // handled by window.hidesOnDeactivate = true
+		window?.orderOut(self)
 	}
 }
 
+// MARK: -
+
 private extension BrowserWindowController {
 	func positionWindow(_ window: NSWindow) {
-		if let windowOrigin = calculateWindowOrigin() {
+		if let windowOrigin = Self.calculateWindowOrigin() {
 			window.setFrameOrigin(windowOrigin)
 		} else {
 			window.center()
@@ -98,11 +105,11 @@ private extension BrowserWindowController {
 		}
 	}
 
-	func calculateWindowOrigin() -> CGPoint? {
+	static func calculateWindowOrigin() -> CGPoint? {
 		guard
-			let iconRect = DockUtility.getIconRect(),
-			let dockPosition = DockUtility.estimateDockPosition(),
-			let screen = NSScreen.main
+			let iconRect = DockTile.main?.rect,
+			let screen = NSScreen.main,
+			let dockPosition = screen.estimatedDockPosition
 		else {
 			return nil
 		}

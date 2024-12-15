@@ -6,7 +6,7 @@ let package = Package(
 	name: "AppLibraryModules",
 	defaultLocalization: "en",
 	platforms: [
-		.macOS(.v14),
+		.macOS(.v14)
 	],
 	products: [
 		.library(name: "AppLibraryModules", targets: ["AppLibrary"]),
@@ -23,8 +23,9 @@ let package = Package(
 		.package(url: "https://github.com/sindresorhus/ExceptionCatcher.git", from: "2.0.1"),
 		.package(url: "https://github.com/orchetect/SettingsAccess.git", from: "2.0.0"),
 
+		.package(url: "https://github.com/ryanslikesocool/LocalizationTable.git", from: "0.0.1"),
 		.package(url: "https://github.com/ryanslikesocool/AsyncNSMetadataQuery.git", from: "0.0.1"),
-		.package(url: "https://github.com/ryanslikesocool/LocalizationTable.git", branch: "main"),
+		.package(url: "https://github.com/ryanslikesocool/SwiftyAccessibility.git", from: "0.0.1"),
 	],
 	targets: [
 		.target(
@@ -43,26 +44,27 @@ let package = Package(
 
 				"AsyncNSMetadataQuery",
 				"LocalizationTable",
+				"SwiftyAccessibility",
 
 				"AppLibraryCommonViews",
 				"AppLibrarySettingsWindow",
 			],
 			swiftSettings: [
-				.swiftLanguageMode(.v5),
+				.swiftLanguageMode(.v5)
 			]
 		),
 
 		.target(
 			name: "AppLibraryAboutWindow",
 			dependencies: [
-				"AppLibraryCommon",
+				"AppLibraryCommon"
 			]
 		),
 
 		.target(
 			name: "AppLibraryStorage",
 			dependencies: [
-				"AppLibraryCommon",
+				"AppLibraryCommon"
 			]
 		),
 	]
@@ -136,7 +138,7 @@ var commonTargets: [Target] {
 		.target(
 			name: "AppLibraryCommonViews",
 			dependencies: [
-				"AppLibraryCommon",
+				"AppLibraryCommon"
 			]
 		),
 

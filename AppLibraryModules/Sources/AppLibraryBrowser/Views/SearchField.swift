@@ -52,10 +52,8 @@ struct SearchField: View {
 // MARK: - Supporting Views
 
 private extension SearchField {
-	var containerShape: RoundedRectangle {
-		// TODO: replace with Self.shape
-		// hopefully?
-		RoundedRectangle(cornerRadius: 10)
+	var containerShape: some InsettableShape {
+		Self.shape
 	}
 }
 
@@ -72,7 +70,7 @@ private extension SearchField {
 	static let focusedStroke: Stroke = Stroke(style: Color.accentColor, width: 2)
 
 	static let innerPadding: CGFloat = 8
-	static let outerPadding: CGFloat = 8
+	static let outerPadding: CGFloat = 4
 	static let cornerRadius: CGFloat = BrowserWindowShape.cornerRadius - outerPadding
 
 	static let shape: BrowserWindowShape = BrowserWindowShape().inset(by: outerPadding)

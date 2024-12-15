@@ -1,5 +1,5 @@
 import LocalizationTable
 
 public extension LocalizationTableResource {
-	static let common: Self = "Common"
+	static let common = Self("Common")
 }

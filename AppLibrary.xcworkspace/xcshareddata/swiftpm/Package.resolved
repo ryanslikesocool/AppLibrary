@@ -1,5 +1,5 @@
 {
-  "originHash" : "8744409b950914029a937336bc84182141fb3f0e52bd74813e625970d57b4f85",
+  "originHash" : "b0eae7c72c8823a2f39a03c809ddf3088961326b882c90766645767b3e456588",
   "pins" : [
     {
       "identity" : "asyncnsmetadataquery",
@@ -24,8 +24,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/ryanslikesocool/LocalizationTable.git",
       "state" : {
-        "branch" : "main",
-        "revision" : "66c04a96654dd365d2e1b4eead61be45982e8c76"
+        "revision" : "8689a279a2b4c97b1ac65c925a548bcb199945cd",
+        "version" : "0.0.1"
       }
     },
     {
@@ -35,6 +35,15 @@
       "state" : {
         "revision" : "08e80c35501f273afa2f5d6f737429bbe395ff81",
         "version" : "2.1.0"
+      }
+    },
+    {
+      "identity" : "swiftyaccessibility",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ryanslikesocool/SwiftyAccessibility.git",
+      "state" : {
+        "revision" : "ef027b292a28995b4d78cf9d9b8512656814c07e",
+        "version" : "0.0.1"
       }
     }
   ],

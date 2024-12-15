@@ -1,5 +1,5 @@
 import LocalizationTable
 
 extension LocalizationTableResource {
-	static let settingsWindow: Self = "SettingsWindow"
+	static let settingsWindow = Self("SettingsWindow")
 }

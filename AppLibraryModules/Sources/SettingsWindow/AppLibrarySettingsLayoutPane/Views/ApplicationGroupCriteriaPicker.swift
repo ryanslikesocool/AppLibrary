@@ -45,5 +45,5 @@ private extension ApplicationGroupCriteriaPicker.SelectionValue {
 }
 
 private extension LocalizationTableResource {
-	static let applicationGroupCriteriaPicker: Self = "ApplicationGroupCriteriaPicker"
+	static let applicationGroupCriteriaPicker = Self("ApplicationGroupCriteriaPicker")
 }

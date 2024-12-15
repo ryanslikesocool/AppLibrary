@@ -1,5 +1,5 @@
 import LocalizationTable
 
 extension LocalizationTableResource {
-	static let applicationSearchScopeList: Self = "ApplicationSearchScopeList"
+	static let applicationSearchScopeList = Self("ApplicationSearchScopeList")
 }

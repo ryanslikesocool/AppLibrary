@@ -50,5 +50,5 @@ private extension LibraryLayoutPicker.SelectionValue {
 }
 
 private extension LocalizationTableResource {
-	static let libraryLayoutPicker: Self = "LibraryLayoutPicker"
+	static let libraryLayoutPicker = Self("LibraryLayoutPicker")
 }

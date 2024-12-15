@@ -48,5 +48,5 @@ private extension AppearancePicker.SelectionValue {
 }
 
 private extension LocalizationTableResource {
-	static let appearancePicker: Self = "AppearancePicker"
+	static let appearancePicker = Self("AppearancePicker")
 }

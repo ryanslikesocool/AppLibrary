@@ -1,5 +1,5 @@
 import LocalizationTable
 
 extension LocalizationTableResource {
-	static let additionalApplicationGroups: Self = "AdditionalApplicationGroups"
+	static let additionalApplicationGroups = Self("AdditionalApplicationGroups")
 }
