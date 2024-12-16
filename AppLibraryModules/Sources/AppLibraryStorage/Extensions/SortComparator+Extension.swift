@@ -1,10 +1,9 @@
-import AppLibraryStorage
 import Foundation
 
-extension SortComparator where
+public extension SortComparator where
 	Self == KeyPathComparator<Application>
 {
-	static func localizedStandard(_ keyPath: KeyPath<Compared, String>) -> Self {
+	static func localizedStandard(_ keyPath: any KeyPath<Compared, String> & Sendable) -> Self {
 		KeyPathComparator(keyPath, comparator: String.Comparator.localizedStandard)
 	}
 }

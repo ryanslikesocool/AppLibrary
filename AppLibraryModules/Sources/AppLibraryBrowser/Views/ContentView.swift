@@ -14,10 +14,9 @@ struct ContentView: View {
 	public var body: some View {
 		Group {
 			switch browserModel.state {
-				case .loading?: queryLoadingView
-				case .complete?: LibraryView()
-				case let .failed(reason)?: ErrorView(reason: reason)
-				case nil: EmptyView()
+				case .idle: LibraryView()
+				case .loading: queryLoadingView
+				case let .error(error): ErrorView(reason: error)
 			}
 		}
 

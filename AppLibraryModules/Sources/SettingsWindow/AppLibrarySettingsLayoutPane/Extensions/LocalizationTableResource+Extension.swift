@@ -1,5 +1,8 @@
 import LocalizationTable
+import AppLibraryCommon
 
 extension LocalizationTableResource {
-	static let additionalApplicationGroups = Self("AdditionalApplicationGroups")
+	static var additionalApplicationGroups: Self {
+		LocalizationKey<String.LocalizationValue>.AdditionalApplicationGroups.localizationTable
+	}
 }

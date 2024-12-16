@@ -16,14 +16,14 @@ extension ApplicationSearchScopesList {
 			Menu {
 				Section {
 					Button(action: primaryAction) {
-						Text("ADD_MENU.ACTION", table: .applicationSearchScopesList)
+						Text(.applicationSearchScopesList.addMenu.action, table: .applicationSearchScopesList)
 					}
 				}
 
 				DefaultSearchScopesSection(addSearchScope: addSearchScope)
 			} label: {
 				Label {
-					Text("ADD_MENU.LABEL", table: .applicationSearchScopesList)
+					Text(.applicationSearchScopesList.addMenu.label, table: .applicationSearchScopesList)
 				} icon: {
 					Image(systemName: Constant.Symbol.plus)
 				}
@@ -39,8 +39,8 @@ extension ApplicationSearchScopesList {
 				onCompletion: onFileImporterCompleted
 			)
 			.fileDialogDefaultDirectory(.homeDirectory)
-			.fileDialogMessage(Text("ADD_SCOPE_DIALOG.MESSAGE", table: .applicationSearchScopesList))
-			.fileDialogConfirmationLabel(Text("ADD_SCOPE_DIALOG.CONFIRM", table: .applicationSearchScopesList))
+			.fileDialogMessage(Text(.applicationSearchScopesList.addDialog.message, table: .applicationSearchScopesList))
+			.fileDialogConfirmationLabel(Text(.applicationSearchScopesList.addDialog.confirm, table: .applicationSearchScopesList))
 		}
 	}
 }

@@ -50,7 +50,7 @@ public extension SettingsButton where
 	init(destination: SettingsCategory? = nil) {
 		self.init(destination: destination) {
 			Label {
-				Text("LINK.SETTINGS", table: .common)
+				Text(.common.link.settings, table: .common)
 			} icon: {
 				Image(systemName: Constant.Symbol.gear)
 			}

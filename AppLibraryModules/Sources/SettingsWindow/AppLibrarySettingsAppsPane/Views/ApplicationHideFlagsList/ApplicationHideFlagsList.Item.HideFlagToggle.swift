@@ -1,4 +1,5 @@
 import LocalizationTable
+import AppLibraryCommon
 import SwiftUI
 
 extension ApplicationHideFlagsList.Item {
@@ -26,6 +27,6 @@ private extension ApplicationHideFlagsList.Item.HideFlagToggle {
 	func makeTitleText() -> String {
 		let localizationTable: LocalizationTableResource = .applicationHideFlagsList
 		let flagName = String(localized: flagNameKey, table: localizationTable)
-		return String(localized: "ITEM.FORMAT.VERB_\(flagName)", table: localizationTable)
+		return String(localized: .applicationHideFlagsList.item.format.verb(flagName), table: localizationTable)
 	}
 }

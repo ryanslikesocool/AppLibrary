@@ -1,28 +1,6 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "FLAG.BROWSER" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Browser"
-          }
-        }
-      }
-    },
-    "FLAG.SEARCH" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Search"
-          }
-        }
-      }
-    },
     "FORM.DESCRIPTION" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -30,6 +8,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Choose which apps are hidden in the Library."
+          }
+        }
+      }
+    },
+    "ITEM.BROWSER" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Browser"
           }
         }
       }
@@ -52,6 +41,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Hide in %@"
+          }
+        }
+      }
+    },
+    "ITEM.SEARCH" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Search"
           }
         }
       }

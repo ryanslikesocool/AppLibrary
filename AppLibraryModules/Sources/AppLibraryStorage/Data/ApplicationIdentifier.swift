@@ -1,5 +1,8 @@
+import Foundation
+
 public struct ApplicationIdentifier {
 	public let bundleIdentifier: String
+//	public let url: URL // TODO: add url as unique parameter
 	public let version: String?
 
 	@available(*, deprecated)
@@ -8,10 +11,12 @@ public struct ApplicationIdentifier {
 	public init(
 		_ bundleIdentifier: String,
 		displayName: String,
+//		url: URL,
 		version: String? = nil
 	) {
 		self.bundleIdentifier = bundleIdentifier
 		self.displayName = displayName
+//		self.url = url
 		self.version = version
 	}
 }
@@ -26,7 +31,8 @@ extension ApplicationIdentifier: Sendable { }
 extension ApplicationIdentifier: Equatable {
 	public static func == (lhs: Self, rhs: Self) -> Bool {
 		lhs.bundleIdentifier == rhs.bundleIdentifier
-		&& lhs.version == rhs.version
+//			&& lhs.url == rhs.url
+			&& lhs.version == rhs.version
 	}
 }
 
@@ -36,6 +42,7 @@ extension ApplicationIdentifier: Equatable {
 extension ApplicationIdentifier: Hashable {
 	public func hash(into hasher: inout Hasher) {
 		hasher.combine(bundleIdentifier)
+//		hasher.combine(url)
 		hasher.combine(version)
 	}
 }

@@ -1,6 +1,12 @@
+import AppLibraryCommon
 import LocalizationTable
 
 extension LocalizationTableResource {
-	static let applicationHideFlagsList = Self("ApplicationHideFlagsList")
-	static let applicationSearchScopesList = Self("ApplicationSearchScopesList")
+	static var applicationHideFlagsList: Self {
+		LocalizationKey<String.LocalizationValue>.ApplicationHideFlagsList.localizationTable
+	}
+
+	static var applicationSearchScopesList: Self {
+		LocalizationKey<String.LocalizationValue>.ApplicationSearchScopesList.localizationTable
+	}
 }

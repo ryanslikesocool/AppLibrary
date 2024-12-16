@@ -28,8 +28,8 @@ private extension ApplicationSearchScopesSheet {
 	@ViewBuilder
 	func makeHeader() -> some View {
 		SheetHeaderLabel(
-			headline: "TITLE",
-			subheadline: "LIST.DESCRIPTION",
+			headline: .applicationSearchScopesList.title,
+			subheadline: .applicationSearchScopesList.list.description,
 			table: .applicationSearchScopesList
 		)
 

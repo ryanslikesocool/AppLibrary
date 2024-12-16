@@ -1,7 +1,7 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "ITEM.DARK.LABEL" : {
+    "ITEM.DARK" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -12,7 +12,7 @@
         }
       }
     },
-    "ITEM.LIGHT.LABEL" : {
+    "ITEM.LIGHT" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -23,7 +23,7 @@
         }
       }
     },
-    "ITEM.SYSTEM.LABEL" : {
+    "ITEM.SYSTEM" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {

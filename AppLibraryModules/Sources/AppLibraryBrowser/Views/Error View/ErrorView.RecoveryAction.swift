@@ -6,17 +6,15 @@ import SwiftUI
 
 extension ErrorView {
 	struct RecoveryAction: View {
-		private typealias RecoveryActionKind = BrowserError?.RecoveryActionKind
+		private let actionKind: BrowserError.RecoveryAction
 
-		private let actionKind: RecoveryActionKind
-
-		public init(error: BrowserError?) {
+		public init(error: BrowserError) {
 			actionKind = error.recoveryActionKind
 		}
 
 		public var body: some View {
 			switch actionKind {
-				case let .settings(destination):
+				case let .openSettings(destination):
 					settingsButton(destination: destination)
 				case .retry:
 					retryButton()
@@ -40,25 +38,6 @@ private extension ErrorView.RecoveryAction {
 			} icon: {
 				Image(systemName: Constant.Symbol.arrow_clockwise)
 			}
-		}
-	}
-}
-
-// MARK: -
-
-private extension BrowserError? {
-	enum RecoveryActionKind {
-		case settings(SettingsCategory)
-		case retry
-	}
-
-	var recoveryActionKind: RecoveryActionKind {
-		switch self {
-			case .noSearchScopes?: .settings(.apps)
-			case .noApps?: .settings(.apps)
-			case .allAppsHidden?: .settings(.apps)
-			case .queryFailure?: .retry
-			case nil: .retry
 		}
 	}
 }

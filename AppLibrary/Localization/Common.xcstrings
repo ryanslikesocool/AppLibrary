@@ -1,6 +1,17 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "ACTION.CANCEL" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancel"
+          }
+        }
+      }
+    },
     "ACTION.DONE" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -8,17 +19,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Done"
-          }
-        }
-      }
-    },
-    "ACTION.MANAGE.EXTERNAL" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Manage…"
           }
         }
       }
@@ -85,6 +85,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "App Library"
+          }
+        }
+      }
+    },
+    "LINK.MANAGE" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Manage…"
           }
         }
       }

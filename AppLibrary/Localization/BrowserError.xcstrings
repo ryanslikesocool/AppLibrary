@@ -1,7 +1,18 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "RECOVERY_SUGGESTION.ALL_APPS_HIDDEN" : {
+    "ALL_APPLICATIONS_HIDDEN.DESCRIPTION" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "All Applications Hidden"
+          }
+        }
+      }
+    },
+    "ALL_APPLICATIONS_HIDDEN.RECOVERY_SUGGESTION" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -12,7 +23,18 @@
         }
       }
     },
-    "RECOVERY_SUGGESTION.NO_APPS" : {
+    "NO_APPLICATIONS.DESCRIPTION" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No Applications"
+          }
+        }
+      }
+    },
+    "NO_APPLICATIONS.RECOVERY_SUGGESTION" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -23,57 +45,24 @@
         }
       }
     },
-    "RECOVERY_SUGGESTION.NO_SEARCH_SCOPES" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Add search scopes in the settings pane."
-          }
-        }
-      }
-    },
-    "TITLE.ALL_APPS_HIDDEN" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "All Apps Hidden"
-          }
-        }
-      }
-    },
-    "TITLE.LOAD_FAILURE" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Failed to Load Apps"
-          }
-        }
-      }
-    },
-    "TITLE.NO_APPS" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No Apps"
-          }
-        }
-      }
-    },
-    "TITLE.NO_SEARCH_SCOPES" : {
+    "NO_SEARCH_SCOPES.DESCRIPTION" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "No Search Scopes"
+          }
+        }
+      }
+    },
+    "NO_SEARCH_SCOPES.RECOVERY_SUGGESTION" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add search scopes in the settings pane."
           }
         }
       }

@@ -33,10 +33,10 @@ public enum AccessibilityUtility {
 			let alert = NSAlert()
 
 			alert.alertStyle = .informational
-			alert.messageText = String(localized: "TITLE", table: .accessibilityRequest)
-			alert.informativeText = String(localized: "DESCRIPTION", table: .accessibilityRequest)
-			/*let denyButton =*/ alert.addButton(withTitle: String(localized: "ACTION.DENY", table: .accessibilityRequest))
-			/*let allowButton =*/ alert.addButton(withTitle: String(localized: "ACTION.ALLOW", table: .accessibilityRequest))
+			alert.messageText = String(localized: .accessibilityRequest.title, table: .accessibilityRequest)
+			alert.informativeText = String(localized: .accessibilityRequest.description, table: .accessibilityRequest)
+			/*let denyButton =*/ alert.addButton(withTitle: String(localized: .accessibilityRequest.action.deny, table: .accessibilityRequest))
+			/*let allowButton =*/ alert.addButton(withTitle: String(localized: .accessibilityRequest.action.allow, table: .accessibilityRequest))
 
 			return alert
 		}

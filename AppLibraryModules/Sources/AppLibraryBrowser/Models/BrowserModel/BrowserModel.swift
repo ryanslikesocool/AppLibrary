@@ -5,13 +5,19 @@ import OSLog
 import SwiftUI
 
 final class BrowserModel: ObservableObject {
-	@Published var state: BrowserState?
-	@Published var apps: [Application]
+	private let applicationCache: ApplicationCache
+//	private var applicationCache: ApplicationCache { .shared }
+
+	@Published private(set) var state: BrowserState
 	@Published var searchQuery: String
 	@Published var focus: FocusElement?
 
+	@MainActor
+	var apps: [Application] { applicationCache.applications }
+
+	@MainActor
 	var isSearchDisplayed: Bool {
-		if case .complete = state {
+		if case .idle = applicationCache.state {
 			true
 		} else {
 			false
@@ -42,9 +48,13 @@ final class BrowserModel: ObservableObject {
 
 	@MainActor
 	init() {
-		apps = []
+		state = .idle
 		searchQuery = ""
 		focus = nil
+
+		applicationCache = ApplicationCache()
+		applicationCache.delegate = self
+
 		refreshApps()
 
 		_ = refreshAppsSubscriber
@@ -52,13 +62,23 @@ final class BrowserModel: ObservableObject {
 	}
 }
 
-private extension BrowserModel {
-	func searchFilter(application: Application) -> Bool {
+// MARK: - ApplicationCacheDelegate
+
+extension BrowserModel: ApplicationCacheDelegate {
+	func applicationCache(didFinishQuery results: borrowing [Application]) {
+		state = .idle
+	}
+}
+
+// MARK: -
+
+extension BrowserModel {
+	private func searchFilter(application: Application) -> Bool {
 		application.displayName.localizedStandardContains(searchQuery)
 	}
 
 	@MainActor
-	static func hiddenAppsFilterBrowser(application: Application) -> Bool {
+	private static func hiddenAppsFilterBrowser(application: Application) -> Bool {
 		if let hideFlags = AppsSettings.shared.applicationHideFlags[application.id] {
 			!hideFlags.contains(.hiddenInBrowser)
 		} else {
@@ -67,7 +87,7 @@ private extension BrowserModel {
 	}
 
 	@MainActor
-	static func hiddenAppsFilterSearch(application: Application) -> Bool {
+	private static func hiddenAppsFilterSearch(application: Application) -> Bool {
 		if let hideFlags = AppsSettings.shared.applicationHideFlags[application.id] {
 			!hideFlags.contains(.hiddenInSearch)
 		} else {
@@ -75,21 +95,39 @@ private extension BrowserModel {
 		}
 	}
 
-	func activateSearch() {
+	private func activateSearch() {
 		focus = .search
 	}
-}
 
-extension BrowserModel {
 	func filteredAppsChanged(_ newValue: borrowing [Application]) {
 		guard searchQuery.isEmpty else {
 			return
 		}
 
 		state = if newValue.isEmpty {
-			.failed(reason: .allAppsHidden)
+			.error(.allApplicationsHidden)
 		} else {
-			.complete
+			.idle
+		}
+	}
+
+	@MainActor
+	func refreshApps() {
+		do {
+			let searchScopes = try getSearchScopes()
+
+			state = .loading
+			applicationCache.reload(searchScopes: searchScopes)
+		} catch {
+			state = .error(error)
+		}
+
+		func getSearchScopes() throws(BrowserError) -> [URL] {
+			let searchScopes = LocationSettings.shared.searchScopes
+			guard !searchScopes.isEmpty else {
+				throw .noSearchScopes
+			}
+			return Array(searchScopes)
 		}
 	}
 }

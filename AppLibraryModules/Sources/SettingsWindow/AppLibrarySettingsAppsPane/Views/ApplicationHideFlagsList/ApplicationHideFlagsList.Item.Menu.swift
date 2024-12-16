@@ -54,7 +54,7 @@ private extension ApplicationHideFlagsList.Item.Menu {
 			}
 		let itemList = ListFormatter.localizedString(byJoining: items)
 
-		let text = String(localized: "ITEM.FORMAT.ADJECTIVE_\(itemList)", table: localizationTable)
+		let text = String(localized: .applicationHideFlagsList.item.format.adjective(itemList), table: localizationTable)
 
 		return text
 	}
@@ -71,8 +71,8 @@ private extension ApplicationHideFlagsList.Item.Menu {
 private extension ApplicationHideFlag {
 	var flagLabelKey: String.LocalizationValue {
 		switch self {
-			case .hiddenInBrowser: "FLAG.BROWSER"
-			case .hiddenInSearch: "FLAG.SEARCH"
+			case .hiddenInBrowser: .applicationHideFlagsList.item.browser
+			case .hiddenInSearch: .applicationHideFlagsList.item.search
 		}
 	}
 }

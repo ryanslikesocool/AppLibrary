@@ -1,3 +1,4 @@
+import AppLibraryCommon
 import LocalizationTable
 import SwiftUI
 
@@ -6,18 +7,27 @@ struct SheetFormItem<SheetContent>: View where
 {
 	@State private var isSheetPresented: Bool = false
 
+	private let titleKey: LocalizedStringKey
+	private let descriptionKey: LocalizedStringKey
 	private let table: LocalizationTableResource
 	private let sheetContent: () -> SheetContent
 
-	public init(table: LocalizationTableResource, @ViewBuilder sheetContent: @escaping () -> SheetContent) {
+	public init(
+		title titleKey: LocalizedStringKey,
+		description descriptionKey: LocalizedStringKey,
+		table: LocalizationTableResource,
+		@ViewBuilder sheetContent: @escaping () -> SheetContent
+	) {
+		self.titleKey = titleKey
+		self.descriptionKey = descriptionKey
 		self.table = table
 		self.sheetContent = sheetContent
 	}
 
 	public var body: some View {
 		LabeledContent(content: makeButton) {
-			Text("TITLE", table: table)
-			Text("FORM.DESCRIPTION", table: table)
+			Text(titleKey, table: table)
+			Text(descriptionKey, table: table)
 		}
 		.sheet(isPresented: $isSheetPresented, content: sheetContent)
 	}
@@ -30,7 +40,7 @@ private extension SheetFormItem {
 		Button {
 			isSheetPresented = true
 		} label: {
-			Text("ACTION.MANAGE.EXTERNAL", table: .common)
+			Text(.common.link.manage, table: .common)
 		}
 	}
 }

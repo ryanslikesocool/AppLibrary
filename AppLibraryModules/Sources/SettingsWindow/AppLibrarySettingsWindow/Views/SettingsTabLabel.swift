@@ -23,9 +23,9 @@ struct SettingsTabLabel: View {
 private extension SettingsCategory {
 	var titleKey: LocalizedStringKey {
 		switch self {
-			case .general: "TAB.GENERAL.TITLE"
-			case .layout: "TAB.LAYOUT.TITLE"
-			case .apps: "TAB.APPS.TITLE"
+			case .general: .settingsWindow.category.general
+			case .layout: .settingsWindow.category.layout
+			case .apps: .settingsWindow.category.apps
 		}
 	}
 

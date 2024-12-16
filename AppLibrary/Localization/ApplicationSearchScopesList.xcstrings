@@ -1,6 +1,28 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "ADD_DIALOG.CONFIRM" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Select Scope"
+          }
+        }
+      }
+    },
+    "ADD_DIALOG.MESSAGE" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add a Search Scope"
+          }
+        }
+      }
+    },
     "ADD_MENU.ACTION" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -12,6 +34,17 @@
         }
       }
     },
+    "ADD_MENU.DEFAULT_SECTION.TITLE" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Default Scopes"
+          }
+        }
+      }
+    },
     "ADD_MENU.LABEL" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -19,39 +52,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Add Scope"
-          }
-        }
-      }
-    },
-    "ADD_SCOPE_DIALOG.CONFIRM" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Select Scope"
-          }
-        }
-      }
-    },
-    "ADD_SCOPE_DIALOG.MESSAGE" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Add a Search Scope"
-          }
-        }
-      }
-    },
-    "DEFAULT_SECTION.TITLE" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Default Scopes"
           }
         }
       }

@@ -1,3 +1,4 @@
+import AppLibraryCommon
 import AppLibraryStorage
 import LocalizationTable
 import SwiftUI
@@ -13,7 +14,7 @@ struct LibraryLayoutPicker: View {
 		Picker(selection: $selection) {
 			ForEach(Self.itemDisplayOrder, content: makeItem)
 		} label: {
-			Text("LABEL", table: .libraryLayoutPicker)
+			Text(.libraryLayoutPicker.label, table: .libraryLayoutPicker)
 		}
 	}
 }
@@ -43,12 +44,14 @@ private extension LibraryLayoutPicker {
 private extension LibraryLayoutPicker.SelectionValue {
 	var labelKey: LocalizedStringKey {
 		switch self {
-			case .list: "ITEM.LIST.LABEL"
-			case .grid: "ITEM.GRID.LABEL"
+			case .list: .libraryLayoutPicker.item.list
+			case .grid: .libraryLayoutPicker.item.grid
 		}
 	}
 }
 
 private extension LocalizationTableResource {
-	static let libraryLayoutPicker = Self("LibraryLayoutPicker")
+	static var libraryLayoutPicker: Self {
+		LocalizationKey<String.LocalizationValue>.LibraryLayoutPicker.localizationTable
+	}
 }

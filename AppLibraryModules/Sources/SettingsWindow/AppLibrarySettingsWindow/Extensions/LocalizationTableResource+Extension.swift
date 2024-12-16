@@ -1,5 +1,8 @@
+import AppLibraryCommon
 import LocalizationTable
 
 extension LocalizationTableResource {
-	static let settingsWindow = Self("SettingsWindow")
+	static var settingsWindow: Self {
+		LocalizationKey<String.LocalizationValue>.SettingsWindow.localizationTable
+	}
 }

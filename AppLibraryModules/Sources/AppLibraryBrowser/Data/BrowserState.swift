@@ -1,5 +1,7 @@
+import AppLibraryStorage
+
 enum BrowserState {
-	case loading(task: Task<Void, Never>) // TODO: ensure task is cancelled when setting state.
-	case complete
-	case failed(reason: BrowserError)
+	case idle
+	case loading
+	case error(BrowserError)
 }

@@ -1,3 +1,4 @@
+import AppLibraryCommon
 import AppLibraryStorage
 import SwiftUI
 
@@ -8,8 +9,8 @@ struct AdditionalApplicationGroupsSection: View {
 		Section {
 			ForEach(Self.itemDisplayOrder, content: Item.init)
 		} header: {
-			Text("SECTION.TITLE", table: .additionalApplicationGroups)
-			Text("SECTION.DESCRIPTION", table: .additionalApplicationGroups)
+			Text(.additionalApplicationGroups.section.title, table: .additionalApplicationGroups)
+			Text(.additionalApplicationGroups.section.description, table: .additionalApplicationGroups)
 		}
 	}
 }

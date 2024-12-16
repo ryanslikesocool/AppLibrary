@@ -1,12 +1,17 @@
+import AppLibraryCommon
+import AppLibraryStorage
 import Foundation
 import LocalizationTable
 
 enum BrowserError: Swift.Error {
 	case noSearchScopes
-	case noApps
-	case allAppsHidden
-	case queryFailure(String)
+	case noApplications
+	case allApplicationsHidden
 }
+
+// MARK: - Sendable
+
+extension BrowserError: Sendable { }
 
 // MARK: - Equatable
 
@@ -21,27 +26,42 @@ extension BrowserError: Hashable { }
 extension BrowserError: LocalizedError {
 	var errorDescription: String? {
 		let localizationKey: String.LocalizationValue = switch self {
-			case .noSearchScopes: "TITLE.NO_SEARCH_SCOPES"
-			case .noApps: "TITLE.NO_APPS"
-			case .allAppsHidden: "TITLE.ALL_APPS_HIDDEN"
-			case .queryFailure: "TITLE.LOAD_FAILURE"
+			case .noSearchScopes: .browserError.noSearchScopes.description
+			case .noApplications: .browserError.noApplications.description
+			case .allApplicationsHidden: .browserError.allApplicationsHidden.description
 		}
 
 		return String(localized: localizationKey, table: .browserError)
 	}
 
 	var recoverySuggestion: String? {
-		let localizationKey: String.LocalizationValue? = switch self {
-			case .noSearchScopes: "RECOVERY_SUGGESTION.NO_SEARCH_SCOPES"
-			case .noApps: "RECOVERY_SUGGESTION.NO_APPS"
-			case .allAppsHidden: "RECOVERY_SUGGESTION.ALL_APPS_HIDDEN"
-			case .queryFailure: nil
+		let localizationKey: String.LocalizationValue = switch self {
+			case .noSearchScopes: .browserError.noSearchScopes.recoverySuggestion
+			case .noApplications: .browserError.noApplications.recoverySuggestion
+			case .allApplicationsHidden: .browserError.allApplicationsHidden.recoverySuggestion
 		}
 
-		return if let localizationKey {
-			String(localized: localizationKey, table: .browserError)
-		} else {
-			nil
+		return String(localized: localizationKey, table: .browserError)
+	}
+}
+
+// MARK: - Supporting Data
+
+extension BrowserError {
+	enum RecoveryAction {
+		case openSettings(SettingsCategory)
+		case retry
+	}
+}
+
+// MARK: -
+
+extension BrowserError {
+	var recoveryActionKind: RecoveryAction {
+		switch self {
+			case .noSearchScopes: .openSettings(.apps)
+			case .noApplications: .openSettings(.apps)
+			case .allApplicationsHidden: .openSettings(.apps)
 		}
 	}
 }
@@ -49,13 +69,7 @@ extension BrowserError: LocalizedError {
 // MARK: - Constants
 
 private extension LocalizationTableResource {
-	static let browserError = Self("BrowserError")
-}
-
-// MARK: -
-
-extension BrowserError {
-	static func queryFailure(_ error: any Error) -> Self {
-		.queryFailure(String(describing: error))
+	static var browserError: Self {
+		LocalizationKey<String.LocalizationValue>.BrowserError.localizationTable
 	}
 }

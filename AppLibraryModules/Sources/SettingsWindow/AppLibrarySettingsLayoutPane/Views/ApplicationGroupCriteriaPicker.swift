@@ -1,3 +1,4 @@
+import AppLibraryCommon
 import AppLibraryStorage
 import LocalizationTable
 import SwiftUI
@@ -17,7 +18,7 @@ struct ApplicationGroupCriteriaPicker: View {
 				makeItem(.category)
 			}
 		} label: {
-			Text("LABEL", table: .applicationGroupCriteriaPicker)
+			Text(.applicationGroupCriteriaPicker.label, table: .applicationGroupCriteriaPicker)
 		}
 	}
 }
@@ -38,12 +39,14 @@ private extension ApplicationGroupCriteriaPicker {
 private extension ApplicationGroupCriteriaPicker.SelectionValue {
 	var labelKey: LocalizedStringKey {
 		switch self {
-			case .category?: "ITEM.CATEGORY.LABEL"
-			case .none: "ITEM.NONE.LABEL"
+			case .category?: .applicationGroupCriteriaPicker.item.category
+			case .none: .applicationGroupCriteriaPicker.item.none
 		}
 	}
 }
 
 private extension LocalizationTableResource {
-	static let applicationGroupCriteriaPicker = Self("ApplicationGroupCriteriaPicker")
+	static var applicationGroupCriteriaPicker: Self {
+		LocalizationKey<String.LocalizationValue>.ApplicationGroupCriteriaPicker.localizationTable
+	}
 }

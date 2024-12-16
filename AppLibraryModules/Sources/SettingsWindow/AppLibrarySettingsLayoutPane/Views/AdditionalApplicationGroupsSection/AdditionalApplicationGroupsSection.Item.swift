@@ -1,3 +1,4 @@
+import AppLibraryCommon
 import AppLibraryStorage
 import SwiftUI
 
@@ -27,15 +28,15 @@ extension AdditionalApplicationGroupsSection {
 private extension AdditionalApplicationGroupsSection.Item.SelectionValue {
 	var labelKey: LocalizedStringKey {
 		switch self {
-			case .recentlyAdded: "ITEM.RECENTLY_ADDED.LABEL"
-			case .recentlyUpdated: "ITEM.RECENTLY_UPDATED.LABEL"
+			case .recentlyAdded: .additionalApplicationGroups.item.recentlyAdded.label
+			case .recentlyUpdated: .additionalApplicationGroups.item.recentlyUpdated.label
 		}
 	}
 
 	var descriptionKey: LocalizedStringKey {
 		switch self {
-			case .recentlyAdded: "ITEM.RECENTLY_ADDED.DESCRIPTION"
-			case .recentlyUpdated: "ITEM.RECENTLY_UPDATED.DESCRIPTION"
+			case .recentlyAdded: .additionalApplicationGroups.item.recentlyAdded.description
+			case .recentlyUpdated: .additionalApplicationGroups.item.recentlyUpdated.description
 		}
 	}
 }

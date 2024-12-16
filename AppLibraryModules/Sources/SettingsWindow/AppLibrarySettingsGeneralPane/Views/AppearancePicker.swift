@@ -1,3 +1,4 @@
+import AppLibraryCommon
 import AppLibraryStorage
 import LocalizationTable
 import SwiftUI
@@ -18,7 +19,7 @@ struct AppearancePicker: View {
 				makeItem(.dark)
 			}
 		} label: {
-			Text("LABEL", table: .appearancePicker)
+			Text(.appearancePicker.label, table: .appearancePicker)
 		}
 		.onChange(of: selection, selection.apply)
 	}
@@ -40,13 +41,15 @@ private extension AppearancePicker {
 private extension AppearancePicker.SelectionValue {
 	var labelKey: LocalizedStringKey {
 		switch self {
-			case .system: "ITEM.SYSTEM.LABEL"
-			case .light: "ITEM.LIGHT.LABEL"
-			case .dark: "ITEM.DARK.LABEL"
+			case .system: .appearancePicker.item.system
+			case .light: .appearancePicker.item.light
+			case .dark: .appearancePicker.item.dark
 		}
 	}
 }
 
 private extension LocalizationTableResource {
-	static let appearancePicker = Self("AppearancePicker")
+	static var appearancePicker: Self {
+		LocalizationKey<String.LocalizationValue>.AppearancePicker.localizationTable
+	}
 }

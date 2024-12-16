@@ -8,7 +8,7 @@ struct GroupingSection: View {
 			ApplicationGroupCriteriaPicker()
 		} header: {
 			Text("Grouping")
-			Text(#"Grouping is only available in the "Grid" layout."#)
+			Text("Grouping is only available in the \"Grid\" layout.")
 		}
 	}
 }

@@ -28,8 +28,8 @@ private extension ApplicationHideFlagsSheet {
 	@ViewBuilder
 	func makeHeader() -> some View {
 		SheetHeaderLabel(
-			headline: "TITLE",
-			subheadline: "LIST.DESCRIPTION",
+			headline: .applicationHideFlagsList.title,
+			subheadline: .applicationHideFlagsList.list.description,
 			table: .applicationHideFlagsList
 		)
 
