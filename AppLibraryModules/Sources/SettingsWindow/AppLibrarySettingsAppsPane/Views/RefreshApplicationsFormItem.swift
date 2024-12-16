@@ -21,7 +21,7 @@ private extension RefreshApplicationsFormItem {
 	var button: some View {
 		RefreshAppsButton {
 			Label {
-				Text(.common.action.refresh, table: .common)
+				Text(.common.action.refresh)
 			} icon: {
 				Image(systemName: Constant.Symbol.arrow_clockwise)
 			}

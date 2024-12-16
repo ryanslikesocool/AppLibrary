@@ -32,28 +32,26 @@ public struct SheetHeaderLabel<Headline, Subheadline>: View where
 
 public extension SheetHeaderLabel {
 	init(
-		headline headlineKey: LocalizedStringKey,
-		subheadline subheadlineKey: LocalizedStringKey,
-		table: LocalizationTableResource
+		headline: LocalizedStringResource,
+		subheadline: LocalizedStringResource
 	) where
 		Headline == Text,
 		Subheadline == Text
 	{
 		self.init(
-			headline: { Text(headlineKey, table: table) },
-			subheadline: { Text(subheadlineKey, table: table) }
+			headline: { Text(headline) },
+			subheadline: { Text(subheadline) }
 		)
 	}
 
 	init(
-		headline headlineKey: LocalizedStringKey,
-		table: LocalizationTableResource
+		headline: LocalizedStringResource
 	) where
 		Headline == Text,
 		Subheadline == EmptyView
 	{
 		self.init(
-			headline: { Text(headlineKey, table: table) },
+			headline: { Text(headline) },
 			subheadline: EmptyView.init
 		)
 	}

@@ -19,7 +19,7 @@ struct AppearancePicker: View {
 				makeItem(.dark)
 			}
 		} label: {
-			Text(.appearancePicker.label, table: .appearancePicker)
+			Text(.appearancePicker.label)
 		}
 		.onChange(of: selection, selection.apply)
 	}
@@ -31,7 +31,7 @@ private extension AppearancePicker {
 	func makeItem(
 		_ item: SelectionValue
 	) -> some View {
-		Text(item.labelKey, table: .appearancePicker)
+		Text(item.labelKey)
 			.tag(item)
 	}
 }
@@ -39,17 +39,11 @@ private extension AppearancePicker {
 // MARK: -
 
 private extension AppearancePicker.SelectionValue {
-	var labelKey: LocalizedStringKey {
+	var labelKey: LocalizedStringResource {
 		switch self {
 			case .system: .appearancePicker.item.system
 			case .light: .appearancePicker.item.light
 			case .dark: .appearancePicker.item.dark
 		}
-	}
-}
-
-private extension LocalizationTableResource {
-	static var appearancePicker: Self {
-		LocalizationKey<String.LocalizationValue>.AppearancePicker.localizationTable
 	}
 }

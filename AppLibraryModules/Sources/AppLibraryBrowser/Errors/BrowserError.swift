@@ -25,23 +25,23 @@ extension BrowserError: Hashable { }
 
 extension BrowserError: LocalizedError {
 	var errorDescription: String? {
-		let localizationKey: String.LocalizationValue = switch self {
+		let localizedStringResource: LocalizedStringResource = switch self {
 			case .noSearchScopes: .browserError.noSearchScopes.description
 			case .noApplications: .browserError.noApplications.description
 			case .allApplicationsHidden: .browserError.allApplicationsHidden.description
 		}
 
-		return String(localized: localizationKey, table: .browserError)
+		return String(localized: localizedStringResource)
 	}
 
 	var recoverySuggestion: String? {
-		let localizationKey: String.LocalizationValue = switch self {
+		let localizedStringResource: LocalizedStringResource = switch self {
 			case .noSearchScopes: .browserError.noSearchScopes.recoverySuggestion
 			case .noApplications: .browserError.noApplications.recoverySuggestion
 			case .allApplicationsHidden: .browserError.allApplicationsHidden.recoverySuggestion
 		}
 
-		return String(localized: localizationKey, table: .browserError)
+		return String(localized: localizedStringResource)
 	}
 }
 
@@ -63,13 +63,5 @@ extension BrowserError {
 			case .noApplications: .openSettings(.apps)
 			case .allApplicationsHidden: .openSettings(.apps)
 		}
-	}
-}
-
-// MARK: - Constants
-
-private extension LocalizationTableResource {
-	static var browserError: Self {
-		LocalizationKey<String.LocalizationValue>.BrowserError.localizationTable
 	}
 }

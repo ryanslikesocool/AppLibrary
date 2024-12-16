@@ -14,7 +14,7 @@ struct LibraryLayoutPicker: View {
 		Picker(selection: $selection) {
 			ForEach(Self.itemDisplayOrder, content: makeItem)
 		} label: {
-			Text(.libraryLayoutPicker.label, table: .libraryLayoutPicker)
+			Text(.libraryLayoutPicker.label)
 		}
 	}
 }
@@ -25,7 +25,7 @@ private extension LibraryLayoutPicker {
 	func makeItem(
 		_ item: SelectionValue
 	) -> some View {
-		Text(item.labelKey, table: .libraryLayoutPicker)
+		Text(item.labelKey)
 			.tag(item)
 	}
 }
@@ -42,16 +42,10 @@ private extension LibraryLayoutPicker {
 // MARK: -
 
 private extension LibraryLayoutPicker.SelectionValue {
-	var labelKey: LocalizedStringKey {
+	var labelKey: LocalizedStringResource {
 		switch self {
 			case .list: .libraryLayoutPicker.item.list
 			case .grid: .libraryLayoutPicker.item.grid
 		}
-	}
-}
-
-private extension LocalizationTableResource {
-	static var libraryLayoutPicker: Self {
-		LocalizationKey<String.LocalizationValue>.LibraryLayoutPicker.localizationTable
 	}
 }

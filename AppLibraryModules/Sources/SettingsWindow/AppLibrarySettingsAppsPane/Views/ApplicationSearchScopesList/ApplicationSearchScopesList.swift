@@ -26,7 +26,7 @@ struct ApplicationSearchScopesList: View {
 
 private extension ApplicationSearchScopesList {
 	var emptyListLabel: some View {
-		Text(.applicationSearchScopesList.list.emptyLabel, table: .applicationSearchScopesList)
+		Text(.applicationSearchScopesList.list.emptyLabel)
 			.foregroundStyle(.secondary)
 	}
 

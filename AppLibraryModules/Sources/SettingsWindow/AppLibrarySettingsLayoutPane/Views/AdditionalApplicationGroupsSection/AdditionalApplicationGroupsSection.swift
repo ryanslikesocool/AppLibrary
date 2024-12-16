@@ -9,8 +9,8 @@ struct AdditionalApplicationGroupsSection: View {
 		Section {
 			ForEach(Self.itemDisplayOrder, content: Item.init)
 		} header: {
-			Text(.additionalApplicationGroups.section.title, table: .additionalApplicationGroups)
-			Text(.additionalApplicationGroups.section.description, table: .additionalApplicationGroups)
+			Text(.additionalApplicationGroups.section.title)
+			Text(.additionalApplicationGroups.section.description)
 		}
 	}
 }

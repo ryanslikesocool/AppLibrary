@@ -38,7 +38,7 @@ extension ApplicationHideFlagsList.Item {
 
 private extension ApplicationHideFlagsList.Item.Menu {
 	func makeToggle(_ flag: ApplicationHideFlag) -> some View {
-		ApplicationHideFlagsList.Item.HideFlagToggle(flag.flagLabelKey, isOn: $activeFlags[SelectionValue(flag)])
+		ApplicationHideFlagsList.Item.HideFlagToggle(flag.flagLabel, isOn: $activeFlags[SelectionValue(flag)])
 	}
 }
 
@@ -46,15 +46,13 @@ private extension ApplicationHideFlagsList.Item.Menu {
 
 private extension ApplicationHideFlagsList.Item.Menu {
 	static func labelText(for hideFlags: ApplicationHideFlag.Set) -> String {
-		let localizationTable: LocalizationTableResource = .applicationHideFlagsList
-
 		let items = hideFlags.components
 			.map { item in
-				String(localized: item.flagLabelKey, table: localizationTable)
+				String(localized: item.flagLabel)
 			}
 		let itemList = ListFormatter.localizedString(byJoining: items)
 
-		let text = String(localized: .applicationHideFlagsList.item.format.adjective(itemList), table: localizationTable)
+		let text = String(localized: .applicationHideFlagsList.item.format.adjective(itemList))
 
 		return text
 	}
@@ -69,7 +67,7 @@ private extension ApplicationHideFlagsList.Item.Menu {
 // MARK: -
 
 private extension ApplicationHideFlag {
-	var flagLabelKey: String.LocalizationValue {
+	var flagLabel: LocalizedStringResource {
 		switch self {
 			case .hiddenInBrowser: .applicationHideFlagsList.item.browser
 			case .hiddenInSearch: .applicationHideFlagsList.item.search

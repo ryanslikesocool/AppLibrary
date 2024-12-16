@@ -29,8 +29,7 @@ private extension ApplicationHideFlagsSheet {
 	func makeHeader() -> some View {
 		SheetHeaderLabel(
 			headline: .applicationHideFlagsList.title,
-			subheadline: .applicationHideFlagsList.list.description,
-			table: .applicationHideFlagsList
+			subheadline: .applicationHideFlagsList.list.description
 		)
 
 		Spacer()

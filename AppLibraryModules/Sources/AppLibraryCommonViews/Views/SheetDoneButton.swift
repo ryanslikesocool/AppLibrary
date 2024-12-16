@@ -9,7 +9,7 @@ public struct SheetDoneButton: View {
 		Button {
 			dismiss()
 		} label: {
-			Text(.common.action.done, table: .common)
+			Text(.common.action.done)
 		}
 		.buttonStyle(.borderedProminent)
 	}

@@ -11,7 +11,7 @@ public struct RemoveButton: View {
 	public var body: some View {
 		Button(action: action) {
 			Label {
-				Text(.common.action.remove, table: .common)
+				Text(.common.action.remove)
 			} icon: {
 				Image(systemName: Constant.Symbol.trash)
 			}

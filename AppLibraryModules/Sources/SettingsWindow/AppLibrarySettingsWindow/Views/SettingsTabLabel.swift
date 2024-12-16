@@ -11,7 +11,7 @@ struct SettingsTabLabel: View {
 
 	public var body: some View {
 		Label {
-			Text(category.titleKey, table: .settingsWindow)
+			Text(category.titleKey)
 		} icon: {
 			category.icon
 		}
@@ -21,7 +21,7 @@ struct SettingsTabLabel: View {
 // MARK: -
 
 private extension SettingsCategory {
-	var titleKey: LocalizedStringKey {
+	var titleKey: LocalizedStringResource {
 		switch self {
 			case .general: .settingsWindow.category.general
 			case .layout: .settingsWindow.category.layout

@@ -7,27 +7,24 @@ struct SheetFormItem<SheetContent>: View where
 {
 	@State private var isSheetPresented: Bool = false
 
-	private let titleKey: LocalizedStringKey
-	private let descriptionKey: LocalizedStringKey
-	private let table: LocalizationTableResource
+	private let title: LocalizedStringResource
+	private let description: LocalizedStringResource
 	private let sheetContent: () -> SheetContent
 
 	public init(
-		title titleKey: LocalizedStringKey,
-		description descriptionKey: LocalizedStringKey,
-		table: LocalizationTableResource,
+		title: LocalizedStringResource,
+		description: LocalizedStringResource,
 		@ViewBuilder sheetContent: @escaping () -> SheetContent
 	) {
-		self.titleKey = titleKey
-		self.descriptionKey = descriptionKey
-		self.table = table
+		self.title = title
+		self.description = description
 		self.sheetContent = sheetContent
 	}
 
 	public var body: some View {
 		LabeledContent(content: makeButton) {
-			Text(titleKey, table: table)
-			Text(descriptionKey, table: table)
+			Text(title)
+			Text(description)
 		}
 		.sheet(isPresented: $isSheetPresented, content: sheetContent)
 	}
@@ -40,7 +37,7 @@ private extension SheetFormItem {
 		Button {
 			isSheetPresented = true
 		} label: {
-			Text(.common.link.manage, table: .common)
+			Text(.common.link.manage)
 		}
 	}
 }

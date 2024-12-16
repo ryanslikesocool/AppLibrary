@@ -17,7 +17,7 @@ extension ApplicationSearchScopesList.AddMenu {
 			Section {
 				ForEach(Constant.Settings.defaultSearchScopes, id: \.self, content: makeItem)
 			} header: {
-				Text(.applicationSearchScopesList.addMenu.defaultSectionTitle, table: .applicationSearchScopesList)
+				Text(.applicationSearchScopesList.addMenu.defaultSectionTitle)
 			}
 		}
 	}

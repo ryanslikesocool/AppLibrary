@@ -6,8 +6,8 @@ package struct AppsPane: View {
 	public init() { }
 
 	public var body: some View {
-		SheetFormItem(title: .applicationSearchScopesList.title, description: .applicationSearchScopesList.form.description, table: .applicationSearchScopesList, sheetContent: ApplicationSearchScopesSheet.init)
-		SheetFormItem(title: .applicationHideFlagsList.title, description: .applicationHideFlagsList.form.description, table: .applicationHideFlagsList, sheetContent: ApplicationHideFlagsSheet.init)
+		SheetFormItem(title: .applicationSearchScopesList.title, description: .applicationSearchScopesList.form.description, sheetContent: ApplicationSearchScopesSheet.init)
+		SheetFormItem(title: .applicationHideFlagsList.title, description: .applicationHideFlagsList.form.description, sheetContent: ApplicationHideFlagsSheet.init)
 		RefreshApplicationsFormItem()
 	}
 }

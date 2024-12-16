@@ -16,8 +16,8 @@ extension AdditionalApplicationGroupsSection {
 
 		public var body: some View {
 			Toggle(isOn: $additionalGroups[SelectionValue.Set(group)]) {
-				Text(group.labelKey, table: .additionalApplicationGroups)
-				Text(group.descriptionKey, table: .additionalApplicationGroups)
+				Text(group.labelKey)
+				Text(group.descriptionKey)
 			}
 		}
 	}
@@ -26,14 +26,14 @@ extension AdditionalApplicationGroupsSection {
 // MARK: -
 
 private extension AdditionalApplicationGroupsSection.Item.SelectionValue {
-	var labelKey: LocalizedStringKey {
+	var labelKey: LocalizedStringResource {
 		switch self {
 			case .recentlyAdded: .additionalApplicationGroups.item.recentlyAdded.label
 			case .recentlyUpdated: .additionalApplicationGroups.item.recentlyUpdated.label
 		}
 	}
 
-	var descriptionKey: LocalizedStringKey {
+	var descriptionKey: LocalizedStringResource {
 		switch self {
 			case .recentlyAdded: .additionalApplicationGroups.item.recentlyAdded.description
 			case .recentlyUpdated: .additionalApplicationGroups.item.recentlyUpdated.description

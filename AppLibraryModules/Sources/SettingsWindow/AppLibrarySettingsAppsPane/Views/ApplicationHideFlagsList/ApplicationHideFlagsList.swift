@@ -13,7 +13,7 @@ struct ApplicationHideFlagsList: View {
 
 	public var body: some View {
 		if applicationHideFlags.isEmpty {
-			Text(.applicationHideFlagsList.list.emptyLabel, table: .applicationHideFlagsList)
+			Text(.applicationHideFlagsList.list.emptyLabel)
 				.foregroundStyle(.secondary)
 		} else {
 			listContent

@@ -18,7 +18,7 @@ struct ApplicationGroupCriteriaPicker: View {
 				makeItem(.category)
 			}
 		} label: {
-			Text(.applicationGroupCriteriaPicker.label, table: .applicationGroupCriteriaPicker)
+			Text(.applicationGroupCriteriaPicker.label)
 		}
 	}
 }
@@ -29,7 +29,7 @@ private extension ApplicationGroupCriteriaPicker {
 	func makeItem(
 		_ item: SelectionValue
 	) -> some View {
-		Text(item.labelKey, table: .applicationGroupCriteriaPicker)
+		Text(item.labelKey)
 			.tag(item)
 	}
 }
@@ -37,16 +37,10 @@ private extension ApplicationGroupCriteriaPicker {
 // MARK: -
 
 private extension ApplicationGroupCriteriaPicker.SelectionValue {
-	var labelKey: LocalizedStringKey {
+	var labelKey: LocalizedStringResource {
 		switch self {
 			case .category?: .applicationGroupCriteriaPicker.item.category
 			case .none: .applicationGroupCriteriaPicker.item.none
 		}
-	}
-}
-
-private extension LocalizationTableResource {
-	static var applicationGroupCriteriaPicker: Self {
-		LocalizationKey<String.LocalizationValue>.ApplicationGroupCriteriaPicker.localizationTable
 	}
 }

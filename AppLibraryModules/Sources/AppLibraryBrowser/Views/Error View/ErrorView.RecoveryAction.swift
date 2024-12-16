@@ -34,7 +34,7 @@ private extension ErrorView.RecoveryAction {
 	func retryButton() -> some View {
 		RefreshAppsButton {
 			Label {
-				Text("ACTION.RETRY", table: .common)
+				Text(.common.action.retry)
 			} icon: {
 				Image(systemName: Constant.Symbol.arrow_clockwise)
 			}

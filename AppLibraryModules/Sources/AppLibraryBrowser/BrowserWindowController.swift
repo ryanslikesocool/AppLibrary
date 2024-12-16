@@ -21,7 +21,7 @@ public final class BrowserWindowController: NSWindowController, ObservableObject
 		super.init(window: window)
 
 		window.delegate = self
-		window.title = String(localized: "BROWSER_WINDOW.TITLE", table: .common)
+		window.title = String(localized: .common.browserWindow.title)
 		window.titleVisibility = .hidden
 		window.titlebarAppearsTransparent = true
 		window.isExcludedFromWindowsMenu = true

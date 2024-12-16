@@ -6,10 +6,10 @@ extension ApplicationHideFlagsList.Item {
 	struct HideFlagToggle: View {
 		@Binding private var isOn: Bool
 
-		private let flagNameKey: String.LocalizationValue
+		private let flagName: LocalizedStringResource
 
-		public init(_ flagNameKey: String.LocalizationValue, isOn: Binding<Bool>) {
-			self.flagNameKey = flagNameKey
+		public init(_ flagName: LocalizedStringResource, isOn: Binding<Bool>) {
+			self.flagName = flagName
 			_isOn = isOn
 		}
 
@@ -25,8 +25,7 @@ extension ApplicationHideFlagsList.Item {
 
 private extension ApplicationHideFlagsList.Item.HideFlagToggle {
 	func makeTitleText() -> String {
-		let localizationTable: LocalizationTableResource = .applicationHideFlagsList
-		let flagName = String(localized: flagNameKey, table: localizationTable)
-		return String(localized: .applicationHideFlagsList.item.format.verb(flagName), table: localizationTable)
+		let flagName = String(localized: flagName)
+		return String(localized: .applicationHideFlagsList.item.format.verb(flagName))
 	}
 }

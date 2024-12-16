@@ -29,8 +29,7 @@ private extension ApplicationSearchScopesSheet {
 	func makeHeader() -> some View {
 		SheetHeaderLabel(
 			headline: .applicationSearchScopesList.title,
-			subheadline: .applicationSearchScopesList.list.description,
-			table: .applicationSearchScopesList
+			subheadline: .applicationSearchScopesList.list.description
 		)
 
 		Spacer()

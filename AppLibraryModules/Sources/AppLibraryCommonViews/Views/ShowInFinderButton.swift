@@ -11,7 +11,7 @@ public struct ShowInFinderButton: View {
 	public var body: some View {
 		Button(action: buttonAction) {
 			Label {
-				Text(.common.action.showInFinder, table: .common)
+				Text(.common.action.showInFinder)
 			} icon: {
 				Image(Constant.Symbol.finder)
 			}

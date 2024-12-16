@@ -17,7 +17,7 @@ extension ApplicationSearchScopesList {
 			LabeledContent {
 				Menu(content: makeMenuContent) {
 					Label {
-						Text(.applicationSearchScopesList.item.optionsLabel, table: .applicationSearchScopesList)
+						Text(.applicationSearchScopesList.item.optionsLabel)
 					} icon: {
 						Image(systemName: Constant.Symbol.ellipsis)
 					}
