@@ -3,7 +3,7 @@ import AppLibraryCommonViews
 import AppLibraryStorage
 import SwiftUI
 
-extension ApplicationSearchScopeList.AddMenu {
+extension ApplicationSearchScopesList.AddMenu {
 	struct DefaultSearchScopesSection: View {
 		@Storage(locations: \.searchScopes) private var searchScopes
 
@@ -17,7 +17,7 @@ extension ApplicationSearchScopeList.AddMenu {
 			Section {
 				ForEach(Constant.Settings.defaultSearchScopes, id: \.self, content: makeItem)
 			} header: {
-				Text("DEFAULT_SECTION.TITLE", table: .applicationSearchScopeList)
+				Text("DEFAULT_SECTION.TITLE", table: .applicationSearchScopesList)
 			}
 		}
 	}
@@ -25,7 +25,7 @@ extension ApplicationSearchScopeList.AddMenu {
 
 // MARK: - Supporting Views
 
-private extension ApplicationSearchScopeList.AddMenu.DefaultSearchScopesSection {
+private extension ApplicationSearchScopesList.AddMenu.DefaultSearchScopesSection {
 	func makeItem(for url: URL) -> some View {
 		Button {
 			addSearchScope(url)

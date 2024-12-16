@@ -12,16 +12,11 @@ struct ApplicationHideFlagsList: View {
 	public init() { }
 
 	public var body: some View {
-		Section {
-			if applicationHideFlags.isEmpty {
-				Text("LIST.EMPTY_LABEL", table: .applicationHideFlagsList)
-					.foregroundStyle(.secondary)
-			} else {
-				listContent
-			}
-		} header: {
-			Text("LIST.TITLE", table: .applicationHideFlagsList)
-			Text("LIST.DESCRIPTION", table: .applicationHideFlagsList)
+		if applicationHideFlags.isEmpty {
+			Text("LIST.EMPTY_LABEL", table: .applicationHideFlagsList)
+				.foregroundStyle(.secondary)
+		} else {
+			listContent
 		}
 	}
 }

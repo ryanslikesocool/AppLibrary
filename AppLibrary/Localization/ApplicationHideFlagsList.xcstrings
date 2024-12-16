@@ -1,7 +1,7 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "FLAG.BROWSER.LABEL" : {
+    "FLAG.BROWSER" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -12,7 +12,7 @@
         }
       }
     },
-    "FLAG.SEARCH.LABEL" : {
+    "FLAG.SEARCH" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -23,18 +23,18 @@
         }
       }
     },
-    "ITEM.ACTION.REVEAL" : {
+    "FORM.DESCRIPTION" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Reveal"
+            "value" : "Choose which apps are hidden in the Library."
           }
         }
       }
     },
-    "ITEM.FLAGS_DESCRIPTION.FORMAT_%@" : {
+    "ITEM.FORMAT.ADJECTIVE_%@" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -45,24 +45,13 @@
         }
       }
     },
-    "ITEM.FLAGS_DESCRIPTION.SEPARATOR" : {
+    "ITEM.FORMAT.VERB_%@" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : ", "
-          }
-        }
-      }
-    },
-    "ITEM.HIDE_IN_SEARCH.LABEL" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Hide in Search"
+            "value" : "Hide in %@"
           }
         }
       }
@@ -73,7 +62,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Apps listed here will not appear in the Library.\nApps can be hidden by right-clicking in the Library and selecting \"Hide\"."
+            "value" : "Apps listed below will not appear in the Library.\nApps can be hidden by right-clicking in the Library and selecting \"Hide\"."
           }
         }
       }
@@ -89,7 +78,7 @@
         }
       }
     },
-    "LIST.TITLE" : {
+    "TITLE" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {

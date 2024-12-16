@@ -13,7 +13,7 @@ extension ApplicationHideFlagsList.Item {
 		public var body: some View {
 			Button(action: action) {
 				Label {
-					Text("ITEM.ACTION.REVEAL", table: .applicationHideFlagsList)
+					Text("ACTION.REVEAL", table: .common)
 				} icon: {
 					Image(systemName: Constant.Symbol.eye)
 				}

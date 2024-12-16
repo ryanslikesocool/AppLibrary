@@ -56,6 +56,17 @@
         }
       }
     },
+    "FORM.DESCRIPTION" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Choose where to look for apps."
+          }
+        }
+      }
+    },
     "ITEM.OPTIONS.LABEL" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -73,7 +84,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "App Library will look for apps in these directories."
+            "value" : "App Library will look for apps in the directories listed below."
           }
         }
       }
@@ -89,7 +100,7 @@
         }
       }
     },
-    "LIST.TITLE" : {
+    "TITLE" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {

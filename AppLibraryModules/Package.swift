@@ -85,7 +85,6 @@ var settingsWindowTargets: [Target] {
 
 				"AppLibrarySettingsGeneralPane",
 				"AppLibrarySettingsLayoutPane",
-				"AppLibrarySettingsLocationPane",
 				"AppLibrarySettingsAppsPane",
 			]
 		),
@@ -105,17 +104,6 @@ var settingsWindowTargets: [Target] {
 				"LocalizationTable",
 
 				"AppLibraryStorage",
-			]
-		),
-
-		.target(
-			name: "AppLibrarySettingsLocationPane",
-			dependencies: [
-				"LocalizationTable",
-
-				"AppLibraryStorage",
-				"AppLibraryCommon",
-				"AppLibraryCommonViews",
 			]
 		),
 

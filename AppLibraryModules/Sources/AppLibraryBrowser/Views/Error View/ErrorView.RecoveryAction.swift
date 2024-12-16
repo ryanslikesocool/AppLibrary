@@ -54,8 +54,8 @@ private extension BrowserError? {
 
 	var recoveryActionKind: RecoveryActionKind {
 		switch self {
-			case .noSearchScopes?: .settings(.location)
-			case .noApps?: .settings(.location)
+			case .noSearchScopes?: .settings(.apps)
+			case .noApps?: .settings(.apps)
 			case .allAppsHidden?: .settings(.apps)
 			case .queryFailure?: .retry
 			case nil: .retry

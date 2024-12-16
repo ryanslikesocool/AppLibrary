@@ -1,7 +1,6 @@
 public enum SettingsCategory: String {
 	case general
 	case layout
-	case location
 	case apps
 }
 

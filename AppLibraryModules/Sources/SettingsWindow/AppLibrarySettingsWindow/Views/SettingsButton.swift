@@ -2,7 +2,7 @@ import AppLibraryCommon
 import AppLibraryCommonViews
 import AppLibraryStorage
 import OSLog
-import SettingsAccess
+internal import SettingsAccess
 import SwiftUI
 
 public struct SettingsButton<Label>: View where

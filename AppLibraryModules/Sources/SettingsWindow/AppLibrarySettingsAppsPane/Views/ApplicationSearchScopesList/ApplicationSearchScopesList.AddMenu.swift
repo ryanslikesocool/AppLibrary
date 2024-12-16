@@ -4,7 +4,7 @@ import AppLibraryStorage
 import OSLog
 import SwiftUI
 
-extension ApplicationSearchScopeList {
+extension ApplicationSearchScopesList {
 	struct AddMenu: View {
 		@Storage(locations: \.self) private var locations
 
@@ -16,14 +16,14 @@ extension ApplicationSearchScopeList {
 			Menu {
 				Section {
 					Button(action: primaryAction) {
-						Text("ADD_MENU.ACTION", table: .applicationSearchScopeList)
+						Text("ADD_MENU.ACTION", table: .applicationSearchScopesList)
 					}
 				}
 
 				DefaultSearchScopesSection(addSearchScope: addSearchScope)
 			} label: {
 				Label {
-					Text("ADD_MENU.LABEL", table: .applicationSearchScopeList)
+					Text("ADD_MENU.LABEL", table: .applicationSearchScopesList)
 				} icon: {
 					Image(systemName: Constant.Symbol.plus)
 				}
@@ -39,15 +39,15 @@ extension ApplicationSearchScopeList {
 				onCompletion: onFileImporterCompleted
 			)
 			.fileDialogDefaultDirectory(.homeDirectory)
-			.fileDialogMessage(Text("ADD_SCOPE_DIALOG.MESSAGE", table: .applicationSearchScopeList))
-			.fileDialogConfirmationLabel(Text("ADD_SCOPE_DIALOG.CONFIRM", table: .applicationSearchScopeList))
+			.fileDialogMessage(Text("ADD_SCOPE_DIALOG.MESSAGE", table: .applicationSearchScopesList))
+			.fileDialogConfirmationLabel(Text("ADD_SCOPE_DIALOG.CONFIRM", table: .applicationSearchScopesList))
 		}
 	}
 }
 
 // MARK: - Functions
 
-private extension ApplicationSearchScopeList.AddMenu {
+private extension ApplicationSearchScopesList.AddMenu {
 	func primaryAction() {
 		isFileImporterPresented = true
 	}

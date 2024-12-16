@@ -3,7 +3,7 @@ import AppLibraryCommonViews
 import AppLibraryStorage
 import SwiftUI
 
-extension ApplicationSearchScopeList {
+extension ApplicationSearchScopesList {
 	struct Item: View {
 		private let url: URL
 		private let removeSearchScope: () -> Void
@@ -17,7 +17,7 @@ extension ApplicationSearchScopeList {
 			LabeledContent {
 				Menu(content: makeMenuContent) {
 					Label {
-						Text("ITEM.OPTIONS.LABEL", table: .applicationSearchScopeList)
+						Text("ITEM.OPTIONS.LABEL", table: .applicationSearchScopesList)
 					} icon: {
 						Image(systemName: Constant.Symbol.ellipsis)
 					}
@@ -43,7 +43,7 @@ extension ApplicationSearchScopeList {
 
 // MARK: - Supporting Views
 
-private extension ApplicationSearchScopeList.Item {
+private extension ApplicationSearchScopesList.Item {
 	@ViewBuilder
 	func makeMenuContent() -> some View {
 		Section {

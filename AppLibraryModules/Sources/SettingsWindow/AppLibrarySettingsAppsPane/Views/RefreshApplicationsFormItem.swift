@@ -2,7 +2,7 @@ import AppLibraryCommon
 import AppLibraryCommonViews
 import SwiftUI
 
-struct RefreshAppsSection: View {
+struct RefreshApplicationsFormItem: View {
 	public init() { }
 
 	public var body: some View {
@@ -17,7 +17,7 @@ struct RefreshAppsSection: View {
 
 // MARK: - Supporting Views
 
-private extension RefreshAppsSection {
+private extension RefreshApplicationsFormItem {
 	var button: some View {
 		RefreshAppsButton {
 			Label {

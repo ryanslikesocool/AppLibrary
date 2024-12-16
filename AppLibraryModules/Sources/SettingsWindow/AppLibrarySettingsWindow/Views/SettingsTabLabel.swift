@@ -25,7 +25,6 @@ private extension SettingsCategory {
 		switch self {
 			case .general: "TAB.GENERAL.TITLE"
 			case .layout: "TAB.LAYOUT.TITLE"
-			case .location: "TAB.LOCATION.TITLE"
 			case .apps: "TAB.APPS.TITLE"
 		}
 	}
@@ -34,7 +33,6 @@ private extension SettingsCategory {
 		let systemName = switch self {
 			case .general: Constant.Symbol.gearShape
 			case .layout: Constant.Symbol.square_grid_3x3
-			case .location: Constant.Symbol.externalDrive
 			case .apps: Constant.Symbol.app
 		}
 

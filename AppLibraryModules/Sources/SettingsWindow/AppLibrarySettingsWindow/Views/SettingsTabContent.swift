@@ -3,7 +3,6 @@ import SwiftUI
 internal import AppLibrarySettingsAppsPane
 internal import AppLibrarySettingsLayoutPane
 internal import AppLibrarySettingsGeneralPane
-internal import AppLibrarySettingsLocationPane
 
 struct SettingsTabContent: View {
 	private let category: SettingsCategory
@@ -17,7 +16,6 @@ struct SettingsTabContent: View {
 			switch category {
 				case .general: GeneralPane()
 				case .layout: LayoutPane()
-				case .location: LocationPane()
 				case .apps: AppsPane()
 			}
 		}

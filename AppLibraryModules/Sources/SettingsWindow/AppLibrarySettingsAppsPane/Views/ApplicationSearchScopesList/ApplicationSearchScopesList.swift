@@ -4,35 +4,29 @@ import AppLibraryStorage
 import OSLog
 import SwiftUI
 
-struct ApplicationSearchScopeList: View {
+struct ApplicationSearchScopesList: View {
 	@Storage(locations: \.self) private var locations
 	@Storage(locations: \.searchScopes) private var searchScopes
 
 	public init() { }
 
 	public var body: some View {
-		Section {
+		Group {
 			if searchScopes.isEmpty {
 				emptyListLabel
 			} else {
 				listContent
 			}
-		} header: {
-			Text("LIST.TITLE", table: .applicationSearchScopeList)
-			Text("LIST.DESCRIPTION", table: .applicationSearchScopeList)
-		} footer: {
-			AddMenu()
 		}
-
 		.onChange(of: searchScopes, onSearchScopesChanged)
 	}
 }
 
 // MARK: - Supporting Views
 
-private extension ApplicationSearchScopeList {
+private extension ApplicationSearchScopesList {
 	var emptyListLabel: some View {
-		Text("LIST.EMPTY_LABEL", table: .applicationSearchScopeList)
+		Text("LIST.EMPTY_LABEL", table: .applicationSearchScopesList)
 			.foregroundStyle(.secondary)
 	}
 
@@ -51,7 +45,7 @@ private extension ApplicationSearchScopeList {
 
 // MARK: - Functions
 
-private extension ApplicationSearchScopeList {
+private extension ApplicationSearchScopesList {
 	func onSearchScopesChanged() {
 		Event.refreshApps.send()
 	}
