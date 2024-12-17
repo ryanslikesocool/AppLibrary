@@ -17,7 +17,6 @@ extension Application {
 		lazy var genericIcon: NSImage = NSWorkspace.shared.icon(for: .applicationPlaceholder)
 
 		guard
-			let url,
 			let bundle = Bundle(url: url),
 			let infoDictionary = bundle.infoDictionary
 		else {

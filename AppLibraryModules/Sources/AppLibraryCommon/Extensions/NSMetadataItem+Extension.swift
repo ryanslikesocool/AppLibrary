@@ -118,4 +118,18 @@ public extension NSMetadataItem {
 
 		public static let key: String = NSMetadataItemVersionKey
 	}
+
+	// MARK: url
+
+	var url: URL {
+		get throws {
+			try self[__Key_url.self]
+		}
+	}
+
+	private enum __Key_url: NSMetadataItemKey {
+		public typealias Value = URL
+
+		public static let key: String = NSMetadataItemURLKey
+	}
 }

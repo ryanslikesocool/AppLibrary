@@ -7,10 +7,12 @@ public struct Application {
 	private let metadata: NSMetadataItem
 
 	public let id: ApplicationIdentifier
-	public let displayName: String
 
 	public var bundleIdentifier: String { id.bundleIdentifier }
 	public var version: String? { id.version }
+
+	public let url: URL
+	public let displayName: String
 
 	// TODO: `lazy` properties on structs are causing some headaches...
 
@@ -20,16 +22,13 @@ public struct Application {
 	public private(set) lazy var updatedDate: Date? = try? metadata.fsContentChangeDate
 //	public private(set) lazy var openedDate: Date?
 
-//	public private(set) lazy var url: URL? = NSWorkspace.shared.urlForApplication(withBundleIdentifier: id.bundleIdentifier)
-	public var url: URL? { NSWorkspace.shared.urlForApplication(withBundleIdentifier: id.bundleIdentifier) }
-
 	public init(metadata: NSMetadataItem) throws {
 		self.metadata = metadata
 
-		let bundleIdentifier: String
+		let bundleIdentifier: String = try metadata.cfBundleIdentifier
 		let version: String? = try? metadata.version
 
-		bundleIdentifier = try metadata.cfBundleIdentifier
+		url = try metadata.url
 
 		let separator: String = "."
 		displayName = try metadata.displayName
@@ -37,8 +36,7 @@ public struct Application {
 			.dropLast()
 			.joined(separator: separator)
 
-		id = ApplicationIdentifier(bundleIdentifier, displayName: displayName, version: version)
-//		id = ApplicationIdentifier(bundleIdentifier, version: version)
+		id = ApplicationIdentifier(bundleIdentifier, version: version, displayName: displayName)
 	}
 }
 
