@@ -5,7 +5,7 @@ public extension LocalizedStringResource {
 	static let common = Common.self
 
 	enum Common {
-		private static let localizationTable = LocalizationTableResource("Common", bundle: .module)
+		private static let localizationTable = LocalizationTableResource("Common")
 
 		public static let action = Action.self
 		public static let browserWindow = BrowserWindow.self

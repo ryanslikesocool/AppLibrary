@@ -5,7 +5,7 @@ public extension LocalizedStringResource {
 	static let browserError = BrowserError.self
 
 	enum BrowserError {
-		private static let localizationTable = LocalizationTableResource("BrowserError", bundle: .module)
+		private static let localizationTable = LocalizationTableResource("BrowserError")
 
 		public static let noSearchScopes = NoSearchScopes.self
 		public static let noApplications = NoApplications.self

@@ -5,7 +5,7 @@ public extension LocalizedStringResource {
 	static let appearancePicker = AppearancePicker.self
 
 	enum AppearancePicker {
-		private static let localizationTable = LocalizationTableResource("AppearancePicker", bundle: .module)
+		private static let localizationTable = LocalizationTableResource("AppearancePicker")
 
 		public static let item = Item.self
 

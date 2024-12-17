@@ -60,9 +60,6 @@ let package = Package(
 			dependencies: [
 				"AppLibraryCommon",
 				"AppLibraryLocalization",
-			],
-			resources: [
-				.process("Resources"),
 			]
 		),
 
@@ -77,9 +74,6 @@ let package = Package(
 			name: "AppLibraryLocalization",
 			dependencies: [
 				"LocalizationTable",
-			],
-			resources: [
-				.process("Resources"),
 			]
 		),
 	]

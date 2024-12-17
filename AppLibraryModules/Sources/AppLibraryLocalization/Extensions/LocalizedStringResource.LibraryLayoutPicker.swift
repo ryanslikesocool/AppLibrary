@@ -5,7 +5,7 @@ public extension LocalizedStringResource {
 	static let libraryLayoutPicker = LibraryLayoutPicker.self
 
 	enum LibraryLayoutPicker {
-		private static let localizationTable = LocalizationTableResource("LibraryLayoutPicker", bundle: .module)
+		private static let localizationTable = LocalizationTableResource("LibraryLayoutPicker")
 
 		public static let item = Item.self
 

@@ -5,7 +5,7 @@ public extension LocalizedStringResource {
 	static let accessibilityRequest = AccessibilityRequest.self
 
 	enum AccessibilityRequest {
-		private static let localizationTable = LocalizationTableResource("AccessibilityRequest", bundle: .module)
+		private static let localizationTable = LocalizationTableResource("AccessibilityRequest")
 
 		public static let action = Action.self
 

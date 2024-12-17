@@ -5,7 +5,7 @@ public extension LocalizedStringResource {
 	static let applicationHideFlagsList = ApplicationHideFlagsList.self
 
 	enum ApplicationHideFlagsList {
-		private static let localizationTable = LocalizationTableResource("ApplicationHideFlagsList", bundle: .module)
+		private static let localizationTable = LocalizationTableResource("ApplicationHideFlagsList")
 
 		public static let item = Item.self
 		public static let form = Form.self

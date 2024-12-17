@@ -30,7 +30,7 @@ extension Dependency: Acknowledgement {
 	typealias Decoder = JSONDecoder
 
 	static var fileURL: URL? {
-		Bundle.module.url(forResource: "Dependencies", withExtension: "json")
+		Bundle.main.url(forResource: "Dependencies", withExtension: "json")
 	}
 
 	static let modelKeyPath: KeyPath<AboutWindowModel, [Self]> = \.dependencies

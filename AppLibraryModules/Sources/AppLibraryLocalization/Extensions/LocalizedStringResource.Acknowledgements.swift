@@ -5,7 +5,7 @@ public extension LocalizedStringResource {
 	static let acknowledgements = Acknowledgements.self
 
 	enum Acknowledgements {
-		private static let localizationTable = LocalizationTableResource("Acknowledgements", bundle: .module)
+		private static let localizationTable = LocalizationTableResource("Acknowledgements")
 
 		public static let link = Link.self
 		public static let section = Section.self

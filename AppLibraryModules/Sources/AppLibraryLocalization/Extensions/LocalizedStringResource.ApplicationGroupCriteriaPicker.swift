@@ -5,7 +5,7 @@ public extension LocalizedStringResource {
 	static let applicationGroupCriteriaPicker = ApplicationGroupCriteriaPicker.self
 
 	enum ApplicationGroupCriteriaPicker {
-		private static let localizationTable = LocalizationTableResource("ApplicationGroupCriteriaPicker", bundle: .module)
+		private static let localizationTable = LocalizationTableResource("ApplicationGroupCriteriaPicker")
 
 		public static let item = Item.self
 

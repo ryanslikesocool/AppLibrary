@@ -5,7 +5,7 @@ public extension LocalizedStringResource {
 	static let applicationSearchScopesList = ApplicationSearchScopesList.self
 
 	enum ApplicationSearchScopesList {
-		private static let localizationTable = LocalizationTableResource("ApplicationSearchScopesList", bundle: .module)
+		private static let localizationTable = LocalizationTableResource("ApplicationSearchScopesList")
 
 		public static let item = Item.self
 		public static let addMenu = AddMenu.self

@@ -30,7 +30,7 @@ extension Contributor: Acknowledgement {
 	typealias Decoder = JSONDecoder
 
 	static var fileURL: URL? {
-		Bundle.module.url(forResource: "Contributors", withExtension: "json")
+		Bundle.main.url(forResource: "Contributors", withExtension: "json")
 	}
 
 	static let modelKeyPath: KeyPath<AboutWindowModel, [Self]> = \.contributors

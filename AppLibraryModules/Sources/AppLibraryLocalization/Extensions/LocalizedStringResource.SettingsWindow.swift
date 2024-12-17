@@ -5,7 +5,7 @@ public extension LocalizedStringResource {
 	static let settingsWindow = SettingsWindow.self
 
 	enum SettingsWindow {
-		private static let localizationTable = LocalizationTableResource("SettingsWindow", bundle: .module)
+		private static let localizationTable = LocalizationTableResource("SettingsWindow")
 
 		public static let category = Category.self
 
