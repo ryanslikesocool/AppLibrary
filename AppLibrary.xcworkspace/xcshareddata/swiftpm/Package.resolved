@@ -1,5 +1,5 @@
 {
-  "originHash" : "99fb434286bafcfedfae352c1e3d01cc9fe5b6f770feec04d92f8c023e75fac9",
+  "originHash" : "4a48fae10e8a6ef3ee87b5bb1465128503d6ba675f80cd350d5cdc75c1911b85",
   "pins" : [
     {
       "identity" : "asyncnsmetadataquery",
@@ -24,8 +24,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/ryanslikesocool/LocalizationTable.git",
       "state" : {
-        "revision" : "8689a279a2b4c97b1ac65c925a548bcb199945cd",
-        "version" : "0.0.1"
+        "revision" : "32515ca437701f7033396be161366f70dffe5c9f",
+        "version" : "0.0.2"
       }
     },
     {

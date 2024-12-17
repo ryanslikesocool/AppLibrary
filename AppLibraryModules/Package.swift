@@ -6,7 +6,7 @@ let package = Package(
 	name: "AppLibraryModules",
 	defaultLocalization: "en",
 	platforms: [
-		.macOS(.v14)
+		.macOS(.v14),
 	],
 	products: [
 		.library(name: "AppLibraryModules", targets: ["AppLibrary"]),
@@ -18,6 +18,7 @@ let package = Package(
 		.library(name: "AppLibraryStorage", targets: ["AppLibraryStorage"]),
 		.library(name: "AppLibraryCommon", targets: ["AppLibraryCommon"]),
 		.library(name: "AppLibraryCommonViews", targets: ["AppLibraryCommonViews"]),
+		.library(name: "AppLibraryLocalization", targets: ["AppLibraryLocalization"]),
 	],
 	dependencies: [
 		.package(url: "https://github.com/sindresorhus/ExceptionCatcher.git", from: "2.0.1"),
@@ -43,28 +44,42 @@ let package = Package(
 				"SettingsAccess",
 
 				"AsyncNSMetadataQuery",
-				"LocalizationTable",
 				"SwiftyAccessibility",
 
 				"AppLibraryCommonViews",
 				"AppLibrarySettingsWindow",
+				"AppLibraryLocalization",
 			],
 			swiftSettings: [
-				.swiftLanguageMode(.v5)
+				.swiftLanguageMode(.v5),
 			]
 		),
 
 		.target(
 			name: "AppLibraryAboutWindow",
 			dependencies: [
-				"AppLibraryCommon"
+				"AppLibraryCommon",
+				"AppLibraryLocalization",
+			],
+			resources: [
+				.process("Resources"),
 			]
 		),
 
 		.target(
 			name: "AppLibraryStorage",
 			dependencies: [
-				"AppLibraryCommon"
+				"AppLibraryCommon",
+			]
+		),
+
+		.target(
+			name: "AppLibraryLocalization",
+			dependencies: [
+				"LocalizationTable",
+			],
+			resources: [
+				.process("Resources"),
 			]
 		),
 	]
@@ -92,26 +107,22 @@ var settingsWindowTargets: [Target] {
 		.target(
 			name: "AppLibrarySettingsGeneralPane",
 			dependencies: [
-				"LocalizationTable",
-
 				"AppLibraryStorage",
+				"AppLibraryLocalization",
 			]
 		),
 
 		.target(
 			name: "AppLibrarySettingsLayoutPane",
 			dependencies: [
-				"LocalizationTable",
-
 				"AppLibraryStorage",
+				"AppLibraryLocalization",
 			]
 		),
 
 		.target(
 			name: "AppLibrarySettingsAppsPane",
 			dependencies: [
-				"LocalizationTable",
-
 				"AppLibraryStorage",
 				"AppLibraryCommon",
 				"AppLibraryCommonViews",
@@ -126,7 +137,7 @@ var commonTargets: [Target] {
 		.target(
 			name: "AppLibraryCommonViews",
 			dependencies: [
-				"AppLibraryCommon"
+				"AppLibraryCommon",
 			]
 		),
 
@@ -134,8 +145,6 @@ var commonTargets: [Target] {
 			name: "AppLibraryCommon",
 			dependencies: [
 				"ExceptionCatcher",
-
-				"LocalizationTable",
 			]
 		),
 	]

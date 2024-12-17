@@ -1,7 +1,6 @@
 import AppLibraryCommon
 import AppLibraryCommonViews
 import AppLibraryStorage
-import LocalizationTable
 import OSLog
 import SwiftUI
 

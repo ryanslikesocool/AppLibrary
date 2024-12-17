@@ -1,7 +1,7 @@
 import AppKit
 import AppLibraryCommon
 import AppLibraryCommonViews
-import LocalizationTable
+internal import AppLibraryLocalization
 import OSLog
 import SwiftUI
 

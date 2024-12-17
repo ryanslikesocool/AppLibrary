@@ -1,6 +1,6 @@
 import AppLibraryCommon
+internal import AppLibraryLocalization
 import AppLibraryStorage
-import LocalizationTable
 import SwiftUI
 
 struct AppearancePicker: View {

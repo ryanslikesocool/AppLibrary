@@ -1,5 +1,5 @@
 import AppKit
-import LocalizationTable
+internal import AppLibraryLocalization
 import OSLog
 
 public enum AccessibilityUtility {
@@ -35,8 +35,8 @@ public enum AccessibilityUtility {
 			alert.alertStyle = .informational
 			alert.messageText = String(localized: .accessibilityRequest.title)
 			alert.informativeText = String(localized: .accessibilityRequest.description)
-			/*let denyButton =*/ alert.addButton(withTitle: String(localized: .accessibilityRequest.action.deny))
-			/*let allowButton =*/ alert.addButton(withTitle: String(localized: .accessibilityRequest.action.allow))
+			/* let denyButton = */ alert.addButton(withTitle: String(localized: .accessibilityRequest.action.deny))
+			/* let allowButton = */ alert.addButton(withTitle: String(localized: .accessibilityRequest.action.allow))
 
 			return alert
 		}
@@ -60,8 +60,4 @@ public enum AccessibilityUtility {
 
 private extension AccessibilityUtility {
 	static let logger: Logger = Logger(category: Self.self)
-}
-
-private extension LocalizationTableResource {
-	static let accessibilityRequest = Self("AccessibilityRequest")
 }

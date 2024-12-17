@@ -1,4 +1,3 @@
-import LocalizationTable
 import AppLibraryCommon
 import SwiftUI
 

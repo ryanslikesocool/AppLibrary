@@ -1,3 +1,4 @@
+internal import AppLibraryLocalization
 import SwiftUI
 
 extension Dependency {
@@ -32,7 +33,7 @@ private extension Dependency.ItemView {
 
 	var projectLink: some View {
 		Link(
-			String(localized: "LINK.PROJECT", table: .acknowledgements),
+			String(localized: .acknowledgements.link.project),
 			systemImage: "link",
 			destination: value.projectURL
 		)
@@ -41,7 +42,7 @@ private extension Dependency.ItemView {
 	var licenseLink: some View {
 		// TODO: replace with scales symbol if/when one becomes available
 		Link(
-			String(localized: "LINK.LICENSE", table: .acknowledgements),
+			String(localized: .acknowledgements.link.license),
 			systemImage: "building.columns",
 			destination: value.licenseURL
 		)

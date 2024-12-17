@@ -1,4 +1,3 @@
-import LocalizationTable
 import SwiftUI
 
 public struct SheetHeaderLabel<Headline, Subheadline>: View where

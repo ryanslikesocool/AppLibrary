@@ -1,7 +1,7 @@
 import AppLibraryCommon
+internal import AppLibraryLocalization
 import AppLibraryStorage
 import Foundation
-import LocalizationTable
 
 enum BrowserError: Swift.Error {
 	case noSearchScopes

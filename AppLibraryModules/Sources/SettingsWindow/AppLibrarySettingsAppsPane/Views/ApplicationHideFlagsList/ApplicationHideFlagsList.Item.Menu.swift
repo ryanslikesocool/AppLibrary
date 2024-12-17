@@ -1,5 +1,4 @@
 import AppLibraryStorage
-import LocalizationTable
 import SwiftUI
 
 extension ApplicationHideFlagsList.Item {

@@ -1,5 +1,4 @@
 import AppLibraryCommon
-import LocalizationTable
 import SwiftUI
 
 struct SheetFormItem<SheetContent>: View where

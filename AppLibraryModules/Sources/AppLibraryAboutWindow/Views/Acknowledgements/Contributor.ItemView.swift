@@ -1,3 +1,4 @@
+internal import AppLibraryLocalization
 import SwiftUI
 
 extension Contributor {
@@ -32,7 +33,7 @@ private extension Contributor.ItemView {
 
 	var personalLink: some View {
 		Link(
-			String(localized: "LINK.PERSONAL", table: .acknowledgements),
+			String(localized: .acknowledgements.link.personal),
 			systemImage: "link",
 			destination: value.personalURL
 		)
@@ -41,7 +42,7 @@ private extension Contributor.ItemView {
 	var githubLink: some View {
 		// TODO: add github icon
 		Link(
-			String(localized: "LINK.GITHUB", table: .acknowledgements),
+			String(localized: .acknowledgements.link.github),
 			icon: EmptyView(),
 			destination: value.githubURL
 		)
