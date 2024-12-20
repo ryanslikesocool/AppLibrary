@@ -2,18 +2,15 @@ import Foundation
 
 public struct ApplicationIdentifier {
 	public let bundleIdentifier: String
-	public let version: String?
 
 	@available(*, deprecated)
 	public let displayName: String // TODO: remove
 
 	public init(
 		_ bundleIdentifier: String,
-		version: String? = nil,
 		displayName: String
 	) {
 		self.bundleIdentifier = bundleIdentifier
-		self.version = version
 		self.displayName = displayName
 	}
 }
@@ -28,7 +25,6 @@ extension ApplicationIdentifier: Sendable { }
 extension ApplicationIdentifier: Equatable {
 	public static func == (lhs: Self, rhs: Self) -> Bool {
 		lhs.bundleIdentifier == rhs.bundleIdentifier
-			&& lhs.version == rhs.version
 	}
 }
 
@@ -38,7 +34,6 @@ extension ApplicationIdentifier: Equatable {
 extension ApplicationIdentifier: Hashable {
 	public func hash(into hasher: inout Hasher) {
 		hasher.combine(bundleIdentifier)
-		hasher.combine(version)
 	}
 }
 

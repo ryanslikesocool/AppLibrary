@@ -1,4 +1,4 @@
-import AsyncNSMetadataQuery
+import MetadataQueryToolbox
 import Foundation
 import OSLog
 import UniformTypeIdentifiers
@@ -48,7 +48,7 @@ public extension ApplicationCache {
 			applications = delegate.applicationCache(processQueryResults: applications)
 			self.applications = applications
 
-			Self.logger.info("Finished metadata query with \(applications.count) result(s).")
+			Self.logger.info("Finished metadata query with \(applications.count) processed result(s).")
 		}
 	}
 
@@ -62,6 +62,8 @@ public extension ApplicationCache {
 
 	private static func queryResultsAsApplications(_ query: NSMetadataQuery) -> [Application] {
 		assert(query.delegate == nil)
+
+		Logger.module.info("Processing \(query.results.count) metadata query result(s).")
 
 		return query.results
 			.compactMap { element -> Application? in

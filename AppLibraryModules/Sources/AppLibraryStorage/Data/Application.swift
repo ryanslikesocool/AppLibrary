@@ -1,6 +1,6 @@
+import AppKit
 import AppLibraryCommon
-import Cocoa
-import ExceptionCatcher
+import MetadataQueryToolbox
 import OSLog
 
 public struct Application {
@@ -8,35 +8,25 @@ public struct Application {
 
 	public let id: ApplicationIdentifier
 
-	public var bundleIdentifier: String { id.bundleIdentifier }
-	public var version: String? { id.version }
-
-	public let url: URL
-	public let displayName: String
-
-	// TODO: `lazy` properties on structs are causing some headaches...
-
-	public private(set) lazy var copyright: String? = try? metadata.copyright
-	public private(set) lazy var categories: [String]? = try? metadata.applicationCategories
-	public private(set) lazy var creationDate: Date? = try? metadata.fsCreationDate
-	public private(set) lazy var updatedDate: Date? = try? metadata.fsContentChangeDate
-//	public private(set) lazy var openedDate: Date?
-
 	public init(metadata: NSMetadataItem) throws {
 		self.metadata = metadata
 
-		let bundleIdentifier: String = try metadata.cfBundleIdentifier
-		let version: String? = try? metadata.version
+		guard
+			let bundleIdentifier = metadata.value(forAttribute: \.cfBundleIdentifier),
+			var displayName = metadata.value(forAttribute: \.displayName)
+		else {
+			throw CommonError.unexpectedNil
+		}
 
-		url = try metadata.url
+		if displayName.hasSuffix(".app") {
+			let separationCharacter: String = "."
+			displayName = displayName
+				.components(separatedBy: separationCharacter)
+				.dropLast()
+				.joined(separator: separationCharacter)
+		}
 
-		let separator: String = "."
-		displayName = try metadata.displayName
-			.components(separatedBy: separator)
-			.dropLast()
-			.joined(separator: separator)
-
-		id = ApplicationIdentifier(bundleIdentifier, version: version, displayName: displayName)
+		id = ApplicationIdentifier(bundleIdentifier, displayName: displayName)
 	}
 }
 
@@ -52,21 +42,91 @@ extension Application: Hashable { }
 
 extension Application: Identifiable { }
 
-// MARK: -
-
-private extension Application {
-	static func logUnwrapFailure(error: some Error, objectDescription: String) {
-		Logger.module.error("""
-		Failed to retrieve \(objectDescription) from \(NSMetadataItem.self):
-		\(error.localizedDescription)
-		""")
-	}
-}
+// MARK: - Properties
 
 public extension Application {
-//	var urls: [URL] {
-//		// NOTE: this seems to be unrelated to `urlForApplication(withBundleIdentifier:)`,
-//		// and more akin to `urlsForApplications(toOpen:)`
-//		NSWorkspace.shared.urlsForApplications(withBundleIdentifier: id.bundleIdentifier)
+	// Is `NSMetadataItem` performant enough to allow us
+	// to just use computed properties?
+
+	var bundleIdentifier: String {
+		id.bundleIdentifier
+	}
+
+	var displayName: String {
+		id.displayName
+	}
+
+	var url: URL? {
+		if let path = metadata.value(forAttribute: \.path) {
+			URL(filePath: path, directoryHint: .notDirectory)
+		} else {
+			// fallback
+			NSWorkspace.shared.urlForApplication(withBundleIdentifier: bundleIdentifier)
+		}
+	}
+
+	var copyright: String? {
+		metadata.value(forAttribute: \.copyright)
+	}
+
+	var version: String? {
+		metadata.value(forAttribute: \.version)
+	}
+
+	var creationDate: Date? {
+		metadata.value(forAttribute: \.fsCreationDate)
+	}
+
+	var updatedDate: Date? {
+		metadata.value(forAttribute: \.fsContentChangeDate)
+	}
+
+	var lastOpenedDate: Date? {
+		metadata.value(forAttribute: \.lastUsedDate)
+	}
+
+	/// The file size of the application, measured in bytes.
+	var fileSize: Int64? {
+		metadata.value(forAttribute: \.fsSize)
+	}
+
+	var fileSizeDescription: String? {
+		fileSize?.formatted(.byteCount(style: .file))
+	}
+
+	// NOTE: \.appStoreCategory *might* provide a localized display name
+	var appStoreCategory: AppStoreCategory? {
+		if let appStoreCategoryType = metadata.value(forAttribute: \.appStoreCategoryType) {
+			AppStoreCategory(rawValue: appStoreCategoryType)
+		} else {
+			nil
+		}
+	}
+
+	var executableArchitectures: [ExecutableArchitecture]? {
+		metadata.value(forAttribute: \.executableArchitectures)?
+			.compactMap(ExecutableArchitecture.init(rawValue:))
+	}
+
+	var keywords: String? {
+		metadata.value(forAttribute: \.keywords)
+	}
+
+	// TODO: Do keywords need to be processed?
+	// They're primarily used for search and filtering, so we could probably just do
+	// `keywords.localizedStandardContains(searchQuery)`
+//	var processedKeywords: [String] {
+//		keywords?
+//			.replaceEmptyWithNil?
+//			.components(separatedBy: .punctuationCharacters)
+//			.map { component in
+//				component.trimmingCharacters(in: .whitespacesAndNewlines)
+//			}
 //	}
+
+	// In most cases, this seems to return a keyword, similar name, localized name, keyword, or the original display name with ".app" suffix.
+	// This *could* be used as an additional search parameter.
+	var alternateNames: [String]? {
+		metadata.value(forAttribute: \.alternateNames)
+	}
 }

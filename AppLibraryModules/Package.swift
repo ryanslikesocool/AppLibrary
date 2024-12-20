@@ -25,8 +25,9 @@ let package = Package(
 		.package(url: "https://github.com/orchetect/SettingsAccess.git", from: "2.0.0"),
 
 		.package(url: "https://github.com/ryanslikesocool/LocalizationTable.git", from: "0.0.1"),
-		.package(url: "https://github.com/ryanslikesocool/AsyncNSMetadataQuery.git", from: "0.0.1"),
+		.package(url: "https://github.com/ryanslikesocool/AsyncNSMetadataQuery.git", branch: "metadata-query-toolbox"),
 		.package(url: "https://github.com/ryanslikesocool/SwiftyAccessibility.git", from: "0.0.1"),
+		.package(url: "https://github.com/ryanslikesocool/DictionaryPath.git", from: "0.0.1"),
 	],
 	targets: [
 		.target(
@@ -43,8 +44,9 @@ let package = Package(
 			dependencies: [
 				"SettingsAccess",
 
-				"AsyncNSMetadataQuery",
+				.product(name: "MetadataQueryToolbox", package: "AsyncNSMetadataQuery"),
 				"SwiftyAccessibility",
+				"DictionaryPath",
 
 				"AppLibraryCommonViews",
 				"AppLibrarySettingsWindow",

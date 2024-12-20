@@ -21,7 +21,7 @@ public extension Constant {
 
 		public static let defaultApplicationVisibility: [ApplicationIdentifier: ApplicationHideFlag.Set] = [
 //			ApplicationIdentifier(Bundle.main.bundleIdentifier!, version: try? Bundle.main.cfBundleShortVersionString): .all,
-			ApplicationIdentifier(Bundle.main.bundleIdentifier!, version: try? Bundle.main.cfBundleShortVersionString, displayName: "App Library"): .all,
+			ApplicationIdentifier(Bundle.main.bundleIdentifier!, displayName: "App Library"): .all,
 		]
 	}
 }

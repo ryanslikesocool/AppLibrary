@@ -22,7 +22,7 @@ extension DockTile {
 	fileprivate static let dockBundleIdentifier: String = "com.apple.dock"
 
 	public static var main: Self? {
-		if let appName = try? Bundle.main.cfBundleName {
+		if let appName = Bundle.main.cfBundleName {
 			Self(withTitle: appName)
 		} else {
 			nil
