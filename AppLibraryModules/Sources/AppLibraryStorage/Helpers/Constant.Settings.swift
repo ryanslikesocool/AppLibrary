@@ -10,7 +10,9 @@ public extension Constant {
 		// VALIDATE: Do these directories need to be localized?
 		public static let defaultSearchScopes: [URL] = [
 			"/System/Applications",
+			"/System/Library/CoreServices",
 			"/System/Library/CoreServices/Applications",
+//			"/System/Volumes/Preboot/Cryptexes/App/System/Applications",
 			"/Applications",
 			"~/Applications",
 		]
@@ -19,9 +21,9 @@ public extension Constant {
 			URL(filePath: filePath, directoryHint: .isDirectory)
 		}
 
-		public static let defaultApplicationVisibility: [ApplicationIdentifier: ApplicationHideFlag.Set] = [
-//			ApplicationIdentifier(Bundle.main.bundleIdentifier!, version: try? Bundle.main.cfBundleShortVersionString): .all,
-			ApplicationIdentifier(Bundle.main.bundleIdentifier!, displayName: "App Library"): .all,
+		public static let defaultApplicationVisibility: [ApplicationModelIdentifier: ApplicationHideFlag.Set] = [
+			ApplicationModelIdentifier(bundleIdentifier: Bundle.main.bundleIdentifier!): .all,
+//			ApplicationIdentifier(Bundle.main.bundleIdentifier!, displayName: "App Library"): .all,
 		]
 	}
 }

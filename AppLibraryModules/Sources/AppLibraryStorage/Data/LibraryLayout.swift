@@ -3,6 +3,10 @@ public enum LibraryLayout: String {
 	case grid
 }
 
+// MARK: - Sendable
+
+extension LibraryLayout: Sendable { }
+
 // MARK: - Equatable
 
 extension LibraryLayout: Equatable { }

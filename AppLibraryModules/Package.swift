@@ -11,7 +11,7 @@ let package = Package(
 	products: [
 		.library(name: "AppLibraryModules", targets: ["AppLibrary"]),
 
-		.library(name: "AppLibraryBrowser", targets: ["AppLibraryBrowser"]),
+		.library(name: "AppLibraryBrowserWindow", targets: ["AppLibraryBrowserWindow"]),
 		.library(name: "AppLibraryAboutWindow", targets: ["AppLibraryAboutWindow"]),
 		.library(name: "AppLibrarySettingsWindow", targets: ["AppLibrarySettingsWindow"]),
 
@@ -21,11 +21,8 @@ let package = Package(
 		.library(name: "AppLibraryLocalization", targets: ["AppLibraryLocalization"]),
 	],
 	dependencies: [
-		.package(url: "https://github.com/sindresorhus/ExceptionCatcher.git", from: "2.0.1"),
-		.package(url: "https://github.com/orchetect/SettingsAccess.git", from: "2.0.0"),
-
 		.package(url: "https://github.com/ryanslikesocool/LocalizationTable.git", from: "0.0.1"),
-		.package(url: "https://github.com/ryanslikesocool/AsyncNSMetadataQuery.git", branch: "metadata-query-toolbox"),
+		.package(url: "https://github.com/ryanslikesocool/NSMetadataToolbox.git", from: "0.0.3"),
 		.package(url: "https://github.com/ryanslikesocool/SwiftyAccessibility.git", from: "0.0.1"),
 		.package(url: "https://github.com/ryanslikesocool/DictionaryPath.git", from: "0.0.1"),
 	],
@@ -33,18 +30,16 @@ let package = Package(
 		.target(
 			name: "AppLibrary",
 			dependencies: [
-				"AppLibraryBrowser",
 				"AppLibraryAboutWindow",
+				"AppLibraryBrowserWindow",
 				"AppLibrarySettingsWindow",
 			]
 		),
 
 		.target(
-			name: "AppLibraryBrowser",
+			name: "AppLibraryBrowserWindow",
 			dependencies: [
-				"SettingsAccess",
-
-				.product(name: "MetadataQueryToolbox", package: "AsyncNSMetadataQuery"),
+				"NSMetadataToolbox",
 				"SwiftyAccessibility",
 				"DictionaryPath",
 
@@ -68,6 +63,8 @@ let package = Package(
 		.target(
 			name: "AppLibraryStorage",
 			dependencies: [
+				"NSMetadataToolbox",
+
 				"AppLibraryCommon",
 			]
 		),
@@ -90,8 +87,6 @@ var settingsWindowTargets: [Target] {
 		.target(
 			name: "AppLibrarySettingsWindow",
 			dependencies: [
-				"SettingsAccess",
-
 				"AppLibraryCommon",
 
 				"AppLibrarySettingsGeneralPane",
@@ -134,14 +129,12 @@ var commonTargets: [Target] {
 			name: "AppLibraryCommonViews",
 			dependencies: [
 				"AppLibraryCommon",
+				"AppLibraryLocalization",
 			]
 		),
 
 		.target(
-			name: "AppLibraryCommon",
-			dependencies: [
-				"ExceptionCatcher",
-			]
+			name: "AppLibraryCommon"
 		),
 	]
 }

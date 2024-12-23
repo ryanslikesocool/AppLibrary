@@ -5,8 +5,8 @@ public extension Dictionary {
 		Value: Identifiable,
 		Value.ID == Key
 	{
-		self = elements.reduce(into: Self()) { partialResult, element in
-			partialResult[element.id] = element
+		self.init(elements.map { element in (element.id, element) }) { _, newValue in
+			newValue
 		}
 	}
 }

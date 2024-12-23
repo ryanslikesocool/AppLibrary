@@ -4,7 +4,7 @@ public extension Bundle {
 	func object<Key>(forInfoDictionaryKey key: Key.Type) -> Key.Value? where
 		Key: BundleInfoDictionaryKey
 	{
-		object(forInfoDictionaryKey: Key.infoDictionaryKey) as? Key.Value
+		Key.process(infoDictionaryObject: object(forInfoDictionaryKey: Key.infoDictionaryKey))
 	}
 
 	func objects<each Key>(forInfoDictionaryKeys keys: repeat (each Key).Type) -> (repeat (each Key).Value?) where

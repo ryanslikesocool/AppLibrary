@@ -1,5 +1,5 @@
-import MetadataQueryToolbox
 import Foundation
+import NSMetadataToolbox
 import OSLog
 import UniformTypeIdentifiers
 
@@ -35,70 +35,80 @@ public extension ApplicationCache {
 			Self.logger.info("Starting metadata query.")
 
 			let query = NSMetadataQuery()
-//			let queryDelegate = MetadataQueryDelegate()
 			query.searchScopes = searchScopes
 			query.predicate = Self.metadataQueryPredicate
-//			query.delegate = queryDelegate
+			query.groupingAttributes = Self.metadataQueryGroupingAttributes
 
 			await query.gatherResults()
 
 //			await Task.yield() // TODO: yield?
 
-			var applications = Self.queryResultsAsApplications(query)
-			applications = delegate.applicationCache(processQueryResults: applications)
-			self.applications = applications
+			self.applications = delegate.applicationCache(
+				processQueryResults: Self.queryResultsAsApplications(query)
+			)
 
-			Self.logger.info("Finished metadata query with \(applications.count) processed result(s).")
+			Self.logger.info("Finished metadata query with \(self.applications.count) processed result(s).")
 		}
 	}
 
-//	private static func queryResultsAsApplications(_ query: NSMetadataQuery) -> [Application] {
-//		assert(type(of: query.delegate) == Optional<MetadataQueryDelegate>.self)
-//
-//		return query.results.compactMap { element in
-//			element as? Application
-//		}
-//	}
-
-	private static func queryResultsAsApplications(_ query: NSMetadataQuery) -> [Application] {
+	private static func queryResultsAsApplications(_ query: NSMetadataQuery) -> [ApplicationModel] {
 		assert(query.delegate == nil)
 
-		Logger.module.info("Processing \(query.results.count) metadata query result(s).")
+		Logger.module.info("Processing \(query.resultCount) metadata query result(s).")
 
-		return query.results
-			.compactMap { element -> Application? in
-				if let element = element as? NSMetadataItem {
-					try? Application(metadata: element)
-				} else {
-					nil
+		return query.groupedResults
+			.compactMap { group -> ApplicationModel? in
+				assert(group.attribute == Self.metadataQueryGroupingAttributes[0])
+
+				guard let bundleIdentifier = group.value as? String else {
+					return nil
 				}
+
+				let applications: [ApplicationInstance] = group.results
+					.compactMap { element -> ApplicationInstance? in
+						if let element = element as? NSMetadataItem {
+							try? ApplicationInstance(metadataItem: element)
+						} else {
+							nil
+						}
+					}
+
+				return ApplicationModel(bundleIdentifier: bundleIdentifier, instances: applications)
 			}
 	}
 }
 
-// MARK: - NSMetadataQueryDelegate
-
-//private extension ApplicationCache {
-//	final class MetadataQueryDelegate: NSObject, NSMetadataQueryDelegate {
-//		public func metadataQuery(_ query: NSMetadataQuery, replacementObjectForResultObject result: NSMetadataItem) -> Any {
-//			(try? Application(metadata: result)) as Any
-//		}
-//	}
-//}
-
 // MARK: - Constants
 
 private extension ApplicationCache {
-	static let metadataQueryPredicate: NSPredicate = {
-		let contentTypeKey: String = NSMetadataItemContentTypeKey
-		let desiredContentType = UTType.applicationBundle.identifier
+	/// An array of attribute keys that determine how query results are grouped.
+	static let metadataQueryGroupingAttributes: [String] = [
+		NSMetadataAttribute.CFBundleIdentifierKey.attributeKey,
+	]
 
-		// TODO: figure out why format with arguments throws an Obj-C exception
-//		let format: String = "%@ == '%@'"
+	static let metadataQueryPredicate: NSPredicate! = {
+		// NOTE: We can't use the #Predicate macro because it doesn't support `NSMetadataItem.value(forAttribute:)`
+		// See the
+		// [official documentation](https://developer.apple.com/documentation/foundation/nspredicate/4162324-init#discussion)
+		// for more information.
 
-		let format: String = "\(contentTypeKey) == '\(desiredContentType)'"
+		let contentTypeKey: String = NSMetadataAttribute.ContentTypeKey.attributeKey
+		let desiredContentType: UTType = UTType.applicationBundle
 
-		return NSComparisonPredicate(format: format)
-//		return NSPredicate(format: format)
+		// NOTE: We use different substitution arguments because we're
+		// replacing a key path on the left side and an object value on the right side.
+		// See
+		// [NSHipster's Article](https://nshipster.com/nspredicate/#substitutions)
+		// for more information.
+		let format: String = "%K == %@"
+
+		return NSPredicate(format: format, contentTypeKey, desiredContentType.identifier)
+
+		// An alternative is to use the `init(fromMetadataQueryString:)`,
+		// but the overload doesn't format the string for us,
+		// so we have to do it ourselves.
+		// The format string is a little less straightforward.
+		// let format: String = #"%@ == "%@""#
+		// NSPredicate(fromMetadataQueryString: String(format: format, contentTypeKey, desiredContentType.identifier))
 	}()
 }

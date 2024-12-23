@@ -3,6 +3,10 @@ public enum AdditionalApplicationGroup: UInt8 {
 	case recentlyUpdated
 }
 
+// MARK: - Sendable
+
+extension AdditionalApplicationGroup: Sendable { }
+
 // MARK: - Equatable
 
 extension AdditionalApplicationGroup: Equatable { }

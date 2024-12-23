@@ -14,9 +14,6 @@
       location = "group:AppLibraryModules">
    </FileRef>
    <FileRef
-      location = "container:../AsyncNSMetadataQuery">
-   </FileRef>
-   <FileRef
       location = "container:../DictionaryPath">
    </FileRef>
 </Workspace>
