@@ -11,6 +11,7 @@ public final class BrowserWindowController: NSWindowController, ObservableObject
 	public init() {
 		browserModel = BrowserModel()
 
+		// TODO: Should this be a panel?
 		let window = NSVisualEffectWindow(
 			contentRect: NSRect(origin: .zero, size: BrowserWindowController.windowSize),
 			styleMask: [.titled, .fullSizeContentView, .nonactivatingPanel],
@@ -70,7 +71,7 @@ extension BrowserWindowController {
 public extension BrowserWindowController {
 	func reveal() {
 		guard let window else {
-			Logger.module.debug("Browser window does not exist.  This should never happen.")
+			Logger.module.debug("Browser window does not exist.  This should not happen.")
 			return
 		}
 //		NSApp.setActivationPolicy(.accessory)
@@ -106,6 +107,9 @@ private extension BrowserWindowController {
 	}
 
 	static func calculateWindowOrigin() -> CGPoint? {
+		// TODO: Move dock icon access into separate process.
+		// This way, the main app can be sandboxed.
+
 		guard
 			let iconRect = DockTile.main?.rect,
 			let screen = NSScreen.main,

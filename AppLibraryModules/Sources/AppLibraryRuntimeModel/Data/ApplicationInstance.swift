@@ -1,4 +1,5 @@
 import AppLibraryCommon
+import AppLibraryStorage
 import Foundation
 import NSMetadataToolbox
 
@@ -122,15 +123,15 @@ extension ApplicationInstance {
 //	}
 }
 
-//extension Collection where
+// extension Collection where
 //	Element == ApplicationInstance
-//{
+// {
 //	func allBundleIdentifiersEqual() -> Bool {
 //		allEqual { application in
 //			application.metadataItem.value(forAttribute: .cfBundleIdentifier)
 //		}
 //	}
-//}
+// }
 
 extension Sequence where
 	Element == ApplicationInstance

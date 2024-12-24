@@ -54,7 +54,7 @@ public extension ApplicationCache {
 	private static func queryResultsAsApplications(_ query: NSMetadataQuery) -> [ApplicationModel] {
 		assert(query.delegate == nil)
 
-		Logger.module.info("Processing \(query.resultCount) metadata query result(s).")
+		Self.logger.info("Processing \(query.resultCount) metadata query result(s).")
 
 		return query.groupedResults
 			.compactMap { group -> ApplicationModel? in

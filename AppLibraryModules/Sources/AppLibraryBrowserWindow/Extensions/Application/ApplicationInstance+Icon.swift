@@ -1,5 +1,6 @@
 import AppKit
 import AppLibraryCommon
+import AppLibraryRuntimeModel
 import AppLibraryStorage
 import DictionaryPath
 import OSLog
@@ -98,9 +99,9 @@ extension ApplicationInstance {
 				let primaryIcon = bundleIcons[path[1]] as? [String: Any],
 				let files = primaryIcon[path[2]] as? [String],
 				let image = files
-					.lazy
-					.compactMap(bundle.image(forResource:))
-					.first
+				.lazy
+				.compactMap(bundle.image(forResource:))
+				.first
 			else {
 				return nil
 			}

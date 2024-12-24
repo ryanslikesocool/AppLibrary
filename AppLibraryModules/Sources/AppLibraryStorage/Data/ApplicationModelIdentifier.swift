@@ -45,15 +45,3 @@ extension ApplicationModelIdentifier: CustomStringConvertible {
 		"\(Self.self)(bundleIdentifier: \(bundleIdentifier))"
 	}
 }
-
-// MARK: - Convenience
-
-extension ApplicationModelIdentifier {
-	public init(_ model: ApplicationModel) {
-		self.init(bundleIdentifier: model.bundleIdentifier)
-	}
-
-	init(_ instanceIdentifier: borrowing ApplicationInstanceIdentifier) {
-		self.init(bundleIdentifier: instanceIdentifier.bundleIdentifier)
-	}
-}

@@ -1,4 +1,5 @@
 import AppLibraryCommon
+import AppLibraryStorage
 import Foundation
 
 public protocol ApplicationCacheDelegate {

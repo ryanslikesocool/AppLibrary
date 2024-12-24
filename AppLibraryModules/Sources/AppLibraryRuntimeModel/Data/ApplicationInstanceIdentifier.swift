@@ -1,3 +1,4 @@
+import AppLibraryStorage
 import Foundation
 
 public struct ApplicationInstanceIdentifier {
