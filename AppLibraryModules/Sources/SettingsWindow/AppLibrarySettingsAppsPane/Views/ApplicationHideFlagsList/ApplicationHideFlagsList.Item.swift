@@ -1,22 +1,30 @@
 import AppLibraryCommon
 import AppLibraryCommonViews
+import AppLibraryRuntimeModel
 import AppLibraryStorage
 import SwiftUI
 
 extension ApplicationHideFlagsList {
 	struct Item: View {
+		public typealias ItemIdentifier = ApplicationModelIdentifier
 		public typealias SelectionValue = ApplicationHideFlag.Set
 
-		private let application: ApplicationIdentifier
+		private let displayName: String
+		private let itemIdentifier: ItemIdentifier
 		@Binding private var activeFlags: SelectionValue
 		private let removeHideFlags: () -> Void
 
-		public init(
-			application: ApplicationIdentifier,
+		public init?(
+			application itemIdentifier: ItemIdentifier,
 			selection: Binding<SelectionValue>,
 			onRemove removeHideFlags: @escaping () -> Void
 		) {
-			self.application = application
+			guard let displayName = ApplicationCache.shared.applications[itemIdentifier]?.displayName else {
+				return nil
+			}
+
+			self.displayName = displayName
+			self.itemIdentifier = itemIdentifier
 			self.removeHideFlags = removeHideFlags
 			_activeFlags = selection
 		}
@@ -28,10 +36,10 @@ extension ApplicationHideFlagsList {
 			} label: {
 				// TODO: display app icon
 
-				Text(verbatim: application.displayName)
+				Text(verbatim: displayName)
 					.lineLimit(1)
 					.truncationMode(.tail)
-					.help(application.bundleIdentifier)
+					.help(itemIdentifier.bundleIdentifier)
 			}
 		}
 	}

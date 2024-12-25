@@ -1,89 +1,70 @@
 import Foundation
 
 public extension Bundle {
-	subscript<Key>(key: Key.Type) -> Key.Value where
-		Key: BundleKey
+	func object<Key>(forInfoDictionaryKey key: Key.Type) -> Key.Value? where
+		Key: BundleInfoDictionaryKey
 	{
-		get throws {
-			guard let bundleValue = object(forInfoDictionaryKey: Key.key) else {
-				throw CommonError.unexpectedNil
-			}
-			guard let safeValue = bundleValue as? Key.Value else {
-				throw CommonError.castFailure(from: bundleValue, to: Key.Value.self)
-			}
-			return safeValue
-		}
+		Key.process(infoDictionaryObject: object(forInfoDictionaryKey: Key.infoDictionaryKey))
+	}
+
+	func objects<each Key>(forInfoDictionaryKeys keys: repeat (each Key).Type) -> (repeat (each Key).Value?) where
+		repeat each Key: BundleInfoDictionaryKey
+	{
+		(repeat object(forInfoDictionaryKey: each keys))
 	}
 }
 
 // MARK: - BundleKey
 
 public extension Bundle {
-	// MARK: CFBundleName
+	// MARK: cfBundleName
 
-	var cfBundleName: String {
-		get throws {
-			try self[__Key_cfBundleName.self]
-		}
+	var cfBundleName: String? {
+		object(forInfoDictionaryKey: __Key_cfBundleName.self)
 	}
 
-	private enum __Key_cfBundleName: BundleKey {
+	private enum __Key_cfBundleName: BundleInfoDictionaryKey {
 		public typealias Value = String
 
-		public static var key: String { kCFBundleNameKey as String }
+		public static var infoDictionaryKey: String { kCFBundleNameKey as String }
 	}
 
-	// MARK: CFBundleShortVersionString
+	// MARK: cfBundleShortVersionString
 
-	var cfBundleShortVersionString: String {
-		get throws {
-			try self[__Key_cfBundleShortVersionString.self]
-		}
+	var cfBundleShortVersionString: String? {
+		object(forInfoDictionaryKey: __Key_cfBundleShortVersionString.self)
 	}
 
-	private enum __Key_cfBundleShortVersionString: BundleKey {
+	private enum __Key_cfBundleShortVersionString: BundleInfoDictionaryKey {
 		public typealias Value = String
 
-		public static let key: String = "CFBundleShortVersionString"
+		public static let infoDictionaryKey: String = "CFBundleShortVersionString"
 	}
 
-	// MARK: CFBundleVersionString
+	// MARK: cfBundleVersionString
 
-	var cfBundleVersionString: String {
-		get throws {
-			try self[__Key_cfBundleVersionString.self]
-		}
+	var cfBundleVersionString: String? {
+		object(forInfoDictionaryKey: __Key_cfBundleVersionString.self)
 	}
 
-	private enum __Key_cfBundleVersionString: BundleKey {
+	private enum __Key_cfBundleVersionString: BundleInfoDictionaryKey {
 		public typealias Value = String
 
-		public static var key: String { kCFBundleVersionKey as String }
+		public static var infoDictionaryKey: String { kCFBundleVersionKey as String }
+	}
+}
+
+@available(macOS 10.0, *)
+public extension Bundle {
+	// MARK: nsHumanReadableCopyright
+
+	var nsHumanReadableCopyright: String? {
+		object(forInfoDictionaryKey: __Key_nsHumanReadableCopyright.self)
 	}
 
-	// MARK: NSHumanReadableCopyright
-
-	@available(macOS 10.0, *)
-	@available(iOS, unavailable)
-	@available(tvOS, unavailable)
-	@available(watchOS, unavailable)
-	@available(macCatalyst, unavailable)
-	@available(visionOS, unavailable)
-	var nsHumanReadableCopyright: String {
-		get throws {
-			try self[__Key_nsHumanReadableCopyright.self]
-		}
-	}
-
-	@available(macOS 10.0, *)
-	@available(iOS, unavailable)
-	@available(tvOS, unavailable)
-	@available(watchOS, unavailable)
-	@available(macCatalyst, unavailable)
-	@available(visionOS, unavailable)
-	private enum __Key_nsHumanReadableCopyright: BundleKey {
+	private enum __Key_nsHumanReadableCopyright: BundleInfoDictionaryKey {
 		public typealias Value = String
 
-		public static let key: String = "NSHumanReadableCopyright"
+		public static let infoDictionaryKey: String = "NSHumanReadableCopyright"
 	}
 }

@@ -1,5 +1,5 @@
 import AppLibraryAboutWindow
-import AppLibraryBrowser
+import AppLibraryBrowserWindow
 import AppLibraryCommon
 import AppLibrarySettingsWindow
 import OSLog

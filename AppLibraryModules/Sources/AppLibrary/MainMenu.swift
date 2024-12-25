@@ -3,6 +3,8 @@ import AppLibraryCommon
 import AppLibraryLocalization
 import OSLog
 
+// TODO: Does this really need to be its own class?
+
 @MainActor
 final class MainMenu {
 	init() {
@@ -19,12 +21,6 @@ final class MainMenu {
 	}
 }
 
-// MARK: - Constants
-
-private extension MainMenu {
-	static let logger: Logger = Logger(category: MainMenu.self)
-}
-
 // MARK: -
 
 private extension MainMenu {
@@ -35,7 +31,7 @@ private extension MainMenu {
 		guard let submenu = menu.item(withTitle: .mainMenu.submenu.edit)?.submenu else {
 			return
 		}
-		Self.logger.debug("Create \"Edit\" submenu items.")
+		Logger.module.debug("Create \"Edit\" submenu items.")
 
 		let item = submenu.addItem(
 			withTitle: String(localized: .mainMenu.item.search),
@@ -49,7 +45,7 @@ private extension MainMenu {
 		guard let submenu = menu.item(withTitle: .mainMenu.submenu.view)?.submenu else {
 			return
 		}
-		Self.logger.debug("Create \"View\" submenu items.")
+		Logger.module.debug("Create \"View\" submenu items.")
 
 		let item = submenu.addItem(
 			withTitle: String(localized: .mainMenu.item.refresh),

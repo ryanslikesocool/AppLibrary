@@ -2,13 +2,12 @@ import AppLibraryCommon
 import AppLibraryCommonViews
 import AppLibraryStorage
 import OSLog
-internal import SettingsAccess
 import SwiftUI
 
 public struct SettingsButton<Label>: View where
 	Label: View
 {
-	@Environment(\.openSettingsLegacy) private var openSettings
+	@Environment(\.openSettings) private var openSettings
 
 	private let label: () -> Label
 	private let destination: SettingsCategory?
@@ -27,17 +26,10 @@ public struct SettingsButton<Label>: View where
 
 private extension SettingsButton {
 	func buttonAction() {
-		do {
-			try openSettings()
+		openSettings()
 
-			if let destination {
-				Event.goToSettingsTab.send(destination)
-			}
-		} catch {
-			Logger.module.error("""
-			Failed to open settings window:
-			\(error.localizedDescription)
-			""")
+		if let destination {
+			Event.goToSettingsTab.send(destination)
 		}
 	}
 }

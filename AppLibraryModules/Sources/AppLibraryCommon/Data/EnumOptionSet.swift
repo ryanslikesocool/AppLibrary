@@ -41,7 +41,9 @@ public extension EnumOptionSet {
 
 // MARK: -
 
-public extension EnumOptionSet where Enum: CaseIterable {
+public extension EnumOptionSet where
+	Enum: CaseIterable
+{
 	var components: [Enum] {
 		Enum.allCases
 			.filter { item in

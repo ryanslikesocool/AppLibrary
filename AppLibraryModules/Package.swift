@@ -11,44 +11,43 @@ let package = Package(
 	products: [
 		.library(name: "AppLibraryModules", targets: ["AppLibrary"]),
 
-		.library(name: "AppLibraryBrowser", targets: ["AppLibraryBrowser"]),
+		.library(name: "AppLibraryBrowserWindow", targets: ["AppLibraryBrowserWindow"]),
 		.library(name: "AppLibraryAboutWindow", targets: ["AppLibraryAboutWindow"]),
 		.library(name: "AppLibrarySettingsWindow", targets: ["AppLibrarySettingsWindow"]),
 
+		.library(name: "AppLibraryRuntimeModel", targets: ["AppLibraryRuntimeModel"]),
 		.library(name: "AppLibraryStorage", targets: ["AppLibraryStorage"]),
 		.library(name: "AppLibraryCommon", targets: ["AppLibraryCommon"]),
 		.library(name: "AppLibraryCommonViews", targets: ["AppLibraryCommonViews"]),
 		.library(name: "AppLibraryLocalization", targets: ["AppLibraryLocalization"]),
 	],
 	dependencies: [
-		.package(url: "https://github.com/sindresorhus/ExceptionCatcher.git", from: "2.0.1"),
-		.package(url: "https://github.com/orchetect/SettingsAccess.git", from: "2.0.0"),
-
 		.package(url: "https://github.com/ryanslikesocool/LocalizationTable.git", from: "0.0.1"),
-		.package(url: "https://github.com/ryanslikesocool/AsyncNSMetadataQuery.git", from: "0.0.1"),
+		.package(url: "https://github.com/ryanslikesocool/NSMetadataToolbox.git", from: "0.0.3"),
 		.package(url: "https://github.com/ryanslikesocool/SwiftyAccessibility.git", from: "0.0.1"),
+		.package(url: "https://github.com/ryanslikesocool/DictionaryPath.git", from: "0.0.1"),
 	],
 	targets: [
 		.target(
 			name: "AppLibrary",
 			dependencies: [
-				"AppLibraryBrowser",
 				"AppLibraryAboutWindow",
+				"AppLibraryBrowserWindow",
 				"AppLibrarySettingsWindow",
 			]
 		),
 
 		.target(
-			name: "AppLibraryBrowser",
+			name: "AppLibraryBrowserWindow",
 			dependencies: [
-				"SettingsAccess",
-
-				"AsyncNSMetadataQuery",
+				"NSMetadataToolbox",
 				"SwiftyAccessibility",
+				"DictionaryPath",
 
 				"AppLibraryCommonViews",
 				"AppLibrarySettingsWindow",
 				"AppLibraryLocalization",
+				"AppLibraryRuntimeModel",
 			],
 			swiftSettings: [
 				.swiftLanguageMode(.v5),
@@ -64,8 +63,19 @@ let package = Package(
 		),
 
 		.target(
+			name: "AppLibraryRuntimeModel",
+			dependencies: [
+				"NSMetadataToolbox",
+
+				"AppLibraryStorage",
+			]
+		),
+
+		.target(
 			name: "AppLibraryStorage",
 			dependencies: [
+				"NSMetadataToolbox",
+
 				"AppLibraryCommon",
 			]
 		),
@@ -88,8 +98,6 @@ var settingsWindowTargets: [Target] {
 		.target(
 			name: "AppLibrarySettingsWindow",
 			dependencies: [
-				"SettingsAccess",
-
 				"AppLibraryCommon",
 
 				"AppLibrarySettingsGeneralPane",
@@ -132,14 +140,12 @@ var commonTargets: [Target] {
 			name: "AppLibraryCommonViews",
 			dependencies: [
 				"AppLibraryCommon",
+				"AppLibraryLocalization",
 			]
 		),
 
 		.target(
-			name: "AppLibraryCommon",
-			dependencies: [
-				"ExceptionCatcher",
-			]
+			name: "AppLibraryCommon"
 		),
 	]
 }

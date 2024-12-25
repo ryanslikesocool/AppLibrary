@@ -3,7 +3,7 @@ import Combine
 import OSLog
 
 public struct AppsSettings {
-	public var applicationHideFlags: [ApplicationIdentifier: ApplicationHideFlag.Set]
+	public var applicationHideFlags: [ApplicationModelIdentifier: ApplicationHideFlag.Set]
 
 	public init() {
 		applicationHideFlags = Constant.Settings.defaultApplicationVisibility
@@ -39,7 +39,7 @@ extension AppsSettings: Codable {
 //			}
 //		}
 
-		applicationHideFlags = try container.decodeIfPresent([ApplicationIdentifier: ApplicationHideFlag.Set].self, forKey: .applicationHideFlags) ?? applicationHideFlags
+		applicationHideFlags = try container.decodeIfPresent([ApplicationModelIdentifier: ApplicationHideFlag.Set].self, forKey: .applicationHideFlags) ?? applicationHideFlags
 	}
 
 	public func encode(to encoder: any Encoder) throws {
@@ -82,10 +82,10 @@ private extension AppsSettings {
 // MARK: -
 
 public extension AppsSettings {
-	mutating func hideApplication(with appIdentifier: ApplicationIdentifier) {
-		var hideFlags = applicationHideFlags[appIdentifier] ?? .none
+	mutating func hideApplication(with applicationIdentifier: ApplicationModelIdentifier) {
+		var hideFlags = applicationHideFlags[applicationIdentifier] ?? .none
 		let inserted = hideFlags.insert(.hiddenInBrowser).inserted
-		applicationHideFlags[appIdentifier] = hideFlags
+		applicationHideFlags[applicationIdentifier] = hideFlags
 
 		let messagePrefix: String = if inserted {
 			"Successfully added"
@@ -95,12 +95,12 @@ public extension AppsSettings {
 
 		Logger.module.debug("""
 		\(messagePrefix) hidden app.
-		- Bundle Identifier: \(appIdentifier.bundleIdentifier)
+		- Bundle Identifier: \(applicationIdentifier.bundleIdentifier)
 		""")
 	}
 
-	mutating func removeApplicationHideFlags(for appIdentifier: ApplicationIdentifier) {
-		let removed: Bool = applicationHideFlags.removeValue(forKey: appIdentifier) != nil
+	mutating func removeApplicationHideFlags(for applicationIdentifier: ApplicationModelIdentifier) {
+		let removed: Bool = applicationHideFlags.removeValue(forKey: applicationIdentifier) != nil
 
 		let messagePrefix: String = if removed {
 			"Successfully removed"
@@ -110,7 +110,7 @@ public extension AppsSettings {
 
 		Logger.module.debug("""
 		\(messagePrefix) hidden app.
-		- Identifier: \(appIdentifier.bundleIdentifier)
+		- Bundle Identifier: \(applicationIdentifier.bundleIdentifier)
 		""")
 	}
 }

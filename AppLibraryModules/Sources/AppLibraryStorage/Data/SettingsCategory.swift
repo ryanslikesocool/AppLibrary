@@ -4,6 +4,10 @@ public enum SettingsCategory: String {
 	case apps
 }
 
+// MARK: - Sendable
+
+extension SettingsCategory: Sendable { }
+
 // MARK: - Equatable
 
 extension SettingsCategory: Equatable { }

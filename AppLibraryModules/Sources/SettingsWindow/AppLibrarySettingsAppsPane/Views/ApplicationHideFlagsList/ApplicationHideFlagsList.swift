@@ -1,5 +1,6 @@
 import AppLibraryCommon
 import AppLibraryCommonViews
+import AppLibraryRuntimeModel
 import AppLibraryStorage
 import OSLog
 import SwiftUI
@@ -7,6 +8,11 @@ import SwiftUI
 struct ApplicationHideFlagsList: View {
 	@Storage(apps: \.self) private var appsSettings
 	@Storage(apps: \.applicationHideFlags) private var applicationHideFlags
+
+	private var listItems: some RandomAccessCollection<ApplicationModelIdentifier> {
+		applicationHideFlags.keys
+			.sorted(using: .model(by: \.displayName, comparator: .localizedStandard))
+	}
 
 	public init() { }
 
@@ -24,18 +30,18 @@ struct ApplicationHideFlagsList: View {
 
 private extension ApplicationHideFlagsList {
 	var listContent: some View {
-		ForEach(applicationHideFlags.keys.sorted(by: \.displayName)) { application in
+		ForEach(listItems) { applicationModelIdentifier in
 			let activeFlags = Binding<ApplicationHideFlag.Set>(
-				get: { applicationHideFlags[application] ?? .none },
-				set: { newValue in applicationHideFlags[application] = newValue }
+				get: { applicationHideFlags[applicationModelIdentifier] ?? .none },
+				set: { newValue in applicationHideFlags[applicationModelIdentifier] = newValue }
 			)
 
 			Item(
-				application: application,
+				application: applicationModelIdentifier,
 				selection: activeFlags,
-				onRemove: { appsSettings.removeApplicationHideFlags(for: application) }
+				onRemove: { appsSettings.removeApplicationHideFlags(for: applicationModelIdentifier) }
 			)
-			.id(application)
+			.id(applicationModelIdentifier)
 		}
 	}
 }

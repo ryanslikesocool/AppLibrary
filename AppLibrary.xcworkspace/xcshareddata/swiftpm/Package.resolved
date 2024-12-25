@@ -1,24 +1,6 @@
 {
-  "originHash" : "4a48fae10e8a6ef3ee87b5bb1465128503d6ba675f80cd350d5cdc75c1911b85",
+  "originHash" : "28888f917440678d820e42aff97afc91f9e5428c81baf8e4518404810c354ac6",
   "pins" : [
-    {
-      "identity" : "asyncnsmetadataquery",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/ryanslikesocool/AsyncNSMetadataQuery.git",
-      "state" : {
-        "revision" : "8b94d8a16db6a8e334d7e00b5dcc4ebce4c57c2b",
-        "version" : "0.0.1"
-      }
-    },
-    {
-      "identity" : "exceptioncatcher",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/sindresorhus/ExceptionCatcher.git",
-      "state" : {
-        "revision" : "3cd1997e3663078812efca8652af06104b5160bb",
-        "version" : "2.1.0"
-      }
-    },
     {
       "identity" : "localizationtable",
       "kind" : "remoteSourceControl",
@@ -29,12 +11,12 @@
       }
     },
     {
-      "identity" : "settingsaccess",
+      "identity" : "nsmetadatatoolbox",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/orchetect/SettingsAccess.git",
+      "location" : "https://github.com/ryanslikesocool/NSMetadataToolbox.git",
       "state" : {
-        "revision" : "08e80c35501f273afa2f5d6f737429bbe395ff81",
-        "version" : "2.1.0"
+        "revision" : "151ac5c9b423b5e9ecf492a17064d321abdd5109",
+        "version" : "0.0.3"
       }
     },
     {

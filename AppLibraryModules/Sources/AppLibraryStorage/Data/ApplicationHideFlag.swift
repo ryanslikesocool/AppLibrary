@@ -3,6 +3,10 @@ public enum ApplicationHideFlag: UInt8 {
 	case hiddenInSearch
 }
 
+// MARK: - Sendable
+
+extension ApplicationHideFlag: Sendable { }
+
 // MARK: - Equatable
 
 extension ApplicationHideFlag: Equatable { }

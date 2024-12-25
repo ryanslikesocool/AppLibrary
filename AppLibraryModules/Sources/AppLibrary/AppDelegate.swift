@@ -1,5 +1,5 @@
 import AppKit
-import AppLibraryBrowser
+import AppLibraryBrowserWindow
 import AppLibraryStorage
 import OSLog
 
