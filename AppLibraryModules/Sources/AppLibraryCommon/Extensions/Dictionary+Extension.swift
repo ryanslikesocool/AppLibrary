@@ -5,7 +5,9 @@ public extension Dictionary {
 		Value: Identifiable,
 		Value.ID == Key
 	{
-		self.init(elements.map { element in (element.id, element) }) { _, newValue in
+		self.init(
+			elements.map { element in (element.id, element) }
+		) { _, newValue in
 			newValue
 		}
 	}

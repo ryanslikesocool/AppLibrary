@@ -6,7 +6,7 @@ import SwiftUI
 
 extension AppTile {
 	struct ContextMenu: View {
-		private let application: ApplicationModel
+		@ObservedObject private var application: ApplicationModel
 
 		public init(for application: ApplicationModel) {
 			self.application = application
@@ -14,10 +14,10 @@ extension AppTile {
 
 		public var body: some View {
 			Section {
-				Button("Open", systemImage: Constant.Symbol.arrow_up_forward, action: application.openLatest)
+				OpenApplicationButton(application: application)
 			}
 			Section {
-				Button("Hide", systemImage: Constant.Symbol.eye_slash, action: application.hide)
+				HideApplicationButton(application: application)
 
 				if let latestInstance = application.latestInstance {
 					ShowInFinderButton(latestInstance.url)

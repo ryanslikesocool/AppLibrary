@@ -45,3 +45,11 @@ extension ApplicationModelIdentifier: CustomStringConvertible {
 		"\(Self.self)(bundleIdentifier: \(bundleIdentifier))"
 	}
 }
+
+// MARK: - Convenience
+
+public extension ApplicationModelIdentifier {
+	init(_ bundleIdentifier: String) {
+		self.init(bundleIdentifier: bundleIdentifier)
+	}
+}

@@ -14,6 +14,8 @@ public extension LocalizedStringResource {
 		public enum Action {
 			public static let cancel = LocalizedStringResource("ACTION.CANCEL", table: localizationTable)
 			public static let done = LocalizedStringResource("ACTION.DONE", table: localizationTable)
+			public static let hide = LocalizedStringResource("ACTION.HIDE", table: localizationTable)
+			public static let open = LocalizedStringResource("ACTION.OPEN", table: localizationTable)
 			public static let refresh = LocalizedStringResource("ACTION.REFRESH", table: localizationTable)
 			public static let remove = LocalizedStringResource("ACTION.REMOVE", table: localizationTable)
 			public static let retry = LocalizedStringResource("ACTION.RETRY", table: localizationTable)

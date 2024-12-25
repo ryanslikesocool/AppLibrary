@@ -1,23 +1,17 @@
+import AppLibraryCommon
+import AppLibraryStorage
 import Foundation
 import NSMetadataToolbox
 import OSLog
 import UniformTypeIdentifiers
 
 public extension ApplicationCache {
-	func reload(searchScopes: [URL]) {
-		Task {
-			await reload(searchScopes: searchScopes)
-		}
-	}
-
 	func reload(searchScopes: [URL]) async {
 		guard case .idle = state else {
 			return
 		}
 
-		let delegate = self.delegate ?? DefaultApplicationCacheDelegate.shared
-
-		let task = createReloadCacheTask(delegate: delegate, searchScopes: searchScopes)
+		let task = createReloadCacheTask(searchScopes: searchScopes)
 		state = .loading(task: task)
 
 //		await Task.yield() // TODO: yield?
@@ -25,11 +19,9 @@ public extension ApplicationCache {
 		await task.value
 
 		state = .idle
-
-		delegate.applicationCache(didFinishQuery: applications)
 	}
 
-	private func createReloadCacheTask(delegate: ApplicationCacheDelegate, searchScopes: [URL]) -> Task<Void, Never> {
+	private func createReloadCacheTask(searchScopes: [URL]) -> Task<Void, Never> {
 		// TODO: handle task cancellation
 		Task {
 			Self.logger.info("Starting metadata query.")
@@ -43,20 +35,16 @@ public extension ApplicationCache {
 
 //			await Task.yield() // TODO: yield?
 
-			self.applications = delegate.applicationCache(
-				processQueryResults: Self.queryResultsAsApplications(query)
-			)
+			self.applications = Self.processQueryResults(query)
 
 			Self.logger.info("Finished metadata query with \(self.applications.count) processed result(s).")
 		}
 	}
 
-	private static func queryResultsAsApplications(_ query: NSMetadataQuery) -> [ApplicationModel] {
-		assert(query.delegate == nil)
-
+	private static func processQueryResults(_ query: NSMetadataQuery) -> OrderedDictionary<ApplicationModelIdentifier, ApplicationModel> {
 		Self.logger.info("Processing \(query.resultCount) metadata query result(s).")
 
-		return query.groupedResults
+		let applicationModels = query.groupedResults
 			.compactMap { group -> ApplicationModel? in
 				assert(group.attribute == Self.metadataQueryGroupingAttributes[0])
 
@@ -75,6 +63,14 @@ public extension ApplicationCache {
 
 				return ApplicationModel(bundleIdentifier: bundleIdentifier, instances: applications)
 			}
+
+		return OrderedDictionary(
+			applicationModels.map { element in (ApplicationModelIdentifier(element), element) }
+		) { oldValue, newValue in
+			oldValue.formUnion(newValue)
+			return oldValue
+		}
+		.sorted(by: \.displayName, comparator: .localizedStandard)
 	}
 }
 
@@ -86,8 +82,8 @@ private extension ApplicationCache {
 		NSMetadataAttribute.CFBundleIdentifierKey.attributeKey,
 	]
 
-	static let metadataQueryPredicate: NSPredicate! = {
-		// NOTE: We can't use the #Predicate macro because it doesn't support `NSMetadataItem.value(forAttribute:)`
+	static let metadataQueryPredicate: NSPredicate = {
+		// NOTE: We can't use the #Predicate macro because it doesn't support `NSMetadataItem.value(forAttribute:)`.
 		// See the
 		// [official documentation](https://developer.apple.com/documentation/foundation/nspredicate/4162324-init#discussion)
 		// for more information.

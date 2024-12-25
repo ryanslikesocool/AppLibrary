@@ -7,7 +7,8 @@ import OSLog
 
 extension ApplicationModel {
 	func getLatestIcon() -> NSImage {
-		latestInstance?.getIcon() ?? NSImage.applicationPlaceholder
+		latestInstance?.getIcon()
+			?? NSWorkspace.shared.icon(for: .applicationPlaceholder)
 	}
 }
 

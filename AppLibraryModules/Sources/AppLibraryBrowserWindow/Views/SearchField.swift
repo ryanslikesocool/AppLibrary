@@ -1,3 +1,4 @@
+import AppLibraryCommon
 import AppLibraryCommonViews
 import AppLibraryStorage
 import SwiftUI
@@ -18,6 +19,7 @@ struct SearchField: View {
 			prompt: Text("􀊫 App Library"),
 			label: EmptyView.init
 		)
+//		.keyboardShortcut(.search)
 //		.onSubmit(of: .text) {
 //			browserModel.filteredApps.first?.open()
 //		}

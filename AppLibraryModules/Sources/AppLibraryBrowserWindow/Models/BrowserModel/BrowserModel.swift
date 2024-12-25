@@ -43,20 +43,10 @@ final class BrowserModel: ObservableObject {
 		searchQuery = ""
 		focus = nil
 
-		applicationCache.delegate = self
-
 		refreshApps()
 
 		_ = refreshAppsSubscriber
 		_ = activateSearchSubscriber
-	}
-}
-
-// MARK: - ApplicationCacheDelegate
-
-extension BrowserModel: ApplicationCacheDelegate {
-	func applicationCache(didFinishQuery results: borrowing OrderedDictionary<ApplicationModelIdentifier, ApplicationModel>) {
-		state = .idle
 	}
 }
 
@@ -85,7 +75,13 @@ extension BrowserModel {
 			let searchScopes = try getSearchScopes()
 
 			state = .loading
-			applicationCache.reload(searchScopes: searchScopes)
+
+			// TODO: Does this task need to be stored anywhere?
+			Task {
+				await applicationCache.reload(searchScopes: searchScopes)
+
+				self.state = .idle
+			}
 		} catch {
 			state = .error(error)
 		}

@@ -9,8 +9,6 @@ public final class ApplicationCache: Observable {
 	@Published public internal(set) var state: ApplicationCacheState
 	@Published public internal(set) var applications: OrderedDictionary<ApplicationModelIdentifier, ApplicationModel>
 
-	public var delegate: ApplicationCacheDelegate?
-
 	public init() {
 		state = .idle
 		applications = [:]
@@ -22,5 +20,6 @@ public final class ApplicationCache: Observable {
 extension ApplicationCache {
 	static let logger: Logger = Logger(category: ApplicationCache.self)
 
+	/// The shared application cache instance.
 	public static let shared: ApplicationCache = ApplicationCache()
 }

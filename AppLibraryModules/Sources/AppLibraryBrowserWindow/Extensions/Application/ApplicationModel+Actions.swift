@@ -30,11 +30,6 @@ extension ApplicationModel {
 
 		url.showInFinder()
 	}
-
-	@MainActor
-	func hide() {
-		AppsSettings.shared.hideApplication(with: ApplicationModelIdentifier(self))
-	}
 }
 
 // MARK: - Constants
