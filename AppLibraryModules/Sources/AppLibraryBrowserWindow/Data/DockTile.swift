@@ -1,17 +1,12 @@
 import AppKit
 import ApplicationServices
-import SwiftyAccessibility
+import AXToolbox
+import OSLog
 
 struct DockTile {
 	private let accessibilityElement: AXUIElement
 
-	public init?(withTitle title: String) {
-		guard
-			AccessibilityUtility.isTrusted,
-			let accessibilityElement = AXUIElement.dockTile(withTitle: title)
-		else {
-			return nil
-		}
+	init(accessibilityElement: AXUIElement) {
 		self.accessibilityElement = accessibilityElement
 	}
 }
@@ -19,14 +14,10 @@ struct DockTile {
 // MARK: - Constants
 
 extension DockTile {
-	fileprivate static let dockBundleIdentifier: String = "com.apple.dock"
-
-	public static var main: Self? {
-		if let appName = Bundle.main.cfBundleName {
-			Self(withTitle: appName)
-		} else {
-			nil
-		}
+	// TODO: Should `main` be retained somewhere so we don't keep recalculating it?
+	// Or is it safer to recalculate it?
+	public static func main(in dock: Dock? = Dock.main) -> Self? {
+		dock?.applicationTile(withURL: Bundle.main.bundleURL)
 	}
 }
 
@@ -35,37 +26,22 @@ extension DockTile {
 extension DockTile {
 	/// The rect for the dock tile.
 	public var rect: CGRect? {
-		guard let axValues = try? accessibilityElement.values(forAttributes: [.position, .size], options: .stopOnError) else {
-			return nil
-		}
-
-		var origin = CGPoint.zero
-		var size = CGSize.zero
-
-		for axValue in axValues {
-			axValue.value(ofType: .cgPoint, &origin)
-			axValue.value(ofType: .cgSize, &size)
-		}
-
-		return CGRect(origin: origin, size: size)
+		try? accessibilityElement.value(forAttribute: .frame)
 	}
-}
 
-// MARK: -
+	/// The position of the dock tile on the screen.
+	///
+	/// - Remark: If this property is used in the same scope as ``size``,
+	/// consider using the `origin` and `size` properties on ``rect`` instead.
+	public var position: CGPoint? {
+		try? accessibilityElement.value(forAttribute: .position)
+	}
 
-private extension AXUIElement {
-	/// The accessibility element for an app’s dock tile
-	static func dockTile(withTitle appTitle: String) -> AXUIElement? {
-		if
-			let dockElement = AXUIElement.applications(withBundleIdentifier: DockTile.dockBundleIdentifier).last,
-			let firstChild = (try? dockElement.children())?.first,
-			let children = try? firstChild.children()
-		{
-			children.first { child in
-				(try? child.value(forAttribute: .title)) as? String == appTitle
-			}
-		} else {
-			nil
-		}
+	/// The size of the dock tile.
+	///
+	/// - Remark: If this property is used in the same scope as ``position``,
+	/// consider using the `origin` and `size` properties on ``rect`` instead.
+	public var size: CGSize? {
+		try? accessibilityElement.value(forAttribute: .size)
 	}
 }

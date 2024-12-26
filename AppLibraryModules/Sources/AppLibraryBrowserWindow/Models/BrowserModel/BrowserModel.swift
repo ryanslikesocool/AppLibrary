@@ -76,7 +76,9 @@ extension BrowserModel {
 
 			state = .loading
 
-			// TODO: Does this task need to be stored anywhere?
+			// TODO: Does this task ever need to be cancelled?
+			// We should probably only ever need the task from `ApplicationCacheState.loading(task:)`
+			// That said, there's probably a better way to handle this, rather than starting 2 tasks.
 			Task {
 				await applicationCache.reload(searchScopes: searchScopes)
 

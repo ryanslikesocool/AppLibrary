@@ -128,7 +128,7 @@ extension ApplicationModel {
 	}
 
 	static func trimFileExtension(_ input: String) -> String {
-		input.dropSuffix(".app")
+		String(input.dropSuffix(".app"))
 	}
 
 	static func trimFileExtension(_ input: String?) -> String? {

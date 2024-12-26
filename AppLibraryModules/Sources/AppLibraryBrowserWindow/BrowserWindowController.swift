@@ -60,8 +60,12 @@ extension BrowserWindowController: NSWindowDelegate {
 // MARK: - Constants
 
 extension BrowserWindowController {
-	static let windowSize: NSSize = NSSize(width: 300, height: 450)
-	static let windowPadding: CGFloat = 8
+	static let windowSize: CGSize = CGSize(width: 300, height: 450)
+
+	/// The padding from the edge of the window to the dock.
+	///
+	/// The accessibility API used to calculate the position the window automatically adds some padding by default.
+	static let windowPadding: CGFloat = 0
 
 	static let windowIdentifier: NSUserInterfaceItemIdentifier = NSUserInterfaceItemIdentifier(WindowIdentifier.appLibrary)
 }
@@ -106,34 +110,33 @@ private extension BrowserWindowController {
 		}
 	}
 
-	static func calculateWindowOrigin() -> CGPoint? {
-		// TODO: Move dock icon access into separate process.
-		// This way, the main app can be sandboxed.
-
-		guard
-			let iconRect = DockTile.main?.rect,
-			let screen = NSScreen.main,
-			let dockPosition = screen.estimatedDockPosition
+	/// - Parameter screen: The screen the window will be displayed on.
+	/// Leave this `nil` to use `NSScreen.main`.
+	static func calculateWindowOrigin(on screen: NSScreen? = nil) -> CGPoint? {
+ 		guard
+			let screen = screen ?? NSScreen.main,
+			let dock = Dock.main,
+			let iconRect = DockTile.main(in: dock)?.rect,
+			let (dockRect, dockEdge) = dock.rectAndEstimatedEdge(on: screen)
 		else {
 			return nil
 		}
 
-		var frameOrigin = switch dockPosition {
+		var frameOrigin = switch dockEdge {
 			case .left:
 				CGPoint(
-					x: iconRect.origin.x + iconRect.width + Self.windowPadding,
-					y: iconRect.origin.y + (iconRect.height + Self.windowSize.height) * 0.5
+					x: dockRect.maxX + windowPadding,
+					y: iconRect.midY + windowSize.height * 0.5
 				)
 			case .bottom:
 				CGPoint(
-					x: iconRect.origin.x + (iconRect.width - Self.windowSize.width) * 0.5,
-					y: iconRect.origin.y - Self.windowPadding
+					x: iconRect.midX - windowSize.width * 0.5,
+					y: dockRect.minY - windowPadding
 				)
 			case .right:
-				// The gap between the dock and window is a little wider due to the accessibility API returning a rect with the origin off a little bit.
 				CGPoint(
-					x: iconRect.origin.x - (Self.windowSize.width + Self.windowPadding),
-					y: iconRect.origin.y + (iconRect.height + Self.windowSize.height) * 0.5
+					x: dockRect.minX - (windowSize.width + windowPadding),
+					y: iconRect.midY + windowSize.height * 0.5
 				)
 		}
 

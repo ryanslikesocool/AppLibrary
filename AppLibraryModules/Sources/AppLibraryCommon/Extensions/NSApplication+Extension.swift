@@ -2,7 +2,8 @@ import AppKit
 
 public extension NSApplication {
 	var appName: String {
-		Bundle.main.cfBundleName ?? ProcessInfo.processInfo.processName
+		Bundle.main.cfBundleName
+			?? ProcessInfo.processInfo.processName
 	}
 
 	var appVersion: String? {
