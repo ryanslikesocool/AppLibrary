@@ -13,5 +13,10 @@
 		"name": "AXToolbox",
 		"projectURL": "https://github.com/ryanslikesocool/AXToolbox",
 		"licenseURL": "https://github.com/ryanslikesocool/AXToolbox/blob/main/LICENSE.md"
+	},
+	{
+		"name": "BundleToolbox",
+		"projectURL": "https://github.com/ryanslikesocool/BundleToolbox",
+		"licenseURL": "https://github.com/ryanslikesocool/BundleToolbox/blob/main/LICENSE.md"
 	}
 ]

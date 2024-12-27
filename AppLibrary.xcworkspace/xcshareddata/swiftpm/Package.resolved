@@ -1,6 +1,24 @@
 {
-  "originHash" : "542f855914c07935405b1ae1c0426ceb28ee863a9a9710b8f4fe7beaf41e2500",
+  "originHash" : "0827eacf8a8b3031582add7a8b89903d0210905dba4c82a8d39f24d2a3c9c51b",
   "pins" : [
+    {
+      "identity" : "axtoolbox",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ryanslikesocool/AXToolbox.git",
+      "state" : {
+        "revision" : "8b0ae796692a8d51bf886441ffc8fe05b8796fb6",
+        "version" : "0.0.2"
+      }
+    },
+    {
+      "identity" : "bundletoolbox",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ryanslikesocool/BundleToolbox.git",
+      "state" : {
+        "revision" : "9354c013b675eef81c40bc7e64d4756bbc62f7f2",
+        "version" : "0.0.2"
+      }
+    },
     {
       "identity" : "localizationtable",
       "kind" : "remoteSourceControl",

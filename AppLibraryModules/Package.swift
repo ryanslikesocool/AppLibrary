@@ -24,8 +24,8 @@ let package = Package(
 	dependencies: [
 		.package(url: "https://github.com/ryanslikesocool/LocalizationTable.git", from: "0.0.1"),
 		.package(url: "https://github.com/ryanslikesocool/NSMetadataToolbox.git", from: "0.0.3"),
-//		.package(url: "https://github.com/ryanslikesocool/AXToolbox.git", from: "0.0.2"),
-		.package(path: "~/Documents/Xcode Projects/AXToolbox"),
+		.package(url: "https://github.com/ryanslikesocool/AXToolbox.git", from: "0.0.2"),
+		.package(url: "https://github.com/ryanslikesocool/BundleToolbox.git", from: "0.0.2"),
 		.package(url: "https://github.com/ryanslikesocool/DictionaryPath.git", from: "0.0.1"),
 	],
 	targets: [
@@ -129,6 +129,7 @@ var settingsWindowTargets: [Target] {
 				"AppLibraryStorage",
 				"AppLibraryCommon",
 				"AppLibraryCommonViews",
+				"AppLibraryRuntimeModel",
 			]
 		),
 	]
@@ -146,7 +147,10 @@ var commonTargets: [Target] {
 		),
 
 		.target(
-			name: "AppLibraryCommon"
+			name: "AppLibraryCommon",
+			dependencies: [
+				"BundleToolbox",
+			]
 		),
 	]
 }
