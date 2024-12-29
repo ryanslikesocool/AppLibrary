@@ -41,11 +41,7 @@ public extension SettingsButton where
 {
 	init(destination: SettingsCategory? = nil) {
 		self.init(destination: destination) {
-			Label {
-				Text(.common.link.settings)
-			} icon: {
-				Image(systemName: Constant.Symbol.gear)
-			}
+			Label(.common.link.settings, systemImage: .gear)
 		}
 	}
 }

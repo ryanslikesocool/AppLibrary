@@ -20,7 +20,7 @@ public extension DefaultableStorageFile {
 		} catch {
 			Logger.module.error("""
 			Failed to read \(Self.self).
-			- URL:   \(url)
+			- URL: \(url)
 			- Error: \(error)
 			Falling back to default.
 			""")
@@ -38,7 +38,7 @@ public extension StorageFile {
 		} catch {
 			Logger.module.error("""
 			Failed to write \(Self.self).
-			- URL:   \(url)
+			- URL: \(url)
 			- Error: \(error)
 			""")
 		}

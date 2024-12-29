@@ -8,6 +8,6 @@ public struct URLLabel: View {
 	}
 
 	public var body: some View {
-		Text(url.abbreviatingWithTildeInPath)
+		Text(verbatim: url.abbreviatingWithTildeInPath)
 	}
 }

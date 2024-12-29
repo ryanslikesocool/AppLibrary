@@ -31,7 +31,7 @@ private extension MainMenu {
 		guard let submenu = menu.item(withTitle: .mainMenu.submenu.edit)?.submenu else {
 			return
 		}
-		Logger.module.debug("Create \"Edit\" submenu items.")
+		Logger.module.debug(#"Create "Edit" submenu items."#)
 
 		let item = submenu.addItem(
 			withTitle: String(localized: .mainMenu.item.search),
@@ -45,7 +45,7 @@ private extension MainMenu {
 		guard let submenu = menu.item(withTitle: .mainMenu.submenu.view)?.submenu else {
 			return
 		}
-		Logger.module.debug("Create \"View\" submenu items.")
+		Logger.module.debug(#"Create "View" submenu items."#)
 
 		let item = submenu.addItem(
 			withTitle: String(localized: .mainMenu.item.refresh),

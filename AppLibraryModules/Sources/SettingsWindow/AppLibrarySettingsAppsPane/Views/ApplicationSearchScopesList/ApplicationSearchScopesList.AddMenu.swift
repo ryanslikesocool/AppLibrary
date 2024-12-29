@@ -6,7 +6,7 @@ import SwiftUI
 
 extension ApplicationSearchScopesList {
 	struct AddMenu: View {
-		@Storage(locations: \.self) private var locations
+		@Storage(apps: \.self) private var locations
 
 		@State private var isFileImporterPresented: Bool = false
 
@@ -22,11 +22,7 @@ extension ApplicationSearchScopesList {
 
 				DefaultSearchScopesSection(addSearchScope: addSearchScope)
 			} label: {
-				Label {
-					Text(.applicationSearchScopesList.addMenu.label)
-				} icon: {
-					Image(systemName: Constant.Symbol.plus)
-				}
+				Label(.applicationSearchScopesList.addMenu.label, systemImage: .plus)
 			} primaryAction: {
 				primaryAction()
 			}
@@ -56,7 +52,7 @@ private extension ApplicationSearchScopesList.AddMenu {
 		switch result {
 			case let .failure(error):
 				Logger.module.error("""
-				Failed to select new search directory.
+				Failed to select search directory:
 				- Error: \(error)
 				""")
 			case let .success(url):

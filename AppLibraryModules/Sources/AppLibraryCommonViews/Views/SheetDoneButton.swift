@@ -6,10 +6,8 @@ public struct SheetDoneButton: View {
 	public init() { }
 
 	public var body: some View {
-		Button {
+		Button(.common.action.done) {
 			dismiss()
-		} label: {
-			Text(.common.action.done)
 		}
 		.buttonStyle(.borderedProminent)
 	}

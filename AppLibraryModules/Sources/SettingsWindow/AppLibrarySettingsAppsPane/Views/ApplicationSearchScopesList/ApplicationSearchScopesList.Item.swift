@@ -16,14 +16,10 @@ extension ApplicationSearchScopesList {
 		public var body: some View {
 			LabeledContent {
 				Menu(content: makeMenuContent) {
-					Label {
-						Text(.applicationSearchScopesList.item.optionsLabel)
-					} icon: {
-						Image(systemName: Constant.Symbol.ellipsis)
-					}
-					.frame(height: 16)
-					.labelStyle(.iconOnly)
-					.contentShape(.rect)
+					Label(.applicationSearchScopesList.item.optionsLabel, systemImage: .ellipsis)
+						.frame(height: 16)
+						.labelStyle(.iconOnly)
+						.contentShape(.rect)
 				}
 				.fixedSize()
 				.menuIndicator(.hidden)

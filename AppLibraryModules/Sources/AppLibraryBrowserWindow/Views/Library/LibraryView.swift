@@ -16,9 +16,14 @@ struct LibraryView: View {
 			}
 			.frame(maxWidth: .infinity)
 			.buttonStyle(.plain)
-			.scrollClipDisabled()
-			.padding(.top, LibraryLayout.list.iconSize + LibraryLayout.list.padding * 0.5)
-			.padding(.bottom, LibraryLayout.list.padding)
+
+			.contentMargins(.bottom, LibraryLayout.list.padding, for: .scrollContent)
+			.safeAreaInset(edge: .top, spacing: LibraryLayout.list.padding) {
+				if browserModel.isSearchDisplayed {
+					SearchField()
+				}
+			}
+
 			.onReceive(Event.scrollToApp) { id in
 				scrollToApp(id: id, in: proxy)
 			}

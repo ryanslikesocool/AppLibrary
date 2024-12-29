@@ -11,4 +11,18 @@ public extension Dictionary {
 			newValue
 		}
 	}
+
+	func mapKeys<ResultKey>(
+		_ transform: (Key) throws -> ResultKey,
+		uniquingKeysWith combine: (Value, Value) throws -> Value
+	) rethrows -> [ResultKey: Value] where
+		ResultKey: Hashable
+	{
+		try [ResultKey: Value](
+			map { key, value in
+				try (transform(key), value)
+			},
+			uniquingKeysWith: combine
+		)
+	}
 }

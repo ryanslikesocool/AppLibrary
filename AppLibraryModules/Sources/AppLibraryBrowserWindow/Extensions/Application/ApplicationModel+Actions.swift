@@ -6,10 +6,7 @@ import OSLog
 extension ApplicationModel {
 	func openLatest() {
 		guard let url = latestInstance?.url else {
-			Logger.module.warning("""
-			Failed to get URL for latest version of application:
-			- Bundle Identifier: \(self.bundleIdentifier)
-			""")
+			Self.logMissingLatestURL(bundleIdentifier)
 			return
 		}
 
@@ -21,14 +18,22 @@ extension ApplicationModel {
 
 	func showLatestInFinder() {
 		guard let url = latestInstance?.url else {
-			Logger.module.warning("""
-			Failed to get URL for latest version of application:
-			- Bundle Identifier: \(self.bundleIdentifier)
-			""")
+			Self.logMissingLatestURL(bundleIdentifier)
 			return
 		}
 
 		url.showInFinder()
+	}
+}
+
+// MARK: - Utility
+
+private extension ApplicationModel {
+	static func logMissingLatestURL(_ bundleIdentifier: String) {
+		Logger.module.warning("""
+		Failed to get URL for latest version of application:
+		- Bundle Identifier: \(bundleIdentifier)
+		""")
 	}
 }
 

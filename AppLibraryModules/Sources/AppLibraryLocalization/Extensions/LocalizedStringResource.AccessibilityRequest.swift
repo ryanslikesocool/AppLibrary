@@ -1,5 +1,5 @@
+internal import LocalizationToolbox
 import Foundation
-internal import LocalizationTable
 
 public extension LocalizedStringResource {
 	static let accessibilityRequest = AccessibilityRequest.self

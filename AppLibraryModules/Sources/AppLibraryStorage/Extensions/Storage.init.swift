@@ -21,11 +21,3 @@ public extension Storage where
 		self.init(File.$shared, keyPath)
 	}
 }
-
-public extension Storage where
-	File == LocationSettings
-{
-	init(locations keyPath: any WritableKeyPath<File, Value> & Sendable) {
-		self.init(File.$shared, keyPath)
-	}
-}

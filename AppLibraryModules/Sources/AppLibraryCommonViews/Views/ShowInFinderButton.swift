@@ -11,11 +11,7 @@ public struct ShowInFinderButton: View {
 
 	public var body: some View {
 		Button(action: buttonAction) {
-			Label {
-				Text(.common.action.showInFinder)
-			} icon: {
-				Image(Constant.Symbol.finder)
-			}
+			Label(.common.action.showInFinder, image: .finder)
 		}
 		.disabled(url == nil)
 	}

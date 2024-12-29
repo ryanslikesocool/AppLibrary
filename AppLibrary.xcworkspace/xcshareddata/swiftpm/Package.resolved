@@ -1,5 +1,5 @@
 {
-  "originHash" : "0827eacf8a8b3031582add7a8b89903d0210905dba4c82a8d39f24d2a3c9c51b",
+  "originHash" : "c2c3b95c02678de04dd8ef16cd0975abf63a14979fee7794f88589c5dd866779",
   "pins" : [
     {
       "identity" : "axtoolbox",
@@ -20,20 +20,11 @@
       }
     },
     {
-      "identity" : "localizationtable",
+      "identity" : "localizationtoolbox",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/ryanslikesocool/LocalizationTable.git",
+      "location" : "https://github.com/ryanslikesocool/LocalizationToolbox.git",
       "state" : {
-        "revision" : "32515ca437701f7033396be161366f70dffe5c9f",
-        "version" : "0.0.2"
-      }
-    },
-    {
-      "identity" : "nsmetadatatoolbox",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/ryanslikesocool/NSMetadataToolbox.git",
-      "state" : {
-        "revision" : "151ac5c9b423b5e9ecf492a17064d321abdd5109",
+        "revision" : "a8d83365834dce39bb6f71c83be494caf2dfcb9b",
         "version" : "0.0.3"
       }
     }

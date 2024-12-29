@@ -22,8 +22,9 @@ let package = Package(
 		.library(name: "AppLibraryLocalization", targets: ["AppLibraryLocalization"]),
 	],
 	dependencies: [
-		.package(url: "https://github.com/ryanslikesocool/LocalizationTable.git", from: "0.0.1"),
-		.package(url: "https://github.com/ryanslikesocool/NSMetadataToolbox.git", from: "0.0.3"),
+		.package(url: "https://github.com/ryanslikesocool/LocalizationToolbox.git", from: "0.0.3"),
+//		.package(url: "https://github.com/ryanslikesocool/NSMetadataToolbox.git", from: "0.0.4"),
+		.package(path: "~/Documents/Xcode Projects/NSMetadataToolbox"),
 		.package(url: "https://github.com/ryanslikesocool/AXToolbox.git", from: "0.0.2"),
 		.package(url: "https://github.com/ryanslikesocool/BundleToolbox.git", from: "0.0.2"),
 		.package(url: "https://github.com/ryanslikesocool/DictionaryPath.git", from: "0.0.1"),
@@ -84,7 +85,7 @@ let package = Package(
 		.target(
 			name: "AppLibraryLocalization",
 			dependencies: [
-				"LocalizationTable",
+				"LocalizationToolbox",
 			]
 		),
 	]

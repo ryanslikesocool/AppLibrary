@@ -54,8 +54,7 @@ extension LayoutSettings: Codable {
 // MARK: - SingletonStorageFile
 
 extension LayoutSettings: SingletonStorageFile {
-	public static let fileURL: URL = URL.settingsDirectory
-		.appending(component: "layout.plist", directoryHint: .notDirectory)
+	public static let fileURL: URL = URL(for: .layout)
 
 	@ObservingCurrentValue
 	public static var shared: Self = Self.read(sharedSubscriber) {

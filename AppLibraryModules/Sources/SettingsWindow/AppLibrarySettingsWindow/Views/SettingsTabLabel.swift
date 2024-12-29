@@ -1,4 +1,5 @@
 import AppLibraryCommon
+import AppLibraryCommonViews
 import AppLibraryStorage
 import SwiftUI
 
@@ -10,11 +11,7 @@ struct SettingsTabLabel: View {
 	}
 
 	public var body: some View {
-		Label {
-			Text(category.titleKey)
-		} icon: {
-			category.icon
-		}
+		Label(category.titleKey, systemImage: category.icon)
 	}
 }
 
@@ -29,13 +26,11 @@ private extension SettingsCategory {
 		}
 	}
 
-	var icon: Image {
-		let systemName = switch self {
-			case .general: Constant.Symbol.gearShape
-			case .layout: Constant.Symbol.square_grid_3x3
-			case .apps: Constant.Symbol.app
+	var icon: SFSymbol {
+		switch self {
+			case .general: SFSymbol.gearShape
+			case .layout: SFSymbol.square_grid_3x3
+			case .apps: SFSymbol.app
 		}
-
-		return Image(systemName: systemName)
 	}
 }

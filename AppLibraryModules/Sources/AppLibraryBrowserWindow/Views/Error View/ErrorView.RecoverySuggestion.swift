@@ -12,7 +12,7 @@ extension ErrorView {
 		}
 
 		public var body: some View {
-			Text(text)
+			Text(verbatim: text)
 		}
 	}
 }

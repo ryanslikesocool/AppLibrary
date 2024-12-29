@@ -89,7 +89,7 @@ extension BrowserModel {
 		}
 
 		func getSearchScopes() throws(BrowserError) -> [URL] {
-			let searchScopes = LocationSettings.shared.searchScopes
+			let searchScopes = AppsSettings.shared.searchScopes
 			guard !searchScopes.isEmpty else {
 				throw .noSearchScopes
 			}

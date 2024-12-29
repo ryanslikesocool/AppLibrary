@@ -2,6 +2,10 @@ import AppKit
 import AppLibraryCommon
 import Foundation
 import NSMetadataToolbox
+import OSLog
+
+// TODO: The most recent version of the app should provide primary attributes.
+// Primary attributes include `displayName`, `keywords`, and `appStoreCategory`.
 
 public final class ApplicationModel {
 	/// The bundle identifier for the application, usually formatted in
@@ -86,11 +90,12 @@ public final class ApplicationModel {
 
 extension ApplicationModel: ObservableObject { }
 
-// MARK: -
+// MARK: - Constants
 
 extension ApplicationModel {
-	// TODO: The most recent version of the app should provide primary attributes.
-	// Primary attributes include `displayName`, `keywords`, and `appStoreCategory`.
+	private static let fileExtension: String = ".app"
+
+	static let logger = Logger(category: ApplicationModel.self)
 }
 
 // MARK: - Utility
@@ -128,7 +133,7 @@ extension ApplicationModel {
 	}
 
 	static func trimFileExtension(_ input: String) -> String {
-		String(input.dropSuffix(".app"))
+		String(input.dropSuffix(fileExtension))
 	}
 
 	static func trimFileExtension(_ input: String?) -> String? {

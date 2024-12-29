@@ -12,11 +12,7 @@ public struct OpenApplicationButton: View {
 
 	public var body: some View {
 		Button(action: action) {
-			Label {
-				Text(LocalizedStringResource.common.action.open)
-			} icon: {
-				Image(systemName: Constant.Symbol.arrow_up_forward)
-			}
+			Label(.common.action.open, systemImage: .arrow_up_forward)
 		}
 	}
 }

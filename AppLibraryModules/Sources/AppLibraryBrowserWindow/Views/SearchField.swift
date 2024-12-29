@@ -16,7 +16,7 @@ struct SearchField: View {
 	public var body: some View {
 		TextField(
 			text: $browserModel.searchQuery,
-			prompt: Text("􀊫 App Library"),
+			prompt: Text(verbatim: "􀊫 \(try! Bundle.main.object(forInfoDictionaryKey: .cfBundleName))"),
 			label: EmptyView.init
 		)
 //		.keyboardShortcut(.search)

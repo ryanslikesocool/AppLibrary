@@ -1,3 +1,4 @@
+import AppLibraryCommon
 import Foundation
 
 extension URL {
@@ -7,4 +8,9 @@ extension URL {
 
 	static let settingsDirectory: Self = Self.preferencesDirectory
 		.appending(component: Bundle.main.bundleIdentifier!, directoryHint: .isDirectory)
+
+	init(for category: SettingsCategory) {
+		self = Self.settingsDirectory
+			.appending(component: "\(category.rawValue).plist", directoryHint: .notDirectory)
+	}
 }

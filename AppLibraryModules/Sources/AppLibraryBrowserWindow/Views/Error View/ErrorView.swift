@@ -13,7 +13,7 @@ struct ErrorView: View {
 
 	public var body: some View {
 		VStack {
-			Image(systemName: Constant.Symbol.exclamationMark_octagon)
+			Image(systemName: .exclamationMark_octagon)
 				.resizable()
 				.fontWeight(.semibold)
 				.frame(width: 48, height: 48)

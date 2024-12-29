@@ -1,4 +1,5 @@
 import AppLibraryCommon
+import OSLog
 import AppLibraryStorage
 import Foundation
 import NSMetadataToolbox
@@ -18,28 +19,28 @@ public struct ApplicationInstance {
 	public let url: URL
 
 	/// The version of the application instance.
-	public var version: String? { metadataItem.value(forAttribute: .version) }
+	public var version: String? { try? metadataItem.value(forAttribute: .version) }
 
 	/// The display name for the application instance.
 	///
 	// If this value is `nil`, the containing ``ApplicationModel/displayName`` will be used.
-	public var displayName: String? { metadataItem.value(forAttribute: .displayName) }
+	public var displayName: String? { try? metadataItem.value(forAttribute: .displayName) }
 
 	/// The copyright for the application instance.
 	///
 	// If this value is `nil`, the containing ``ApplicationModel/copyright`` will be used.
-	public var copyright: String? { metadataItem.value(forAttribute: .copyright) }
+	public var copyright: String? { try? metadataItem.value(forAttribute: .copyright) }
 
 	/// The App Store category type for the application instance.
 	///
 	// If this value is `nil`, the containing ``ApplicationModel/appStoreCategoryType`` will be used.
 	// NOTE: `.appStoreCategory` might provide a localized display name.
-	public var appStoreCategoryType: AppStoreCategoryType? { metadataItem.value(forAttribute: .appStoreCategoryType.asEnum()) }
+	public var appStoreCategoryType: AppStoreCategoryType? { try? metadataItem.value(forAttribute: .appStoreCategoryType.asEnum()) }
 
 	/// The executable architectures for the application instance.
 	///
 	// If this value is `nil`, the containing ``ApplicationModel/executableArchitectures`` will be used.
-	public var executableArchitectures: [ExecutableArchitecture]? { metadataItem.value(forAttribute: .executableArchitectures.asEnums()) }
+	public var executableArchitectures: [ExecutableArchitecture]? { try? metadataItem.value(forAttribute: .executableArchitectures.asEnums()) }
 
 	/// Alternate names for the application instance.
 	///
@@ -49,16 +50,16 @@ public struct ApplicationInstance {
 //	public var alternateNames: [String]? { metadataItem.value(forAttribute: .alternateNames) }
 
 	/// The file size of the application, measured in bytes.
-	public var fileSize: Int64? { metadataItem.value(forAttribute: .fsSize) }
+	public var fileSize: Int64? { try? metadataItem.value(forAttribute: .fsSize) }
 
 	/// The date the application instance was created.
-	public var creationDate: Date? { metadataItem.value(forAttribute: .fsCreationDate) }
+	public var creationDate: Date? { try? metadataItem.value(forAttribute: .fsCreationDate) }
 
 	/// The date the application instance was last updated.
-	public var lastUpdatedDate: Date? { metadataItem.value(forAttribute: .fsContentChangeDate) }
+	public var lastUpdatedDate: Date? { try? metadataItem.value(forAttribute: .fsContentChangeDate) }
 
 	/// The date the application instance was last opened.
-	public var lastOpenedDate: Date? { metadataItem.value(forAttribute: .lastUsedDate) }
+	public var lastOpenedDate: Date? { try? metadataItem.value(forAttribute: .lastUsedDate) }
 
 	public var bundle: Bundle? { Bundle(url: url) }
 
@@ -68,8 +69,8 @@ public struct ApplicationInstance {
 	// Call ``resolve(in:)`` to associate the instance with an ``ApplicationModel``.
 	init(metadataItem: NSMetadataItem) throws {
 		guard
-//			let bundleIdentifier = metadataItem.value(forAttribute: .cfBundleIdentifier),
-			let url = metadataItem.value(forAttribute: .path.asFileURL())
+//			let bundleIdentifier = try? metadataItem.value(forAttribute: .cfBundleIdentifier),
+			let url = try? metadataItem.value(forAttribute: .path.asFileURL())
 		// TODO: Should we include a fallback URL?
 //				?? NSWorkspace.shared.urlForApplication(withBundleIdentifier: bundleIdentifier)
 		else {
@@ -79,6 +80,15 @@ public struct ApplicationInstance {
 		self.metadataItem = metadataItem
 //		self.bundleIdentifier = bundleIdentifier
 		self.url = url
+
+		if FeatureFlag.Application.logInstance {
+			ApplicationModel.logger.debug("""
+			Found Application Instance:
+			- Bundle Identifier: \(String(describing: try? metadataItem.value(forAttribute: .cfBundleIdentifier)))
+			- Display Name: \(String(describing: try? metadataItem.value(forAttribute: .displayName)))
+			- Path: \(String(describing: try? metadataItem.value(forAttribute: .path.asFileURL())))
+			""")
+		}
 	}
 }
 
@@ -138,7 +148,7 @@ extension Sequence where
 {
 	func allBundleIdentifiersEqual(_ equalityValue: String) -> Bool {
 		allSatisfy { application in
-			application.metadataItem.value(forAttribute: .cfBundleIdentifier) == equalityValue
+			(try? application.metadataItem.value(forAttribute: .cfBundleIdentifier)) == equalityValue
 		}
 	}
 }

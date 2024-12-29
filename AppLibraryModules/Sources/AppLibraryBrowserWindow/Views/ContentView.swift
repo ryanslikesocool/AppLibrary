@@ -19,11 +19,6 @@ struct ContentView: View {
 			}
 		}
 
-		.overlay(alignment: .top) {
-			if browserModel.isSearchDisplayed {
-				SearchField()
-			}
-		}
 		.ignoresSafeArea()
 
 		.libraryLayout(layout)

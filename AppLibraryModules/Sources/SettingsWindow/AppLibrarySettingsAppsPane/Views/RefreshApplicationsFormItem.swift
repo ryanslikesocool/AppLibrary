@@ -9,8 +9,8 @@ struct RefreshApplicationsFormItem: View {
 		LabeledContent {
 			button
 		} label: {
-			Text("Refresh")
-			Text("Use ⌘ + R to refresh the list while the Library is focused.")
+			Text(.applicationRefresh.label)
+			Text(.applicationRefresh.description)
 		}
 	}
 }
@@ -20,11 +20,7 @@ struct RefreshApplicationsFormItem: View {
 private extension RefreshApplicationsFormItem {
 	var button: some View {
 		RefreshAppsButton {
-			Label {
-				Text(.common.action.refresh)
-			} icon: {
-				Image(systemName: Constant.Symbol.arrow_clockwise)
-			}
+			Label(.common.action.refresh, systemImage: .arrow_clockwise)
 		}
 	}
 }

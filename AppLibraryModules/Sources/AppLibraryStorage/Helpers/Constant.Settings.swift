@@ -3,10 +3,6 @@ import Foundation
 
 public extension Constant {
 	enum Settings {
-		// TODO: Should the settings directory actually point to `URL.preferencesDirectory`?
-		static let settingsDirectoryURL: URL = Constant.applicationSupportDirectory
-			.appending(components: "settings", directoryHint: .isDirectory)
-
 		// VALIDATE: Do these directories need to be localized?
 		public static let defaultSearchScopes: [URL] = [
 			"/System/Applications",
@@ -23,7 +19,6 @@ public extension Constant {
 
 		public static let defaultApplicationVisibility: [ApplicationModelIdentifier: ApplicationHideFlag.Set] = [
 			ApplicationModelIdentifier(bundleIdentifier: Bundle.main.bundleIdentifier!): .all,
-//			ApplicationIdentifier(Bundle.main.bundleIdentifier!, displayName: "App Library"): .all,
 		]
 	}
 }

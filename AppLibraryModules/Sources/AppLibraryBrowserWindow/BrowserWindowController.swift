@@ -60,6 +60,8 @@ extension BrowserWindowController: NSWindowDelegate {
 // MARK: - Constants
 
 extension BrowserWindowController {
+	static let logger: Logger = Logger(category: BrowserWindowController.self)
+
 	static let windowSize: CGSize = CGSize(width: 300, height: 450)
 
 	/// The padding from the edge of the window to the dock.
@@ -75,7 +77,7 @@ extension BrowserWindowController {
 public extension BrowserWindowController {
 	func reveal() {
 		guard let window else {
-			Logger.module.debug("Browser window does not exist.  This should not happen.")
+			Self.logger.debug("Browser window does not exist.  This should not happen.")
 			return
 		}
 //		NSApp.setActivationPolicy(.accessory)
@@ -85,12 +87,12 @@ public extension BrowserWindowController {
 
 		DispatchQueue.main.async {
 			window.makeKeyAndOrderFront(self)
-			Logger.module.debug("Revealed browser.")
+			Self.logger.debug("Revealed browser.")
 		}
 	}
 
 	func dismiss() {
-		Logger.module.debug("Dismissed browser.")
+		Self.logger.debug("Dismissed browser.")
 		window?.orderOut(self)
 	}
 }
@@ -103,7 +105,7 @@ private extension BrowserWindowController {
 			window.setFrameOrigin(windowOrigin)
 		} else {
 			window.center()
-			Logger.module.debug("""
+			Self.logger.debug("""
 			Failed to get dock icon location for window positioning.
 			The window will be centered instead.
 			""")
@@ -113,7 +115,7 @@ private extension BrowserWindowController {
 	/// - Parameter screen: The screen the window will be displayed on.
 	/// Leave this `nil` to use `NSScreen.main`.
 	static func calculateWindowOrigin(on screen: NSScreen? = nil) -> CGPoint? {
- 		guard
+		guard
 			let screen = screen ?? NSScreen.main,
 			let dock = Dock.main,
 			let iconRect = DockTile.main(in: dock)?.rect,

@@ -5,7 +5,7 @@ import SwiftUI
 
 extension ApplicationSearchScopesList.AddMenu {
 	struct DefaultSearchScopesSection: View {
-		@Storage(locations: \.searchScopes) private var searchScopes
+		@Storage(apps: \.searchScopes) private var searchScopes
 
 		private let addSearchScope: (URL) -> Void
 
