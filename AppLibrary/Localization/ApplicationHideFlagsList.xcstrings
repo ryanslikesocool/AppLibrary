@@ -45,6 +45,17 @@
         }
       }
     },
+    "ITEM.NOT_HIDDEN" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Not Hidden"
+          }
+        }
+      }
+    },
     "ITEM.SEARCH" : {
       "extractionState" : "manual",
       "localizations" : {

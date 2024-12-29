@@ -18,7 +18,7 @@ public final class ApplicationCache: Observable {
 // MARK: - Constants
 
 extension ApplicationCache {
-	static let logger: Logger = Logger(category: ApplicationCache.self)
+	nonisolated static let logger: Logger = Logger(category: ApplicationCache.self)
 
 	/// The shared application cache instance.
 	public static let shared: ApplicationCache = ApplicationCache()

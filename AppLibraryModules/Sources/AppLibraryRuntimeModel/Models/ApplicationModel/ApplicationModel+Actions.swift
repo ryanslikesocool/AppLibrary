@@ -1,9 +1,9 @@
 import AppKit
-import AppLibraryRuntimeModel
 import AppLibraryStorage
 import OSLog
 
-extension ApplicationModel {
+public extension ApplicationModel {
+	@MainActor
 	func openLatest() {
 		guard let url = latestInstance?.url else {
 			Self.logMissingLatestURL(bundleIdentifier)
@@ -30,7 +30,7 @@ extension ApplicationModel {
 
 private extension ApplicationModel {
 	static func logMissingLatestURL(_ bundleIdentifier: String) {
-		Logger.module.warning("""
+		logger.warning("""
 		Failed to get URL for latest version of application:
 		- Bundle Identifier: \(bundleIdentifier)
 		""")
@@ -40,5 +40,6 @@ private extension ApplicationModel {
 // MARK: - Constants
 
 private extension ApplicationModel {
+	@MainActor
 	static let openApplicationConfiguration: NSWorkspace.OpenConfiguration = NSWorkspace.OpenConfiguration()
 }

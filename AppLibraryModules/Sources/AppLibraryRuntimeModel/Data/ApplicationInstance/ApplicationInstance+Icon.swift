@@ -1,19 +1,11 @@
 import AppKit
 import AppLibraryCommon
-import AppLibraryRuntimeModel
 import AppLibraryStorage
 import DictionaryPath
 import OSLog
 
-extension ApplicationModel {
-	func getLatestIcon() -> NSImage {
-		latestInstance?.getIcon()
-			?? NSWorkspace.shared.icon(for: .applicationPlaceholder)
-	}
-}
-
 extension ApplicationInstance {
-	func getIcon() -> NSImage? {
+	public func getIcon() -> NSImage? {
 		guard
 			let bundle,
 			let (path, icon) = tryGetIcon(in: bundle)
@@ -21,7 +13,7 @@ extension ApplicationInstance {
 			return nil
 		}
 
-		if FeatureFlag.ApplicationIcon.logSuccessfulResult {
+		if FeatureFlag.Application.Icon.logSuccessfulResult {
 			Self.logger.debug("""
 			Found application icon:
 			- Bundle Identifier: \(String(describing: bundle.bundleIdentifier))
@@ -32,7 +24,7 @@ extension ApplicationInstance {
 		return icon
 
 		func tryGetIcon(in bundle: Bundle) -> (String, NSImage)? {
-			return if FeatureFlag.ApplicationIcon.measureTime {
+			return if FeatureFlag.Application.Icon.measureTime {
 				Measure.default.work("Get Application Icon", work: work)
 			} else {
 				work()
@@ -41,7 +33,7 @@ extension ApplicationInstance {
 			// TODO: Measure time elapsed for each implementation and only use shortest.
 
 			func work() -> (String, NSImage)? {
-				switch FeatureFlag.ApplicationIcon.implementation {
+				switch FeatureFlag.Application.Icon.implementation {
 					case .manualPath: Self.getIconManualPath(in: bundle)
 					case .recursivePath: Self.getIconRecursivePath(in: bundle)
 					case .recursivePathTypeSafe: Self.getIconRecursivePathTypeSafe(in: bundle)
@@ -182,7 +174,7 @@ private extension ApplicationInstance {
 		[("CFBundleIcons", [String: Any].self), ("CFBundlePrimaryIcon", [String: Any].self), ("CFBundleIconFiles", [String].self)],
 	]
 
-	static let typeSafeBundleImageSearchPaths: [any DictionaryPathComponent] = [
+	nonisolated(unsafe) static let typeSafeBundleImageSearchPaths: [any DictionaryPathComponent] = [
 		DictionaryPath(key: bundleImageSearchPaths[0][0].key, ofType: String.self),
 
 		DictionaryPath(key: bundleImageSearchPaths[1][0].key, ofType: String.self),

@@ -5,26 +5,20 @@ extension ApplicationHideFlagsList.Item {
 	struct Menu: View {
 		public typealias SelectionValue = ApplicationHideFlag.Set
 
-		@Binding private var activeFlags: SelectionValue
-		private let removeHideFlags: () -> Void
+		@Environment(\.removeHideFlagsAction) private var removeHideFlagsAction
 
-		public init(activeFlags: Binding<SelectionValue>, onRemove removeHideFlags: @escaping () -> Void) {
+		@Binding private var activeFlags: SelectionValue
+		private let applicationModelIdentifier: ApplicationModelIdentifier
+
+		public init(activeFlags: Binding<SelectionValue>, applicationModelIdentifier: ApplicationModelIdentifier) {
 			_activeFlags = activeFlags
-			self.removeHideFlags = removeHideFlags
+			self.applicationModelIdentifier = applicationModelIdentifier
 		}
 
 		public var body: some View {
 			SwiftUI.Menu {
-				Section {
-					makeToggle(.hiddenInBrowser)
-						.disabled(true)
-
-					makeToggle(.hiddenInSearch)
-				}
-
-				Divider()
-
-				RemoveHideFlagsButton(action: removeHideFlags)
+				makeToggle(.hiddenInBrowser)
+				makeToggle(.hiddenInSearch)
 			} label: {
 				Text(verbatim: Self.labelText(for: activeFlags))
 			}
@@ -45,20 +39,21 @@ private extension ApplicationHideFlagsList.Item.Menu {
 
 private extension ApplicationHideFlagsList.Item.Menu {
 	static func labelText(for hideFlags: ApplicationHideFlag.Set) -> String {
-		let items = hideFlags.components
-			.map { item in
-				String(localized: item.flagLabel)
-			}
-		let itemList = ListFormatter.localizedString(byJoining: items)
-
-		let text = String(localized: .applicationHideFlagsList.item.format.adjective(itemList))
-
-		return text
+		if hideFlags.isEmpty {
+			return String(localized: .applicationHideFlagsList.item.notHidden)
+		} else {
+			let items = hideFlags.components
+				.map { item in
+					String(localized: item.flagLabel)
+				}
+			let itemList = ListFormatter.localizedString(byJoining: items)
+			return String(localized: .applicationHideFlagsList.item.format.adjective(itemList))
+		}
 	}
 
 	func onActiveFlagsChanged() {
 		if !activeFlags.contains(.hiddenInBrowser) {
-			removeHideFlags()
+			removeHideFlagsAction(applicationModelIdentifier)
 		}
 	}
 }

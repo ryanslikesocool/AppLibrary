@@ -16,6 +16,7 @@ public extension LocalizedStringResource {
 		public enum Item {
 			public static let format = Format.self
 
+			public static let notHidden = LocalizedStringResource("ITEM.NOT_HIDDEN", table: localizationTable)
 			public static let browser = LocalizedStringResource("ITEM.BROWSER", table: localizationTable)
 			public static let search = LocalizedStringResource("ITEM.SEARCH", table: localizationTable)
 

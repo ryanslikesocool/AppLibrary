@@ -102,7 +102,7 @@ extension ApplicationModel {
 
 extension ApplicationModel {
 	/// - Precondition: `bundleIdentifier` and `other.bundleIdentifier` are equal.
-	func formUnion(_ other: ApplicationModel) {
+	func formUnion(_ other: borrowing ApplicationModel) {
 		assert(bundleIdentifier == other.bundleIdentifier)
 
 		instances.merge(other.instances) { _, newValue in
@@ -112,15 +112,12 @@ extension ApplicationModel {
 		instances.sort()
 	}
 
-	// TODO: Do keywords need to be processed?
+	// VALIDATE: Do keywords need to be processed?
 	// They're primarily used for search and filtering, so we could probably just do
 	// `keywords.localizedStandardContains(searchQuery)`
-	static func separateApplicationKeywords(_ input: String?) -> Set<String>? {
-		guard
-			let input,
-			!input.isEmpty
-		else {
-			return nil
+	static func separateApplicationKeywords(_ input: borrowing String) -> Set<String> {
+		guard !input.isEmpty else {
+			return []
 		}
 
 		return Set(
@@ -132,22 +129,13 @@ extension ApplicationModel {
 		)
 	}
 
-	static func trimFileExtension(_ input: String) -> String {
+	static func trimFileExtension(_ input: borrowing String) -> String {
 		String(input.dropSuffix(fileExtension))
 	}
 
-	static func trimFileExtension(_ input: String?) -> String? {
-		guard
-			let input,
-			!input.isEmpty
-		else {
-			return nil
-		}
-		return trimFileExtension(input)
-	}
-
-	/// The item in ``instances`` with the highest ``ApplicationInstance/version``.
+	/// The item in ``instances`` with the greatest ``ApplicationInstance/version``.
 	public var latestInstance: ApplicationInstance? {
+		// VALIDATE: `instances` should always be pre-sorted by ascending `version`.
 		instances.last
 	}
 }

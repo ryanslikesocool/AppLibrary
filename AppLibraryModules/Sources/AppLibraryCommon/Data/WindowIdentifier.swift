@@ -1,6 +1,6 @@
 public enum WindowIdentifier: String {
 	case appLibrary
-	case settings
+	case settings = "com_apple_SwiftUI_Settings_window"
 	case about
 }
 

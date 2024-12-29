@@ -6,40 +6,42 @@ import SwiftUI
 
 extension ApplicationHideFlagsList {
 	struct Item: View {
-		public typealias ItemIdentifier = ApplicationModelIdentifier
 		public typealias SelectionValue = ApplicationHideFlag.Set
 
 		private let displayName: String
-		private let itemIdentifier: ItemIdentifier
+		private let applicationModelIdentifier: ApplicationModelIdentifier
 		@Binding private var activeFlags: SelectionValue
-		private let removeHideFlags: () -> Void
 
 		public init?(
-			application itemIdentifier: ItemIdentifier,
-			selection: Binding<SelectionValue>,
-			onRemove removeHideFlags: @escaping () -> Void
+			applicationModelIdentifier: ApplicationModelIdentifier,
+			selection: Binding<SelectionValue>
 		) {
-			guard let displayName = ApplicationCache.shared.applications[itemIdentifier]?.displayName else {
+			guard let displayName = ApplicationCache.shared.applications[applicationModelIdentifier]?.displayName else {
 				return nil
 			}
 
 			self.displayName = displayName
-			self.itemIdentifier = itemIdentifier
-			self.removeHideFlags = removeHideFlags
+			self.applicationModelIdentifier = applicationModelIdentifier
 			_activeFlags = selection
 		}
 
 		public var body: some View {
 			LabeledContent {
-				Menu(activeFlags: $activeFlags, onRemove: removeHideFlags)
+				Menu(activeFlags: $activeFlags, applicationModelIdentifier: applicationModelIdentifier)
 					.fixedSize()
 			} label: {
-				// TODO: display app icon
-
-				Text(verbatim: displayName)
-					.lineLimit(1)
-					.truncationMode(.tail)
-					.help(itemIdentifier.bundleIdentifier)
+				Label {
+					Text(verbatim: displayName)
+						.lineLimit(1)
+						.truncationMode(.tail)
+						.help(applicationModelIdentifier.bundleIdentifier)
+				} icon: {
+					if let nsImage = ApplicationCache.shared.applications[applicationModelIdentifier]?.getLatestIcon() {
+						Image(nsImage: nsImage)
+							.resizable()
+							.frame(width: 16, height: 16)
+					}
+				}
 			}
 		}
 	}

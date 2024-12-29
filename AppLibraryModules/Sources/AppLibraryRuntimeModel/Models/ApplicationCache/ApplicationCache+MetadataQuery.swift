@@ -7,12 +7,15 @@ import UniformTypeIdentifiers
 
 public extension ApplicationCache {
 	func reload(searchScopes: [URL]) {
-		Task {
+		Task { // Implicit `@MainActor`
 			await reload(searchScopes: searchScopes)
 		}
 	}
 
+	// Implicit `@MainActor`
 	func reload(searchScopes: [URL]) async {
+		// TODO: Handle task cancellation
+
 		guard case .idle = state else {
 			return
 		}
@@ -20,16 +23,21 @@ public extension ApplicationCache {
 		let task = createReloadCacheTask(searchScopes: searchScopes)
 		state = .loading(task: task)
 
-		await Task.yield() // VALIDATE: Is `yield`ing here correct?
+		// We should `yield` here,
+		// since this task is running on the main thread,
+		// and we don't need result immediately.
+		await Task.yield()
 
 		await task.value
 
 		state = .idle
 	}
 
+	// Implicit `@MainActor`
 	private func createReloadCacheTask(searchScopes: [URL]) -> Task<Void, Never> {
-		// TODO: handle task cancellation
-		Task {
+		// TODO: Handle task cancellation
+
+		Task { // Implicit `@MainActor`
 			Self.logger.info("Starting metadata query.")
 
 			let query = NSMetadataQuery()
@@ -37,23 +45,24 @@ public extension ApplicationCache {
 			query.predicate = Self.metadataQueryPredicate
 			query.groupingAttributes = Self.metadataQueryGroupingAttributes
 
-			// TODO: disable recursive search
-
 			await query.gatherResults()
 
-//			await Task.yield() // VALIDATE: Is `yield`ing here correct?
+			// We should `yield` here,
+			// since this task is running on the main thread,
+			// and we don't need result immediately.
+			await Task.yield()
 
-			self.applications = Self.processQueryResults(query)
+			self.applications = Self.processQueryResults(query, searchScopes: searchScopes)
 
 			Self.logger.info("Finished metadata query with \(self.applications.count) processed result(s).")
 		}
 	}
 
-	private static func processQueryResults(_ query: NSMetadataQuery) -> OrderedDictionary<ApplicationModelIdentifier, ApplicationModel> {
+	private static func processQueryResults(_ query: NSMetadataQuery, searchScopes: borrowing [URL]) -> OrderedDictionary<ApplicationModelIdentifier, ApplicationModel> {
 		logger.info("Processing \(query.resultCount) metadata query result(s).")
 
 		let applicationModels = query.groupedResults
-//			.compactMap(processGroup(_:)) // TODO: Why doesn't this work?
+//			.compactMap(processGroup(_:)) // TODO: Why does this want to `throw`?
 			.compactMap { group -> ApplicationModel? in
 				processGroup(group)
 			}
@@ -74,15 +83,25 @@ public extension ApplicationCache {
 			}
 
 			let applications: [ApplicationInstance] = group.results
+//				.compactMap(processResult(_:)) // TODO: Why does this want to `throw`?
 				.compactMap { element -> ApplicationInstance? in
-					guard let element = element as? NSMetadataItem else {
-						return nil
-					}
-
-					return try? ApplicationInstance(metadataItem: element)
+					processResult(element)
 				}
 
 			return ApplicationModel(bundleIdentifier: bundleIdentifier, instances: applications)
+		}
+
+		func processResult(_ element: Any) -> ApplicationInstance? {
+			guard
+				let metadataItem = element as? NSMetadataItem,
+				let applicationInstance = try? ApplicationInstance(metadataItem: metadataItem)
+				// If we only want to include top-level results:
+//				searchScopes.contains(applicationInstance.url.deletingLastPathComponent())
+			else {
+				return nil
+			}
+
+			return applicationInstance
 		}
 	}
 }

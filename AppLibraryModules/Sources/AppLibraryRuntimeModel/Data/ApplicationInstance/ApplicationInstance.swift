@@ -1,8 +1,8 @@
 import AppLibraryCommon
-import OSLog
 import AppLibraryStorage
 import Foundation
 import NSMetadataToolbox
+import OSLog
 
 public struct ApplicationInstance {
 	/// The metadata this application instance was generated from.
@@ -61,6 +61,7 @@ public struct ApplicationInstance {
 	/// The date the application instance was last opened.
 	public var lastOpenedDate: Date? { try? metadataItem.value(forAttribute: .lastUsedDate) }
 
+	/// The application instance's bundle.
 	public var bundle: Bundle? { Bundle(url: url) }
 
 	/// Create an application instance.
@@ -95,7 +96,7 @@ public struct ApplicationInstance {
 // MARK: - Identifiable
 
 extension ApplicationInstance: Identifiable {
-	// TODO: Should `id` be replaced with `ObjectIdentifier(metadata)`?
+	// VALIDATE: Should `id` be replaced with `ObjectIdentifier(metadata)`?
 	public var id: URL { url }
 }
 
@@ -131,24 +132,4 @@ extension ApplicationInstance {
 //			newValue: metadataItem.value(forAttribute: .copyright)
 //		)
 //	}
-}
-
-// extension Collection where
-//	Element == ApplicationInstance
-// {
-//	func allBundleIdentifiersEqual() -> Bool {
-//		allEqual { application in
-//			application.metadataItem.value(forAttribute: .cfBundleIdentifier)
-//		}
-//	}
-// }
-
-extension Sequence where
-	Element == ApplicationInstance
-{
-	func allBundleIdentifiersEqual(_ equalityValue: String) -> Bool {
-		allSatisfy { application in
-			(try? application.metadataItem.value(forAttribute: .cfBundleIdentifier)) == equalityValue
-		}
-	}
 }

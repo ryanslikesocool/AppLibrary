@@ -19,7 +19,7 @@ public enum AccessibilityUtility {
 		logger.info("Requesting accessibility permission...")
 
 		guard !isTrusted else {
-			logger.info("Accessibility permission was already granted!")
+			logger.info("Accessibility permission was already granted.")
 			return
 		}
 
