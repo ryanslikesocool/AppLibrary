@@ -1,5 +1,5 @@
 import AppLibraryCommon
-internal import AppLibraryLocalization
+import AppLibraryLocalization
 import SwiftUI
 
 public struct ShowInFinderButton: View {

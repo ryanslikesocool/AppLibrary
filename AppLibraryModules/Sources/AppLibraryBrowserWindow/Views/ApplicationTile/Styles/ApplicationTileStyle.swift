@@ -1,8 +1,8 @@
 import SwiftUI
 
-protocol AppTileStyle {
+protocol ApplicationTileStyle {
 	associatedtype Body: View
-	typealias Configuration = AppTileStyleConfiguration
+	typealias Configuration = ApplicationTileStyleConfiguration
 
 	@ViewBuilder
 	@MainActor

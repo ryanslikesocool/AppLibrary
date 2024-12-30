@@ -4,6 +4,13 @@ import AppLibraryCommon
 public extension ApplicationModel {
 	func getLatestIcon() -> NSImage {
 		latestInstance?.getIcon()
-			?? NSWorkspace.shared.icon(for: .applicationPlaceholder)
+			?? NSImage.applicationPlaceholder
+	}
+}
+
+public extension ApplicationModel? {
+	func getLatestIcon() -> NSImage {
+		self?.getLatestIcon()
+			?? NSImage.applicationPlaceholder
 	}
 }

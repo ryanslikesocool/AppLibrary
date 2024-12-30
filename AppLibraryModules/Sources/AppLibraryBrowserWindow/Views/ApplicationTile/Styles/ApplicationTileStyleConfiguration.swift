@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct AppTileStyleConfiguration {
+struct ApplicationTileStyleConfiguration {
 	public let label: Label
 	public let icon: Icon
 
@@ -15,7 +15,7 @@ struct AppTileStyleConfiguration {
 
 // MARK: - Supporting Data
 
-extension AppTileStyleConfiguration {
+extension ApplicationTileStyleConfiguration {
 	/// The type-erased label of an ``AppTile``.
 	public struct Label: View {
 		fileprivate init(_ content: some View) {

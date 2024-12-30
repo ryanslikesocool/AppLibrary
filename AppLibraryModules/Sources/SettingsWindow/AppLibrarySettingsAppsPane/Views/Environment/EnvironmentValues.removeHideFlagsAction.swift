@@ -4,7 +4,7 @@ import SwiftUI
 extension EnvironmentValues {
 	@Entry
 	fileprivate(set) var removeHideFlagsAction: RemoveHideFlagsAction = RemoveHideFlagsAction { _ in
-		preconditionFailure("The `removeHideFlagsAction` environment value should always be set.")
+		preconditionFailure("Attempted to access `removeHideFlagsAction` before it was set.")
 	}
 }
 

@@ -100,17 +100,6 @@
         }
       }
     },
-    "BROWSER_WINDOW.TITLE" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "App Library"
-          }
-        }
-      }
-    },
     "LINK.MANAGE" : {
       "extractionState" : "manual",
       "localizations" : {

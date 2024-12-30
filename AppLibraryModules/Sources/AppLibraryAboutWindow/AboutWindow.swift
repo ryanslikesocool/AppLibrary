@@ -1,3 +1,4 @@
+import AppLibraryCommonViews
 import SwiftUI
 
 public struct AboutWindow: Scene {
@@ -14,6 +15,11 @@ public struct AboutWindow: Scene {
 		.windowStyle(.hiddenTitleBar)
 		.windowResizability(.contentSize)
 		.environmentObject(model)
+		.commands {
+			CommandGroup(replacing: .appInfo) {
+				AboutLink()
+			}
+		}
 	}
 }
 

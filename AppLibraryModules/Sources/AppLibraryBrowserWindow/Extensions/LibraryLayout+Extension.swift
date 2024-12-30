@@ -23,10 +23,10 @@ extension LibraryLayout {
 		}
 	}
 
-	var appTileStyle: AnyAppTileStyle {
+	var appTileStyle: AnyApplicationTileStyle {
 		switch self {
-			case .list: AnyAppTileStyle(.list)
-			case .grid: AnyAppTileStyle(.grid)
+			case .list: AnyApplicationTileStyle(.list)
+			case .grid: AnyApplicationTileStyle(.grid)
 		}
 	}
 }

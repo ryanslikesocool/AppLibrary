@@ -4,7 +4,7 @@ import AppLibraryRuntimeModel
 import AppLibraryStorage
 import SwiftUI
 
-extension AppTile {
+extension ApplicationTile {
 	struct ContextMenu: View {
 		@ObservedObject private var application: ApplicationModel
 

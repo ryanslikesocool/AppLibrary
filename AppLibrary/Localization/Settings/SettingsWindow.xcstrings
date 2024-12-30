@@ -33,6 +33,18 @@
           }
         }
       }
+    },
+    "TITLE" : {
+      "comment" : "The title of the settings window.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Settings"
+          }
+        }
+      }
     }
   },
   "version" : "1.0"

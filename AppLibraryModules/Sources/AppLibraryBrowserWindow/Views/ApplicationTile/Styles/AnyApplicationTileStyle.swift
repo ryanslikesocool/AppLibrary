@@ -1,10 +1,10 @@
 import SwiftUI
 
-struct AnyAppTileStyle: AppTileStyle {
+struct AnyApplicationTileStyle: ApplicationTileStyle {
 	private let _makeBody: @MainActor (Configuration) -> AnyView
 
 	public init<S>(_ style: S) where
-		S: AppTileStyle
+		S: ApplicationTileStyle
 	{
 		_makeBody = if let style = style as? Self {
 			style._makeBody

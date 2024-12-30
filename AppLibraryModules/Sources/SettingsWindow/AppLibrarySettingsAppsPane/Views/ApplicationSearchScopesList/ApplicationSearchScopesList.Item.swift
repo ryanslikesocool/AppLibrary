@@ -31,7 +31,6 @@ extension ApplicationSearchScopesList {
 					.truncationMode(.tail)
 					.help(url.abbreviatingWithTildeInPath)
 			}
-			.contentShape(.rect)
 			.contextMenu(menuItems: makeMenuContent)
 		}
 	}

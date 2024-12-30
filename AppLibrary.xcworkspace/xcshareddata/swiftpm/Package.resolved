@@ -1,13 +1,13 @@
 {
-  "originHash" : "c2c3b95c02678de04dd8ef16cd0975abf63a14979fee7794f88589c5dd866779",
+  "originHash" : "926dae51ac106b9962e70881b577ea25120ab6ccad26d10d02b2795c2e1485b5",
   "pins" : [
     {
       "identity" : "axtoolbox",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/ryanslikesocool/AXToolbox.git",
       "state" : {
-        "revision" : "8b0ae796692a8d51bf886441ffc8fe05b8796fb6",
-        "version" : "0.0.2"
+        "revision" : "284f69b3ae07cba436131cc2c53c18dec7fce137",
+        "version" : "0.0.5"
       }
     },
     {
@@ -15,8 +15,17 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/ryanslikesocool/BundleToolbox.git",
       "state" : {
-        "revision" : "9354c013b675eef81c40bc7e64d4756bbc62f7f2",
-        "version" : "0.0.2"
+        "revision" : "960091a5b2580b8b049b96a6d935ed50effaa382",
+        "version" : "0.0.4"
+      }
+    },
+    {
+      "identity" : "declarativecore",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ryanslikesocool/DeclarativeCore.git",
+      "state" : {
+        "revision" : "c94969f908deb5d6d6ff4732c1c44fffd2081cc8",
+        "version" : "0.0.3"
       }
     },
     {
@@ -26,6 +35,15 @@
       "state" : {
         "revision" : "a8d83365834dce39bb6f71c83be494caf2dfcb9b",
         "version" : "0.0.3"
+      }
+    },
+    {
+      "identity" : "nsmetadatatoolbox",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ryanslikesocool/NSMetadataToolbox.git",
+      "state" : {
+        "revision" : "d8d12caab16d9484d813787d23a775a5e08af7c7",
+        "version" : "0.0.5"
       }
     }
   ],

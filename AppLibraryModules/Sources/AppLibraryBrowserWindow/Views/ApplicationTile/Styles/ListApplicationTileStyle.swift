@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct ListAppTileStyle: AppTileStyle {
+struct ListApplicationTileStyle: ApplicationTileStyle {
 	public init() { }
 
 	public func makeBody(configuration: Configuration) -> some View {
@@ -19,8 +19,8 @@ struct ListAppTileStyle: AppTileStyle {
 
 // MARK: - Convenience
 
-extension AppTileStyle where
-	Self == ListAppTileStyle
+extension ApplicationTileStyle where
+	Self == ListApplicationTileStyle
 {
 	static var list: Self {
 		Self()

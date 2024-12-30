@@ -1,10 +1,11 @@
 import AppLibraryCommon
+import AppLibraryRuntimeModelViews
 import AppLibraryCommonViews
 import AppLibraryRuntimeModel
 import AppLibraryStorage
 import SwiftUI
 
-struct AppTile: View {
+struct ApplicationTile: View {
 	@Environment(\.libraryLayout) private var libraryLayout
 
 	@ObservedObject private var application: ApplicationModel
@@ -16,7 +17,7 @@ struct AppTile: View {
 	public var body: some View {
 		Button(action: application.openLatest) {
 			libraryLayout.appTileStyle.makeBody(
-				configuration: AnyAppTileStyle.Configuration(
+				configuration: AnyApplicationTileStyle.Configuration(
 					label: label,
 					icon: icon
 				)
@@ -28,12 +29,13 @@ struct AppTile: View {
 			ContextMenu(for: application)
 		}
 		.id(ApplicationModelIdentifier(application))
+		.applicationModelIdentifier(application)
 	}
 }
 
 // MARK: - Supporting Views
 
-private extension AppTile {
+private extension ApplicationTile {
 	var label: some View {
 		Text(verbatim: application.displayName)
 			.truncationMode(.tail)
@@ -41,7 +43,7 @@ private extension AppTile {
 	}
 
 	var icon: some View {
-		Image(nsImage: application.getLatestIcon())
+		Image(applicationIcon: application)
 			.resizable()
 			.aspectRatio(contentMode: .fit)
 	}

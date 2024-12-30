@@ -6,13 +6,12 @@ extension ApplicationHideFlagsList.Item {
 		public typealias SelectionValue = ApplicationHideFlag.Set
 
 		@Environment(\.removeHideFlagsAction) private var removeHideFlagsAction
+		@Environment(\.applicationModelIdentifier) private var applicationModelIdentifier
 
 		@Binding private var activeFlags: SelectionValue
-		private let applicationModelIdentifier: ApplicationModelIdentifier
 
-		public init(activeFlags: Binding<SelectionValue>, applicationModelIdentifier: ApplicationModelIdentifier) {
+		public init(activeFlags: Binding<SelectionValue>) {
 			_activeFlags = activeFlags
-			self.applicationModelIdentifier = applicationModelIdentifier
 		}
 
 		public var body: some View {

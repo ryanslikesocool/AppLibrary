@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct GridAppTileStyle: AppTileStyle {
+struct GridApplicationTileStyle: ApplicationTileStyle {
 	public init() { }
 
 	public func makeBody(configuration: Configuration) -> some View {
@@ -19,8 +19,8 @@ struct GridAppTileStyle: AppTileStyle {
 
 // MARK: - Convenience
 
-extension AppTileStyle where
-	Self == GridAppTileStyle
+extension ApplicationTileStyle where
+	Self == GridApplicationTileStyle
 {
 	static var grid: Self {
 		Self()

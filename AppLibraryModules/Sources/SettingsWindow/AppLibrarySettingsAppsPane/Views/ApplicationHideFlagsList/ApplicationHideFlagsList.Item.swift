@@ -1,6 +1,7 @@
 import AppLibraryCommon
 import AppLibraryCommonViews
 import AppLibraryRuntimeModel
+import AppLibraryRuntimeModelViews
 import AppLibraryStorage
 import SwiftUI
 
@@ -8,41 +9,44 @@ extension ApplicationHideFlagsList {
 	struct Item: View {
 		public typealias SelectionValue = ApplicationHideFlag.Set
 
-		private let displayName: String
-		private let applicationModelIdentifier: ApplicationModelIdentifier
+		@Environment(\.applicationModelIdentifier) private var applicationModelIdentifier
+		@Environment(\.applicationModel) private var applicationModel
+
 		@Binding private var activeFlags: SelectionValue
 
-		public init?(
-			applicationModelIdentifier: ApplicationModelIdentifier,
-			selection: Binding<SelectionValue>
-		) {
-			guard let displayName = ApplicationCache.shared.applications[applicationModelIdentifier]?.displayName else {
-				return nil
-			}
-
-			self.displayName = displayName
-			self.applicationModelIdentifier = applicationModelIdentifier
+		public init(selection: Binding<SelectionValue>) {
 			_activeFlags = selection
 		}
 
 		public var body: some View {
-			LabeledContent {
-				Menu(activeFlags: $activeFlags, applicationModelIdentifier: applicationModelIdentifier)
-					.fixedSize()
-			} label: {
-				Label {
-					Text(verbatim: displayName)
-						.lineLimit(1)
-						.truncationMode(.tail)
-						.help(applicationModelIdentifier.bundleIdentifier)
-				} icon: {
-					if let nsImage = ApplicationCache.shared.applications[applicationModelIdentifier]?.getLatestIcon() {
-						Image(nsImage: nsImage)
-							.resizable()
-							.frame(width: 16, height: 16)
-					}
+			if let displayName = applicationModel?.displayName {
+				LabeledContent {
+					Menu(activeFlags: $activeFlags)
+						.fixedSize()
+				} label: {
+					makeLabel(displayName: displayName)
+				}
+				.contextMenu {
+					ContextMenu()
 				}
 			}
+		}
+	}
+}
+
+// MARK: - Supporting Views
+
+private extension ApplicationHideFlagsList.Item {
+	func makeLabel(displayName: String) -> some View {
+		Label {
+			Text(verbatim: displayName)
+				.lineLimit(1)
+				.truncationMode(.tail)
+				.help(applicationModelIdentifier.bundleIdentifier)
+		} icon: {
+			Image(applicationIcon: applicationModel)
+				.resizable()
+				.aspectRatio(contentMode: .fit)
 		}
 	}
 }

@@ -25,7 +25,8 @@ public extension OpenApplicationButton {
 	}
 
 	init?(application applicationModelIdentifier: ApplicationModelIdentifier) {
-		guard let applicationModel = ApplicationCache.shared.applications[applicationModelIdentifier] else {
+		@Application(applicationModelIdentifier) var application
+		guard let applicationModel = $application else {
 			return nil
 		}
 		self.init(application: applicationModel)

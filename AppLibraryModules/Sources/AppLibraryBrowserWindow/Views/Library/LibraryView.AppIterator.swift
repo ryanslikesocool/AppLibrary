@@ -17,7 +17,7 @@ extension LibraryView {
 
 		public var body: some View {
 			ForEach(applications, id: \.bundleIdentifier) { application in
-				AppTile(for: application)
+				ApplicationTile(for: application)
 					.focused($focusedApp, equals: .app(ApplicationModelIdentifier(application)))
 			}
 			.onChange(of: browserModel.focus) {

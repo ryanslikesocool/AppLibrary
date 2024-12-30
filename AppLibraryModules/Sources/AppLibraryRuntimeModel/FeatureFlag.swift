@@ -4,9 +4,6 @@ enum FeatureFlag {
 			= false
 
 		enum Icon {
-			static let implementation: ApplicationIconFunctionImplementation
-				= .manualPath
-
 			static let logSuccessfulResult: Bool
 				= false
 

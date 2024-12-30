@@ -7,6 +7,8 @@ public extension LocalizedStringResource {
 	enum SettingsWindow {
 		private static let localizationTable = LocalizationTableResource("SettingsWindow")
 
+		public static let title = LocalizedStringResource("TITLE", table: localizationTable)
+
 		public static let category = Category.self
 
 		public enum Category {

@@ -1,6 +1,7 @@
 import AppLibraryCommon
 import AppLibraryCommonViews
 import AppLibraryRuntimeModel
+import AppLibraryRuntimeModelViews
 import AppLibraryStorage
 import OSLog
 import SwiftUI
@@ -31,11 +32,9 @@ private extension ApplicationHideFlagsList {
 				set: { newValue in applicationHideFlags[applicationModelIdentifier] = newValue }
 			)
 
-			Item(
-				applicationModelIdentifier: applicationModelIdentifier,
-				selection: activeFlags
-			)
-			.id(applicationModelIdentifier)
+			Item(selection: activeFlags)
+				.id(applicationModelIdentifier)
+				.applicationModelIdentifier(applicationModelIdentifier)
 		}
 		.removeHideFlagsAction(removeHideFlags(for:))
 	}

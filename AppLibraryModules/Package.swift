@@ -23,11 +23,9 @@ let package = Package(
 	],
 	dependencies: [
 		.package(url: "https://github.com/ryanslikesocool/LocalizationToolbox.git", from: "0.0.3"),
-//		.package(url: "https://github.com/ryanslikesocool/NSMetadataToolbox.git", from: "0.0.4"),
-		.package(path: "~/Documents/Xcode Projects/NSMetadataToolbox"),
-		.package(url: "https://github.com/ryanslikesocool/AXToolbox.git", from: "0.0.2"),
-		.package(url: "https://github.com/ryanslikesocool/BundleToolbox.git", from: "0.0.2"),
-		.package(url: "https://github.com/ryanslikesocool/DictionaryPath.git", from: "0.0.1"),
+		.package(url: "https://github.com/ryanslikesocool/NSMetadataToolbox.git", from: "0.0.5"),
+		.package(url: "https://github.com/ryanslikesocool/AXToolbox.git", from: "0.0.5"),
+		.package(url: "https://github.com/ryanslikesocool/BundleToolbox.git", from: "0.0.4"),
 	],
 	targets: [
 		.target(
@@ -42,9 +40,8 @@ let package = Package(
 		.target(
 			name: "AppLibraryBrowserWindow",
 			dependencies: [
-				"NSMetadataToolbox",
 				"AXToolbox",
-				"DictionaryPath",
+				"NSMetadataToolbox",
 
 				"AppLibraryCommonViews",
 				"AppLibrarySettingsWindow",
@@ -60,16 +57,26 @@ let package = Package(
 			name: "AppLibraryAboutWindow",
 			dependencies: [
 				"AppLibraryCommon",
+				"AppLibraryCommonViews",
 				"AppLibraryLocalization",
+			]
+		),
+
+		.target(
+			name: "AppLibraryRuntimeModelViews",
+			dependencies: [
+				"AppLibraryRuntimeModel",
 			]
 		),
 
 		.target(
 			name: "AppLibraryRuntimeModel",
 			dependencies: [
+				"BundleToolbox",
 				"NSMetadataToolbox",
 
 				"AppLibraryStorage",
+				"AppLibraryCommon",
 			]
 		),
 
@@ -85,6 +92,7 @@ let package = Package(
 		.target(
 			name: "AppLibraryLocalization",
 			dependencies: [
+				"BundleToolbox",
 				"LocalizationToolbox",
 			]
 		),
@@ -130,6 +138,7 @@ var settingsWindowTargets: [Target] {
 				"AppLibraryStorage",
 				"AppLibraryCommon",
 				"AppLibraryCommonViews",
+				"AppLibraryRuntimeModelViews",
 				"AppLibraryRuntimeModel",
 			]
 		),
