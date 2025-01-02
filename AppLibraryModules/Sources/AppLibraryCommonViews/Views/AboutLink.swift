@@ -1,4 +1,4 @@
-import AppLibraryLocalization
+import AppLibraryResources
 import SwiftUI
 
 public struct AboutLink<Label>: View where

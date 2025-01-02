@@ -33,7 +33,7 @@ private extension ErrorView.RecoveryAction {
 
 	func retryButton() -> some View {
 		RefreshAppsButton {
-			Label(.common.action.retry, systemImage: SFSymbol.arrow_clockwise)
+			Label(String(localized: .common.action.retry), systemImage: .arrow_clockwise)
 		}
 	}
 }

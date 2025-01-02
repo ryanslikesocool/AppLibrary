@@ -19,13 +19,14 @@ let package = Package(
 		.library(name: "AppLibraryStorage", targets: ["AppLibraryStorage"]),
 		.library(name: "AppLibraryCommon", targets: ["AppLibraryCommon"]),
 		.library(name: "AppLibraryCommonViews", targets: ["AppLibraryCommonViews"]),
-		.library(name: "AppLibraryLocalization", targets: ["AppLibraryLocalization"]),
+		.library(name: "AppLibraryResources", targets: ["AppLibraryResources"]),
 	],
 	dependencies: [
-		.package(url: "https://github.com/ryanslikesocool/LocalizationToolbox.git", from: "0.0.3"),
-		.package(url: "https://github.com/ryanslikesocool/NSMetadataToolbox.git", from: "0.0.5"),
 		.package(url: "https://github.com/ryanslikesocool/AXToolbox.git", from: "0.0.5"),
 		.package(url: "https://github.com/ryanslikesocool/BundleToolbox.git", from: "0.0.4"),
+		.package(url: "https://github.com/ryanslikesocool/LocalizationToolbox.git", from: "0.0.3"),
+		.package(url: "https://github.com/ryanslikesocool/NSMetadataToolbox.git", from: "0.0.5"),
+		.package(url: "https://github.com/ryanslikesocool/SFSymbolToolbox.git", from: "0.0.1"),
 	],
 	targets: [
 		.target(
@@ -45,7 +46,7 @@ let package = Package(
 
 				"AppLibraryCommonViews",
 				"AppLibrarySettingsWindow",
-				"AppLibraryLocalization",
+				"AppLibraryResources",
 				"AppLibraryRuntimeModel",
 			],
 			swiftSettings: [
@@ -58,7 +59,7 @@ let package = Package(
 			dependencies: [
 				"AppLibraryCommon",
 				"AppLibraryCommonViews",
-				"AppLibraryLocalization",
+				"AppLibraryResources",
 			]
 		),
 
@@ -90,10 +91,11 @@ let package = Package(
 		),
 
 		.target(
-			name: "AppLibraryLocalization",
+			name: "AppLibraryResources",
 			dependencies: [
 				"BundleToolbox",
 				"LocalizationToolbox",
+				"SFSymbolToolbox",
 			]
 		),
 	]
@@ -120,7 +122,7 @@ var settingsWindowTargets: [Target] {
 			name: "AppLibrarySettingsGeneralPane",
 			dependencies: [
 				"AppLibraryStorage",
-				"AppLibraryLocalization",
+				"AppLibraryResources",
 			]
 		),
 
@@ -128,7 +130,7 @@ var settingsWindowTargets: [Target] {
 			name: "AppLibrarySettingsLayoutPane",
 			dependencies: [
 				"AppLibraryStorage",
-				"AppLibraryLocalization",
+				"AppLibraryResources",
 			]
 		),
 
@@ -152,7 +154,7 @@ var commonTargets: [Target] {
 			name: "AppLibraryCommonViews",
 			dependencies: [
 				"AppLibraryCommon",
-				"AppLibraryLocalization",
+				"AppLibraryResources",
 			]
 		),
 

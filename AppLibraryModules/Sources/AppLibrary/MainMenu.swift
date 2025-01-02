@@ -1,6 +1,6 @@
 import AppKit
 import AppLibraryCommon
-import AppLibraryLocalization
+import AppLibraryResources
 import OSLog
 
 // TODO: Does this really need to be its own class?

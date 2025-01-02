@@ -16,7 +16,7 @@ extension ApplicationSearchScopesList {
 		public var body: some View {
 			LabeledContent {
 				Menu(content: makeMenuContent) {
-					Label(.applicationSearchScopesList.item.optionsLabel, systemImage: .ellipsis)
+					Label(String(localized: .applicationSearchScopesList.item.optionsLabel), systemImage: .ellipsis)
 						.frame(height: 16)
 						.labelStyle(.iconOnly)
 						.contentShape(.rect)

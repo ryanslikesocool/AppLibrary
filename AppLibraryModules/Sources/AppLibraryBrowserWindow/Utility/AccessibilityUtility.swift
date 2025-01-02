@@ -1,5 +1,5 @@
 import AppKit
-internal import AppLibraryLocalization
+internal import AppLibraryResources
 import OSLog
 
 public enum AccessibilityUtility {

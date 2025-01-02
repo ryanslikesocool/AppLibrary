@@ -10,7 +10,7 @@ public struct RemoveButton: View {
 
 	public var body: some View {
 		Button(action: action) {
-			Label(.common.action.remove, systemImage: .trash)
+			Label(String(localized: .common.action.remove), systemImage: .trash)
 		}
 	}
 }

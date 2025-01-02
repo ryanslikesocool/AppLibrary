@@ -1,5 +1,5 @@
 import AppLibraryCommon
-internal import AppLibraryLocalization
+internal import AppLibraryResources
 import AppLibraryStorage
 import SwiftUI
 

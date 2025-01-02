@@ -20,7 +20,7 @@ struct RefreshApplicationsFormItem: View {
 private extension RefreshApplicationsFormItem {
 	var button: some View {
 		RefreshAppsButton {
-			Label(.common.action.refresh, systemImage: .arrow_clockwise)
+			Label(String(localized: .common.action.refresh), systemImage: .arrow_clockwise)
 		}
 	}
 }

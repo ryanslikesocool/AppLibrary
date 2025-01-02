@@ -1,5 +1,5 @@
 import AppLibraryCommon
-import AppLibraryLocalization
+import AppLibraryResources
 import SwiftUI
 
 public struct ShowInFinderButton: View {
@@ -11,7 +11,7 @@ public struct ShowInFinderButton: View {
 
 	public var body: some View {
 		Button(action: buttonAction) {
-			Label(.common.action.showInFinder, image: .finder)
+			Label(String(localized: .common.action.showInFinder), image: .finder)
 		}
 		.disabled(url == nil)
 	}

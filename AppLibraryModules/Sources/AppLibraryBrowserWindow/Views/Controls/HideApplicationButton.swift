@@ -12,7 +12,7 @@ public struct HideApplicationButton: View {
 
 	public var body: some View {
 		Button(action: buttonAction) {
-			Label(.common.action.hide, systemImage: .eye_slash)
+			Label(String(localized: .common.action.hide), systemImage: .eye_slash)
 		}
 	}
 }

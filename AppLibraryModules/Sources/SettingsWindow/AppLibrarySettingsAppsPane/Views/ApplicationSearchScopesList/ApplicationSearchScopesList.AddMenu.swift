@@ -22,7 +22,7 @@ extension ApplicationSearchScopesList {
 
 				DefaultSearchScopesSection(addSearchScope: addSearchScope)
 			} label: {
-				Label(.applicationSearchScopesList.addMenu.label, systemImage: .plus)
+				Label(String(localized: .applicationSearchScopesList.addMenu.label), systemImage: .plus)
 			} primaryAction: {
 				primaryAction()
 			}

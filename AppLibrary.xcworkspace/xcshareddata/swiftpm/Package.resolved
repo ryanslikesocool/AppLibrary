@@ -1,5 +1,5 @@
 {
-  "originHash" : "926dae51ac106b9962e70881b577ea25120ab6ccad26d10d02b2795c2e1485b5",
+  "originHash" : "12c146c7376efd203a6f6aa448ddb7bd97c8d91db9d89109f09a413633adcbed",
   "pins" : [
     {
       "identity" : "axtoolbox",
@@ -44,6 +44,15 @@
       "state" : {
         "revision" : "d8d12caab16d9484d813787d23a775a5e08af7c7",
         "version" : "0.0.5"
+      }
+    },
+    {
+      "identity" : "sfsymboltoolbox",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ryanslikesocool/SFSymbolToolbox.git",
+      "state" : {
+        "revision" : "3fe7d34a76b93006caf48ffce1be4c7f101af55b",
+        "version" : "0.0.1"
       }
     }
   ],

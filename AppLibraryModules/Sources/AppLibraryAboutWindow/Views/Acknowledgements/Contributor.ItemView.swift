@@ -1,4 +1,4 @@
-import AppLibraryLocalization
+import AppLibraryResources
 import SwiftUI
 
 extension Contributor {

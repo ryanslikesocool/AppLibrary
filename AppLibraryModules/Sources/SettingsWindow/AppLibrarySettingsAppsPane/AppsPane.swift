@@ -1,6 +1,6 @@
 import AppLibraryCommon
 import AppLibraryCommonViews
-internal import AppLibraryLocalization
+internal import AppLibraryResources
 import SwiftUI
 
 package struct AppsPane: View {
