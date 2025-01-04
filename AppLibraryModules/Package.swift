@@ -15,6 +15,7 @@ let package = Package(
 		.library(name: "AppLibraryAboutWindow", targets: ["AppLibraryAboutWindow"]),
 		.library(name: "AppLibrarySettingsWindow", targets: ["AppLibrarySettingsWindow"]),
 
+		.library(name: "AppLibraryDockUtility", targets: ["AppLibraryDockUtility"]),
 		.library(name: "AppLibraryRuntimeModel", targets: ["AppLibraryRuntimeModel"]),
 		.library(name: "AppLibraryStorage", targets: ["AppLibraryStorage"]),
 		.library(name: "AppLibraryCommon", targets: ["AppLibraryCommon"]),
@@ -48,6 +49,7 @@ let package = Package(
 				"AppLibrarySettingsWindow",
 				"AppLibraryResources",
 				"AppLibraryRuntimeModel",
+				"AppLibraryDockUtility",
 			],
 			swiftSettings: [
 				.swiftLanguageMode(.v5),
@@ -82,11 +84,21 @@ let package = Package(
 		),
 
 		.target(
+			name: "AppLibraryDockUtility",
+			dependencies: [
+				"AXToolbox",
+
+				"AppLibraryCommon",
+			]
+		),
+
+		.target(
 			name: "AppLibraryStorage",
 			dependencies: [
 				"NSMetadataToolbox",
 
 				"AppLibraryCommon",
+				"AppLibraryResources",
 			]
 		),
 

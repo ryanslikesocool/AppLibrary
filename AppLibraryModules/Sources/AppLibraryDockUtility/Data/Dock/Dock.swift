@@ -4,8 +4,8 @@ import ApplicationServices
 import AXToolbox
 import OSLog
 
-struct Dock {
-	let listElement: AXUIElement
+public struct Dock {
+	public let listElement: AXUIElement
 
 	private init?() {
 		guard
@@ -59,7 +59,7 @@ extension Dock {
 
 	// TODO: Should `main` be retained somewhere so we don't keep recalculating it?
 	// Or is it safer to recalculate it?
-	static var main: Self? {
+	public static var main: Self? {
 		Self()
 	}
 }
@@ -117,7 +117,7 @@ private extension Dock {
 
 // MARK: - Application Tiles
 
-extension Dock {
+public extension Dock {
 	/// Retrieve the first dock tile with an accessibility element that matches the given `predicate`.
 	/// - Parameter predicate: The predicate to match.
 	/// - Returns: The first dock tile with an accessibility element that matches the given `predicate` if one could be found; `nil` otherwise.

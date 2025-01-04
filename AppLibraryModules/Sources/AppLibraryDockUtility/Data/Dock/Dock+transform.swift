@@ -2,11 +2,10 @@ import AppKit
 import AppLibraryCommon
 import ApplicationServices
 import AXToolbox
-import OSLog
 
 // MARK: - Estimated Position
 
-extension Dock {
+public extension Dock {
 	/// Estimate the dock position on the given `screen`.
 	/// - Parameter screen: The screen look for the dock on.
 	/// - Returns: The edge on the given `screen` that the dock lies on, or `nil` if the dock is hidden or not on the screen.
@@ -107,7 +106,7 @@ extension Dock {
 
 // MARK: - Frame
 
-extension Dock {
+public extension Dock {
 	var rect: CGRect? {
 		try? listElement.value(forAttribute: .frame)
 	}
@@ -115,7 +114,7 @@ extension Dock {
 
 // MARK: - FrameAndEstimatedPosition
 
-extension Dock {
+public extension Dock {
 	/// - Parameter screen: The screen look for the dock on.
 	func rectAndEstimatedEdge(on screen: NSScreen) -> (rect: CGRect, estimatedEdge: DockEdge)? {
 		guard
@@ -131,7 +130,7 @@ extension Dock {
 
 // MARK: - Short Axis
 
-extension Dock {
+public extension Dock {
 	// TODO: Figure out why this was implemented.
 //	/// Estimate the short axis of the dock.
 //	/// - Returns:The estimated dock height if the dock is at the bottom of the screen, the estimated dock width if the dock is at the left or right side of the screen, or `nil` if the dock is hidden.
