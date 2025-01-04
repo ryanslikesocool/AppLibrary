@@ -21,12 +21,21 @@ public extension LocalizedStringResource {
 			public static let search = LocalizedStringResource("ITEM.SEARCH", table: localizationTable)
 
 			public enum Format {
-				public static func verb(_ argument: String) -> LocalizedStringResource {
-					LocalizedStringResource("ITEM.FORMAT.VERB_\(argument)", table: localizationTable)
+				private static let verbFormat = LocalizedStringResource("ITEM.FORMAT.VERB_%@", table: localizationTable)
+				private static let adjectiveFormat = LocalizedStringResource("ITEM.FORMAT.ADJECTIVE_%@", table: localizationTable)
+
+				public static func verb(_ argument: String) -> String {
+					var options = String.LocalizationOptions()
+					options.replacements = [argument]
+
+					return String(localized: verbFormat, options: options)
 				}
 
-				public static func adjective(_ argument: String) -> LocalizedStringResource {
-					LocalizedStringResource("ITEM.FORMAT.ADJECTIVE_\(argument)", table: localizationTable)
+				public static func adjective(_ argument: String) -> String {
+					var options = String.LocalizationOptions()
+					options.replacements = [argument]
+
+					return String(localized: adjectiveFormat, options: options)
 				}
 			}
 		}

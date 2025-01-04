@@ -25,6 +25,6 @@ extension ApplicationHideFlagsList.Item {
 private extension ApplicationHideFlagsList.Item.HideFlagToggle {
 	func makeTitleText() -> String {
 		let flagName = String(localized: flagName)
-		return String(localized: .applicationHideFlagsList.item.format.verb(flagName))
+		return LocalizedStringResource.applicationHideFlagsList.item.format.verb(flagName)
 	}
 }

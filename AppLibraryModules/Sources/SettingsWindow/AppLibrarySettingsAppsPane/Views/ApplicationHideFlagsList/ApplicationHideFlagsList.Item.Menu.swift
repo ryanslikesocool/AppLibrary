@@ -46,7 +46,7 @@ private extension ApplicationHideFlagsList.Item.Menu {
 					String(localized: item.flagLabel)
 				}
 			let itemList = ListFormatter.localizedString(byJoining: items)
-			return String(localized: .applicationHideFlagsList.item.format.adjective(itemList))
+			return LocalizedStringResource.applicationHideFlagsList.item.format.adjective(itemList)
 		}
 	}
 

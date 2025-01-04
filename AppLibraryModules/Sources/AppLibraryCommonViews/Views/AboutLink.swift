@@ -64,7 +64,10 @@ public extension AboutLink where
 
 	init() {
 		self.init {
-			Label(String(localized: .aboutWindow.title), image: "info")
+			Label(
+				LocalizedStringResource.aboutWindow.title,
+				systemImage: .info
+			)
 		}
 	}
 }

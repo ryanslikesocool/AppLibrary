@@ -21,6 +21,10 @@ public extension SystemSymbol {
 	static let gear: Self = "gear"
 	static let gearShape: Self = "gearshape"
 
+	// MARK: I
+
+	static let info: Self = "info"
+
 	// MARK: P
 
 	static let plus: Self = "plus"
