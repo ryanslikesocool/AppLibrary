@@ -1,5 +1,5 @@
 import AppLibraryCommon
-internal import AppLibraryResources
+import AppLibraryResources
 import AppLibraryStorage
 import SwiftUI
 
@@ -11,10 +11,11 @@ struct LibraryLayoutPicker: View {
 	public init() { }
 
 	public var body: some View {
-		Picker(selection: $selection) {
+		Picker(
+			String(localized: .libraryLayoutPicker.label),
+			selection: $selection
+		) {
 			ForEach(Self.itemDisplayOrder, content: makeItem)
-		} label: {
-			Text(.libraryLayoutPicker.label)
 		}
 	}
 }
@@ -25,7 +26,7 @@ private extension LibraryLayoutPicker {
 	func makeItem(
 		_ item: SelectionValue
 	) -> some View {
-		Text(item.labelKey)
+		Text(item.localizedStringResource)
 			.tag(item)
 	}
 }
@@ -37,15 +38,4 @@ private extension LibraryLayoutPicker {
 		.list,
 		.grid,
 	]
-}
-
-// MARK: -
-
-private extension LibraryLayoutPicker.SelectionValue {
-	var labelKey: LocalizedStringResource {
-		switch self {
-			case .list: .libraryLayoutPicker.item.list
-			case .grid: .libraryLayoutPicker.item.grid
-		}
-	}
 }

@@ -2,15 +2,17 @@ import AppLibraryCommon
 import SwiftUI
 
 public struct RemoveButton: View {
-	private let action: () -> Void
+	private let action: @MainActor () -> Void
 
-	public init(action: @escaping () -> Void) {
+	public init(action: @escaping @MainActor () -> Void) {
 		self.action = action
 	}
 
 	public var body: some View {
-		Button(action: action) {
-			Label(String(localized: .common.action.remove), systemImage: .trash)
-		}
+		Button(
+			String(localized: .common.action.remove),
+			systemImage: .trash,
+			action: action
+		)
 	}
 }

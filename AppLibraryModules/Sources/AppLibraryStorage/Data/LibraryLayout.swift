@@ -1,3 +1,5 @@
+import Foundation
+
 public enum LibraryLayout: String {
 	case list
 	case grid
@@ -24,3 +26,14 @@ extension LibraryLayout: Identifiable {
 // MARK: - Codable
 
 extension LibraryLayout: Codable { }
+
+// MARK: - CustomLocalizedStringResourceConvertible
+
+extension LibraryLayout: CustomLocalizedStringResourceConvertible {
+	public var localizedStringResource: LocalizedStringResource {
+		switch self {
+			case .list: .libraryLayoutPicker.item.list
+			case .grid: .libraryLayoutPicker.item.grid
+		}
+	}
+}

@@ -13,9 +13,10 @@ extension ApplicationHideFlagsList.Item {
 		}
 
 		public var body: some View {
-			Toggle(isOn: $isOn) {
-				Text(verbatim: makeTitleText())
-			}
+			Toggle(
+				makeTitleText(),
+				isOn: $isOn
+			)
 		}
 	}
 }

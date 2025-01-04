@@ -10,9 +10,11 @@ public struct ShowInFinderButton: View {
 	}
 
 	public var body: some View {
-		Button(action: buttonAction) {
-			Label(String(localized: .common.action.showInFinder), image: .finder)
-		}
+		Button(
+			String(localized: .common.action.showInFinder),
+			image: .finder,
+			action: buttonAction
+		)
 		.disabled(url == nil)
 	}
 }

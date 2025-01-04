@@ -1,6 +1,6 @@
 import SFSymbolToolbox
 
-public extension CustomSymbol {
+public extension CustomSymbolName {
 	// MARK: F
 
 	static let finder: Self = "finder"

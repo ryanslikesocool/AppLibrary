@@ -4,16 +4,26 @@ import AppLibraryStorage
 import SwiftUI
 
 public struct OpenApplicationButton: View {
-	private let action: () -> Void
+	private let action: @MainActor () -> Void
 
-	private init(action: @escaping () -> Void) {
+	private init(action: @escaping @MainActor () -> Void) {
 		self.action = action
 	}
 
 	public var body: some View {
 		Button(action: action) {
-			Label(String(localized: .common.action.open), systemImage: .arrow_up_forward)
+			Label(
+				String(localized: .common.action.open),
+				systemImage: .arrow_up_forward
+			)
 		}
+
+		// TODO: After updating module to Swift 6, use following implementation.
+//		Button(
+//			String(localized: .common.action.open),
+//			systemImage: .arrow_up_forward
+//			action: action
+//		)
 	}
 }
 

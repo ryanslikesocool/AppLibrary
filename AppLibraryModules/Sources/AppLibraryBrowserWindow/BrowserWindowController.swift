@@ -1,7 +1,7 @@
 import AppKit
 import AppLibraryCommon
 import AppLibraryCommonViews
-internal import AppLibraryResources
+import AppLibraryResources
 import OSLog
 import SwiftUI
 

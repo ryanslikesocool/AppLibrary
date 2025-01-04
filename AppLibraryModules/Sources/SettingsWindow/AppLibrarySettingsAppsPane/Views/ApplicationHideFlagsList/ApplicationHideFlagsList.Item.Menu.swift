@@ -15,11 +15,11 @@ extension ApplicationHideFlagsList.Item {
 		}
 
 		public var body: some View {
-			SwiftUI.Menu {
+			SwiftUI.Menu(
+				Self.labelText(for: activeFlags)
+			) {
 				makeToggle(.hiddenInBrowser)
 				makeToggle(.hiddenInSearch)
-			} label: {
-				Text(verbatim: Self.labelText(for: activeFlags))
 			}
 			.onChange(of: activeFlags, onActiveFlagsChanged)
 		}

@@ -15,14 +15,18 @@ extension ApplicationSearchScopesList {
 		public var body: some View {
 			Menu {
 				Section {
-					Button(action: primaryAction) {
-						Text(.applicationSearchScopesList.addMenu.action)
-					}
+					Button(
+						String(localized: .applicationSearchScopesList.addMenu.action),
+						action: primaryAction
+					)
 				}
 
 				DefaultSearchScopesSection(addSearchScope: addSearchScope)
 			} label: {
-				Label(String(localized: .applicationSearchScopesList.addMenu.label), systemImage: .plus)
+				Label(
+					String(localized: .applicationSearchScopesList.addMenu.label),
+					systemImage: .plus
+				)
 			} primaryAction: {
 				primaryAction()
 			}

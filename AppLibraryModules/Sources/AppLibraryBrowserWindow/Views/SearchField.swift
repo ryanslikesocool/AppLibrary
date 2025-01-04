@@ -1,4 +1,6 @@
 import AppLibraryCommon
+import SFSymbolToolbox
+import AppLibraryResources
 import AppLibraryCommonViews
 import AppLibraryStorage
 import SwiftUI
@@ -16,7 +18,7 @@ struct SearchField: View {
 	public var body: some View {
 		TextField(
 			text: $browserModel.searchQuery,
-			prompt: Text(verbatim: "􀊫 \(try! Bundle.main.object(forInfoDictionaryKey: .cfBundleName))"),
+			prompt: prompt,
 			label: EmptyView.init
 		)
 //		.keyboardShortcut(.search)
@@ -62,6 +64,14 @@ struct SearchField: View {
 private extension SearchField {
 	var containerShape: some InsettableShape {
 		Self.shape
+	}
+
+	var prompt: Text {
+		let icon = Image(systemName: .magnifyingGlass)
+		let title = try! Bundle.main.object(forInfoDictionaryKey: .cfBundleName)
+
+		// TODO: Why isn't this a `Label`?
+		return Text(verbatim: "\(icon) \(title)")
 	}
 }
 

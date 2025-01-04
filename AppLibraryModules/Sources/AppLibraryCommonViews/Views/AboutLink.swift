@@ -30,36 +30,72 @@ private extension AboutLink {
 public extension AboutLink where
 	Label == Text
 {
-	init<S>(_ title: S) where
+	init<S>(
+		_ title: S
+	) where
 		S: StringProtocol
 	{
-		self.init(label: { Text(title) })
+		self.init {
+			Text(title)
+		}
 	}
 
-	init(_ title: LocalizedStringResource) {
-		self.init(label: { Text(title) })
+	init(
+		_ title: LocalizedStringResource
+	) {
+		self.init {
+			Text(title)
+		}
 	}
 
-	init(_ titleKey: LocalizedStringKey) {
-		self.init(label: { Text(titleKey) })
+	init(
+		_ titleKey: LocalizedStringKey
+	) {
+		self.init {
+			Text(titleKey)
+		}
 	}
 }
 
 public extension AboutLink where
 	Label == SwiftUI.Label<Text, Image>
 {
-	init<S>(_ title: S, systemImage name: String) where
+	init<S>(
+		_ title: S,
+		systemImage name: String
+	) where
 		S: StringProtocol
 	{
-		self.init(label: { Label(title, systemImage: name) })
+		self.init {
+			Label(
+				title,
+				systemImage: name
+			)
+		}
 	}
 
-	init(_ title: LocalizedStringResource, systemImage name: String) {
-		self.init(label: { Label(title, systemImage: name) })
+	init(
+		_ title: LocalizedStringResource,
+		systemImage name: String
+	) {
+		self.init {
+			Label(
+				title,
+				systemImage: name
+			)
+		}
 	}
 
-	init(_ titleKey: LocalizedStringKey, systemImage name: String) {
-		self.init(label: { Label(titleKey, systemImage: name) })
+	init(
+		_ titleKey: LocalizedStringKey,
+		systemImage name: String
+	) {
+		self.init {
+			Label(
+				titleKey,
+				systemImage: name
+			)
+		}
 	}
 
 	init() {

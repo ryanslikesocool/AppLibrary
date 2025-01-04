@@ -6,7 +6,7 @@ public struct SheetDoneButton: View {
 	public init() { }
 
 	public var body: some View {
-		Button(.common.action.done) {
+		Button(String(localized: .common.action.done)) {
 			dismiss()
 		}
 		.buttonStyle(.borderedProminent)

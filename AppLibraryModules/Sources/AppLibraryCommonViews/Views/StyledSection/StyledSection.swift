@@ -35,7 +35,10 @@ public struct StyledSection<Content, Header, Footer>: View where
 // MARK: - Convenience
 
 public extension StyledSection {
-	init<S>(_ title: S, @ViewBuilder content: @escaping () -> Content) where
+	init<S>(
+		_ title: S,
+		@ViewBuilder content: @escaping () -> Content
+	) where
 		Header == Text,
 		Footer == EmptyView,
 		S: StringProtocol
@@ -43,27 +46,38 @@ public extension StyledSection {
 		self.init(content: content, header: { Text(title) }, footer: EmptyView.init)
 	}
 
-	init(_ titleKey: LocalizedStringKey, @ViewBuilder content: @escaping () -> Content) where
+	init(
+		_ titleKey: LocalizedStringKey,
+		@ViewBuilder content: @escaping () -> Content
+	) where
 		Header == Text,
 		Footer == EmptyView
 	{
 		self.init(content: content, header: { Text(titleKey) }, footer: EmptyView.init)
 	}
 
-	init(@ViewBuilder content: @escaping () -> Content) where
+	init(
+		@ViewBuilder content: @escaping () -> Content
+	) where
 		Header == EmptyView,
 		Footer == EmptyView
 	{
 		self.init(content: content, header: EmptyView.init, footer: EmptyView.init)
 	}
 
-	init(@ViewBuilder content: @escaping () -> Content, @ViewBuilder header: @escaping () -> Header) where
+	init(
+		@ViewBuilder content: @escaping () -> Content,
+		@ViewBuilder header: @escaping () -> Header
+	) where
 		Footer == EmptyView
 	{
 		self.init(content: content, header: header, footer: EmptyView.init)
 	}
 
-	init(@ViewBuilder content: @escaping () -> Content, @ViewBuilder footer: @escaping () -> Footer) where
+	init(
+		@ViewBuilder content: @escaping () -> Content,
+		@ViewBuilder footer: @escaping () -> Footer
+	) where
 		Header == EmptyView
 	{
 		self.init(content: content, header: EmptyView.init, footer: footer)

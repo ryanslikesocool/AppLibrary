@@ -1,6 +1,6 @@
 import SFSymbolToolbox
 
-public extension SystemSymbol {
+public extension SystemSymbolName {
 	// MARK: A
 
 	static let app: Self = "app"
@@ -24,6 +24,10 @@ public extension SystemSymbol {
 	// MARK: I
 
 	static let info: Self = "info"
+
+	// MARK: M
+
+	static let magnifyingGlass: Self = "magnifyingglass"
 
 	// MARK: P
 

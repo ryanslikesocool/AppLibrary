@@ -6,9 +6,9 @@ import SwiftUI
 extension ApplicationSearchScopesList {
 	struct Item: View {
 		private let url: URL
-		private let removeSearchScope: () -> Void
+		private let removeSearchScope: @MainActor () -> Void
 
-		public init(for url: URL, onRemove removeSearchScope: @escaping () -> Void) {
+		public init(for url: URL, onRemove removeSearchScope: @escaping @MainActor () -> Void) {
 			self.url = url
 			self.removeSearchScope = removeSearchScope
 		}
@@ -16,10 +16,13 @@ extension ApplicationSearchScopesList {
 		public var body: some View {
 			LabeledContent {
 				Menu(content: makeMenuContent) {
-					Label(String(localized: .applicationSearchScopesList.item.optionsLabel), systemImage: .ellipsis)
-						.frame(height: 16)
-						.labelStyle(.iconOnly)
-						.contentShape(.rect)
+					Label(
+						String(localized: .applicationSearchScopesList.item.optionsLabel),
+						systemImage: .ellipsis
+					)
+					.frame(height: 16)
+					.labelStyle(.iconOnly)
+					.contentShape(.rect)
 				}
 				.fixedSize()
 				.menuIndicator(.hidden)
