@@ -4,6 +4,7 @@ struct ApplicationTileStyleConfiguration {
 	public let label: Label
 	public let icon: Icon
 
+	@MainActor
 	init(
 		label: some View,
 		icon: some View

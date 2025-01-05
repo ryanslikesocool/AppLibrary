@@ -28,10 +28,10 @@ final class BrowserModel: ObservableObject {
 	let keyboardObserver: KeyboardObserver
 
 	private lazy var refreshAppsSubscriber: AnyCancellable? = Event.refreshApps
-		.sink(receiveValue: refreshApps)
+		.sink { self.refreshApps() }
 
 	private lazy var activateSearchSubscriber: AnyCancellable? = Event.activateSearch
-		.sink(receiveValue: activateSearch)
+		.sink { self.activateSearch() }
 
 	init() {
 		state = .idle

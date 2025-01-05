@@ -11,19 +11,11 @@ public struct HideApplicationButton: View {
 	}
 
 	public var body: some View {
-		Button(action: buttonAction) {
-			Label(
-				String(localized: .common.action.hide),
-				systemImage: .eye_slash
-			)
-		}
-
-		// TODO: After updating module to Swift 6, use following implementation.
-//		Button(
-//			String(localized: .common.action.hide),
-//			systemImage: .eye_slash,
-//			action: buttonAction
-//		)
+		Button(
+			String(localized: .common.action.hide),
+			systemImage: .eye_slash,
+			action: buttonAction
+		)
 	}
 }
 

@@ -11,19 +11,11 @@ public struct OpenApplicationButton: View {
 	}
 
 	public var body: some View {
-		Button(action: action) {
-			Label(
-				String(localized: .common.action.open),
-				systemImage: .arrow_up_forward
-			)
-		}
-
-		// TODO: After updating module to Swift 6, use following implementation.
-//		Button(
-//			String(localized: .common.action.open),
-//			systemImage: .arrow_up_forward
-//			action: action
-//		)
+		Button(
+			String(localized: .common.action.open),
+			systemImage: .arrow_up_forward,
+			action: action
+		)
 	}
 }
 
@@ -31,7 +23,7 @@ public struct OpenApplicationButton: View {
 
 public extension OpenApplicationButton {
 	init(application applicationModel: ApplicationModel) {
-		self.init(action: applicationModel.openLatest)
+		self.init { applicationModel.openLatest() }
 	}
 
 	init?(application applicationModelIdentifier: ApplicationModelIdentifier) {

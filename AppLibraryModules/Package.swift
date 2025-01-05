@@ -52,9 +52,6 @@ let package = Package(
 				"AppLibraryResources",
 				"AppLibraryRuntimeModel",
 				"AppLibraryDockUtility",
-			],
-			swiftSettings: [
-				.swiftLanguageMode(.v5),
 			]
 		),
 

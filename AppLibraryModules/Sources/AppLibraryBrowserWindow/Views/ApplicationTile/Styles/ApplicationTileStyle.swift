@@ -1,6 +1,6 @@
 import SwiftUI
 
-protocol ApplicationTileStyle {
+protocol ApplicationTileStyle: Sendable {
 	associatedtype Body: View
 	typealias Configuration = ApplicationTileStyleConfiguration
 

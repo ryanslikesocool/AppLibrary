@@ -1,63 +1,38 @@
 import AppKit
 import AppLibraryResources
+@preconcurrency import var ApplicationServices.HIServices.kAXTrustedCheckOptionPrompt
 import OSLog
 
+@MainActor
 public enum AccessibilityUtility {
 	/// Returns whether the current process is a trusted accessibility client.
 	public static var isTrusted: Bool {
 		AXIsProcessTrusted()
 	}
 
-//	static func readPrivileges(prompt: Bool) -> Bool {
-//		let options: NSDictionary = [kAXTrustedCheckOptionPrompt.takeRetainedValue() as NSString: prompt]
-//		let status = AXIsProcessTrustedWithOptions(options)
-//		return status
-//	}
+	// TODO: Only request accessibility permisson once.
+	// Don't bother the user every time the app launches,
+	// even if they deny accessibility permisson.
 
 	/// Show an alert to the user requesting accessibility permission.
-	public static func requestAccess() {
-		logger.info("Requesting accessibility permission...")
+	@discardableResult
+	public static func requestAccess() -> Bool {
+		let prompt = kAXTrustedCheckOptionPrompt.takeUnretainedValue() as String
+		let options: NSDictionary = [prompt: true]
+		let permissionGranted = AXIsProcessTrustedWithOptions(options)
 
-		guard !isTrusted else {
-			logger.info("Accessibility permission was already granted.")
-			return
+		if permissionGranted {
+			logger.info("Accessibility permission was granted.")
+		} else {
+			logger.info("Accessibility permission was denied.")
 		}
 
-		let alert = createAlert()
-
-		logger.info("Presenting accessibility permission alert.")
-
-		presentAlert()
-
-		func createAlert() -> NSAlert {
-			let alert = NSAlert()
-
-			alert.alertStyle = .informational
-			alert.messageText = String(localized: .accessibilityRequest.title)
-			alert.informativeText = String(localized: .accessibilityRequest.description)
-			/* let denyButton = */ alert.addButton(withTitle: String(localized: .accessibilityRequest.action.deny))
-			/* let allowButton = */ alert.addButton(withTitle: String(localized: .accessibilityRequest.action.allow))
-
-			return alert
-		}
-
-		func presentAlert() {
-			switch alert.runModal() {
-				case .cancel, .alertFirstButtonReturn:
-					logger.info("Accessibility permission was denied.")
-				case .alertSecondButtonReturn:
-					let options = [kAXTrustedCheckOptionPrompt.takeRetainedValue(): true]
-					_ = AXIsProcessTrustedWithOptions(options as CFDictionary)
-					logger.info("Accessibility permission was granted.")
-				case let otherOption:
-					logger.error("Unsupported alert button '\(String(describing: otherOption))'.")
-			}
-		}
+		return permissionGranted
 	}
 }
 
 // MARK: - Constants
 
 private extension AccessibilityUtility {
-	static let logger: Logger = Logger(category: Self.self)
+	nonisolated static let logger = Logger(category: Self.self)
 }
