@@ -28,6 +28,8 @@ let package = Package(
 		.package(url: "https://github.com/ryanslikesocool/LocalizationToolbox.git", from: "0.0.4"),
 		.package(url: "https://github.com/ryanslikesocool/NSMetadataToolbox.git", from: "0.0.5"),
 		.package(url: "https://github.com/ryanslikesocool/SFSymbolToolbox.git", from: "0.0.2"),
+
+//		.package(url: "https://github.com/joogps/Glur.git", from: "1.0.4"),
 	],
 	targets: [
 		.target(

@@ -1,8 +1,8 @@
 import AppLibraryCommon
-import SFSymbolToolbox
-import AppLibraryResources
 import AppLibraryCommonViews
+import AppLibraryResources
 import AppLibraryStorage
+import SFSymbolToolbox
 import SwiftUI
 
 struct SearchField: View {
@@ -29,13 +29,14 @@ struct SearchField: View {
 		.focusable()
 		.focused($isFocused)
 
-		.font(.title3)
-		.textFieldStyle(.plain)
+		.font(Self.font)
+		.textFieldStyle(Self.textFieldStyle)
+		.autocorrectionDisabled()
 
 		.padding(Self.innerPadding)
 		.overlay(stroke, in: containerShape)
 //		.overlay(stroke.style, in: containerShape.inset(by: -stroke.width * 0.5).stroke(lineWidth: stroke.width))
-		.background(.regularMaterial, in: containerShape)
+		.background(Self.backgroundStyle, in: containerShape)
 		.fixedSize(horizontal: false, vertical: true)
 		.compositingGroup()
 		.contentShape(containerShape)
@@ -44,7 +45,7 @@ struct SearchField: View {
 		.shadow(shadowA)
 		.shadow(shadowB)
 
-		.animation(.easeOut(duration: 0.2), value: isFocused)
+		.animation(Self.isFocusedAnimation, value: isFocused)
 
 //		.onAppear { isFocused = browserModel.isSearchFocused }
 //		.onChange(of: isFocused) { _, newValue in
@@ -67,11 +68,12 @@ private extension SearchField {
 	}
 
 	var prompt: Text {
-		let icon = Image(systemName: .magnifyingGlass)
 		let title = try! Bundle.main.object(forInfoDictionaryKey: .cfBundleName)
 
-		// TODO: Why isn't this a `Label`?
-		return Text(verbatim: "\(icon) \(title)")
+		// NOTE: This can't be a `Label` because the
+		// `TextField` initializer only supports a `Text` prompt.
+		// We also can't use an `Image` interpolation argument for whatever reason...
+		return Text(verbatim: "􀊫 \(title)")
 	}
 }
 
@@ -84,12 +86,19 @@ private extension SearchField {
 	static let focusedShadowA: Shadow = Shadow(opacity: 0.25, radius: 4, y: 2)
 	static let focusedShadowB: Shadow = Shadow(opacity: 0.125, radius: 8, y: 4)
 
-	static let unfocusedStroke: Stroke = Stroke(position: .inside, shapeStyle: .separator, lineWidth: 1)
-	static let focusedStroke: Stroke = Stroke(position: .inside, shapeStyle: Color.accentColor, lineWidth: 2)
+	static var unfocusedStroke: Stroke { Stroke(position: .inside, shapeStyle: .separator, lineWidth: 1) }
+	static var focusedStroke: Stroke { Stroke(position: .inside, shapeStyle: Color.accentColor, lineWidth: 2) }
+
+	static var backgroundStyle: some ShapeStyle { .regularMaterial }
+
+	static var font: Font { .title3 }
+	static var textFieldStyle: some TextFieldStyle { .plain }
 
 	static let innerPadding: CGFloat = 8
 	static let outerPadding: CGFloat = 4
 	static let cornerRadius: CGFloat = BrowserWindowShape.cornerRadius - outerPadding
 
 	static let shape: BrowserWindowShape = BrowserWindowShape().inset(by: outerPadding)
+
+	static let isFocusedAnimation: Animation = .easeOut(duration: 0.2)
 }

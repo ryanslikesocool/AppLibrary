@@ -1,40 +1,71 @@
 import AppKit
 import AppLibraryStorage
 import OSLog
+import SwiftUI
 
+@MainActor
 final class KeyboardObserver {
-	private unowned let model: BrowserModel
+	public weak var delegate: KeyboardObserverDelegate?
 
 	private var modifierEventMonitor: Any?
 	private var keyEventMonitor: Any?
 
 	private var modifierFlags: NSEvent.ModifierFlags
-	var isEventMonitorInitialized: Bool { modifierEventMonitor != nil && keyEventMonitor != nil }
 
-	init(model: BrowserModel) {
-		self.model = model
+	public var isEventMonitorInitialized: Bool {
+		modifierEventMonitor != nil && keyEventMonitor != nil
+	}
 
+	public init() {
+		delegate = nil
 		modifierEventMonitor = nil
 		keyEventMonitor = nil
 		modifierFlags = []
 	}
+}
 
-	func createEventMonitor() {
+// MARK: - Constants
+
+extension KeyboardObserver {
+	nonisolated static let logger = Logger(category: KeyboardObserver.self)
+}
+
+// MARK: - Event Monitors
+
+extension KeyboardObserver {
+	public var isEnabled: Bool {
+		get { modifierEventMonitor != nil && keyEventMonitor != nil }
+		set {
+			guard isEnabled != newValue else {
+				return
+			}
+
+			if newValue {
+				createEventMonitors()
+			} else {
+				destroyEventMonitors()
+			}
+		}
+	}
+
+	private func createEventMonitors() {
 		guard !isEventMonitorInitialized else {
 			return
 		}
+
 		/// Cannot combine event monitors for some reason.
 		/// Obj-C exceptions get thrown when trying to access `NSEvent.characters`.
 		modifierEventMonitor = NSEvent.addLocalMonitorForEvents(matching: .flagsChanged, handler: onModifierEvent)
-//		keyEventMonitor = NSEvent.addLocalMonitorForEvents(matching: .keyDown, handler: onKeyEvent)
+		keyEventMonitor = NSEvent.addLocalMonitorForEvents(matching: .keyDown, handler: onKeyEvent)
 
-		Logger.keyboardEvents.debug("Created event monitor.")
+		Self.logger.debug("Created event monitors.")
 	}
 
-	func destroyEventMonitor() {
+	private func destroyEventMonitors() {
 		guard isEventMonitorInitialized else {
 			return
 		}
+
 		if let modifierEventMonitor {
 			NSEvent.removeMonitor(modifierEventMonitor)
 			self.modifierEventMonitor = nil
@@ -44,11 +75,11 @@ final class KeyboardObserver {
 			self.keyEventMonitor = nil
 		}
 
-		Logger.keyboardEvents.debug("Destroyed event monitor.")
+		Self.logger.debug("Destroyed event monitors.")
 	}
 }
 
-// MARK: -
+// MARK: - Event Observers
 
 private extension KeyboardObserver {
 	func onModifierEvent(_ event: NSEvent) -> NSEvent? {
@@ -56,109 +87,33 @@ private extension KeyboardObserver {
 		return event
 	}
 
-//	func onKeyEvent(_ event: NSEvent) -> NSEvent? {
-//		if
-//			matchSearchShortcut(in: event)
-//			|| matchRefreshShortcut(in: event)
-//			|| matchEscapeKey(in: event)
-//			|| matchReturnKey(in: event)
-//			|| matchArrowKey(in: event)
-//			|| matchAlphanumericKey(in: event)
-//		{
-//			return nil
-//		}
-//
-//		return event
-//	}
-}
-
-private extension KeyboardObserver {
-	// (command + f) -> (activate search)
-	func matchSearchShortcut(in event: NSEvent) -> Bool {
-		// TODO: how to localize "f"?
-		guard matchingKeyboardShortcut(event, key: "f", modifier: .command) else {
-			return false
-		}
-
-		model.onSearchShortcut()
-		return true
-	}
-
-	// (command + r) -> (refresh apps)
-	@MainActor
-	func matchRefreshShortcut(in event: NSEvent) -> Bool {
-		// TODO: how to localize "r"?
-		guard matchingKeyboardShortcut(event, key: "r", modifier: .command) else {
-			return false
-		}
-
-		model.onRefreshShortcut()
-		return true
-	}
-
-	// (escape) -> (dismiss + clear search) | (dismiss window)
-	func matchEscapeKey(in event: NSEvent) -> Bool {
-		guard matchingKeyboardShortcut(event, keyCode: Self.escapeKey, modifier: []) else {
-			return false
-		}
-
-		model.onEscapeKey()
-		return true
-	}
-
-	// (return) -> (dismiss search)
-	@MainActor
-	func matchReturnKey(in event: NSEvent) -> Bool {
-		matchingKeyboardShortcut(event, keyCode: Self.returnKey, modifier: [])
-			&& model.onReturnKey()
-	}
-
-	// (arrow keys) -> (navigate)
-	@MainActor
-	func matchArrowKey(in event: NSEvent) -> Bool {
+	func onKeyEvent(_ event: NSEvent) -> NSEvent? {
 		guard
-			let direction = NavigationDirection(keyCode: event.keyCode),
-			!model.isSearchDisplayed || direction.axis == .vertical
+			let delegate,
+			let keyboardShortcut = Self.createKeyboardShortcut(event: event, modifierFlags: modifierFlags)
 		else {
-			return false
+			return event
 		}
 
-		model.onArrowKey(direction)
-		return true
-	}
+		Self.logger.debug("Sending keyboard event: \(String(describing: keyboardShortcut))")
 
-	// (characters) -> (scroll to character)
-	@MainActor
-	func matchAlphanumericKey(in event: NSEvent) -> Bool {
-		guard let characters = event.charactersIgnoringModifiers else {
-			return false
+		return if delegate.keyboardObserver(receivedKeyboardShortcut: keyboardShortcut, self) {
+			nil
+		} else {
+			event
 		}
-
-		return model.onAlphanumericKey(characters)
 	}
 }
 
+// MARK: - Utility
+
 private extension KeyboardObserver {
-	func matchingKeyboardShortcut(_ event: NSEvent, key: String, modifier: NSEvent.ModifierFlags) -> Bool {
-		guard
-			let characters = event.characters,
-			characters.count == 1,
-			characters == key,
-			modifierFlags == modifier
-		else {
-			return false
+	static func createKeyboardShortcut(event: NSEvent, modifierFlags: NSEvent.ModifierFlags) -> KeyboardShortcut? {
+		guard let keyEquivalent = KeyEquivalent(event.charactersIgnoringModifiers) else {
+			return nil
 		}
-		return true
+		let eventModifiers = EventModifiers(modifierFlags)
+
+		return KeyboardShortcut(keyEquivalent, modifiers: eventModifiers)
 	}
-
-	func matchingKeyboardShortcut(_ event: NSEvent, keyCode: CGKeyCode, modifier: NSEvent.ModifierFlags) -> Bool {
-		event.keyCode == keyCode && modifierFlags == modifier
-	}
-}
-
-// MARK: - Constants
-
-private extension KeyboardObserver {
-	static let escapeKey: UInt16 = 0x35
-	static let returnKey: UInt16 = 0x24
 }

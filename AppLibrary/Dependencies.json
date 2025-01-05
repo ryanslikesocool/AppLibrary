@@ -1,8 +1,8 @@
 [
 	{
-		"name": "LocalizationTable",
-		"projectURL": "https://github.com/ryanslikesocool/LocalizationTable",
-		"licenseURL": "https://github.com/ryanslikesocool/LocalizationTable/blob/main/LICENSE.md"
+		"name": "LocalizationToolbox",
+		"projectURL": "https://github.com/ryanslikesocool/LocalizationToolbox",
+		"licenseURL": "https://github.com/ryanslikesocool/LocalizationToolbox/blob/main/LICENSE.md"
 	},
 	{
 		"name": "NSMetadataToolbox",
@@ -18,5 +18,10 @@
 		"name": "BundleToolbox",
 		"projectURL": "https://github.com/ryanslikesocool/BundleToolbox",
 		"licenseURL": "https://github.com/ryanslikesocool/BundleToolbox/blob/main/LICENSE.md"
+	},
+	{
+		"name": "SFSymbolToolbox",
+		"projectURL": "https://github.com/ryanslikesocool/SFSymbolToolbox",
+		"licenseURL": "https://github.com/ryanslikesocool/SFSymbolToolbox/blob/main/LICENSE.md"
 	}
 ]

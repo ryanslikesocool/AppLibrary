@@ -50,11 +50,11 @@ public final class BrowserWindowController: NSWindowController, ObservableObject
 extension BrowserWindowController: NSWindowDelegate {
 	public func windowDidResignKey(_ notification: Notification) {
 		dismiss()
-		browserModel.keyboardObserver.destroyEventMonitor()
+		browserModel.keyboardObserver.isEnabled = false
 	}
 
 	public func windowDidBecomeKey(_ notification: Notification) {
-		browserModel.keyboardObserver.createEventMonitor()
+		browserModel.keyboardObserver.isEnabled = true
 	}
 }
 

@@ -21,20 +21,28 @@ extension NSEvent.ModifierFlags: @retroactive CaseIterable {
 
 #if DEBUG
 extension NSEvent.ModifierFlags: @retroactive CustomStringConvertible {
-	public var description: String {
+	private var elementDescription: String {
 		switch self {
-			case .capsLock: "\(Self.self).capsLock"
-			case .shift: "\(Self.self).shift"
-			case .control: "\(Self.self).control"
-			case .option: "\(Self.self).option"
-			case .command: "\(Self.self).command"
-			case .numericPad: "\(Self.self).numericPad"
-			case .help: "\(Self.self).help"
-			case .function: "\(Self.self).function"
+			case .capsLock: "capsLock"
+			case .shift: "shift"
+			case .control: "control"
+			case .option: "option"
+			case .command: "command"
+			case .numericPad: "numericPad"
+			case .help: "help"
+			case .function: "function"
 			default:
 				enumerated()
-					.map(\.element.description)
+					.map(\.element.elementDescription)
 					.joined(separator: ", ")
+		}
+	}
+
+	public var description: String {
+		if enumerated().count == 1 {
+			"\(Self.self)\(elementDescription)"
+		} else {
+			"\(Self.self)(\(elementDescription))"
 		}
 	}
 }

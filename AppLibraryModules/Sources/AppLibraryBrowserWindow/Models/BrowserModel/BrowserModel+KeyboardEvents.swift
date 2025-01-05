@@ -5,13 +5,12 @@ import OSLog
 
 extension BrowserModel {
 	func onSearchShortcut() {
-		Logger.keyboardEvents.debug("Search Shortcut: Focusing search.")
+		KeyboardObserver.logger.debug("Search Shortcut: Focusing search.")
 		focus = .search
 	}
 
-	@MainActor
 	func onRefreshShortcut() {
-		Logger.keyboardEvents.debug("Refresh Shortcut: Reloading apps.")
+		KeyboardObserver.logger.debug("Refresh Shortcut: Reloading apps.")
 		refreshApps()
 	}
 
@@ -21,7 +20,6 @@ extension BrowserModel {
 		NSApplication.shared.hide(nil)
 	}
 
-	@MainActor
 	func onReturnKey() -> Bool {
 		switch focus {
 			case .search:
@@ -29,15 +27,15 @@ extension BrowserModel {
 					if let bestMatch = filteredApps.first {
 						bestMatch.openLatest()
 						searchQuery = ""
-						Logger.keyboardEvents.debug("Return Key: Opening app for best match.")
+						KeyboardObserver.logger.debug("Return Key: Opening app for best match.")
 						return true
 					} else {
-						Logger.keyboardEvents.debug("Return Key: Best match for search was not found.")
+						KeyboardObserver.logger.debug("Return Key: Best match for search was not found.")
 						return false
 					}
 				} else {
 					focus = nil
-					Logger.keyboardEvents.debug("Return Key: Search was focused, query was empty.")
+					KeyboardObserver.logger.debug("Return Key: Search was focused, query was empty.")
 					return true
 				}
 			case let .app(applicationID):
@@ -48,13 +46,12 @@ extension BrowserModel {
 					return true
 				}
 			default:
-				Logger.keyboardEvents.debug("Return Key: Search was not focused.")
+				KeyboardObserver.logger.debug("Return Key: Search was not focused.")
 		}
 
 		return false
 	}
 
-	@MainActor
 	func onArrowKey(_ direction: NavigationDirection) {
 		guard
 			case let .app(applicationID) = focus,
@@ -82,13 +79,28 @@ extension BrowserModel {
 		}
 	}
 
-	@MainActor
+	func onAlphanumericKey(_ value: Character?) -> Bool {
+		guard let value else {
+			return false
+		}
+		return onAlphanumericKey(String(value))
+	}
+
+	@_disfavoredOverload
 	func onAlphanumericKey(_ value: String?) -> Bool {
-		guard
-			focus != .search,
-			let lowercasedString = value?.lowercased(),
-			lowercasedString.isAlphanumeric
-		else {
+		guard let value else {
+			return false
+		}
+		return onAlphanumericKey(value)
+	}
+
+	func onAlphanumericKey(_ value: String) -> Bool {
+		guard focus != .search else {
+			return false
+		}
+
+		let lowercasedString = value.lowercased()
+		guard lowercasedString.isAlphanumeric else {
 			return false
 		}
 
@@ -97,11 +109,11 @@ extension BrowserModel {
 				application.displayName.lowercased().starts(with: lowercasedString)
 			})
 		else {
-			Logger.keyboardEvents.debug("Any Key: No app results to scroll to.")
+			KeyboardObserver.logger.debug("Any Key: No app results to scroll to.")
 			return false
 		}
 
-		Logger.keyboardEvents.debug("Any Key: Scrolling to apps starting with \"\(lowercasedString)\".")
+		KeyboardObserver.logger.debug("Any Key: Scrolling to apps starting with \"\(lowercasedString)\".")
 		Event.scrollToApp.send(ApplicationModelIdentifier(firstResult))
 		return true
 	}
