@@ -7,8 +7,8 @@ public struct AppsSettings {
 	public var applicationHideFlags: [ApplicationModelIdentifier: ApplicationHideFlag.Set]
 
 	public init() {
-		searchScopes = Set(Constant.Settings.defaultSearchScopes)
-		applicationHideFlags = Constant.Settings.defaultApplicationVisibility
+		searchScopes = Set([URL].defaultSearchScopes)
+		applicationHideFlags = .default
 	}
 }
 

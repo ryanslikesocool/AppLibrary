@@ -6,7 +6,7 @@ struct LibraryView: View {
 	@Environment(\.libraryLayout) private var libraryLayout
 	@EnvironmentObject private var browserModel: BrowserModel
 
-	public init() { }
+	public init() {	}
 
 	public var body: some View {
 		ScrollViewReader { proxy in
@@ -14,10 +14,13 @@ struct LibraryView: View {
 				scrollContent
 					.padding(.horizontal, libraryLayout.padding)
 			}
+
+//			.searchable(text: <#T##Binding<String>#>, placement: <#T##SearchFieldPlacement#>, prompt: <#T##Text?#>)
+
 			.frame(maxWidth: .infinity)
 			.buttonStyle(.plain)
 
-			.contentMargins(.bottom, LibraryLayout.list.padding, for: .scrollContent)
+			.safeAreaPadding(.bottom, LibraryLayout.list.padding)
 			.safeAreaInset(edge: .top, spacing: LibraryLayout.list.padding) {
 				if browserModel.isSearchDisplayed {
 					SearchField()
@@ -53,7 +56,7 @@ private extension LibraryView {
 // MARK: - Event Receivers
 
 private extension LibraryView {
-	func receiveFocus(newValue: FocusElement?, in proxy: ScrollViewProxy) {
+	func receiveFocus(newValue: BrowserFocusElement?, in proxy: ScrollViewProxy) {
 		switch newValue {
 			case let .some(.app(app)): scrollToApp(id: app, in: proxy)
 			default: break

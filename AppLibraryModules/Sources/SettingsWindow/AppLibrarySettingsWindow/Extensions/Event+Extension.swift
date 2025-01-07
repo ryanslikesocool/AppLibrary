@@ -3,5 +3,5 @@ import AppLibraryStorage
 import Combine
 
 public extension Event {
-	@MainActor static let goToSettingsTab = Passthrough<SettingsCategory>()
+	@MainActor static let goToSettingsTab = PassthroughEvent<SettingsCategory>()
 }

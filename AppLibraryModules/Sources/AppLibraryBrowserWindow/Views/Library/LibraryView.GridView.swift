@@ -3,7 +3,7 @@ import SwiftUI
 
 extension LibraryView {
 	struct GridView: View {
-		public init() { }
+		public init() {	}
 
 		public var body: some View {
 			LazyVGrid(columns: Self.gridColumns) {

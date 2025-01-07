@@ -2,10 +2,11 @@ import AppKit
 import AppLibraryCommon
 import AppLibraryStorage
 import OSLog
+import SwiftUI
 
 extension BrowserModel {
-	func onSearchShortcut() {
-		KeyboardObserver.logger.debug("Search Shortcut: Focusing search.")
+	func onFindShortcut() {
+		KeyboardObserver.logger.debug("Find Shortcut: Focusing search.")
 		focus = .search
 	}
 
@@ -52,7 +53,7 @@ extension BrowserModel {
 		return false
 	}
 
-	func onArrowKey(_ direction: NavigationDirection) {
+	func onArrowKey(_ direction: MoveCommandDirection) {
 		guard
 			case let .app(applicationID) = focus,
 			let currentFocus = filteredApps.firstIndex(where: { application in

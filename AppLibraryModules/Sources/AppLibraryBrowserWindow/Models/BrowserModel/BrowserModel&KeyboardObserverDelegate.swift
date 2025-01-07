@@ -3,7 +3,7 @@ import SwiftUI
 
 extension BrowserModel: KeyboardObserverDelegate {
 	func keyboardObserver(receivedKeyboardShortcut keyboardShortcut: KeyboardShortcut, _: KeyboardObserver) -> Bool {
-		matchSearchShortcut(keyboardShortcut)
+		matchFindShortcut(keyboardShortcut)
 			|| matchRefreshShortcut(keyboardShortcut)
 			|| matchCancelAction(keyboardShortcut)
 			|| matchDefaultAction(keyboardShortcut)
@@ -16,12 +16,12 @@ extension BrowserModel: KeyboardObserverDelegate {
 
 private extension BrowserModel {
 	/// - Returns: `true` if the event should be consumed; `false` otherwise.
-	func matchSearchShortcut(_ keyboardShortcut: KeyboardShortcut) -> Bool {
-		guard keyboardShortcut == .search else {
+	func matchFindShortcut(_ keyboardShortcut: KeyboardShortcut) -> Bool {
+		guard keyboardShortcut == .find else {
 			return false
 		}
 
-		onSearchShortcut()
+		onFindShortcut()
 
 		return true
 	}
@@ -64,7 +64,7 @@ private extension BrowserModel {
 		}
 
 		guard
-			let direction = NavigationDirection(keyEquivalent: keyEquivalent),
+			let direction = MoveCommandDirection(keyEquivalent: keyEquivalent),
 			!isSearchDisplayed || direction.axis == .vertical
 		else {
 			return false

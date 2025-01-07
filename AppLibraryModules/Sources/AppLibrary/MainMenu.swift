@@ -1,71 +1,22 @@
-import AppKit
-import AppLibraryCommon
-import AppLibraryResources
 import OSLog
+import SwiftUI
 
-// TODO: Does this really need to be its own class?
+struct MainMenu: Commands {
+	public init() { }
 
-@MainActor
-final class MainMenu {
-	init() {
-		guard let mainMenu = NSApp.mainMenu else {
-			preconditionFailure("Failed to access the main menu.")
+	public var body: some Commands {
+		CommandGroup(after: .textEditing) {
+			FindButton()
 		}
 
-		if #available(macOS 15.2, *) {
-			mainMenu.automaticallyInsertsWritingToolsItems = false
+		CommandGroup(after: .toolbar) {
+			RefreshButton()
 		}
-
-		initializeEditSubmenu(in: mainMenu)
-		initializeViewSubmenu(in: mainMenu)
 	}
 }
 
-// MARK: -
+// MARK: - Constants
 
-private extension MainMenu {
-	// TODO: Find a better way to access submenus.
-	// There's no reason we should have to search by (localized) name.
-
-	func initializeEditSubmenu(in menu: NSMenu) {
-		guard let submenu = menu.item(withTitle: .mainMenu.submenu.edit)?.submenu else {
-			return
-		}
-		Logger.module.debug(#"Create "Edit" submenu items."#)
-
-		let item = submenu.addItem(
-			withTitle: String(localized: .mainMenu.item.search),
-			action: #selector(activateSearchAction),
-			keyEquivalent: "f"
-		)
-		item.target = self
-	}
-
-	func initializeViewSubmenu(in menu: NSMenu) {
-		guard let submenu = menu.item(withTitle: .mainMenu.submenu.view)?.submenu else {
-			return
-		}
-		Logger.module.debug(#"Create "View" submenu items."#)
-
-		let item = submenu.addItem(
-			withTitle: String(localized: .mainMenu.item.refresh),
-			action: #selector(refreshLibraryAction),
-			keyEquivalent: "r"
-		)
-		item.target = self
-	}
-}
-
-// MARK: - Actions
-
-private extension MainMenu {
-	@objc
-	func activateSearchAction() {
-		Event.activateSearch.send()
-	}
-
-	@objc
-	func refreshLibraryAction() {
-		Event.refreshApps.send()
-	}
+extension MainMenu {
+	static let logger = Logger(category: Self.self)
 }

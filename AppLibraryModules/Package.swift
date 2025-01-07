@@ -25,11 +25,13 @@ let package = Package(
 	dependencies: [
 		.package(url: "https://github.com/ryanslikesocool/AXToolbox.git", from: "0.0.5"),
 		.package(url: "https://github.com/ryanslikesocool/BundleToolbox.git", from: "0.0.4"),
+
+//		.package(url: "https://github.com/ryanslikesocool/EnvironmentalFocus.git", from: "0.0.1"),
+		.package(path: "~/Documents/Xcode Projects/EnvironmentalFocus"),
+
 		.package(url: "https://github.com/ryanslikesocool/LocalizationToolbox.git", from: "0.0.4"),
 		.package(url: "https://github.com/ryanslikesocool/NSMetadataToolbox.git", from: "0.0.5"),
 		.package(url: "https://github.com/ryanslikesocool/SFSymbolToolbox.git", from: "0.0.2"),
-
-//		.package(url: "https://github.com/joogps/Glur.git", from: "1.0.4"),
 	],
 	targets: [
 		.target(
@@ -45,6 +47,7 @@ let package = Package(
 			name: "AppLibraryBrowserWindow",
 			dependencies: [
 				"AXToolbox",
+				"EnvironmentalFocus",
 				"NSMetadataToolbox",
 
 				"AppLibraryCommonViews",

@@ -15,7 +15,7 @@ extension ApplicationSearchScopesList.AddMenu {
 
 		public var body: some View {
 			Section {
-				ForEach(Constant.Settings.defaultSearchScopes, id: \.self, content: makeItem)
+				ForEach([URL].defaultSearchScopes, id: \.self, content: makeItem)
 			} header: {
 				Text(.applicationSearchScopesList.addMenu.defaultSectionTitle)
 			}

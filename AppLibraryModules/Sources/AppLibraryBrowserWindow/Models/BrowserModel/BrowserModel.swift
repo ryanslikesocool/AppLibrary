@@ -11,7 +11,7 @@ final class BrowserModel: ObservableObject {
 
 	@Published private(set) var state: BrowserState
 	@Published var searchQuery: String
-	@Published var focus: FocusElement?
+	@Published var focus: BrowserFocusElement?
 
 	var isSearchDisplayed: Bool {
 		if case .idle = applicationCache.state {
@@ -41,7 +41,9 @@ final class BrowserModel: ObservableObject {
 
 		refreshApps()
 
-		keyboardObserver.delegate = self
+		if FeatureFlag.Input.implementation == .keyboardObserver {
+			keyboardObserver.delegate = self
+		}
 
 		_ = refreshAppsSubscriber
 		_ = activateSearchSubscriber

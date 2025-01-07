@@ -1,11 +1,8 @@
-import Combine
 import Foundation
 
-public enum Event {
-	public typealias Passthrough<each Output> = PassthroughSubject<(repeat each Output), Never>
-}
+public enum Event { }
 
 public extension Event {
-	@MainActor static let refreshApps = Passthrough<Void>()
-	@MainActor static let activateSearch = Passthrough<Void>()
+	@MainActor static let refreshApps = PassthroughEvent<Void>()
+	@MainActor static let activateSearch = PassthroughEvent<Void>()
 }

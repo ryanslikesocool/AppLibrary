@@ -17,7 +17,7 @@ public extension LocalizedStringResource {
 
 		public enum Item {
 			public static let refresh = LocalizedStringResource("ITEM.REFRESH", table: localizationTable)
-			public static let search = LocalizedStringResource("ITEM.SEARCH", table: localizationTable)
+			public static let find = LocalizedStringResource("ITEM.FIND", table: localizationTable)
 		}
 	}
 }
