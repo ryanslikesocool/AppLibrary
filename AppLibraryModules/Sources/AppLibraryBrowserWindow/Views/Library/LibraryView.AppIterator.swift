@@ -1,6 +1,5 @@
 import AppLibraryRuntimeModel
 import AppLibraryStorage
-import EnvironmentalFocus
 import SwiftUI
 
 extension LibraryView {
@@ -8,13 +7,15 @@ extension LibraryView {
 		@EnvironmentObject private var browserModel: BrowserModel
 		@Environment(\.libraryLayout) private var libraryLayout
 
-		@EnvironmentFocus(\.browserFocus) private var focusState
+		@FocusState.Binding private var focusState: BrowserFocusElement?
 
 		private var applications: [ApplicationModel] {
 			browserModel.filteredApps
 		}
 
-		public init() {	}
+		public init(focusState: FocusState<BrowserFocusElement?>.Binding) {
+			_focusState = focusState
+		}
 
 		public var body: some View {
 			ForEach(applications, id: \.bundleIdentifier) { application in

@@ -5,8 +5,11 @@ import SwiftUI
 struct LibraryView: View {
 	@Environment(\.libraryLayout) private var libraryLayout
 	@EnvironmentObject private var browserModel: BrowserModel
+	@FocusState.Binding private var focusState: BrowserFocusElement?
 
-	public init() {	}
+	public init(focusState: FocusState<BrowserFocusElement?>.Binding) {
+		_focusState = focusState
+	}
 
 	public var body: some View {
 		ScrollViewReader { proxy in
@@ -23,7 +26,7 @@ struct LibraryView: View {
 			.safeAreaPadding(.bottom, LibraryLayout.list.padding)
 			.safeAreaInset(edge: .top, spacing: LibraryLayout.list.padding) {
 				if browserModel.isSearchDisplayed {
-					SearchField()
+					SearchField(focusState: $focusState)
 				}
 			}
 
@@ -44,11 +47,11 @@ private extension LibraryView {
 	var scrollContent: some View {
 		if browserModel.searchQuery.isEmpty {
 			switch libraryLayout {
-				case .list: ListView()
-				case .grid: GridView()
+				case .list: ListView(focusState: $focusState)
+				case .grid: GridView(focusState: $focusState)
 			}
 		} else {
-			ListView()
+			ListView(focusState: $focusState)
 		}
 	}
 }

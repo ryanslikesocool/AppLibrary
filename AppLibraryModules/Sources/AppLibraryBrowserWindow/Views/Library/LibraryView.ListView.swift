@@ -3,11 +3,15 @@ import SwiftUI
 
 extension LibraryView {
 	struct ListView: View {
-		public init() { }
+		@FocusState.Binding private var focusState: BrowserFocusElement?
+
+		public init(focusState: FocusState<BrowserFocusElement?>.Binding) {
+			_focusState = focusState
+		}
 
 		public var body: some View {
 			LazyVStack {
-				AppIterator()
+				AppIterator(focusState: $focusState)
 			}
 		}
 	}

@@ -14,7 +14,7 @@ struct ContentView: View {
 	public var body: some View {
 		Group {
 			switch browserModel.state {
-				case .idle: LibraryView()
+				case .idle: LibraryView(focusState: $focusState)
 				case .loading: queryLoadingView
 				case let .error(error): ErrorView(reason: error)
 			}
@@ -31,7 +31,6 @@ struct ContentView: View {
 //		.refreshable(action: browserModel.refreshApps)
 
 		.environmentObject(browserModel)
-		.browserFocus($focusState)
 
 		.onChange(of: browserModel.focus) { _, newValue in
 			focusState = newValue

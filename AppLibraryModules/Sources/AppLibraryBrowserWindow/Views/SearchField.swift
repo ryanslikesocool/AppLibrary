@@ -2,18 +2,19 @@ import AppLibraryCommon
 import AppLibraryCommonViews
 import AppLibraryResources
 import AppLibraryStorage
-import EnvironmentalFocus
 import SFSymbolToolbox
 import SwiftUI
 
 struct SearchField: View {
 	@EnvironmentObject private var browserModel: BrowserModel
 
-	@EnvironmentFocus(\.browserFocus) private var focusState
+	@FocusState.Binding private var focusState: BrowserFocusElement?
 
 	private var isFocused: Bool { focusState == Self.focusTarget }
 
-	public init() {	}
+	public init(focusState: FocusState<BrowserFocusElement?>.Binding) {
+		_focusState = focusState
+	}
 
 	public var body: some View {
 		let style: SearchFieldStyle = isFocused ? Self.focusedStyle : Self.unfocusedStyle
