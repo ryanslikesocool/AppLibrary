@@ -2,19 +2,24 @@ import AppLibraryCommon
 import AppLibraryResources
 import SwiftUI
 
-public struct ShowInFinderButton: View {
+public struct ShowInFinderButton<Label>: View where
+	Label: View
+{
 	private let url: URL?
+	private let label: Label
 
-	public init(_ url: URL?) {
+	public init(
+		_ url: URL?,
+		@ViewBuilder label: () -> Label
+	) {
 		self.url = url
+		self.label = label()
 	}
 
 	public var body: some View {
-		Button(
-			String(localized: .common.action.showInFinder),
-			image: .finder,
-			action: buttonAction
-		)
+		Button(action: buttonAction) {
+			label
+		}
 		.disabled(url == nil)
 	}
 }
@@ -24,5 +29,20 @@ public struct ShowInFinderButton: View {
 private extension ShowInFinderButton {
 	func buttonAction() {
 		url?.showInFinder()
+	}
+}
+
+// MARK: - Convenience
+
+public extension ShowInFinderButton where
+	Label == SwiftUI.Label<Text, Image>
+{
+	init(_ url: URL?) {
+		self.init(url) {
+			Label(
+				String(localized: .common.action.showInFinder),
+				image: .finder
+			)
+		}
 	}
 }

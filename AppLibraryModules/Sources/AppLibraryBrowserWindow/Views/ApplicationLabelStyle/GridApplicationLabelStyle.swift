@@ -1,6 +1,7 @@
+import AppLibraryRuntimeModelViews
 import SwiftUI
 
-struct GridApplicationTileStyle: ApplicationTileStyle {
+struct GridApplicationLabelStyle: ApplicationLabelStyle {
 	public init() { }
 
 	public func makeBody(configuration: Configuration) -> some View {
@@ -8,7 +9,7 @@ struct GridApplicationTileStyle: ApplicationTileStyle {
 			configuration.icon
 				.frame(height: 48)
 
-			configuration.label
+			configuration.title
 				.font(.footnote)
 				.lineLimit(2, reservesSpace: true)
 		}
@@ -19,8 +20,8 @@ struct GridApplicationTileStyle: ApplicationTileStyle {
 
 // MARK: - Convenience
 
-extension ApplicationTileStyle where
-	Self == GridApplicationTileStyle
+extension ApplicationLabelStyle where
+	Self == GridApplicationLabelStyle
 {
 	static var grid: Self {
 		Self()

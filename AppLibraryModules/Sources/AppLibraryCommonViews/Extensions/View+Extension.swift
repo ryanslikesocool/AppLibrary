@@ -37,4 +37,13 @@ public extension View {
 			fillStyle: fillStyle
 		)
 	}
+
+	@ViewBuilder
+	func writingToolsDisabled() -> some View {
+		if #available(iOS 18, macCatalyst 18, macOS 15, *) {
+			writingToolsBehavior(.disabled)
+		} else {
+			self
+		}
+	}
 }

@@ -12,7 +12,7 @@ extension MoveCommandDirection {
 		}
 	}
 
-	func getEntry<S>(
+	func getEntryElement<S>(
 		ofType: S.Element.Type = S.Element.self
 	) -> KeyPath<S, S.Element?> where
 		S: BidirectionalCollection

@@ -6,7 +6,9 @@ import SwiftUI
 public struct OpenApplicationButton: View {
 	private let action: @MainActor () -> Void
 
-	private init(action: @escaping @MainActor () -> Void) {
+	private init(
+		action: @escaping @MainActor () -> Void
+	) {
 		self.action = action
 	}
 
@@ -23,7 +25,9 @@ public struct OpenApplicationButton: View {
 
 public extension OpenApplicationButton {
 	init(application applicationModel: ApplicationModel) {
-		self.init { applicationModel.openLatest() }
+		self.init {
+			applicationModel.openLatest()
+		}
 	}
 
 	init?(application applicationModelIdentifier: ApplicationModelIdentifier) {
@@ -31,6 +35,7 @@ public extension OpenApplicationButton {
 		guard let applicationModel = $application else {
 			return nil
 		}
+
 		self.init(application: applicationModel)
 	}
 }

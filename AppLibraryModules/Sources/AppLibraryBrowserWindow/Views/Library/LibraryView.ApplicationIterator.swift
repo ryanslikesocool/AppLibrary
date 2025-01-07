@@ -3,7 +3,7 @@ import AppLibraryStorage
 import SwiftUI
 
 extension LibraryView {
-	struct AppIterator: View {
+	struct ApplicationIterator: View {
 		@EnvironmentObject private var browserModel: BrowserModel
 		@Environment(\.libraryLayout) private var libraryLayout
 
@@ -20,12 +20,9 @@ extension LibraryView {
 		public var body: some View {
 			ForEach(applications, id: \.bundleIdentifier) { application in
 				ApplicationTile(for: application)
-					.focused($focusState, equals: .app(ApplicationModelIdentifier(application)))
+					.focused($focusState, equals: .application(application))
 			}
-			.onChange(of: browserModel.focus) {
-				focusState = browserModel.focus
-			}
-//			.focusSection()
+			.focusSection()
 		}
 	}
 }

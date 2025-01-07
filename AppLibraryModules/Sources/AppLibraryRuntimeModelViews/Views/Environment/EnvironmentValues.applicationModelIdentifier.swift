@@ -11,11 +11,11 @@ public extension EnvironmentValues {
 // MARK: - Convenience
 
 public extension View {
-	func applicationModelIdentifier(_ applicationModelIdentifier: ApplicationModelIdentifier) -> some View {
+	nonisolated func applicationModelIdentifier(_ applicationModelIdentifier: ApplicationModelIdentifier) -> some View {
 		environment(\.applicationModelIdentifier, applicationModelIdentifier)
 	}
 
-	func applicationModelIdentifier(_ applicationModel: ApplicationModel) -> some View {
+	nonisolated func applicationModelIdentifier(_ applicationModel: ApplicationModel) -> some View {
 		applicationModelIdentifier(ApplicationModelIdentifier(applicationModel))
 	}
 }

@@ -70,7 +70,7 @@ private extension BrowserModel {
 			return false
 		}
 
-		onArrowKey(direction)
+		onArrowKey(direction: direction)
 
 		return true
 	}

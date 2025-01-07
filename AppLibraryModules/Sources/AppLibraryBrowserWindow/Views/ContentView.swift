@@ -1,3 +1,5 @@
+import AppLibraryCommon
+import OSLog
 import AppLibraryCommonViews
 import AppLibraryStorage
 import SwiftUI
@@ -21,20 +23,24 @@ struct ContentView: View {
 		}
 
 		.ignoresSafeArea()
-
 		.libraryLayout(layout)
+
+//		.refreshable(action: browserModel.refreshApps)
+		.onReceive(Event.refreshApps) {
+			FeatureFlag.Input.logEvent(in: Self.self, named: "refreshApps")
+			browserModel.refreshApps()
+		}
 
 //		.onChange(of: browserModel.filteredApps) { _, newValue in
 //			browserModel.filteredAppsChanged(newValue)
 //		}
 
-//		.refreshable(action: browserModel.refreshApps)
-
 		.environmentObject(browserModel)
 
-		.onChange(of: browserModel.focus) { _, newValue in
-			focusState = newValue
-		}
+		.defaultFocus($focusState, nil)
+//		.onChange(of: browserModel.focus) { _, newValue in
+//			focusState = newValue
+//		}
 	}
 }
 

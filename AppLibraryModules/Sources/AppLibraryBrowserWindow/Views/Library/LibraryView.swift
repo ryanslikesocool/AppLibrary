@@ -18,8 +18,6 @@ struct LibraryView: View {
 					.padding(.horizontal, libraryLayout.padding)
 			}
 
-//			.searchable(text: <#T##Binding<String>#>, placement: <#T##SearchFieldPlacement#>, prompt: <#T##Text?#>)
-
 			.frame(maxWidth: .infinity)
 			.buttonStyle(.plain)
 
@@ -33,7 +31,7 @@ struct LibraryView: View {
 			.onReceive(Event.scrollToApp) { id in
 				scrollToApp(id: id, in: proxy)
 			}
-			.onChange(of: browserModel.focus) { _, newValue in
+			.onChange(of: focusState) { _, newValue in
 				receiveFocus(newValue: newValue, in: proxy)
 			}
 		}
@@ -61,12 +59,16 @@ private extension LibraryView {
 private extension LibraryView {
 	func receiveFocus(newValue: BrowserFocusElement?, in proxy: ScrollViewProxy) {
 		switch newValue {
-			case let .some(.app(app)): scrollToApp(id: app, in: proxy)
+			case let .application(application)?: scrollToApp(id: application, in: proxy)
 			default: break
 		}
 	}
 
 	func scrollToApp(id: ApplicationModelIdentifier, in proxy: ScrollViewProxy) {
 		proxy.scrollTo(id, anchor: .top)
+	}
+
+	func scrollToSection(character: Character, in proxy: ScrollViewProxy) {
+		proxy.scrollTo(character, anchor: .top)
 	}
 }

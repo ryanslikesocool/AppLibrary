@@ -11,7 +11,7 @@ extension LibraryView {
 
 		public var body: some View {
 			LazyVStack {
-				AppIterator(focusState: $focusState)
+				ApplicationIterator(focusState: $focusState)
 			}
 		}
 	}

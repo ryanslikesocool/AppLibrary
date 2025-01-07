@@ -1,6 +1,7 @@
+import AppLibraryRuntimeModelViews
 import SwiftUI
 
-struct ListApplicationTileStyle: ApplicationTileStyle {
+struct ListApplicationLabelStyle: ApplicationLabelStyle {
 	public init() { }
 
 	public func makeBody(configuration: Configuration) -> some View {
@@ -8,7 +9,7 @@ struct ListApplicationTileStyle: ApplicationTileStyle {
 			configuration.icon
 				.frame(height: 56)
 
-			configuration.label
+			configuration.title
 				.font(.body)
 
 			Spacer()
@@ -19,8 +20,8 @@ struct ListApplicationTileStyle: ApplicationTileStyle {
 
 // MARK: - Convenience
 
-extension ApplicationTileStyle where
-	Self == ListApplicationTileStyle
+extension ApplicationLabelStyle where
+	Self == ListApplicationLabelStyle
 {
 	static var list: Self {
 		Self()

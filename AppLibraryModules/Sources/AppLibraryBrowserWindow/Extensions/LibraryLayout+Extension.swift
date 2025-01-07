@@ -1,3 +1,4 @@
+import AppLibraryRuntimeModelViews
 import AppLibraryStorage
 import SwiftUI
 
@@ -23,10 +24,10 @@ extension LibraryLayout {
 		}
 	}
 
-	var appTileStyle: AnyApplicationTileStyle {
+	var applicationLabelStyle: AnyApplicationLabelStyle {
 		switch self {
-			case .list: AnyApplicationTileStyle(.list)
-			case .grid: AnyApplicationTileStyle(.grid)
+			case .list: AnyApplicationLabelStyle(.list)
+			case .grid: AnyApplicationLabelStyle(.grid)
 		}
 	}
 }

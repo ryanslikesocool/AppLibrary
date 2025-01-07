@@ -11,7 +11,7 @@ extension LibraryView {
 
 		public var body: some View {
 			LazyVGrid(columns: Self.gridColumns) {
-				AppIterator(focusState: $focusState)
+				ApplicationIterator(focusState: $focusState)
 			}
 		}
 	}

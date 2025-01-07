@@ -27,11 +27,11 @@ final class BrowserModel: ObservableObject {
 
 	let keyboardObserver: KeyboardObserver
 
-	private lazy var refreshAppsSubscriber: AnyCancellable? = Event.refreshApps
-		.sink { self.refreshApps() }
+//	private lazy var refreshAppsSubscriber: AnyCancellable? = Event.refreshApps
+//		.sink { self.refreshApps() }
 
-	private lazy var activateSearchSubscriber: AnyCancellable? = Event.activateSearch
-		.sink { self.activateSearch() }
+//	private lazy var activateSearchSubscriber: AnyCancellable? = Event.activateSearch
+//		.sink { self.activateSearch() }
 
 	init() {
 		state = .idle
@@ -45,9 +45,15 @@ final class BrowserModel: ObservableObject {
 			keyboardObserver.delegate = self
 		}
 
-		_ = refreshAppsSubscriber
-		_ = activateSearchSubscriber
+//		_ = refreshAppsSubscriber
+//		_ = activateSearchSubscriber
 	}
+}
+
+// MARK: - Constants
+
+extension BrowserModel {
+	nonisolated static let logger = Logger(category: BrowserModel.self)
 }
 
 // MARK: -

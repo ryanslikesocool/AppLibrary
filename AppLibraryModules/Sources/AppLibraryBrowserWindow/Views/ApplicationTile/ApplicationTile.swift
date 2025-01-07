@@ -8,6 +8,8 @@ import SwiftUI
 struct ApplicationTile: View {
 	@Environment(\.libraryLayout) private var libraryLayout
 
+	@Environment(\.isFocused) private var isFocused
+
 	@ObservedObject private var application: ApplicationModel
 
 	public init(for application: ApplicationModel) {
@@ -16,35 +18,18 @@ struct ApplicationTile: View {
 
 	public var body: some View {
 		Button(action: application.openLatest) {
-			libraryLayout.appTileStyle.makeBody(
-				configuration: AnyApplicationTileStyle.Configuration(
-					label: label,
-					icon: icon
-				)
-			)
+			ApplicationLabel(for: application)
 		}
+		.background(isFocused ? Color.accentColor : Color.clear)
+
 		.focusable()
 		.focusEffectDisabled()
+
 		.contextMenu {
 			ContextMenu(for: application)
 		}
+
 		.id(ApplicationModelIdentifier(application))
 		.applicationModelIdentifier(application)
-	}
-}
-
-// MARK: - Supporting Views
-
-private extension ApplicationTile {
-	var label: some View {
-		Text(verbatim: application.displayName)
-			.truncationMode(.tail)
-			.help(application.displayName)
-	}
-
-	var icon: some View {
-		Image(applicationIcon: application)
-			.resizable()
-			.aspectRatio(contentMode: .fit)
 	}
 }

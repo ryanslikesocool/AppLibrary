@@ -7,23 +7,10 @@ struct RefreshApplicationsFormItem: View {
 
 	public var body: some View {
 		LabeledContent {
-			button
+			RefreshButton()
 		} label: {
 			Text(.applicationRefresh.label)
 			Text(.applicationRefresh.description)
-		}
-	}
-}
-
-// MARK: - Supporting Views
-
-private extension RefreshApplicationsFormItem {
-	var button: some View {
-		RefreshAppsButton {
-			Label(
-				String(localized: .common.action.refresh),
-				systemImage: .arrow_clockwise
-			)
 		}
 	}
 }

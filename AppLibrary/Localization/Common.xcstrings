@@ -23,6 +23,17 @@
         }
       }
     },
+    "ACTION.FIND" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Find"
+          }
+        }
+      }
+    },
     "ACTION.HIDE" : {
       "extractionState" : "manual",
       "localizations" : {

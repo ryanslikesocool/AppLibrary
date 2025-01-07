@@ -1,8 +1,9 @@
 import AppLibraryStorage
+import AppLibraryRuntimeModel
 
 enum BrowserFocusElement {
 	case search
-	case app(ApplicationModelIdentifier)
+	case application(ApplicationModelIdentifier)
 //	case group(ApplicationGroup)
 }
 
@@ -24,8 +25,16 @@ extension BrowserFocusElement: Identifiable {
 	var id: String {
 		switch self {
 			case .search: "AppLibrary.Search"
-			case let .app(app): app.bundleIdentifier
+			case let .application(application): application.bundleIdentifier
 //			case let .group(group): group.rawValue
 		}
+	}
+}
+
+// MARK: - Convenience
+
+extension BrowserFocusElement {
+	static func application(_ applicationModel: ApplicationModel) -> Self {
+		Self.application(ApplicationModelIdentifier(applicationModel))
 	}
 }
