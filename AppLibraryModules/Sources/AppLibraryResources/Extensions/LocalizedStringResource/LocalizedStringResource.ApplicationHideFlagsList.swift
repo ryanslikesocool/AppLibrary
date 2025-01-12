@@ -1,5 +1,5 @@
-internal import LocalizationToolbox
 import Foundation
+import LocalizationToolbox
 
 public extension LocalizedStringResource {
 	static let applicationHideFlagsList = ApplicationHideFlagsList.self
@@ -42,7 +42,14 @@ public extension LocalizedStringResource {
 
 		public enum List {
 			public static let emptyLabel = LocalizedStringResource("LIST.EMPTY_LABEL", table: localizationTable)
-			public static let description = LocalizedStringResource("LIST.DESCRIPTION", table: localizationTable)
+			private static let descriptionFormat = LocalizedStringResource("LIST.DESCRIPTION_\(placeholder: .object)", table: localizationTable)
+
+			public static var description: String {
+				let options = String.LocalizationOptions(replacements: [
+					String(localized: LocalizedStringResource.common.action.hide),
+				])
+				return String(localized: descriptionFormat, options: options)
+			}
 		}
 	}
 }

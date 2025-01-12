@@ -1,7 +1,7 @@
 import SwiftUI
 
-struct AcknowledgementsList<ItemView>: View where
-	ItemView: AcknowledgementItemView
+struct CreditsList<ItemView>: View where
+	ItemView: CreditItemView
 {
 	typealias Item = ItemView.Value
 
@@ -22,7 +22,7 @@ struct AcknowledgementsList<ItemView>: View where
 			ItemView(values[i])
 		}
 		.task {
-			await model.loadDefaultAcknowledgements(ofType: Item.self)
+			await model.loadDefaultCredits(ofType: Item.self)
 		}
 	}
 }

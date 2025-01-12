@@ -1,4 +1,4 @@
-internal import LocalizationToolbox
+import LocalizationToolbox
 import BundleToolbox
 import Foundation
 

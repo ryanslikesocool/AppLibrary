@@ -29,20 +29,42 @@ public struct SheetHeaderLabel<Headline, Subheadline>: View where
 
 // MARK: - Convenience
 
-public extension SheetHeaderLabel {
+public extension SheetHeaderLabel where
+	Headline == Text,
+	Subheadline == Text
+{
 	init(
 		headline: LocalizedStringResource,
-		subheadline: LocalizedStringResource
-	) where
-		Headline == Text,
-		Subheadline == Text
-	{
+		subheadline: String
+	) {
 		self.init(
 			headline: { Text(headline) },
 			subheadline: { Text(subheadline) }
 		)
 	}
 
+	init(
+		headline: String,
+		subheadline: LocalizedStringResource
+	) {
+		self.init(
+			headline: { Text(headline) },
+			subheadline: { Text(subheadline) }
+		)
+	}
+
+	init(
+		headline: LocalizedStringResource,
+		subheadline: LocalizedStringResource
+	) {
+		self.init(
+			headline: { Text(headline) },
+			subheadline: { Text(subheadline) }
+		)
+	}
+}
+
+public extension SheetHeaderLabel {
 	init(
 		headline: LocalizedStringResource
 	) where

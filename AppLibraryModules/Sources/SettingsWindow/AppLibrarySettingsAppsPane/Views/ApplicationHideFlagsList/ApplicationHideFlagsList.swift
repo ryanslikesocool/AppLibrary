@@ -26,7 +26,7 @@ struct ApplicationHideFlagsList: View {
 
 private extension ApplicationHideFlagsList {
 	var listContent: some View {
-		ForEach(ApplicationCache.shared.applications.keys) { applicationModelIdentifier in
+		SwiftUI.List(ApplicationCache.shared.applications.keys) { applicationModelIdentifier in
 			let activeFlags = Binding<ApplicationHideFlag.Set>(
 				get: { applicationHideFlags[applicationModelIdentifier] ?? .none },
 				set: { newValue in applicationHideFlags[applicationModelIdentifier] = newValue }
@@ -37,6 +37,7 @@ private extension ApplicationHideFlagsList {
 				.applicationModelIdentifier(applicationModelIdentifier)
 		}
 		.removeHideFlagsAction(removeHideFlags(for:))
+		.listStyle(.inset)
 	}
 }
 

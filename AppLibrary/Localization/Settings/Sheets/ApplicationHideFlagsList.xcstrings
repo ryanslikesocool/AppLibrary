@@ -67,13 +67,14 @@
         }
       }
     },
-    "LIST.DESCRIPTION" : {
+    "LIST.DESCRIPTION_%@" : {
+      "comment" : "The argument is the value for the \"ACTION.HIDE\" key.",
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Apps listed below will not appear in the Library.\nApps can be hidden by right-clicking in the Library and selecting \"Hide\"."
+            "value" : "Configure which apps appear in the Library and search.\nAn App can also be hidden by right-clicking on it in the Library and selecting “%@”."
           }
         }
       }

@@ -24,10 +24,10 @@ extension Contributor: Sendable { }
 
 extension Contributor: Decodable { }
 
-// MARK: - Acknowledgement
+// MARK: - CreditProtocol
 
-extension Contributor: Acknowledgement {
-	typealias Decoder = JSONDecoder
+extension Contributor: CreditProtocol {
+	typealias TopLevelDecoder = JSONDecoder
 
 	static var fileURL: URL? {
 		Bundle.main.url(forResource: "Contributors", withExtension: "json")

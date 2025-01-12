@@ -1,5 +1,17 @@
 public enum ExecutableArchitecture: String {
+	/// Specifies the 32-bit PowerPC architecture.
+	case ppc
+
+	/// Specifies the 64-bit PowerPC architecture.
+	case ppc64
+
+	/// Specifies the 32-bit Intel architecture.
+	case i386
+
+	/// Specifies the 64-bit Intel architecture.
 	case x86_64
+
+	/// Specifies the 64-bit ARM architecture.
 	case arm64
 
 	// TODO: Should arbitrary executable architectures be supported?

@@ -1,8 +1,10 @@
+import AppLibraryCommonViews
 import AppLibraryResources
+import SFSymbolToolbox
 import SwiftUI
 
 extension Contributor {
-	struct ItemView: AppLibraryAboutWindow.AcknowledgementItemView {
+	struct ItemView: AppLibraryAboutWindow.CreditItemView {
 		private let value: Value
 
 		public init(_ value: Contributor) {
@@ -34,7 +36,7 @@ private extension Contributor.ItemView {
 	var personalLink: some View {
 		Link(
 			String(localized: .acknowledgements.link.personal),
-			systemImage: "link",
+			systemImage: .link,
 			destination: value.personalURL
 		)
 	}

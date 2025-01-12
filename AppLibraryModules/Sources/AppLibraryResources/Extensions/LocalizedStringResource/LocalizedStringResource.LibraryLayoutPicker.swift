@@ -1,4 +1,4 @@
-internal import LocalizationToolbox
+import LocalizationToolbox
 import Foundation
 
 public extension LocalizedStringResource {

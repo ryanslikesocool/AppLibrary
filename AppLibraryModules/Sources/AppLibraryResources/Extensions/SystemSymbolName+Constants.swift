@@ -7,6 +7,10 @@ public extension SystemSymbolName {
 	static let arrow_clockwise: Self = "arrow.clockwise"
 	static let arrow_up_forward: Self = "arrow.up.forward"
 
+	// MARK: B
+
+	static let building_columns: Self = "building.columns"
+
 	// MARK: E
 
 	static let ellipsis: Self = "ellipsis"
@@ -24,6 +28,10 @@ public extension SystemSymbolName {
 	// MARK: I
 
 	static let info: Self = "info"
+
+	// MARK: L
+
+	static let link: Self = "link"
 
 	// MARK: M
 

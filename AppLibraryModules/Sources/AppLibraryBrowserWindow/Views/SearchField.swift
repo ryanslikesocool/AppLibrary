@@ -115,7 +115,7 @@ private extension View {
 		browserModel: BrowserModel,
 		focusState: FocusState<BrowserFocusElement?>.Binding
 	) -> some View {
-		return onReceive(Event.activateSearch) {
+		onReceive(Event.activateSearch) {
 			FeatureFlag.Input.logEvent(in: SearchField.self, named: "activate")
 			focusState.wrappedValue = SearchField.focusTarget
 		}

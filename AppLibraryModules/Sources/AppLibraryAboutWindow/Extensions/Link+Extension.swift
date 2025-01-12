@@ -1,4 +1,5 @@
 import SwiftUI
+import AppLibraryCommonViews
 
 extension Link {
 	init<Icon>(
@@ -18,20 +19,6 @@ extension Link {
 		}
 	}
 
-	init(
-		_ title: String,
-		systemImage: String,
-		destination: URL
-	) where
-		Label == SwiftUI.Label<Text, Image>
-	{
-		self.init(
-			title,
-			icon: Image(systemName: systemImage),
-			destination: destination
-		)
-	}
-
 	init?<Icon>(
 		_ title: @autoclosure () -> String,
 		icon: @autoclosure () -> Icon,
@@ -43,24 +30,6 @@ extension Link {
 		guard let destination else {
 			return nil
 		}
-		self.init(
-			title(),
-			icon: icon(),
-			destination: destination
-		)
-	}
-
-	init?(
-		_ title: @autoclosure () -> String,
-		systemImage: @autoclosure () -> String,
-		destination: URL?
-	) where
-		Label == SwiftUI.Label<Text, Image>
-	{
-		self.init(
-			title(),
-			icon: Image(systemName: systemImage()),
-			destination: destination
-		)
+		self.init(title(), icon: icon(), destination: destination)
 	}
 }

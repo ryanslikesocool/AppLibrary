@@ -1,3 +1,4 @@
+import AppLibraryResources
 import Foundation
 
 public enum AppStoreCategoryType: String {
@@ -73,12 +74,58 @@ extension AppStoreCategoryType: CaseIterable { }
 
 extension AppStoreCategoryType: CustomLocalizedStringResourceConvertible {
 	public var localizedStringResource: LocalizedStringResource {
-		// TODO: Should this be pre-computed as a `static let` dictionary?
-		// Or is the Swift compiler smart enough to optimize this away?
-		LocalizedStringResource(
-			String.LocalizationValue(rawValue),
-			table: Self.localizationTableName
-		)
+		// TODO: Optimize
+		// - Is the Swift compiler already smart enough to optimize this away?
+		// - Should this be pre-computed as a `static let` dictionary?
+		// - Should we fall back to the old approach, where the `rawValue` is the localization key?
+
+		switch self {
+			case .books: .appStoreCategory.books
+			case .business: .appStoreCategory.business
+			case .developerTools: .appStoreCategory.developerTools
+			case .education: .appStoreCategory.education
+			case .entertainment: .appStoreCategory.entertainment
+			case .finance: .appStoreCategory.finance
+			case .foodAndDrink: .appStoreCategory.foodAndDrink
+			case .games: .appStoreCategory.games
+			case .actionGames: .appStoreCategory.actionGames
+			case .adventureGames: .appStoreCategory.adventureGames
+			case .arcadeGames: .appStoreCategory.arcadeGames
+			case .boardGames: .appStoreCategory.boardGames
+			case .cardGames: .appStoreCategory.cardGames
+			case .casinoGames: .appStoreCategory.casinoGames
+			case .diceGames: .appStoreCategory.diceGames
+			case .educationalGames: .appStoreCategory.educationalGames
+			case .familyGames: .appStoreCategory.familyGames
+			case .kidsGames: .appStoreCategory.kidsGames
+			case .musicGames: .appStoreCategory.musicGames
+			case .puzzleGames: .appStoreCategory.puzzleGames
+			case .racingGames: .appStoreCategory.racingGames
+			case .rolePlayingGames: .appStoreCategory.rolePlayingGames
+			case .simulationGames: .appStoreCategory.simulationGames
+			case .sportsGames: .appStoreCategory.sportsGames
+			case .strategyGames: .appStoreCategory.strategyGames
+			case .triviaGames: .appStoreCategory.triviaGames
+			case .wordGames: .appStoreCategory.wordGames
+			case .graphicsAndDesign: .appStoreCategory.graphicsAndDesign
+			case .healthcareAndFitness: .appStoreCategory.healthcareAndFitness
+			case .lifestyle: .appStoreCategory.lifestyle
+			case .magazinesAndNewspapers: .appStoreCategory.magazinesAndNewspapers
+			case .medical: .appStoreCategory.medical
+			case .music: .appStoreCategory.music
+			case .navigation: .appStoreCategory.navigation
+			case .news: .appStoreCategory.news
+			case .photography: .appStoreCategory.photography
+			case .productivity: .appStoreCategory.productivity
+			case .reference: .appStoreCategory.reference
+			case .shopping: .appStoreCategory.shopping
+			case .socialNetworking: .appStoreCategory.socialNetworking
+			case .sports: .appStoreCategory.sports
+			case .travel: .appStoreCategory.travel
+			case .utilities: .appStoreCategory.utilities
+			case .video: .appStoreCategory.video
+			case .weather: .appStoreCategory.weather
+		}
 	}
 
 	// TODO: Is there a built-in string table for category names somewhere?
@@ -86,10 +133,4 @@ extension AppStoreCategoryType: CustomLocalizedStringResourceConvertible {
 
 	// Localized names might be provided by `NSMetadataItemAttribute.AppStoreCategoryKey`,
 	// which is different from `NSMetadataItemAttribute.AppStoreCategoryTypeKey`.
-}
-
-// MARK: - Constants
-
-private extension AppStoreCategoryType {
-	static let localizationTableName: String = "AppStoreCategory"
 }

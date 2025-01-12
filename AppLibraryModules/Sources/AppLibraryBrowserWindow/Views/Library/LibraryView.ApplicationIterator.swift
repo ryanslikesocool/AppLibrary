@@ -5,7 +5,6 @@ import SwiftUI
 extension LibraryView {
 	struct ApplicationIterator: View {
 		@EnvironmentObject private var browserModel: BrowserModel
-		@Environment(\.libraryLayout) private var libraryLayout
 
 		@FocusState.Binding private var focusState: BrowserFocusElement?
 
@@ -13,7 +12,9 @@ extension LibraryView {
 			browserModel.filteredApps
 		}
 
-		public init(focusState: FocusState<BrowserFocusElement?>.Binding) {
+		public init(
+			focusState: FocusState<BrowserFocusElement?>.Binding
+		) {
 			_focusState = focusState
 		}
 

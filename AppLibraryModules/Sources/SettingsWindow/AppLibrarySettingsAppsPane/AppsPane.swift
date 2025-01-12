@@ -12,11 +12,13 @@ package struct AppsPane: View {
 			description: .applicationSearchScopesList.form.description,
 			sheetContent: ApplicationSearchScopesSheet.init
 		)
+
 		SheetFormItem(
 			title: .applicationHideFlagsList.title,
 			description: .applicationHideFlagsList.form.description,
 			sheetContent: ApplicationHideFlagsSheet.init
 		)
+		
 		RefreshApplicationsFormItem()
 	}
 }

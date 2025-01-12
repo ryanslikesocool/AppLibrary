@@ -1,11 +1,12 @@
 import AppLibraryResources
+import SFSymbolToolbox
 import SwiftUI
 
-extension Dependency {
-	struct ItemView: AppLibraryAboutWindow.AcknowledgementItemView {
+extension Acknowledgement {
+	struct ItemView: AppLibraryAboutWindow.CreditItemView {
 		private let value: Value
 
-		public init(_ value: Dependency) {
+		public init(_ value: Acknowledgement) {
 			self.value = value
 		}
 
@@ -25,7 +26,7 @@ extension Dependency {
 
 // MARK: - Supporting Views
 
-private extension Dependency.ItemView {
+private extension Acknowledgement.ItemView {
 	var label: some View {
 		Text(verbatim: value.name)
 			.fontWeight(.bold)
@@ -34,7 +35,7 @@ private extension Dependency.ItemView {
 	var projectLink: some View {
 		Link(
 			String(localized: .acknowledgements.link.project),
-			systemImage: "link",
+			systemImage: .link,
 			destination: value.projectURL
 		)
 	}
@@ -43,7 +44,7 @@ private extension Dependency.ItemView {
 		// TODO: replace with scales symbol if/when one becomes available
 		Link(
 			String(localized: .acknowledgements.link.license),
-			systemImage: "building.columns",
+			systemImage: .building_columns,
 			destination: value.licenseURL
 		)
 	}

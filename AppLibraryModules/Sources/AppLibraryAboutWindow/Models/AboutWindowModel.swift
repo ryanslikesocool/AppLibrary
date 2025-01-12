@@ -3,11 +3,11 @@ import Foundation
 
 @MainActor
 final class AboutWindowModel: ObservableObject {
-	private(set) var dependencies: [Dependency]
+	private(set) var acknowledgements: [Acknowledgement]
 	private(set) var contributors: [Contributor]
 
 	init() {
-		dependencies = []
+		acknowledgements = []
 		contributors = []
 	}
 }
@@ -39,10 +39,10 @@ extension AboutWindowModel {
 //		)
 //	}
 
-	nonisolated func loadDefaultAcknowledgements<Target>(
+	nonisolated func loadDefaultCredits<Target>(
 		ofType targetType: Target.Type
 	) async where
-		Target: Acknowledgement
+		Target: CreditProtocol
 	{
 		do {
 			guard let url = Target.fileURL else {
@@ -50,7 +50,7 @@ extension AboutWindowModel {
 			}
 			let data = try Data(contentsOf: url)
 
-			var acknowledgements = try Target.decoder.decode([Target].self, from: data)
+			var acknowledgements = try Target.topLevelDecoder.decode([Target].self, from: data)
 			if let sortComparator = Target.sortComparator {
 				acknowledgements.sort(using: sortComparator)
 			}

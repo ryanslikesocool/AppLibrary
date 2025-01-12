@@ -13,6 +13,9 @@ extension LibraryView {
 			LazyVStack {
 				ApplicationIterator(focusState: $focusState)
 			}
+//			LazyVStack(pinnedViews: .sectionHeaders) {
+//				GroupedApplicationIterator(focusState: $focusState)
+//			}
 		}
 	}
 }

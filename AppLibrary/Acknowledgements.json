@@ -1,0 +1,44 @@
+[
+	{
+		"name": "Mouse Finder",
+		"projectURL": "https://github.com/neilsardesai/Mouse-Finder",
+		"licensePath": "blob/main/LICENSE",
+		"kind": "borrowedCode"
+	},
+	{
+		"name": "LocalizationToolbox",
+		"projectURL": "https://github.com/ryanslikesocool/LocalizationToolbox",
+		"licensePath": "blob/main/LICENSE.md",
+		"kind": "dependency"
+	},
+	{
+		"name": "NSMetadataToolbox",
+		"projectURL": "https://github.com/ryanslikesocool/NSMetadataToolbox",
+		"licensePath": "blob/main/LICENSE.md",
+		"kind": "dependency"
+	},
+	{
+		"name": "AXToolbox",
+		"projectURL": "https://github.com/ryanslikesocool/AXToolbox",
+		"licensePath": "blob/main/LICENSE.md",
+		"kind": "dependency"
+	},
+	{
+		"name": "BundleToolbox",
+		"projectURL": "https://github.com/ryanslikesocool/BundleToolbox",
+		"licensePath": "blob/main/LICENSE.md",
+		"kind": "dependency"
+	},
+	{
+		"name": "SFSymbolToolbox",
+		"projectURL": "https://github.com/ryanslikesocool/SFSymbolToolbox",
+		"licensePath": "blob/main/LICENSE.md",
+		"kind": "dependency"
+	},
+	{
+		"name": "Swift Algorithms",
+		"projectURL": "https://github.com/apple/swift-algorithms",
+		"licensePath": "blob/main/LICENSE.txt",
+		"kind": "borrowedCode"
+	}
+]

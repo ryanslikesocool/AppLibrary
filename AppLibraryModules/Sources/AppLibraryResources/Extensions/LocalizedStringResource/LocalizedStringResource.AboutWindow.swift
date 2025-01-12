@@ -1,5 +1,5 @@
 import Foundation
-internal import LocalizationToolbox
+import LocalizationToolbox
 
 public extension LocalizedStringResource {
 	static let aboutWindow = AboutWindow.self

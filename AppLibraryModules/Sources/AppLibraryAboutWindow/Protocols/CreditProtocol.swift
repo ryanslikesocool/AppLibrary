@@ -2,14 +2,14 @@ import AppLibraryCommon
 import Combine
 import Foundation
 
-protocol Acknowledgement: Sendable, Decodable {
-	associatedtype Decoder: TopLevelDecoder where Decoder.Input == Data
+protocol CreditProtocol: Sendable, Decodable {
+	associatedtype TopLevelDecoder: Combine.TopLevelDecoder where TopLevelDecoder.Input == Data
 
 	/// The location of the file containing the acknowledgements.
 	static var fileURL: URL? { get }
 
 	/// The top-level decoder used to decode the file at ``fileURL``.
-	static var decoder: Decoder { get }
+	static var topLevelDecoder: TopLevelDecoder { get }
 
 	/// The sort comparator used to sort the items in the UI.
 	/// Leave this value `nil` to leave the items unsorted.
@@ -21,16 +21,16 @@ protocol Acknowledgement: Sendable, Decodable {
 
 // MARK: - Default Implementation
 
-extension Acknowledgement {
+extension CreditProtocol {
 	static var sortComparator: (any SortComparator<Self>)? {
 		nil
 	}
 }
 
-extension Acknowledgement where
-	Decoder == JSONDecoder
+extension CreditProtocol where
+	TopLevelDecoder == JSONDecoder
 {
-	static var decoder: JSONDecoder {
+	static var topLevelDecoder: JSONDecoder {
 		JSONDecoder.shared
 	}
 }
