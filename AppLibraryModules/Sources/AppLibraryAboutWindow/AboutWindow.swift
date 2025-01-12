@@ -1,3 +1,4 @@
+import AppLibraryCommon
 import AppLibraryCommonViews
 import SwiftUI
 
@@ -7,13 +8,16 @@ public struct AboutWindow: Scene {
 	public init() { }
 
 	public var body: some Scene {
-		Window("About", id: Self.windowID) {
-			Text("about window")
-			Text("not implemented")
+		Window(
+			LocalizedStringResource.aboutWindow.title,
+			id: Self.windowID
+		) {
+			ContentView()
+				.windowButtons(miniaturize: .hidden, zoom: .hidden)
 		}
-		.defaultPosition(.center)
-		.windowStyle(.hiddenTitleBar)
-		.windowResizability(.contentSize)
+		.defaultPosition(Self.defaultPosition)
+		.windowStyle(Self.windowStyle)
+		.windowResizability(Self.windowResizability)
 		.environmentObject(model)
 		.commands {
 			CommandGroup(replacing: .appInfo) {
@@ -26,5 +30,11 @@ public struct AboutWindow: Scene {
 // MARK: - Constants
 
 public extension AboutWindow {
-	static let windowID: String = "about"
+	static let windowID: WindowIdentifier = .about
+}
+
+private extension AboutWindow {
+	static var defaultPosition: UnitPoint { .center }
+	static var windowStyle: some WindowStyle { .hiddenTitleBar }
+	static var windowResizability: WindowResizability { .contentSize }
 }

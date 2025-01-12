@@ -21,6 +21,7 @@ struct CreditsList<ItemView>: View where
 		ForEach(values.indices, id: \.self) { i in
 			ItemView(values[i])
 		}
+		.labeledContentStyle(.credit)
 		.task {
 			await model.loadDefaultCredits(ofType: Item.self)
 		}

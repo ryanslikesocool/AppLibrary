@@ -1,4 +1,3 @@
-import AppLibraryCommonViews
 import AppLibraryResources
 import SFSymbolToolbox
 import SwiftUI
@@ -12,15 +11,12 @@ extension Contributor {
 		}
 
 		public var body: some View {
-			HStack {
-				label
-
-				Spacer()
-
+			LabeledContent {
 				personalLink
 				githubLink
+			} label: {
+				Text(verbatim: value.name)
 			}
-			.labelStyle(.iconOnly)
 		}
 	}
 }
@@ -28,14 +24,9 @@ extension Contributor {
 // MARK: - Supporting Views
 
 private extension Contributor.ItemView {
-	var label: some View {
-		Text(verbatim: value.name)
-			.fontWeight(.bold)
-	}
-
 	var personalLink: some View {
 		Link(
-			String(localized: .acknowledgements.link.personal),
+			String(localized: .credits.link.personal),
 			systemImage: .link,
 			destination: value.personalURL
 		)
@@ -44,7 +35,7 @@ private extension Contributor.ItemView {
 	var githubLink: some View {
 		// TODO: add github icon
 		Link(
-			String(localized: .acknowledgements.link.github),
+			String(localized: .credits.link.github),
 			icon: EmptyView(),
 			destination: value.githubURL
 		)

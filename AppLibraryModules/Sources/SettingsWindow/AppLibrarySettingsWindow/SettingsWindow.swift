@@ -8,6 +8,7 @@ public struct SettingsWindow: Scene {
 		Settings {
 			ContentView()
 		}
+		.windowID(.settings)
 	}
 }
 

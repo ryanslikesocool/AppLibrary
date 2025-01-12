@@ -45,13 +45,24 @@
         }
       }
     },
-    "SECTION.TITLE" : {
+    "SECTION.ACKNOWLEDGEMENTS.TITLE" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Acknowledgements"
+          }
+        }
+      }
+    },
+    "SECTION.CONTRIBUTORS.TITLE" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Contributors"
           }
         }
       }

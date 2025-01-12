@@ -11,15 +11,12 @@ extension Acknowledgement {
 		}
 
 		public var body: some View {
-			HStack {
-				label
-
-				Spacer()
-
+			LabeledContent {
 				projectLink
 				licenseLink
+			} label: {
+				Text(verbatim: value.name)
 			}
-			.labelStyle(.iconOnly)
 		}
 	}
 }
@@ -27,14 +24,9 @@ extension Acknowledgement {
 // MARK: - Supporting Views
 
 private extension Acknowledgement.ItemView {
-	var label: some View {
-		Text(verbatim: value.name)
-			.fontWeight(.bold)
-	}
-
 	var projectLink: some View {
 		Link(
-			String(localized: .acknowledgements.link.project),
+			String(localized: .credits.link.project),
 			systemImage: .link,
 			destination: value.projectURL
 		)
@@ -43,7 +35,7 @@ private extension Acknowledgement.ItemView {
 	var licenseLink: some View {
 		// TODO: replace with scales symbol if/when one becomes available
 		Link(
-			String(localized: .acknowledgements.link.license),
+			String(localized: .credits.link.license),
 			systemImage: .building_columns,
 			destination: value.licenseURL
 		)

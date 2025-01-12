@@ -14,11 +14,11 @@ public struct App: SwiftUI.App {
 	}
 
 	public var body: some Scene {
-//		AboutWindow()
-
 		SettingsWindow()
 			.commands {
 				MainMenu()
 			}
+
+		AboutWindow()
 	}
 }

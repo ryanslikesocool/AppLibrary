@@ -13,8 +13,14 @@ extension ErrorView {
 
 		public var body: some View {
 			Text(verbatim: text)
-				.font(.title)
-				.fontWeight(.semibold)
+				.font(Self.font)
 		}
 	}
+}
+
+// MARK: - Constants
+
+private extension ErrorView.ErrorTitle {
+	static var font: Font { .title.weight(fontWeight) }
+	static var fontWeight: Font.Weight { .semibold }
 }

@@ -43,11 +43,26 @@ extension LibraryView {
 							.focused($focusState, equals: .application(application))
 					}
 				} header: {
-					Text(verbatim: subject)
-						.frame(maxWidth: .infinity, alignment: .leading)
+					makeSectionHeader(subject)
 				}
 			}
 			.focusSection()
 		}
+	}
+}
+
+// MARK: - Constants
+
+private extension LibraryView.GroupedApplicationIterator {
+	static var headerMaxWidth: CGFloat? { .infinity }
+	static let headerAlignment: Alignment = .leading
+}
+
+// MARK: - Supporting Views
+
+private extension LibraryView.GroupedApplicationIterator {
+	func makeSectionHeader(_ subject: String) -> some View {
+		Text(verbatim: subject)
+			.frame(maxWidth: Self.headerMaxWidth, alignment: Self.headerAlignment)
 	}
 }

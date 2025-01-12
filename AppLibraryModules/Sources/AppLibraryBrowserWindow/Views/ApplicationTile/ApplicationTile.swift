@@ -1,7 +1,7 @@
 import AppLibraryCommon
-import AppLibraryRuntimeModelViews
 import AppLibraryCommonViews
 import AppLibraryRuntimeModel
+import AppLibraryRuntimeModelViews
 import AppLibraryStorage
 import SwiftUI
 
@@ -20,7 +20,7 @@ struct ApplicationTile: View {
 		Button(action: application.openLatest) {
 			ApplicationLabel(for: application)
 		}
-		.background(isFocused ? Color.accentColor : Color.clear)
+		.background(isFocused ? Self.focusedBackgroundColor : Self.unfocusedBackgroundColor)
 
 		.focusable()
 		.focusEffectDisabled()
@@ -32,4 +32,11 @@ struct ApplicationTile: View {
 		.id(ApplicationModelIdentifier(application))
 		.applicationModelIdentifier(application)
 	}
+}
+
+// MARK: - Constants
+
+private extension ApplicationTile {
+	static var unfocusedBackgroundColor: Color { .clear }
+	static var focusedBackgroundColor: Color { .accentColor }
 }

@@ -20,5 +20,10 @@ extension LibraryView {
 // MARK: - Constants
 
 private extension LibraryView.GridView {
-	static let gridColumns: [GridItem] = [GridItem](repeating: GridItem(), count: 4)
+	static let gridColumns: [GridItem] = [GridItem](
+		repeating: GridItem(),
+		count: gridColumnCount
+	)
+
+	static let gridColumnCount: Int = 4
 }

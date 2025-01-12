@@ -1,11 +1,11 @@
-import LocalizationToolbox
 import Foundation
+import LocalizationToolbox
 
 public extension LocalizedStringResource {
-	static let acknowledgements = Acknowledgements.self
+	static let credits = Credits.self
 
-	enum Acknowledgements {
-		private static let localizationTable = LocalizationTableResource("Acknowledgements")
+	enum Credits {
+		private static let localizationTable = LocalizationTableResource("Credits")
 
 		public static let link = Link.self
 		public static let section = Section.self
@@ -18,7 +18,16 @@ public extension LocalizedStringResource {
 		}
 
 		public enum Section {
-			public static let title = LocalizedStringResource("SECTION.TITLE", table: localizationTable)
+			public static let acknowledgements = Acknowledgements.self
+			public static let contributors = Contributors.self
+
+			public enum Acknowledgements {
+				public static let title = LocalizedStringResource("SECTION.ACKNOWLEDGEMENTS.TITLE", table: localizationTable)
+			}
+
+			public enum Contributors {
+				public static let title = LocalizedStringResource("SECTION.CONTRIBUTORS.TITLE", table: localizationTable)
+			}
 		}
 	}
 }

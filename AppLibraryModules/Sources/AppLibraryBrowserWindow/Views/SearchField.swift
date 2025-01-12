@@ -14,13 +14,12 @@ struct SearchField: View {
 
 	public var body: some View {
 		HStack(alignment: .firstTextBaseline, spacing: Self.labelSpacing) {
-			makeLabelIcon()
+			labelIcon
 				.foregroundStyle(Self.labelIconStyle)
 
-			TextField(
-				text: $browserModel.searchQuery,
-				label: makeLabelTitle
-			)
+			TextField(text: $browserModel.searchQuery) {
+				labelTitle
+			}
 			.focused($focusState, equals: Self.focusTarget)
 		}
 
@@ -34,14 +33,11 @@ struct SearchField: View {
 // MARK: - Supporting Views
 
 private extension SearchField {
-	@ViewBuilder
-	func makeLabelTitle() -> some View {
-		if let title = try? Bundle.main.object(forInfoDictionaryKey: .cfBundleName) {
-			Text(verbatim: title)
-		}
+	var labelTitle: some View {
+		Text(verbatim: NSApplication.shared.appName)
 	}
 
-	func makeLabelIcon() -> some View {
+	var labelIcon: some View {
 		Image(systemName: .magnifyingGlass)
 	}
 

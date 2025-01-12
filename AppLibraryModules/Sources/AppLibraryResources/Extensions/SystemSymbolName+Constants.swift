@@ -11,6 +11,10 @@ public extension SystemSymbolName {
 
 	static let building_columns: Self = "building.columns"
 
+	// MARK: D
+
+	static let document_on_clipboard: Self = "document.on.clipboard"
+
 	// MARK: E
 
 	static let ellipsis: Self = "ellipsis"
