@@ -14,8 +14,8 @@ package struct AppsPane: View {
 		)
 
 		SheetFormItem(
-			title: .applicationHideFlagsList.title,
-			description: .applicationHideFlagsList.form.description,
+			title: .applicationVisibilityList.title,
+			description: .applicationVisibilityList.form.description,
 			sheetContent: ApplicationHideFlagsSheet.init
 		)
 		

@@ -1,6 +1,6 @@
 import AppLibraryStorage
 
-struct RemoveHideFlagsAction {
+struct RemoveVisibilityFlagsAction {
 	private let action: (ApplicationModelIdentifier) -> Void
 
 	public init(_ action: @escaping (ApplicationModelIdentifier) -> Void) {
@@ -10,7 +10,7 @@ struct RemoveHideFlagsAction {
 
 // MARK: -
 
-extension RemoveHideFlagsAction {
+extension RemoveVisibilityFlagsAction {
 	func callAsFunction(_ applicationModelIdentifier: ApplicationModelIdentifier) {
 		action(applicationModelIdentifier)
 	}

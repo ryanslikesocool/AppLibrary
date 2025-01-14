@@ -1,5 +1,5 @@
 {
-  "originHash" : "23f1313a028f88ce42e9cf592ad11e3ec0b3738ca8320d3522f734380983e996",
+  "originHash" : "ef9142f7a6af6cae107030628e681e8209246e87d6d47d62de1099ebaab9623f",
   "pins" : [
     {
       "identity" : "axtoolbox",
@@ -15,8 +15,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/ryanslikesocool/BundleToolbox.git",
       "state" : {
-        "revision" : "960091a5b2580b8b049b96a6d935ed50effaa382",
-        "version" : "0.0.4"
+        "revision" : "83b67868dd2949ab401b8340727f8af6e5397d96",
+        "version" : "0.0.5"
       }
     },
     {
@@ -42,8 +42,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/ryanslikesocool/NSMetadataToolbox.git",
       "state" : {
-        "revision" : "d8d12caab16d9484d813787d23a775a5e08af7c7",
-        "version" : "0.0.5"
+        "revision" : "cf29e914e7fc3968914b056eb16f7f742caf87df",
+        "version" : "0.0.6"
       }
     },
     {

@@ -7,7 +7,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Choose which apps are hidden in the Library."
+            "value" : "Choose which apps appear in the Library."
           }
         }
       }
@@ -29,7 +29,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hidden in %@"
+            "value" : "Visible in %@"
           }
         }
       }
@@ -40,29 +40,40 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hide in %@"
+            "value" : "Visible in %@"
           }
         }
       }
     },
-    "ITEM.NOT_HIDDEN" : {
+    "ITEM.HIDDEN" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Not Hidden"
+            "value" : "Hidden"
           }
         }
       }
     },
-    "ITEM.SEARCH" : {
+    "ITEM.SEARCH_RESULTS" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Search"
+            "value" : "Search Results"
+          }
+        }
+      }
+    },
+    "ITEM.VISIBLE" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Visible"
           }
         }
       }
@@ -74,7 +85,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Configure which apps appear in the Library and search.\nAn App can also be hidden by right-clicking on it in the Library and selecting “%@”."
+            "value" : "Configure which apps appear in the Library and search.\nAn app can also be hidden by right-clicking on it in the Library and selecting “%@”."
           }
         }
       }
@@ -85,7 +96,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "No hidden apps"
+            "value" : "No apps"
           }
         }
       }
@@ -96,7 +107,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hide Flags"
+            "value" : "App Visibility"
           }
         }
       }

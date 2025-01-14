@@ -4,6 +4,8 @@ import LocalizationToolbox
 public extension LocalizedStringResource {
 	static let appStoreCategory = AppStoreCategory.self
 
+	/// ## Topics
+	/// - ``appStoreCategory``
 	enum AppStoreCategory {
 		private static let localizationTable = LocalizationTableResource("AppStoreCategory")
 

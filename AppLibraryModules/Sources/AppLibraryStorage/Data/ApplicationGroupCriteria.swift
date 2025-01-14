@@ -1,5 +1,9 @@
 public enum ApplicationGroupCriteria: String {
+	// Categorize apps by App Store category type.
 	case category
+
+	// Categorize apps by developer.
+//	case developer
 }
 
 // MARK: - Sendable

@@ -1,5 +1,10 @@
 public enum AdditionalApplicationGroup: UInt8 {
+	/// ## See Also
+	/// - ``Set/recentlyAdded``
 	case recentlyAdded
+
+	/// ## See Also
+	/// - ``Set/recentlyUpdated``
 	case recentlyUpdated
 }
 

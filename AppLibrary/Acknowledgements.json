@@ -2,43 +2,36 @@
 	{
 		"name": "Mouse Finder",
 		"projectURL": "https://github.com/neilsardesai/Mouse-Finder",
-		"licensePath": "blob/main/LICENSE",
-		"kind": "borrowedCode"
+		"licensePath": "blob/main/LICENSE"
 	},
 	{
 		"name": "LocalizationToolbox",
 		"projectURL": "https://github.com/ryanslikesocool/LocalizationToolbox",
-		"licensePath": "blob/main/LICENSE.md",
-		"kind": "dependency"
+		"licensePath": "blob/main/LICENSE.md"
 	},
 	{
 		"name": "NSMetadataToolbox",
 		"projectURL": "https://github.com/ryanslikesocool/NSMetadataToolbox",
-		"licensePath": "blob/main/LICENSE.md",
-		"kind": "dependency"
+		"licensePath": "blob/main/LICENSE.md"
 	},
 	{
 		"name": "AXToolbox",
 		"projectURL": "https://github.com/ryanslikesocool/AXToolbox",
-		"licensePath": "blob/main/LICENSE.md",
-		"kind": "dependency"
+		"licensePath": "blob/main/LICENSE.md"
 	},
 	{
 		"name": "BundleToolbox",
 		"projectURL": "https://github.com/ryanslikesocool/BundleToolbox",
-		"licensePath": "blob/main/LICENSE.md",
-		"kind": "dependency"
+		"licensePath": "blob/main/LICENSE.md"
 	},
 	{
 		"name": "SFSymbolToolbox",
 		"projectURL": "https://github.com/ryanslikesocool/SFSymbolToolbox",
-		"licensePath": "blob/main/LICENSE.md",
-		"kind": "dependency"
+		"licensePath": "blob/main/LICENSE.md"
 	},
 	{
 		"name": "Swift Algorithms",
 		"projectURL": "https://github.com/apple/swift-algorithms",
-		"licensePath": "blob/main/LICENSE.txt",
-		"kind": "borrowedCode"
+		"licensePath": "blob/main/LICENSE.txt"
 	}
 ]

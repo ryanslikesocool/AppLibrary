@@ -8,10 +8,13 @@ public struct LayoutSettings {
 	public var groupCriteria: ApplicationGroupCriteria?
 	public var additionalGroups: AdditionalApplicationGroup.Set
 
+	public var infoVisibility: ApplicationInfoVisibility.Set
+
 	public init() {
 		layout = .list
 		groupCriteria = .category
 		additionalGroups = .all
+		infoVisibility = .none
 	}
 }
 

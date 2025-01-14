@@ -29,6 +29,10 @@ struct ApplicationTile: View {
 			ContextMenu(for: application)
 		}
 
+//		.draggable(application.latestInstance?.url) {
+//			ApplicationIcon(for: application)
+//		}
+
 		.id(ApplicationModelIdentifier(application))
 		.applicationModelIdentifier(application)
 	}

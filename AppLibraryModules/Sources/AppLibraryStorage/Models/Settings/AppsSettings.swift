@@ -4,11 +4,11 @@ import OSLog
 
 public struct AppsSettings {
 	public var searchScopes: Set<URL>
-	public var applicationHideFlags: [ApplicationModelIdentifier: ApplicationHideFlag.Set]
+	public var applicationVisibilityFlags: [ApplicationModelIdentifier: ApplicationVisibility.Set]
 
 	public init() {
 		searchScopes = Set([URL].defaultSearchScopes)
-		applicationHideFlags = .default
+		applicationVisibilityFlags = .default
 	}
 }
 
@@ -25,7 +25,7 @@ extension AppsSettings: Hashable { }
 extension AppsSettings: Codable {
 	private enum CodingKeys: CodingKey {
 		case searchScopes
-		case applicationHideFlags
+		case applicationVisibilityFlags
 	}
 
 	public init(from decoder: Decoder) throws {
@@ -35,9 +35,9 @@ extension AppsSettings: Codable {
 
 		searchScopes = try container.decodeIfPresent(Set<URL>.self, forKey: .searchScopes) ?? searchScopes
 
-		if let encodedApplicationHideFlags = try container.decodeIfPresent([String: ApplicationHideFlag.Set].self, forKey: .applicationHideFlags) {
-			applicationHideFlags = encodedApplicationHideFlags.mapKeys(
-				{ bundleIdentifier in ApplicationModelIdentifier(bundleIdentifier: bundleIdentifier) },
+		if let encodedApplicationVisibilityFlags = try container.decodeIfPresent([String: ApplicationVisibility.Set].self, forKey: .applicationVisibilityFlags) {
+			applicationVisibilityFlags = encodedApplicationVisibilityFlags.mapKeys(
+				ApplicationModelIdentifier.init(bundleIdentifier:),
 				uniquingKeysWith: { _, newValue in newValue }
 			)
 		}
@@ -48,11 +48,16 @@ extension AppsSettings: Codable {
 
 		try container.encode(searchScopes, forKey: .searchScopes)
 
-		let encodableApplicationHideFlags: [String: ApplicationHideFlag.Set] = applicationHideFlags.mapKeys(
-			{ key in key.bundleIdentifier },
-			uniquingKeysWith: { _, newValue in newValue }
-		)
-		try container.encode(encodableApplicationHideFlags, forKey: .applicationHideFlags)
+		let encodableApplicationVisibilityFlags: [String: ApplicationVisibility.Set] = applicationVisibilityFlags
+			.filter { _, value in
+				// Only encode modified items
+				value != .all
+			}
+			.mapKeys(
+				\.bundleIdentifier,
+				uniquingKeysWith: { _, newValue in newValue }
+			)
+		try container.encode(encodableApplicationVisibilityFlags, forKey: .applicationVisibilityFlags)
 	}
 }
 
@@ -89,59 +94,40 @@ private extension AppsSettings {
 
 public extension AppsSettings {
 	mutating func hideApplication(with applicationIdentifier: ApplicationModelIdentifier) {
-		var hideFlags = applicationHideFlags[applicationIdentifier] ?? .none
-		let inserted = hideFlags.insert(.hiddenInBrowser).inserted
-		applicationHideFlags[applicationIdentifier] = hideFlags
-
-		let messagePrefix: StaticString = if inserted {
-			"Successfully added"
-		} else {
-			"Failed to add"
-		}
+		var visibilityFlags = applicationVisibilityFlags[applicationIdentifier, default: .all]
+		// NOTE: Because it is `mutating`, the `remove(_:)` operation must be the right side of the `!=` operation.
+		let removed = visibilityFlags != visibilityFlags.remove(.browser)
+		applicationVisibilityFlags[applicationIdentifier] = visibilityFlags
 
 		Logger.module.debug("""
-		\(messagePrefix) hidden app:
+		\(removed ? "Successfully changed" : "Failed to change") visibility modifiers:
 		- Bundle Identifier: \(applicationIdentifier.bundleIdentifier)
 		""")
 	}
 
-	mutating func removeApplicationHideFlags(for applicationIdentifier: ApplicationModelIdentifier) {
-		let removed: Bool = applicationHideFlags.removeValue(forKey: applicationIdentifier) != nil
-
-		let messagePrefix: StaticString = if removed {
-			"Successfully removed"
-		} else {
-			"Failed to remove"
-		}
+	mutating func removeApplicationVisibilityFlags(for applicationIdentifier: ApplicationModelIdentifier) {
+		let removed: Bool = applicationVisibilityFlags.removeValue(forKey: applicationIdentifier) != nil
 
 		Logger.module.debug("""
-		\(messagePrefix) hidden app:
+		\(removed ? "Successfully removed" : "Failed to remove") visibility modifiers:
 		- Bundle Identifier: \(applicationIdentifier.bundleIdentifier)
 		""")
 	}
 
 	mutating func addSearchScope(at url: URL) {
-		let messagePrefix: StaticString = if searchScopes.insert(url).inserted {
-			"Successfully added"
-		} else {
-			"Failed to add"
-		}
+		let added = searchScopes.insert(url).inserted
 
 		Logger.module.debug("""
-		\(messagePrefix) search scope:
+		\(added ? "Successfully added" : "Failed to add") search scope:
 		- Path: \(url.abbreviatingWithTildeInPath)
 		""")
 	}
 
 	mutating func removeSearchScope(at url: URL) {
-		let messagePrefix: StaticString = if searchScopes.remove(url) != nil {
-			"Successfully removed"
-		} else {
-			"Failed to remove"
-		}
+		let removed = searchScopes.remove(url) != nil
 
 		Logger.module.debug("""
-		\(messagePrefix) search scope:
+		\(removed ? "Successfully removed" : "Failed to remove") search scope:
 		- Path: \(url.abbreviatingWithTildeInPath)
 		""")
 	}

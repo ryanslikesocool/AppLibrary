@@ -2,9 +2,9 @@ import AppLibraryRuntimeModelViews
 import AppLibraryStorage
 import SwiftUI
 
-extension ApplicationHideFlagsList {
+extension ApplicationVisibilityList {
 	struct Item: View {
-		public typealias SelectionValue = ApplicationHideFlag.Set
+		public typealias SelectionValue = ApplicationVisibility.Set
 
 		@Environment(\.applicationModelIdentifier) private var applicationModelIdentifier
 

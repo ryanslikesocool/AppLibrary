@@ -1,14 +1,18 @@
 import AppLibraryCommon
 
 public extension AdditionalApplicationGroup {
-	typealias Set = EnumOptionSet<AdditionalApplicationGroup>
+	/// An efficient set of ``AdditionalApplicationGroup``.
+	typealias Set = EnumOptionSet<Self>
 }
 
 // MARK: - Constants
 
 public extension AdditionalApplicationGroup.Set {
+	/// ## See Also
+	/// - ``AdditionalApplicationGroup/recentlyAdded``
 	static let recentlyAdded: Self = Self(.recentlyAdded)
-	static let recentlyUpdated: Self = Self(.recentlyUpdated)
 
-	static let all: Self = [.recentlyAdded, .recentlyUpdated]
+	/// ## See Also
+	/// - ``AdditionalApplicationGroup/recentlyUpdated``
+	static let recentlyUpdated: Self = Self(.recentlyUpdated)
 }

@@ -1,3 +1,5 @@
+// TODO: Should this be converted to a `struct`?
+
 public enum ExecutableArchitecture: String {
 	/// Specifies the 32-bit PowerPC architecture.
 	case ppc

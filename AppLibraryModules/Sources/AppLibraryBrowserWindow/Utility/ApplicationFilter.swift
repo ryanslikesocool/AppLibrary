@@ -6,7 +6,7 @@ enum ApplicationFilter {
 	@MainActor
 	static func filter(_ applications: [ApplicationModel], searchQuery: String) -> [ApplicationModel] {
 		let filterArguments = FilterArguments(
-			applicationHideFlags: AppsSettings.shared.applicationHideFlags,
+			applicationVisibilityFlags: AppsSettings.shared.applicationVisibilityFlags,
 			searchQuery: searchQuery
 		)
 		let filterFunction = createFilterFunction(hasSearchQuery: !searchQuery.isEmpty)
@@ -27,13 +27,13 @@ private extension ApplicationFilter {
 		if hasSearchQuery {
 			{ filterArguments, application in
 				let applicationIdentifier = ApplicationModelIdentifier(application)
-				return filterHideFlags(application, applicationHideFlags: filterArguments.applicationHideFlags[applicationIdentifier], hideFlag: .hiddenInSearch)
+				return filterVisibility(application, applicationVisibilityFlags: filterArguments.applicationVisibilityFlags[applicationIdentifier], visibilityFlag: .searchResults)
 					&& filterDisplayName(application, searchQuery: filterArguments.searchQuery)
 			}
 		} else {
 			{ filterArguments, application in
 				let applicationIdentifier = ApplicationModelIdentifier(application)
-				return filterHideFlags(application, applicationHideFlags: filterArguments.applicationHideFlags[applicationIdentifier], hideFlag: .hiddenInBrowser)
+				return filterVisibility(application, applicationVisibilityFlags: filterArguments.applicationVisibilityFlags[applicationIdentifier], visibilityFlag: .browser)
 			}
 		}
 	}
@@ -47,15 +47,15 @@ private extension ApplicationFilter {
 	}
 
 	/// - Returns: `true` if the application should be included in the filter results; `false` otherwise.
-	static func filterHideFlags(
+	static func filterVisibility(
 		_ application: borrowing ApplicationModel,
-		applicationHideFlags: ApplicationHideFlag.Set?,
-		hideFlag: ApplicationHideFlag.Set
+		applicationVisibilityFlags: ApplicationVisibility.Set?,
+		visibilityFlag: ApplicationVisibility.Set
 	) -> Bool {
-		guard let applicationHideFlags else {
+		guard let applicationVisibilityFlags else {
 			return true
 		}
-		return !applicationHideFlags.contains(hideFlag)
+		return applicationVisibilityFlags.contains(visibilityFlag)
 	}
 }
 
@@ -63,7 +63,7 @@ private extension ApplicationFilter {
 
 private extension ApplicationFilter {
 	struct FilterArguments: ~Copyable {
-		let applicationHideFlags: [ApplicationModelIdentifier: ApplicationHideFlag.Set]
+		let applicationVisibilityFlags: [ApplicationModelIdentifier: ApplicationVisibility.Set]
 		let searchQuery: String
 	}
 }

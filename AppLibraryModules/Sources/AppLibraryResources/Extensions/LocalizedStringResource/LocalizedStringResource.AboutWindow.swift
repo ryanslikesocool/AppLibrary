@@ -4,6 +4,8 @@ import LocalizationToolbox
 public extension LocalizedStringResource {
 	static let aboutWindow = AboutWindow.self
 
+	/// ## Topics
+	/// - ``aboutWindow``
 	enum AboutWindow {
 		private static let localizationTable = LocalizationTableResource("AboutWindow")
 

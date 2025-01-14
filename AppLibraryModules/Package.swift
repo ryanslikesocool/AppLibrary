@@ -24,9 +24,9 @@ let package = Package(
 	],
 	dependencies: [
 		.package(url: "https://github.com/ryanslikesocool/AXToolbox.git", from: "0.0.5"),
-		.package(url: "https://github.com/ryanslikesocool/BundleToolbox.git", from: "0.0.4"),
+		.package(url: "https://github.com/ryanslikesocool/BundleToolbox.git", from: "0.0.5"),
 		.package(url: "https://github.com/ryanslikesocool/LocalizationToolbox.git", from: "0.0.4"),
-		.package(url: "https://github.com/ryanslikesocool/NSMetadataToolbox.git", from: "0.0.5"),
+		.package(url: "https://github.com/ryanslikesocool/NSMetadataToolbox.git", from: "0.0.6"),
 		.package(url: "https://github.com/ryanslikesocool/SFSymbolToolbox.git", from: "0.0.2"),
 	],
 	targets: [

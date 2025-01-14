@@ -34,15 +34,24 @@ extension ApplicationInstanceIdentifier: CustomStringConvertible {
 // MARK: - Convenience
 
 public extension ApplicationInstanceIdentifier {
-	init(_ modelIdentifier: borrowing ApplicationModelIdentifier, url: URL) {
+	init(
+		_ modelIdentifier: borrowing ApplicationModelIdentifier,
+		url: URL
+	) {
 		self.init(bundleIdentifier: modelIdentifier.bundleIdentifier, url: url)
 	}
 
-	init(bundleIdentifier: String, _ instance: borrowing ApplicationInstance) {
+	init(
+		bundleIdentifier: String,
+		_ instance: borrowing ApplicationInstance
+	) {
 		self.init(bundleIdentifier: bundleIdentifier, url: instance.url)
 	}
 
-	init(_ model: ApplicationModel, _ instance: borrowing ApplicationInstance) {
+	init(
+		_ model: ApplicationModel,
+		_ instance: borrowing ApplicationInstance
+	) {
 		self.init(bundleIdentifier: model.bundleIdentifier, url: instance.url)
 	}
 }

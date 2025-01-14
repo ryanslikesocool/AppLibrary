@@ -4,6 +4,8 @@ import LocalizationToolbox
 public extension LocalizedStringResource {
 	static let developedWithLove = DevelopedWithLove.self
 
+	/// ## Topics
+	/// - ``developedWithLove``
 	enum DevelopedWithLove {
 		private static let localizationTable = LocalizationTableResource("DevelopedWithLove")
 

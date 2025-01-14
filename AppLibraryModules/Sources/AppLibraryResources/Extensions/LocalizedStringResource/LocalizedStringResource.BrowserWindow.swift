@@ -5,6 +5,8 @@ import Foundation
 public extension LocalizedStringResource {
 	static let browserWindow = BrowserWindow.self
 
+	/// ## Topics
+	/// - ``browserWindow``
 	enum BrowserWindow {
 		private static let localizationTable = LocalizationTableResource("BrowserWindow")
 

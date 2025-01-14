@@ -1,7 +1,10 @@
 import SwiftUI
 
 public extension View {
-	func shadow(_ shadow: borrowing Shadow) -> some View {
+	/// - Parameter shadow:
+	func shadow(
+		_ shadow: borrowing Shadow
+	) -> some View {
 		self.shadow(
 			color: shadow.color,
 			radius: shadow.radius,
@@ -10,6 +13,10 @@ public extension View {
 		)
 	}
 
+	/// - Parameters:
+	///   - stroke:
+	///   - shape:
+	///   - fillStyle:
 	func overlay(
 		_ stroke: borrowing Stroke,
 		in shape: some InsettableShape,
@@ -24,6 +31,10 @@ public extension View {
 		)
 	}
 
+	/// - Parameters:
+	///   - stroke:
+	///   - shape:
+	///   - fillStyle:
 	func background(
 		_ stroke: borrowing Stroke,
 		in shape: some InsettableShape,

@@ -2,8 +2,10 @@ import LocalizationToolbox
 import Foundation
 
 public extension LocalizedStringResource {
-	static let applicationGroupSection: ApplicationGroupSection.Type = ApplicationGroupSection.self
+	static let applicationGroupSection = ApplicationGroupSection.self
 
+	/// ## Topics
+	/// - ``applicationGroupSection``
 	enum ApplicationGroupSection {
 		private static let localizationTable = LocalizationTableResource("ApplicationGroupSection")
 

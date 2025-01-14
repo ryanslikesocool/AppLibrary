@@ -4,6 +4,8 @@ import Foundation
 public extension LocalizedStringResource {
 	static let accessibilityRequest = AccessibilityRequest.self
 
+	/// ## Topics
+	/// - ``accessibilityRequest``
 	enum AccessibilityRequest {
 		private static let localizationTable = LocalizationTableResource("AccessibilityRequest")
 
@@ -12,6 +14,8 @@ public extension LocalizedStringResource {
 		public static let title = LocalizedStringResource("TITLE", table: localizationTable)
 		public static let description = LocalizedStringResource("DESCRIPTION", table: localizationTable)
 
+		/// ## Topics
+		/// - ``action``
 		public enum Action {
 			public static let allow = LocalizedStringResource("ACTION.ALLOW", table: localizationTable)
 			public static let deny = LocalizedStringResource("ACTION.DENY", table: localizationTable)

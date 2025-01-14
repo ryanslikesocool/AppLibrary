@@ -1,8 +1,8 @@
 import AppLibraryCommon
 import SwiftUI
 
-extension ApplicationHideFlagsList.Item {
-	struct HideFlagToggle: View {
+extension ApplicationVisibilityList.Item {
+	struct VisibilityFlagToggle: View {
 		@Binding private var isOn: Bool
 
 		private let flagName: LocalizedStringResource
@@ -23,9 +23,9 @@ extension ApplicationHideFlagsList.Item {
 
 // MARK: - Functions
 
-private extension ApplicationHideFlagsList.Item.HideFlagToggle {
+private extension ApplicationVisibilityList.Item.VisibilityFlagToggle {
 	func makeTitleText() -> String {
 		let flagName = String(localized: flagName)
-		return LocalizedStringResource.applicationHideFlagsList.item.format.verb(flagName)
+		return LocalizedStringResource.applicationVisibilityList.item.format.verb(flagName)
 	}
 }

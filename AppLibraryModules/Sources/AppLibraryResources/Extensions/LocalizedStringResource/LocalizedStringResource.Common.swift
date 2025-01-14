@@ -4,12 +4,16 @@ import Foundation
 public extension LocalizedStringResource {
 	static let common = Common.self
 
+	/// ## Topics
+	/// - ``common``
 	enum Common {
 		private static let localizationTable = LocalizationTableResource("Common")
 
 		public static let action = Action.self
 		public static let link = Link.self
 
+		/// ## Topics
+		/// - ``action``
 		public enum Action {
 			public static let cancel = LocalizedStringResource("ACTION.CANCEL", table: localizationTable)
 			public static let done = LocalizedStringResource("ACTION.DONE", table: localizationTable)
@@ -23,6 +27,8 @@ public extension LocalizedStringResource {
 			public static let showInFinder = LocalizedStringResource("ACTION.SHOW_IN_FINDER", table: localizationTable)
 		}
 
+		/// ## Topics
+		/// - ``link``
 		public enum Link {
 			public static let settings = LocalizedStringResource("LINK.SETTINGS", table: localizationTable)
 			public static let manage = LocalizedStringResource("LINK.MANAGE", table: localizationTable)

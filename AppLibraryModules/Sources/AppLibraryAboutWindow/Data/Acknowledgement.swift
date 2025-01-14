@@ -4,18 +4,15 @@ struct Acknowledgement {
 	public let name: String
 	public let projectURL: URL
 	public let licenseURL: URL
-	public let kind: Kind
 
 	private init(
 		name: String,
 		projectURL: URL,
-		licenseURL: URL,
-		kind: Kind
+		licenseURL: URL
 	) {
 		self.name = name
 		self.projectURL = projectURL
 		self.licenseURL = licenseURL
-		self.kind = kind
 	}
 }
 
@@ -31,7 +28,6 @@ extension Acknowledgement: Decodable {
 		case projectURL
 		case licenseURL
 		case licensePath
-		case kind
 	}
 
 	public init(from decoder: any Decoder) throws {
@@ -55,13 +51,10 @@ extension Acknowledgement: Decodable {
 			)
 		}
 
-		let kind = try container.decode(Kind.self, forKey: .kind)
-
 		self.init(
 			name: name,
 			projectURL: projectURL,
-			licenseURL: licenseURL,
-			kind: kind
+			licenseURL: licenseURL
 		)
 	}
 }

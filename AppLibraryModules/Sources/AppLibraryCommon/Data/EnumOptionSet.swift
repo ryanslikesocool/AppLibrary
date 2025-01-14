@@ -3,7 +3,7 @@ public struct EnumOptionSet<Enum>: OptionSet where
 	Enum.RawValue: FixedWidthInteger & UnsignedInteger
 {
 	public typealias Enum = Enum
-	
+
 	public let rawValue: Enum.RawValue
 
 	public init(rawValue: RawValue) {
@@ -55,6 +55,36 @@ public extension EnumOptionSet {
 
 		self.init(rawValue: 1 << element.rawValue)
 	}
+
+	init<S>(_ elements: S) where
+		S: Sequence,
+		S.Element == Enum
+	{
+		self = elements.reduce(Self.none) { partialResult, element in
+			partialResult.union(Self(element))
+		}
+	}
+
+	init(_ elements: Enum...) {
+		self.init(elements)
+	}
+}
+
+// MARK: - Constants
+
+public extension EnumOptionSet {
+	static var none: Self {
+		Self(rawValue: RawValue.zero)
+	}
+}
+
+public extension EnumOptionSet where
+	Enum: CaseIterable
+{
+	// TODO: Should typealiases implement this manually?
+	static var all: Self {
+		Self(Enum.allCases)
+	}
 }
 
 // MARK: -
@@ -62,7 +92,7 @@ public extension EnumOptionSet {
 public extension EnumOptionSet where
 	Enum: CaseIterable
 {
-	var components: [Enum] {
+	var elements: [Enum] {
 		Enum.allCases
 			.filter { item in
 				self.contains(Self(item))

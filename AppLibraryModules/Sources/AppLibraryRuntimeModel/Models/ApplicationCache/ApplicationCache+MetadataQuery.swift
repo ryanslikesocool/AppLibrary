@@ -6,14 +6,23 @@ import OSLog
 import UniformTypeIdentifiers
 
 public extension ApplicationCache {
-	func reload(searchScopes: [URL]) {
+	/// - Parameters:
+	///   - searchScopes:
+	// Implicit `@MainActor`
+	func reload(
+		searchScopes: [URL]
+	) {
 		Task { // Implicit `@MainActor`
 			await reload(searchScopes: searchScopes)
 		}
 	}
 
+	/// - Parameters:
+	///   - searchScopes:
 	// Implicit `@MainActor`
-	func reload(searchScopes: [URL]) async {
+	func reload(
+		searchScopes: [URL]
+	) async {
 		// TODO: Handle task cancellation
 
 		guard case .idle = state else {
@@ -33,36 +42,89 @@ public extension ApplicationCache {
 		state = .idle
 	}
 
+	/// - Parameters:
+	///   - searchScopes:
 	// Implicit `@MainActor`
-	private func createReloadCacheTask(searchScopes: [URL]) -> Task<Void, Never> {
-		// TODO: Handle task cancellation
-
+	private func createReloadCacheTask(
+		searchScopes: [URL]
+	) -> Task<Void, Never> {
 		Task { // Implicit `@MainActor`
-			Self.logger.info("Starting metadata query.")
-
 			let query = NSMetadataQuery()
 			query.searchScopes = searchScopes
 			query.predicate = Self.metadataQueryPredicate
 			query.groupingAttributes = Self.metadataQueryGroupingAttributes
 
-			await query.gatherResults()
+			defer {
+				// Perform cleanup when the scope exits.
+				// TODO: Check if `defer` is called on task cancellation.
+				query.stop()
+			}
 
-			// We should `yield` here,
-			// since this task is running on the main thread,
-			// and we don't need result immediately.
-			await Task.yield()
+			let eventStream = query.eventStream()
 
-			self.applications = Self.processQueryResults(query, searchScopes: searchScopes)
+			guard query.start() else {
+				Self.logger.info("Failed to start metadata query.")
+				return
+			}
+			Self.logger.info("Starting metadata query.")
 
-			Self.logger.info("Finished metadata query with \(self.applications.count) processed result(s).")
+			eventLoop: for await event in eventStream {
+				Self.logger.debug("""
+				Received metadata query event.
+				- Event: \(String(describing: event))
+				""")
+
+				// TODO: Handle other metadata events
+
+				switch event {
+					case .didStartGathering:
+						break
+					case .didFinishGathering:
+						self.applications = Self.processQueryResults(query, searchScopes: searchScopes)
+						Self.logger.info("""
+						Finished metadata query.
+						- Processed Results: \(self.applications.count)
+						""")
+						break eventLoop
+					case .gatheringProgress:
+						break
+					case .didUpdate:
+						break
+				}
+
+				checkCancellation()
+			}
+
+			func checkCancellation() {
+				// NOTE: Ideally, we'd use `withTaskCancellationHandler` instead of defining this function,
+				// but `NSMetadataQuery` can't be captured in the `onCancel` closure.
+
+//				await withTaskCancellationHandler {
+//					/* event loop */
+//				} onCancel: {
+//					query.stop()
+//				}
+
+				// VALIDATE: Is this even correct?
+
+				if Task.isCancelled {
+					query.stop()
+				}
+			}
 		}
 	}
 
-	private static func processQueryResults(_ query: NSMetadataQuery, searchScopes: borrowing [URL]) -> OrderedDictionary<ApplicationModelIdentifier, ApplicationModel> {
+	/// - Parameters:
+	///   - query:
+	///   - searchScopes:
+	private static func processQueryResults(
+		_ query: NSMetadataQuery,
+		searchScopes: borrowing [URL]
+	) -> OrderedDictionary<ApplicationModelIdentifier, ApplicationModel> {
 		logger.info("Processing \(query.resultCount) metadata query result(s).")
 
 		let applicationModels = query.groupedResults
-//			.compactMap(processGroup(_:)) // TODO: Why does this want to `throw`?
+//			.compactMap(processGroup(_:)) // TODO: Figure out why this wants to `throw`
 			.compactMap { group -> ApplicationModel? in
 				processGroup(group)
 			}
@@ -83,7 +145,7 @@ public extension ApplicationCache {
 			}
 
 			let applications: [ApplicationInstance] = group.results
-//				.compactMap(processResult(_:)) // TODO: Why does this want to `throw`?
+//				.compactMap(processResult(_:)) // TODO: Figure out why this wants to `throw`
 				.compactMap { element -> ApplicationInstance? in
 					processResult(element)
 				}
@@ -95,7 +157,7 @@ public extension ApplicationCache {
 			guard
 				let metadataItem = element as? NSMetadataItem,
 				let applicationInstance = try? ApplicationInstance(metadataItem: metadataItem)
-				// If we only want to include top-level results:
+			// If we only want to include top-level results:
 //				searchScopes.contains(applicationInstance.url.deletingLastPathComponent())
 			else {
 				return nil
@@ -117,35 +179,19 @@ private extension ApplicationCache {
 	static let metadataQueryPredicate: NSPredicate = {
 		// NOTE: We can't use the #Predicate macro because it doesn't support `NSMetadataItem.value(forAttribute:)`.
 		// See the
-		// [official documentation](https://developer.apple.com/documentation/foundation/nspredicate/4162324-init#discussion)
+		// [official documentation]( https://developer.apple.com/documentation/foundation/nspredicate/4162324-init#discussion )
 		// for more information.
 
+		/// The primary predicate that includes application items.
+		let contentTypePredicate = NSComparisonPredicate(
+			attributeKey: NSMetadataAttributeKeys.ContentType.self,
+			equals: UTType.applicationBundle.identifier
+		)
+
 		return NSCompoundPredicate(type: .and, subpredicates: [
-			createContentTypePredicate(),
+			contentTypePredicate,
 			createSupportFileExclusionPredicate(),
 		])
-
-		/// Create the primary predicate that includes application items.
-		func createContentTypePredicate() -> NSPredicate {
-			let contentTypeKey: String = NSMetadataAttributeKeys.ContentType.attributeKey
-			let desiredContentType: UTType = UTType.applicationBundle
-
-			// NOTE: We use different substitution arguments because we're
-			// replacing a key path on the left side and an object value on the right side.
-			// See
-			// [NSHipster's Article](https://nshipster.com/nspredicate/#substitutions)
-			// for more information.
-			let format: String = "%K == %@"
-
-			return NSPredicate(format: format, contentTypeKey, desiredContentType.identifier)
-
-			// An alternative is to use the `init(fromMetadataQueryString:)`,
-			// but the overload doesn't format the string for us,
-			// so we have to do it ourselves.
-			// The format string is a little less straightforward.
-			// let format: String = #"%@ == "%@""#
-			// NSPredicate(fromMetadataQueryString: String(format: format, contentTypeKey, desiredContentType.identifier))
-		}
 
 		/// Create a secondary predicate that excludes items that are considered support files.
 		func createSupportFileExclusionPredicate() -> NSPredicate {

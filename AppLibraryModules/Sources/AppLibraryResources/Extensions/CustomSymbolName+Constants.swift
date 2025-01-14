@@ -7,5 +7,7 @@ public extension CustomSymbolName {
 
 	// MARK: H
 
+	/// ## See Also
+	/// - ``ImageResource/heart_pixel_fill``
 	static let heart_pixel_fill: Self = "heart.pixel.fill"
 }

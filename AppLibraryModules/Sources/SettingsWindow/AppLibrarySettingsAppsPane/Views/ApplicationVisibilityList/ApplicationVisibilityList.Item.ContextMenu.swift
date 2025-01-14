@@ -3,7 +3,7 @@ import AppLibraryCommonViews
 import AppLibraryRuntimeModel
 import AppLibraryRuntimeModelViews
 
-extension ApplicationHideFlagsList.Item {
+extension ApplicationVisibilityList.Item {
 	struct ContextMenu: View {
 		@Environment(\.applicationModel) private var applicationModel
 

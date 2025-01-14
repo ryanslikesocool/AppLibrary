@@ -2,10 +2,12 @@ import Foundation
 import LocalizationToolbox
 
 public extension LocalizedStringResource {
-	static let applicationHideFlagsList = ApplicationHideFlagsList.self
+	static let applicationVisibilityList = ApplicationVisibilityList.self
 
-	enum ApplicationHideFlagsList {
-		private static let localizationTable = LocalizationTableResource("ApplicationHideFlagsList")
+	/// ## Topics
+	/// - ``applicationVisibilityList``
+	enum ApplicationVisibilityList {
+		private static let localizationTable = LocalizationTableResource("ApplicationVisibilityList")
 
 		public static let item = Item.self
 		public static let form = Form.self
@@ -13,13 +15,18 @@ public extension LocalizedStringResource {
 
 		public static let title = LocalizedStringResource("TITLE", table: localizationTable)
 
+		/// ## Topics
+		/// - ``item``
 		public enum Item {
 			public static let format = Format.self
 
-			public static let notHidden = LocalizedStringResource("ITEM.NOT_HIDDEN", table: localizationTable)
+			public static let visible = LocalizedStringResource("ITEM.VISIBLE", table: localizationTable)
+			public static let hidden = LocalizedStringResource("ITEM.HIDDEN", table: localizationTable)
 			public static let browser = LocalizedStringResource("ITEM.BROWSER", table: localizationTable)
-			public static let search = LocalizedStringResource("ITEM.SEARCH", table: localizationTable)
+			public static let searchResults = LocalizedStringResource("ITEM.SEARCH_RESULTS", table: localizationTable)
 
+			/// ## Topics
+			/// - ``format``
 			public enum Format {
 				private static let verbFormat = LocalizedStringResource("ITEM.FORMAT.VERB_\(placeholder: .object)", table: localizationTable)
 				private static let adjectiveFormat = LocalizedStringResource("ITEM.FORMAT.ADJECTIVE_\(placeholder: .object)", table: localizationTable)
@@ -36,10 +43,14 @@ public extension LocalizedStringResource {
 			}
 		}
 
+		/// ## Topics
+		/// - ``form``
 		public enum Form {
 			public static let description = LocalizedStringResource("FORM.DESCRIPTION", table: localizationTable)
 		}
 
+		/// ## Topics
+		/// - ``list``
 		public enum List {
 			public static let emptyLabel = LocalizedStringResource("LIST.EMPTY_LABEL", table: localizationTable)
 			private static let descriptionFormat = LocalizedStringResource("LIST.DESCRIPTION_\(placeholder: .object)", table: localizationTable)

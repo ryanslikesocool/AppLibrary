@@ -20,7 +20,7 @@ struct ApplicationHideFlagsSheet: View {
 private extension ApplicationHideFlagsSheet {
 	func makeContent() -> some View {
 //		Form {
-			ApplicationHideFlagsList()
+			ApplicationVisibilityList()
 //		}
 //		.formStyle(.grouped)
 	}
@@ -28,8 +28,8 @@ private extension ApplicationHideFlagsSheet {
 	@ViewBuilder
 	func makeHeader() -> some View {
 		SheetHeaderLabel(
-			headline: .applicationHideFlagsList.title,
-			subheadline: LocalizedStringResource.applicationHideFlagsList.list.description
+			headline: .applicationVisibilityList.title,
+			subheadline: LocalizedStringResource.applicationVisibilityList.list.description
 		)
 
 		Spacer()
