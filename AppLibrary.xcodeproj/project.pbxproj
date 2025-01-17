@@ -8,8 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		AF33F0A02CFAF76000767656 /* AppLibraryModules in Frameworks */ = {isa = PBXBuildFile; productRef = AF33F09F2CFAF76000767656 /* AppLibraryModules */; };
-		AFBE9C0E2D36FE9C00B9B12E /* App Library Helper (Dock).xpc in Embed XPC Services */ = {isa = PBXBuildFile; fileRef = AFBE9C042D36FE9C00B9B12E /* App Library Helper (Dock).xpc */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		AFBE9CFC2D373C7000B9B12E /* AppLibraryDockHelperModules in Frameworks */ = {isa = PBXBuildFile; productRef = AFBE9CFB2D373C7000B9B12E /* AppLibraryDockHelperModules */; };
+		AFACA1AB2D3A39E300633975 /* AppLibraryAccessibilityHelperModules in Frameworks */ = {isa = PBXBuildFile; productRef = AFACA1AA2D3A39E300633975 /* AppLibraryAccessibilityHelperModules */; };
+		AFBE9C0E2D36FE9C00B9B12E /* App Library Helper (Accessibility).xpc in Embed XPC Services */ = {isa = PBXBuildFile; fileRef = AFBE9C042D36FE9C00B9B12E /* App Library Helper (Accessibility).xpc */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,7 +29,7 @@
 			dstPath = "$(CONTENTS_FOLDER_PATH)/XPCServices";
 			dstSubfolderSpec = 16;
 			files = (
-				AFBE9C0E2D36FE9C00B9B12E /* App Library Helper (Dock).xpc in Embed XPC Services */,
+				AFBE9C0E2D36FE9C00B9B12E /* App Library Helper (Accessibility).xpc in Embed XPC Services */,
 			);
 			name = "Embed XPC Services";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -38,7 +38,7 @@
 
 /* Begin PBXFileReference section */
 		AF33F06B2CFAF53F00767656 /* App Library.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "App Library.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		AFBE9C042D36FE9C00B9B12E /* App Library Helper (Dock).xpc */ = {isa = PBXFileReference; explicitFileType = "wrapper.xpc-service"; includeInIndex = 0; path = "App Library Helper (Dock).xpc"; sourceTree = BUILT_PRODUCTS_DIR; };
+		AFBE9C042D36FE9C00B9B12E /* App Library Helper (Accessibility).xpc */ = {isa = PBXFileReference; explicitFileType = "wrapper.xpc-service"; includeInIndex = 0; path = "App Library Helper (Accessibility).xpc"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -49,12 +49,12 @@
 			);
 			target = AF33F06A2CFAF53F00767656 /* App Library */;
 		};
-		AFBE9C112D36FE9C00B9B12E /* Exceptions for "AppLibraryHelper-Dock" folder in "App Library Helper (Dock)" target */ = {
+		AFBE9C112D36FE9C00B9B12E /* Exceptions for "AppLibraryHelper-Accessibility" folder in "App Library Helper (Accessibility)" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
 			);
-			target = AFBE9C032D36FE9C00B9B12E /* App Library Helper (Dock) */;
+			target = AFBE9C032D36FE9C00B9B12E /* App Library Helper (Accessibility) */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
@@ -67,12 +67,12 @@
 			path = AppLibrary;
 			sourceTree = "<group>";
 		};
-		AFBE9C052D36FE9C00B9B12E /* AppLibraryHelper-Dock */ = {
+		AFBE9C052D36FE9C00B9B12E /* AppLibraryHelper-Accessibility */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				AFBE9C112D36FE9C00B9B12E /* Exceptions for "AppLibraryHelper-Dock" folder in "App Library Helper (Dock)" target */,
+				AFBE9C112D36FE9C00B9B12E /* Exceptions for "AppLibraryHelper-Accessibility" folder in "App Library Helper (Accessibility)" target */,
 			);
-			path = "AppLibraryHelper-Dock";
+			path = "AppLibraryHelper-Accessibility";
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -90,7 +90,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AFBE9CFC2D373C7000B9B12E /* AppLibraryDockHelperModules in Frameworks */,
+				AFACA1AB2D3A39E300633975 /* AppLibraryAccessibilityHelperModules in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -101,7 +101,7 @@
 			isa = PBXGroup;
 			children = (
 				AF33F06D2CFAF53F00767656 /* AppLibrary */,
-				AFBE9C052D36FE9C00B9B12E /* AppLibraryHelper-Dock */,
+				AFBE9C052D36FE9C00B9B12E /* AppLibraryHelper-Accessibility */,
 				AF33F09E2CFAF76000767656 /* Frameworks */,
 				AF33F06C2CFAF53F00767656 /* Products */,
 			);
@@ -111,7 +111,7 @@
 			isa = PBXGroup;
 			children = (
 				AF33F06B2CFAF53F00767656 /* App Library.app */,
-				AFBE9C042D36FE9C00B9B12E /* App Library Helper (Dock).xpc */,
+				AFBE9C042D36FE9C00B9B12E /* App Library Helper (Accessibility).xpc */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -151,9 +151,9 @@
 			productReference = AF33F06B2CFAF53F00767656 /* App Library.app */;
 			productType = "com.apple.product-type.application";
 		};
-		AFBE9C032D36FE9C00B9B12E /* App Library Helper (Dock) */ = {
+		AFBE9C032D36FE9C00B9B12E /* App Library Helper (Accessibility) */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = AFBE9C122D36FE9C00B9B12E /* Build configuration list for PBXNativeTarget "App Library Helper (Dock)" */;
+			buildConfigurationList = AFBE9C122D36FE9C00B9B12E /* Build configuration list for PBXNativeTarget "App Library Helper (Accessibility)" */;
 			buildPhases = (
 				AFBE9C002D36FE9C00B9B12E /* Sources */,
 				AFBE9C012D36FE9C00B9B12E /* Frameworks */,
@@ -164,14 +164,14 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				AFBE9C052D36FE9C00B9B12E /* AppLibraryHelper-Dock */,
+				AFBE9C052D36FE9C00B9B12E /* AppLibraryHelper-Accessibility */,
 			);
-			name = "App Library Helper (Dock)";
+			name = "App Library Helper (Accessibility)";
 			packageProductDependencies = (
-				AFBE9CFB2D373C7000B9B12E /* AppLibraryDockHelperModules */,
+				AFACA1AA2D3A39E300633975 /* AppLibraryAccessibilityHelperModules */,
 			);
 			productName = "AppLibraryHelper-Dock";
-			productReference = AFBE9C042D36FE9C00B9B12E /* App Library Helper (Dock).xpc */;
+			productReference = AFBE9C042D36FE9C00B9B12E /* App Library Helper (Accessibility).xpc */;
 			productType = "com.apple.product-type.xpc-service";
 		};
 /* End PBXNativeTarget section */
@@ -207,7 +207,7 @@
 			projectRoot = "";
 			targets = (
 				AF33F06A2CFAF53F00767656 /* App Library */,
-				AFBE9C032D36FE9C00B9B12E /* App Library Helper (Dock) */,
+				AFBE9C032D36FE9C00B9B12E /* App Library Helper (Accessibility) */,
 			);
 		};
 /* End PBXProject section */
@@ -249,7 +249,7 @@
 /* Begin PBXTargetDependency section */
 		AFBE9C0D2D36FE9C00B9B12E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = AFBE9C032D36FE9C00B9B12E /* App Library Helper (Dock) */;
+			target = AFBE9C032D36FE9C00B9B12E /* App Library Helper (Accessibility) */;
 			targetProxy = AFBE9C0C2D36FE9C00B9B12E /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -389,7 +389,7 @@
 				CODE_SIGN_ENTITLEMENTS = AppLibrary/Entitlements.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 47;
+				CURRENT_PROJECT_VERSION = 60;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 838RGQ32CA;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -420,7 +420,7 @@
 				CODE_SIGN_ENTITLEMENTS = AppLibrary/Entitlements.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 47;
+				CURRENT_PROJECT_VERSION = 60;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 838RGQ32CA;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -446,19 +446,19 @@
 		AFBE9C0F2D36FE9C00B9B12E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = "AppLibraryHelper-Dock/Entitlements.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "AppLibraryHelper-Accessibility/Entitlements.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 47;
+				CURRENT_PROJECT_VERSION = 60;
 				DEVELOPMENT_TEAM = 838RGQ32CA;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "AppLibraryHelper-Dock/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "App Library Helper (Dock)";
+				INFOPLIST_FILE = "AppLibraryHelper-Accessibility/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "App Library Helper (Accessibility)";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "© 2025 Ryan Boyer";
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 0.1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.DevelopedWithLove.AppLibrary.Helper.Dock;
+				PRODUCT_BUNDLE_IDENTIFIER = com.DevelopedWithLove.AppLibrary.Helper.Accessibility;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -469,19 +469,19 @@
 		AFBE9C102D36FE9C00B9B12E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = "AppLibraryHelper-Dock/Entitlements.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "AppLibraryHelper-Accessibility/Entitlements.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 47;
+				CURRENT_PROJECT_VERSION = 60;
 				DEVELOPMENT_TEAM = 838RGQ32CA;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "AppLibraryHelper-Dock/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "App Library Helper (Dock)";
+				INFOPLIST_FILE = "AppLibraryHelper-Accessibility/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "App Library Helper (Accessibility)";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "© 2025 Ryan Boyer";
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 0.1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.DevelopedWithLove.AppLibrary.Helper.Dock;
+				PRODUCT_BUNDLE_IDENTIFIER = com.DevelopedWithLove.AppLibrary.Helper.Accessibility;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -510,7 +510,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		AFBE9C122D36FE9C00B9B12E /* Build configuration list for PBXNativeTarget "App Library Helper (Dock)" */ = {
+		AFBE9C122D36FE9C00B9B12E /* Build configuration list for PBXNativeTarget "App Library Helper (Accessibility)" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AFBE9C0F2D36FE9C00B9B12E /* Debug */,
@@ -526,9 +526,9 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = AppLibraryModules;
 		};
-		AFBE9CFB2D373C7000B9B12E /* AppLibraryDockHelperModules */ = {
+		AFACA1AA2D3A39E300633975 /* AppLibraryAccessibilityHelperModules */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = AppLibraryDockHelperModules;
+			productName = AppLibraryAccessibilityHelperModules;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

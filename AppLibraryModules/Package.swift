@@ -29,10 +29,11 @@ let package = Package(
 		.package(url: "https://github.com/ryanslikesocool/BundleToolbox.git", from: "0.0.5"),
 		.package(url: "https://github.com/ryanslikesocool/LocalizationToolbox.git", from: "0.0.4"),
 		.package(url: "https://github.com/ryanslikesocool/NSMetadataToolbox.git", from: "0.0.6"),
-		.package(url: "https://github.com/ryanslikesocool/SFSymbolToolbox.git", from: "0.0.2"),
+		.package(url: "https://github.com/ryanslikesocool/SFSymbolToolbox.git", from: "0.0.3"),
 
+		.package(path: "../AppLibraryCore"),
 		.package(path: "../AppLibraryExtension"),
-		.package(path: "../AppLibraryDockHelperModules"),
+		.package(path: "../AppLibraryAccessibilityHelperModules"),
 	],
 	targets: [
 		.target(
@@ -88,7 +89,7 @@ let package = Package(
 			name: "AppLibraryXPCServer",
 			dependencies: [
 				.product(name: "AppLibraryExtensionServer", package: "AppLibraryExtension"),
-				.product(name: "AppLibraryDockHelperShared", package: "AppLibraryDockHelperModules"),
+				.product(name: "AppLibraryAccessibilityHelperShared", package: "AppLibraryAccessibilityHelperModules"),
 
 				"AppLibraryCommon",
 			]
@@ -176,6 +177,8 @@ var commonTargets: [Target] {
 			name: "AppLibraryCommon",
 			dependencies: [
 				"BundleToolbox",
+
+				"AppLibraryCore",
 			]
 		),
 	]

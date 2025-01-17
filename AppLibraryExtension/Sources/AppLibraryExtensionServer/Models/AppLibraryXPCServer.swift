@@ -6,7 +6,7 @@ open class AppLibraryXPCServer: AppLibraryXPCServerProtocol {
 	public var session: XPCSession { _session }
 
 	open class var serviceName: XPCServiceName {
-		fatalError("Subclasses of `XPCServer` must override `serviceName`.")
+		fatalError("Subclasses of `AppLibraryXPCServer` must override `serviceName`.")
 	}
 
 	public init() throws {

@@ -2,6 +2,8 @@ import AppLibraryExtensionCommon
 @preconcurrency import XPC
 
 public extension XPCListener {
+	/// Creates the server side of an XPC service using the specified service name.
+	/// 
 	/// - Parameters:
 	///   - xpcService: The XPC service name that clients use to connect to the service.
 	///   - targetQueue: The dispatch queue that events arrive on.
@@ -10,7 +12,7 @@ public extension XPCListener {
 	///   - options: Configuration options for the listener, such as creating it in an inactive state.
 	///   - incomingSessionHandler: A handler that the system calls when a client connects to the XPC service.
 	convenience init(
-		xpcService: XPCServiceName,
+		xpcService: borrowing XPCServiceName,
 		targetQueue: DispatchQueue? = nil,
 		options: XPCListener.InitializationOptions = .none,
 		incomingSessionHandler: @escaping (XPCListener.IncomingSessionRequest) -> (XPCListener.IncomingSessionRequest.Decision)

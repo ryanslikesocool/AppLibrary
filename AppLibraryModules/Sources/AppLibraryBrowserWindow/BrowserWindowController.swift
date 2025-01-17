@@ -120,7 +120,7 @@ private extension BrowserWindowController {
 	/// - Parameter screen: The screen the window will be displayed on.
 	/// Leave this `nil` to use `NSScreen.main`.
 	static func calculateWindowOrigin(on screen: NSScreen? = nil) -> CGPoint? {
-		let dockHelper = DockHelperServer.shared
+		let accessibilityHelper = AccessibilityHelperServer.shared
 
 		guard
 			let screen = screen ?? NSScreen.main,
@@ -128,8 +128,8 @@ private extension BrowserWindowController {
 //			let dock = Dock.main,
 //			let iconRect = DockTile.main(in: dock)?.rect,
 //			let (dockRect, dockEdge) = dock.rectAndEstimatedEdge(on: screen)
-			let iconRect = try? dockHelper.requestDockTileRect(for: Bundle.main),
-			let (dockRect, dockEdge) = try? dockHelper.requestRectAndEstimatedEdge(screen: screen)
+			let iconRect = try? accessibilityHelper.requestDockTileRect(for: Bundle.main),
+			let (dockRect, dockEdge) = try? accessibilityHelper.requestRectAndEstimatedEdge(screen: screen)
 		else {
 			return nil
 		}

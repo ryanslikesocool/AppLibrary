@@ -12,6 +12,9 @@ let package = Package(
 		.library(name: "AppLibraryExtensionServer", targets: ["AppLibraryExtensionServer"]),
 		.library(name: "AppLibraryExtensionClient", targets: ["AppLibraryExtensionClient"]),
 	],
+	dependencies: [
+		.package(path: "../AppLibraryCore"),
+	],
 	targets: [
 		.target(
 			name: "AppLibraryExtensionServer",
@@ -27,6 +30,11 @@ let package = Package(
 			]
 		),
 
-		.target(name: "AppLibraryExtensionCommon"),
+		.target(
+			name: "AppLibraryExtensionCommon",
+			dependencies: [
+				"AppLibraryCore",
+			]
+		),
 	]
 )
