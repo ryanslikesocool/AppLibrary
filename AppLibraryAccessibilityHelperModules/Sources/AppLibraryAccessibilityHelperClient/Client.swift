@@ -1,5 +1,5 @@
 import AppKit
-import AppLibraryAccessibilityHelperShared
+import AppLibraryAccessibilityHelperCommon
 import AppLibraryExtensionClient
 import AppLibraryExtensionCommon
 import CoreGraphics

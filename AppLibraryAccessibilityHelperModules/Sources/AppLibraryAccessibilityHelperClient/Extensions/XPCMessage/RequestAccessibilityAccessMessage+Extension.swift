@@ -1,4 +1,4 @@
-import AppLibraryAccessibilityHelperShared
+import AppLibraryAccessibilityHelperCommon
 import AppLibraryExtensionClient
 import XPC
 

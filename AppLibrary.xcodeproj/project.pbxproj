@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		AF33F0A02CFAF76000767656 /* AppLibraryModules in Frameworks */ = {isa = PBXBuildFile; productRef = AF33F09F2CFAF76000767656 /* AppLibraryModules */; };
-		AFACA1AB2D3A39E300633975 /* AppLibraryAccessibilityHelperModules in Frameworks */ = {isa = PBXBuildFile; productRef = AFACA1AA2D3A39E300633975 /* AppLibraryAccessibilityHelperModules */; };
+		AFACAAF32D3A9D0800633975 /* AppLibraryAccessibilityHelperClient in Frameworks */ = {isa = PBXBuildFile; productRef = AFACAAF22D3A9D0800633975 /* AppLibraryAccessibilityHelperClient */; };
 		AFBE9C0E2D36FE9C00B9B12E /* App Library Helper (Accessibility).xpc in Embed XPC Services */ = {isa = PBXBuildFile; fileRef = AFBE9C042D36FE9C00B9B12E /* App Library Helper (Accessibility).xpc */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
@@ -90,7 +90,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AFACA1AB2D3A39E300633975 /* AppLibraryAccessibilityHelperModules in Frameworks */,
+				AFACAAF32D3A9D0800633975 /* AppLibraryAccessibilityHelperClient in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -168,7 +168,7 @@
 			);
 			name = "App Library Helper (Accessibility)";
 			packageProductDependencies = (
-				AFACA1AA2D3A39E300633975 /* AppLibraryAccessibilityHelperModules */,
+				AFACAAF22D3A9D0800633975 /* AppLibraryAccessibilityHelperClient */,
 			);
 			productName = "AppLibraryHelper-Dock";
 			productReference = AFBE9C042D36FE9C00B9B12E /* App Library Helper (Accessibility).xpc */;
@@ -389,7 +389,7 @@
 				CODE_SIGN_ENTITLEMENTS = AppLibrary/Entitlements.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 69;
+				CURRENT_PROJECT_VERSION = 70;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 838RGQ32CA;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -420,7 +420,7 @@
 				CODE_SIGN_ENTITLEMENTS = AppLibrary/Entitlements.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 69;
+				CURRENT_PROJECT_VERSION = 70;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 838RGQ32CA;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -449,7 +449,7 @@
 				CODE_SIGN_ENTITLEMENTS = "AppLibraryHelper-Accessibility/Entitlements.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 69;
+				CURRENT_PROJECT_VERSION = 70;
 				DEVELOPMENT_TEAM = 838RGQ32CA;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -472,7 +472,7 @@
 				CODE_SIGN_ENTITLEMENTS = "AppLibraryHelper-Accessibility/Entitlements.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 69;
+				CURRENT_PROJECT_VERSION = 70;
 				DEVELOPMENT_TEAM = 838RGQ32CA;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -526,9 +526,9 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = AppLibraryModules;
 		};
-		AFACA1AA2D3A39E300633975 /* AppLibraryAccessibilityHelperModules */ = {
+		AFACAAF22D3A9D0800633975 /* AppLibraryAccessibilityHelperClient */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = AppLibraryAccessibilityHelperModules;
+			productName = AppLibraryAccessibilityHelperClient;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

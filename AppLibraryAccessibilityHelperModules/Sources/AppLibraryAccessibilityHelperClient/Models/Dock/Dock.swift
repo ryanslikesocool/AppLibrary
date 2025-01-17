@@ -1,4 +1,4 @@
-import AppLibraryAccessibilityHelperShared
+import AppLibraryAccessibilityHelperCommon
 import ApplicationServices
 import AXToolbox
 import OSLog

@@ -1,8 +1,8 @@
 import AppKit
-import AppLibraryAccessibilityHelperShared
+import AppLibraryAccessibilityHelperCommon
 import AppLibraryExtensionClient
 
-extension DockRectAndEstimatedEdgeMessage: XPCMessageHandler {
+extension DockEstimatedEdgeMessage: XPCMessageHandler {
 	public typealias Input = Request
 	public typealias Output = Result<Response, Failure>
 
@@ -15,10 +15,10 @@ extension DockRectAndEstimatedEdgeMessage: XPCMessageHandler {
 		assert(screens.count > request.screenIndex)
 		let screen = screens[request.screenIndex]
 
-		guard let (rect, edge) = dock.rectAndEstimatedEdge(on: screen) else {
+		guard let edge = dock.estimatedEdge(on: screen) else {
 			throw AccessibilityHelperMessageError.unexpectedNil
 		}
 
-		return Response(rect: rect, edge: edge)
+		return Response(edge: edge)
 	}
 }

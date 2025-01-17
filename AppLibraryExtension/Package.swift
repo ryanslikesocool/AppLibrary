@@ -11,6 +11,7 @@ let package = Package(
 	products: [
 		.library(name: "AppLibraryExtensionServer", targets: ["AppLibraryExtensionServer"]),
 		.library(name: "AppLibraryExtensionClient", targets: ["AppLibraryExtensionClient"]),
+		.library(name: "AppLibraryExtensionCommon", targets: ["AppLibraryExtensionCommon"]),
 	],
 	dependencies: [
 		.package(url: "https://github.com/ryanslikesocool/XPCToolbox.git", from: "0.0.1"),
@@ -22,7 +23,7 @@ let package = Package(
 			name: "AppLibraryExtensionServer",
 			dependencies: [
 				"XPCToolbox",
-				
+
 				"AppLibraryExtensionCommon",
 			]
 		),
@@ -31,7 +32,7 @@ let package = Package(
 			name: "AppLibraryExtensionClient",
 			dependencies: [
 				"XPCToolbox",
-				
+
 				"AppLibraryExtensionCommon",
 			]
 		),
@@ -40,7 +41,7 @@ let package = Package(
 			name: "AppLibraryExtensionCommon",
 			dependencies: [
 				"XPCToolbox",
-				
+
 				"AppLibraryCore",
 			]
 		),

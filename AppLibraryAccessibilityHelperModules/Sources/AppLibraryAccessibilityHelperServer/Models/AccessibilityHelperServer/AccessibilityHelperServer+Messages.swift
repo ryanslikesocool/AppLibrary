@@ -1,6 +1,6 @@
 import AppKit
-import AppLibraryAccessibilityHelperShared
-import AppLibraryCommon
+import AppLibraryAccessibilityHelperCommon
+import AppLibraryCore
 import AppLibraryExtensionCommon
 import AppLibraryExtensionServer
 import OSLog

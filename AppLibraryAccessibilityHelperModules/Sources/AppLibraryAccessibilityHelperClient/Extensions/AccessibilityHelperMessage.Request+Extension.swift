@@ -1,4 +1,4 @@
-import AppLibraryAccessibilityHelperShared
+import AppLibraryAccessibilityHelperCommon
 
 extension AccessibilityHelperMessage.Request {
 	func performTask() throws -> AccessibilityHelperMessage.Response {

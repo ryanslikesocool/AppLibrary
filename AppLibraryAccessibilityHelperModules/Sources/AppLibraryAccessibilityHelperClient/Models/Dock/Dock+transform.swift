@@ -1,6 +1,5 @@
 import AppKit
-import AppLibraryAccessibilityHelperShared
-import AppLibraryCommon
+import AppLibraryAccessibilityHelperCommon
 import ApplicationServices
 import AXToolbox
 

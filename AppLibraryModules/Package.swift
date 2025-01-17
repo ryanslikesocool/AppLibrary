@@ -18,7 +18,6 @@ let package = Package(
 		.library(name: "AppLibraryRuntimeModel", targets: ["AppLibraryRuntimeModel"]),
 		.library(name: "AppLibraryRuntimeModelViews", targets: ["AppLibraryRuntimeModelViews"]),
 
-		.library(name: "AppLibraryXPCServer", targets: ["AppLibraryXPCServer"]),
 		.library(name: "AppLibraryStorage", targets: ["AppLibraryStorage"]),
 
 		.library(name: "AppLibraryCommon", targets: ["AppLibraryCommon"]),
@@ -32,7 +31,6 @@ let package = Package(
 		.package(url: "https://github.com/ryanslikesocool/SFSymbolToolbox.git", from: "0.0.3"),
 
 		.package(path: "../AppLibraryCore"),
-		.package(path: "../AppLibraryExtension"),
 		.package(path: "../AppLibraryAccessibilityHelperModules"),
 	],
 	targets: [
@@ -50,11 +48,12 @@ let package = Package(
 			dependencies: [
 				"NSMetadataToolbox",
 
+				.product(name: "AppLibraryAccessibilityHelperServer", package: "AppLibraryAccessibilityHelperModules"),
+
 				"AppLibraryCommonViews",
 				"AppLibrarySettingsWindow",
 				"AppLibraryResources",
 				"AppLibraryRuntimeModel",
-				"AppLibraryXPCServer",
 			]
 		),
 
@@ -71,6 +70,7 @@ let package = Package(
 			name: "AppLibraryRuntimeModelViews",
 			dependencies: [
 				"AppLibraryRuntimeModel",
+				"AppLibraryCommonViews",
 			]
 		),
 
@@ -81,16 +81,6 @@ let package = Package(
 				"NSMetadataToolbox",
 
 				"AppLibraryStorage",
-				"AppLibraryCommon",
-			]
-		),
-
-		.target(
-			name: "AppLibraryXPCServer",
-			dependencies: [
-				.product(name: "AppLibraryExtensionServer", package: "AppLibraryExtension"),
-				.product(name: "AppLibraryAccessibilityHelperShared", package: "AppLibraryAccessibilityHelperModules"),
-
 				"AppLibraryCommon",
 			]
 		),

@@ -9,8 +9,8 @@ let package = Package(
 		.macOS(.v14),
 	],
 	products: [
-		.library(name: "AppLibraryAccessibilityHelperModules", targets: ["AppLibraryAccessibilityHelper"]),
-		.library(name: "AppLibraryAccessibilityHelperShared", targets: ["AppLibraryAccessibilityHelperShared"]),
+		.library(name: "AppLibraryAccessibilityHelperClient", targets: ["AppLibraryAccessibilityHelperClient"]),
+		.library(name: "AppLibraryAccessibilityHelperServer", targets: ["AppLibraryAccessibilityHelperServer"]),
 	],
 	dependencies: [
 		.package(url: "https://github.com/ryanslikesocool/AXToolbox.git", from: "0.0.5"),
@@ -20,18 +20,30 @@ let package = Package(
 	],
 	targets: [
 		.target(
-			name: "AppLibraryAccessibilityHelper",
+			name: "AppLibraryAccessibilityHelperClient",
 			dependencies: [
 				"AXToolbox",
 
-				"AppLibraryAccessibilityHelperShared",
+				.product(name: "AppLibraryExtensionClient", package: "AppLibraryExtension"),
+
+				"AppLibraryAccessibilityHelperCommon",
 			]
 		),
 
+			.target(
+				name: "AppLibraryAccessibilityHelperServer",
+				dependencies: [
+					.product(name: "AppLibraryExtensionServer", package: "AppLibraryExtension"),
+
+					"AppLibraryAccessibilityHelperCommon",
+				]
+			),
+
 		.target(
-			name: "AppLibraryAccessibilityHelperShared",
+			name: "AppLibraryAccessibilityHelperCommon",
 			dependencies: [
-				.product(name: "AppLibraryExtensionClient", package: "AppLibraryExtension"),
+				.product(name: "AppLibraryExtensionCommon", package: "AppLibraryExtension"),
+
 				"AppLibraryCore",
 			]
 		),

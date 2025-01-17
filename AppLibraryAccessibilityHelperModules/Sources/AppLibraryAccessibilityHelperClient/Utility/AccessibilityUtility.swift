@@ -1,5 +1,5 @@
 import AppKit
-import AppLibraryAccessibilityHelperShared
+import AppLibraryAccessibilityHelperCommon
 @preconcurrency import var ApplicationServices.HIServices.kAXTrustedCheckOptionPrompt
 import OSLog
 

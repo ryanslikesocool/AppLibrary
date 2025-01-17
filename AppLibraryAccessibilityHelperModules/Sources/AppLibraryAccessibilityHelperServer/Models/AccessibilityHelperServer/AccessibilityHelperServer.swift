@@ -1,4 +1,4 @@
-import AppLibraryAccessibilityHelperShared
+import AppLibraryAccessibilityHelperCommon
 import AppLibraryExtensionCommon
 import AppLibraryExtensionServer
 import OSLog

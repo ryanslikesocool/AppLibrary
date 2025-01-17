@@ -11,12 +11,12 @@ public protocol SettingsFileProtocol: SingletonFileProtocol where
 // MARK: - Default Implementation
 
 public extension SettingsFileProtocol {
-	static var topLevelEncoder: TopLevelEncoder {
+	nonisolated static var topLevelEncoder: TopLevelEncoder {
 		.shared
 			.with(outputFormat: .binary)
 	}
 
-	static var topLevelDecoder: TopLevelDecoder {
+	nonisolated static var topLevelDecoder: TopLevelDecoder {
 		.shared
 	}
 

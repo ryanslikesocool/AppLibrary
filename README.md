@@ -18,11 +18,14 @@ App Library aims to fix that oversight.
 
 
 ## Installation
-App Library requires macOS 14.0 or later.<br/>
-Download and unzip the latest `App Library.app.zip` [release](https://github.com/ryanslikesocool/AppLibrary/releases/latest).<br/>
+App Library requires macOS 14.0 or later.
+<br/>
+Download and unzip the latest `App Library.app.zip` [release]( https://github.com/ryanslikesocool/AppLibrary/releases/latest ).
+<br/>
 Move the app to your Applications folder (and your dock!)
 
 
 ## Known Issues
 - Apps that may have multiple installations, such as Unity, are not currently supported.
-- App Library cannot be sandboxed due to the way it uses accessibility features to locate the dock icon.
+- App Library cannot be completely sandboxed due to the way it uses accessibility features to locate the dock icon.
+	- Note: This is *partially* remedied using a helper application.
