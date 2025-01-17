@@ -2,10 +2,10 @@ import AppLibraryCommon
 import Combine
 import Foundation
 
-public struct GeneralSettings {
-	public var appearance: Appearance
-
-	public var openAtLogin: OpenAtLogin
+@MainActor
+public final class GeneralSettings: ObservableObject {
+	@Published public var appearance: Appearance
+	@Published public var openAtLogin: OpenAtLogin
 
 	public init() {
 		appearance = .system
@@ -13,25 +13,21 @@ public struct GeneralSettings {
 	}
 }
 
-// MARK: - Equatable
-
-extension GeneralSettings: Equatable { }
-
-// MARK: - Hashable
-
-extension GeneralSettings: Hashable { }
-
 // MARK: - Codable
 
-extension GeneralSettings: Codable {
+// NOTE: Implement `Codable` manually since values may change in the future.
+
+extension GeneralSettings: @preconcurrency Encodable, @preconcurrency Decodable {
 	private enum CodingKeys: CodingKey {
 		case appearance
 	}
 
-	public init(from decoder: Decoder) throws {
+	public convenience init(from decoder: Decoder) throws {
 		let container = try decoder.container(keyedBy: CodingKeys.self)
 
 		self.init()
+
+		// NOTE: Use `decodeIfPresent` when possible to avoid issues when adding new settings.
 
 		let appearance = try container.decodeIfPresent(Appearance.self, forKey: .appearance) ?? appearance
 		self.appearance = appearance
@@ -48,31 +44,18 @@ extension GeneralSettings: Codable {
 	}
 }
 
-// MARK: - SingletonStorageFile
+// MARK: - LocalFileProtocol
 
-extension GeneralSettings: SingletonStorageFile {
-	public static let fileURL: URL = URL(for: .general)
+extension GeneralSettings: LocalFileProtocol { }
 
-	@ObservingCurrentValue
-	public static var shared: Self = Self.read(sharedSubscriber) {
-		didSet {
-			// TODO: don't write on every change
-			// only write after a certain time interval or when application enters background
+// MARK: - SingletonFileProtocol
 
-			shared.write()
-		}
-	}
+extension GeneralSettings: SingletonFileProtocol {
+	public static let shared: GeneralSettings = read()
 }
 
-// MARK: -
+// MARK: - SettingsFileProtocol
 
-private extension GeneralSettings {
-	@MainActor
-	static let sharedSubscriber: AnyCancellable = $shared.publisher
-		.sink { newValue in
-			// TODO: don't write on every change
-			// only write after a certain time interval or when application enters background
-
-			newValue.write()
-		}
+extension GeneralSettings: SettingsFileProtocol {
+	public nonisolated static let category: SettingsCategory = .general
 }

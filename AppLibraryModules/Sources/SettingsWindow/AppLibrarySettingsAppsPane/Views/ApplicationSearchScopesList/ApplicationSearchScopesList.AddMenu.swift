@@ -6,8 +6,6 @@ import SwiftUI
 
 extension ApplicationSearchScopesList {
 	struct AddMenu: View {
-		@Storage(apps: \.self) private var locations
-
 		@State private var isFileImporterPresented: Bool = false
 
 		public init() { }
@@ -65,6 +63,6 @@ private extension ApplicationSearchScopesList.AddMenu {
 	}
 
 	func addSearchScope(at url: URL) {
-		locations.addSearchScope(at: url)
+		AppsSettings.shared.addSearchScope(at: url)
 	}
 }

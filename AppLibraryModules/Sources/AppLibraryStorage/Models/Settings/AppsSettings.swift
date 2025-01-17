@@ -2,9 +2,10 @@ import AppLibraryCommon
 import Combine
 import OSLog
 
-public struct AppsSettings {
-	public var searchScopes: Set<URL>
-	public var applicationVisibilityFlags: [ApplicationModelIdentifier: ApplicationVisibility.Set]
+@MainActor
+public final class AppsSettings: ObservableObject {
+	@Published public var searchScopes: Set<URL>
+	@Published public var applicationVisibilityFlags: [ApplicationModelIdentifier: ApplicationVisibility.Set]
 
 	public init() {
 		searchScopes = Set([URL].defaultSearchScopes)
@@ -12,26 +13,22 @@ public struct AppsSettings {
 	}
 }
 
-// MARK: - Equatable
-
-extension AppsSettings: Equatable { }
-
-// MARK: - Hashable
-
-extension AppsSettings: Hashable { }
-
 // MARK: - Codable
 
-extension AppsSettings: Codable {
+// NOTE: Implement `Codable` manually since values may change in the future.
+
+extension AppsSettings: @preconcurrency Encodable, @preconcurrency Decodable {
 	private enum CodingKeys: CodingKey {
 		case searchScopes
 		case applicationVisibilityFlags
 	}
 
-	public init(from decoder: Decoder) throws {
+	public convenience init(from decoder: Decoder) throws {
 		let container = try decoder.container(keyedBy: CodingKeys.self)
 
 		self.init()
+
+		// NOTE: Use `decodeIfPresent` when possible to avoid issues when adding new settings.
 
 		searchScopes = try container.decodeIfPresent(Set<URL>.self, forKey: .searchScopes) ?? searchScopes
 
@@ -61,39 +58,26 @@ extension AppsSettings: Codable {
 	}
 }
 
-// MARK: - SingletonStorageFile
+// MARK: - LocalFileProtocol
 
-extension AppsSettings: SingletonStorageFile {
-	public static let fileURL: URL = URL(for: .apps)
+extension AppsSettings: LocalFileProtocol { }
 
-	@ObservingCurrentValue
-	public static var shared: Self = Self.read(sharedSubscriber) {
-		didSet {
-			// TODO: don't write on every change
-			// only write after a certain time interval or when application enters background
+// MARK: - SingletonFileProtocol
 
-			shared.write()
-		}
-	}
+extension AppsSettings: SingletonFileProtocol {
+	public static let shared: AppsSettings = read()
 }
 
-// MARK: -
+// MARK: - SettingsFileProtocol
 
-private extension AppsSettings {
-	@MainActor
-	static let sharedSubscriber: AnyCancellable = $shared.publisher
-		.sink { newValue in
-			// TODO: don't write on every change
-			// only write after a certain time interval or when application enters background
-
-			newValue.write()
-		}
+extension AppsSettings: SettingsFileProtocol {
+	public nonisolated static let category: SettingsCategory = .apps
 }
 
 // MARK: -
 
 public extension AppsSettings {
-	mutating func hideApplication(with applicationIdentifier: ApplicationModelIdentifier) {
+	func hideApplication(with applicationIdentifier: ApplicationModelIdentifier) {
 		var visibilityFlags = applicationVisibilityFlags[applicationIdentifier, default: .all]
 		// NOTE: Because it is `mutating`, the `remove(_:)` operation must be the right side of the `!=` operation.
 		let removed = visibilityFlags != visibilityFlags.remove(.browser)
@@ -105,7 +89,7 @@ public extension AppsSettings {
 		""")
 	}
 
-	mutating func removeApplicationVisibilityFlags(for applicationIdentifier: ApplicationModelIdentifier) {
+	func removeApplicationVisibilityFlags(for applicationIdentifier: ApplicationModelIdentifier) {
 		let removed: Bool = applicationVisibilityFlags.removeValue(forKey: applicationIdentifier) != nil
 
 		Logger.module.debug("""
@@ -114,7 +98,7 @@ public extension AppsSettings {
 		""")
 	}
 
-	mutating func addSearchScope(at url: URL) {
+	func addSearchScope(at url: URL) {
 		let added = searchScopes.insert(url).inserted
 
 		Logger.module.debug("""
@@ -123,7 +107,7 @@ public extension AppsSettings {
 		""")
 	}
 
-	mutating func removeSearchScope(at url: URL) {
+	func removeSearchScope(at url: URL) {
 		let removed = searchScopes.remove(url) != nil
 
 		Logger.module.debug("""

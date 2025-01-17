@@ -5,7 +5,7 @@ import OSLog
 import SwiftUI
 
 struct ApplicationSearchScopesList: View {
-	@Storage(apps: \.self) private var apps
+	@StorageFile(AppsSettings.self) private var apps
 	@Storage(apps: \.searchScopes) private var searchScopes
 
 	public init() { }

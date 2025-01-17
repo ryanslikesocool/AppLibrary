@@ -2,13 +2,12 @@ import AppLibraryCommon
 import Combine
 import Foundation
 
-public struct LayoutSettings {
-	public var layout: LibraryLayout
-
-	public var groupCriteria: ApplicationGroupCriteria?
-	public var additionalGroups: AdditionalApplicationGroup.Set
-
-	public var infoVisibility: ApplicationInfoVisibility.Set
+@MainActor
+public final class LayoutSettings: ObservableObject {
+	@Published public var layout: LibraryLayout
+	@Published public var groupCriteria: ApplicationGroupCriteria?
+	@Published public var additionalGroups: AdditionalApplicationGroup.Set
+	@Published public var infoVisibility: ApplicationInfoVisibility.Set
 
 	public init() {
 		layout = .list
@@ -18,27 +17,23 @@ public struct LayoutSettings {
 	}
 }
 
-// MARK: - Equatable
-
-extension LayoutSettings: Equatable { }
-
-// MARK: - Hashable
-
-extension LayoutSettings: Hashable { }
-
 // MARK: - Codable
 
-extension LayoutSettings: Codable {
+// NOTE: Implement `Codable` manually since values may change in the future.
+
+extension LayoutSettings: @preconcurrency Encodable, @preconcurrency Decodable {
 	private enum CodingKeys: CodingKey {
 		case layout
 		case groupCriteria
 		case additionalGroups
 	}
 
-	public init(from decoder: Decoder) throws {
+	public convenience init(from decoder: Decoder) throws {
 		let container = try decoder.container(keyedBy: CodingKeys.self)
 
 		self.init()
+
+		// NOTE: Use `decodeIfPresent` when possible to avoid issues when adding new settings.
 
 		layout = try container.decodeIfPresent(LibraryLayout.self, forKey: .layout) ?? layout
 		groupCriteria = try container.decodeIfPresent(ApplicationGroupCriteria.self, forKey: .groupCriteria) ?? groupCriteria
@@ -54,31 +49,18 @@ extension LayoutSettings: Codable {
 	}
 }
 
-// MARK: - SingletonStorageFile
+// MARK: - LocalFileProtocol
 
-extension LayoutSettings: SingletonStorageFile {
-	public static let fileURL: URL = URL(for: .layout)
+extension LayoutSettings: LocalFileProtocol { }
 
-	@ObservingCurrentValue
-	public static var shared: Self = Self.read(sharedSubscriber) {
-		didSet {
-			// TODO: don't write on every change
-			// only write after a certain time interval or when application enters background
+// MARK: - SingletonFileProtocol
 
-			shared.write()
-		}
-	}
+extension LayoutSettings: SingletonFileProtocol {
+	public static let shared: LayoutSettings = read()
 }
 
-// MARK: -
+// MARK: - SettingsFileProtocol
 
-private extension LayoutSettings {
-	@MainActor
-	static let sharedSubscriber: AnyCancellable = $shared.publisher
-		.sink { newValue in
-			// TODO: don't write on every change
-			// only write after a certain time interval or when application enters background
-
-			newValue.write()
-		}
+extension LayoutSettings: SettingsFileProtocol {
+	public nonisolated static let category: SettingsCategory = .layout
 }
