@@ -15,19 +15,24 @@ let package = Package(
 		.library(name: "AppLibraryAboutWindow", targets: ["AppLibraryAboutWindow"]),
 		.library(name: "AppLibrarySettingsWindow", targets: ["AppLibrarySettingsWindow"]),
 
-		.library(name: "AppLibraryDockUtility", targets: ["AppLibraryDockUtility"]),
 		.library(name: "AppLibraryRuntimeModel", targets: ["AppLibraryRuntimeModel"]),
+		.library(name: "AppLibraryRuntimeModelViews", targets: ["AppLibraryRuntimeModelViews"]),
+
+		.library(name: "AppLibraryXPCServer", targets: ["AppLibraryXPCServer"]),
 		.library(name: "AppLibraryStorage", targets: ["AppLibraryStorage"]),
+
 		.library(name: "AppLibraryCommon", targets: ["AppLibraryCommon"]),
 		.library(name: "AppLibraryCommonViews", targets: ["AppLibraryCommonViews"]),
 		.library(name: "AppLibraryResources", targets: ["AppLibraryResources"]),
 	],
 	dependencies: [
-		.package(url: "https://github.com/ryanslikesocool/AXToolbox.git", from: "0.0.5"),
 		.package(url: "https://github.com/ryanslikesocool/BundleToolbox.git", from: "0.0.5"),
 		.package(url: "https://github.com/ryanslikesocool/LocalizationToolbox.git", from: "0.0.4"),
 		.package(url: "https://github.com/ryanslikesocool/NSMetadataToolbox.git", from: "0.0.6"),
 		.package(url: "https://github.com/ryanslikesocool/SFSymbolToolbox.git", from: "0.0.2"),
+
+		.package(path: "../AppLibraryExtension"),
+		.package(path: "../AppLibraryDockHelperModules"),
 	],
 	targets: [
 		.target(
@@ -42,14 +47,13 @@ let package = Package(
 		.target(
 			name: "AppLibraryBrowserWindow",
 			dependencies: [
-				"AXToolbox",
 				"NSMetadataToolbox",
 
 				"AppLibraryCommonViews",
 				"AppLibrarySettingsWindow",
 				"AppLibraryResources",
 				"AppLibraryRuntimeModel",
-				"AppLibraryDockUtility",
+				"AppLibraryXPCServer",
 			]
 		),
 
@@ -81,9 +85,10 @@ let package = Package(
 		),
 
 		.target(
-			name: "AppLibraryDockUtility",
+			name: "AppLibraryXPCServer",
 			dependencies: [
-				"AXToolbox",
+				.product(name: "AppLibraryExtensionServer", package: "AppLibraryExtension"),
+				.product(name: "AppLibraryDockHelperShared", package: "AppLibraryDockHelperModules"),
 
 				"AppLibraryCommon",
 			]

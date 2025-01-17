@@ -23,7 +23,7 @@
         }
       }
     },
-    "ITEM.FORMAT.ADJECTIVE_%@" : {
+    "ITEM.FORMAT.PAST_PARTICIPLE_%@" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {

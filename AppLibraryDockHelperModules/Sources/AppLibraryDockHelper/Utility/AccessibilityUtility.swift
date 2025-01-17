@@ -1,9 +1,9 @@
 import AppKit
-import AppLibraryResources
+import AppLibraryDockHelperShared
 @preconcurrency import var ApplicationServices.HIServices.kAXTrustedCheckOptionPrompt
 import OSLog
 
-@MainActor
+// @MainActor
 public enum AccessibilityUtility {
 	/// Returns whether the current process is a trusted accessibility client.
 	public static var isTrusted: Bool {

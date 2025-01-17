@@ -29,16 +29,16 @@ public extension LocalizedStringResource {
 			/// - ``format``
 			public enum Format {
 				private static let verbFormat = LocalizedStringResource("ITEM.FORMAT.VERB_\(placeholder: .object)", table: localizationTable)
-				private static let adjectiveFormat = LocalizedStringResource("ITEM.FORMAT.ADJECTIVE_\(placeholder: .object)", table: localizationTable)
+				private static let pastParticipleFormat = LocalizedStringResource("ITEM.FORMAT.PAST_PARTICIPLE_\(placeholder: .object)", table: localizationTable)
 
 				public static func verb(_ argument: some CVarArg) -> String {
 					let options = String.LocalizationOptions(replacements: argument)
 					return String(localized: verbFormat, options: options)
 				}
 
-				public static func adjective(_ argument: some CVarArg) -> String {
+				public static func pastParticiple(_ argument: some CVarArg) -> String {
 					let options = String.LocalizationOptions(replacements: argument)
-					return String(localized: adjectiveFormat, options: options)
+					return String(localized: pastParticipleFormat, options: options)
 				}
 			}
 		}

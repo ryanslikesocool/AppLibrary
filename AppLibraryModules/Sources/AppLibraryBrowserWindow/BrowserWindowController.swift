@@ -1,7 +1,7 @@
 import AppKit
+import AppLibraryXPCServer
 import AppLibraryCommon
 import AppLibraryCommonViews
-import AppLibraryDockUtility
 import AppLibraryResources
 import OSLog
 import SwiftUI
@@ -120,11 +120,16 @@ private extension BrowserWindowController {
 	/// - Parameter screen: The screen the window will be displayed on.
 	/// Leave this `nil` to use `NSScreen.main`.
 	static func calculateWindowOrigin(on screen: NSScreen? = nil) -> CGPoint? {
+		let dockHelper = DockHelperServer.shared
+
 		guard
 			let screen = screen ?? NSScreen.main,
-			let dock = Dock.main,
-			let iconRect = DockTile.main(in: dock)?.rect,
-			let (dockRect, dockEdge) = dock.rectAndEstimatedEdge(on: screen)
+//			let screenIndex = NSScreen.screens.firstIndex(of: screen),
+//			let dock = Dock.main,
+//			let iconRect = DockTile.main(in: dock)?.rect,
+//			let (dockRect, dockEdge) = dock.rectAndEstimatedEdge(on: screen)
+			let iconRect = try? dockHelper.requestDockTileRect(for: Bundle.main),
+			let (dockRect, dockEdge) = try? dockHelper.requestRectAndEstimatedEdge(screen: screen)
 		else {
 			return nil
 		}

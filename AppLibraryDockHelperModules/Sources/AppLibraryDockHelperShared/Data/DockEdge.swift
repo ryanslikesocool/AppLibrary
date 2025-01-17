@@ -21,3 +21,7 @@ extension DockEdge: Equatable { }
 // MARK: - Hashable
 
 extension DockEdge: Hashable { }
+
+// MARK: - Codable
+
+extension DockEdge: Codable { }

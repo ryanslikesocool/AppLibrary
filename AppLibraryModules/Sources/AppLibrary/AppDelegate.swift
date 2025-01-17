@@ -13,8 +13,6 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 		_ = GeneralSettings.shared
 		_ = AppsSettings.shared
 		_ = LayoutSettings.shared
-
-		AccessibilityUtility.requestAccess()
 	}
 
 	func applicationDidBecomeActive(_ notification: Notification) {

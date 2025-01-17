@@ -26,6 +26,6 @@ extension ApplicationVisibilityList.Item {
 private extension ApplicationVisibilityList.Item.VisibilityFlagToggle {
 	func makeTitleText() -> String {
 		let flagName = String(localized: flagName)
-		return LocalizedStringResource.applicationVisibilityList.item.format.verb(flagName)
+		return LocalizedStringResource.applicationVisibilityList.item.format.pastParticiple(flagName)
 	}
 }

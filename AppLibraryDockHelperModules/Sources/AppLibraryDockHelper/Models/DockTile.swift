@@ -1,7 +1,5 @@
-import AppKit
 import ApplicationServices
 import AXToolbox
-import OSLog
 
 public struct DockTile {
 	private let accessibilityElement: AXUIElement
@@ -14,11 +12,12 @@ public struct DockTile {
 // MARK: - Constants
 
 public extension DockTile {
-	// TODO: Should `main` be retained somewhere so we don't keep recalculating it?
-	// Or is it safer to recalculate it?
-	static func main(in dock: Dock? = Dock.main) -> Self? {
-		dock?.applicationTile(withURL: Bundle.main.bundleURL)
-	}
+	// NOTE: `Bundle.main` will return the extension bundle.
+//	// TODO: Should `main` be retained somewhere so we don't keep recalculating it?
+//	// Or is it safer to recalculate it?
+//	static func main(in dock: Dock? = Dock.main) -> Self? {
+//		dock?.applicationTile(withURL: Bundle.main.bundleURL)
+//	}
 }
 
 // MARK: -

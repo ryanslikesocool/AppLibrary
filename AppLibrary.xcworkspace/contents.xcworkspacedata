@@ -11,6 +11,12 @@
       location = "group:AppLibrary.xcodeproj">
    </FileRef>
    <FileRef
+      location = "group:AppLibraryExtension">
+   </FileRef>
+   <FileRef
+      location = "group:AppLibraryDockHelperModules">
+   </FileRef>
+   <FileRef
       location = "group:AppLibraryModules">
    </FileRef>
 </Workspace>

@@ -1,5 +1,4 @@
-import AppKit
-import AppLibraryCommon
+import AppLibraryDockHelperShared
 import ApplicationServices
 import AXToolbox
 import OSLog

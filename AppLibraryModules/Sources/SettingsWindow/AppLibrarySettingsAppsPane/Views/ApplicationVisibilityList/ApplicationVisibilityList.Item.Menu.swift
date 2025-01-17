@@ -62,7 +62,7 @@ private extension ApplicationVisibility.Set {
 						String(localized: item.localizedStringResource)
 					}
 				let itemList = ListFormatter.localizedString(byJoining: items)
-				return LocalizedStringResource.applicationVisibilityList.item.format.adjective(itemList)
+				return LocalizedStringResource.applicationVisibilityList.item.format.pastParticiple(itemList)
 		}
 	}
 }
