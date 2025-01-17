@@ -11,17 +11,20 @@ public extension AccessibilityHelperServer {
 	func requestDockTileRect(
 		for bundle: Bundle = .main
 	) throws -> CGRect {
-		typealias Message = DockTileRectMessage
-
 		Self.logger.debug("""
 		\(StaticString.startXPCRequestPrefix)
 		- Function: \(#function)
 		""")
 
-		let request = Message.Request(bundleURL: bundle.bundleURL)
-		let response: Message.Response = try session.sendSync(request: request)
+		let request = Message.Request.dockTileRect(bundleURL: bundle.bundleURL)
+		let response: Message.Response = try session.sendSync(request)
 
-		return response.rect
+		guard case let .dockTileRect(result) = response else {
+			throw XPCFailure.invalidResponse
+		}
+		let responseValue = try result.get()
+
+		return responseValue.rect
 	}
 
 	// MARK: requestEstimatedEdge
@@ -29,17 +32,22 @@ public extension AccessibilityHelperServer {
 	func requestEstimatedEdge(
 		screenIndex: Int
 	) throws -> DockEdge {
-		typealias Message = DockEstimatedEdgeMessage
+		typealias Message = AccessibilityHelperMessage
 
 		Self.logger.debug("""
 		\(StaticString.startXPCRequestPrefix)
 		- Function: \(#function)
 		""")
 
-		let request = Message.Request(screenIndex: screenIndex)
-		let response: Message.Response = try session.sendSync(request: request)
+		let request = Message.Request.dockEstimatedEdge(screenIndex: screenIndex)
+		let response: Message.Response = try session.sendSync(request)
 
-		return response.edge
+		guard case let .dockEstimatedEdge(result) = response else {
+			throw XPCFailure.invalidResponse
+		}
+		let responseValue = try result.get()
+
+		return responseValue.edge
 	}
 
 	func requestEstimatedEdge(
@@ -57,17 +65,20 @@ public extension AccessibilityHelperServer {
 	func requestRectAndEstimatedEdge(
 		screenIndex: Int
 	) throws -> (rect: CGRect, edge: DockEdge) {
-		typealias Message = DockRectAndEstimatedEdgeMessage
-
 		Self.logger.debug("""
 		\(StaticString.startXPCRequestPrefix)
 		- Function: \(#function)
 		""")
 
-		let request = Message.Request(screenIndex: screenIndex)
-		let response: Message.Response = try session.sendSync(request: request)
+		let request = Message.Request.dockRectAndEstimatedEdge(screenIndex: screenIndex)
+		let response: Message.Response = try session.sendSync(request)
 
-		return (response.rect, response.edge)
+		guard case let .dockRectAndEstimatedEdge(result) = response else {
+			throw XPCFailure.invalidResponse
+		}
+		let responseValue = try result.get()
+
+		return (responseValue.rect, responseValue.edge)
 	}
 
 	func requestRectAndEstimatedEdge(
@@ -84,16 +95,19 @@ public extension AccessibilityHelperServer {
 
 	@discardableResult
 	func requestAccessibilityAccess() throws -> Bool {
-		typealias Message = RequestAccessibilityAccessMessage
-
 		Self.logger.debug("""
 		\(StaticString.startXPCRequestPrefix)
 		- Function: \(#function)
 		""")
 
-		let request = Message.Request()
-		let response: Message.Response = try session.sendSync(request: request)
+		let request = Message.Request.requestAccessibilityAccess()
+		let response: Message.Response = try session.sendSync(request)
 
-		return response.success
+		guard case let .requestAccessibilityAccess(result) = response else {
+			throw XPCFailure.invalidResponse
+		}
+		let responseValue = try result.get()
+
+		return responseValue.success
 	}
 }

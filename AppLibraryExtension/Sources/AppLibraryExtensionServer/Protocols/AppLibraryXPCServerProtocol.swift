@@ -1,5 +1,6 @@
 import AppLibraryExtensionCommon
 @preconcurrency import XPC
+import XPCToolbox
 
 public protocol AppLibraryXPCServerProtocol: AnyObject {
 	/// The name of the XPC service to connect to.

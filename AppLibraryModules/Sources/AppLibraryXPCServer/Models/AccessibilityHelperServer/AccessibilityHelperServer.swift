@@ -2,6 +2,7 @@ import AppLibraryAccessibilityHelperShared
 import AppLibraryExtensionCommon
 import AppLibraryExtensionServer
 import OSLog
+import XPCToolbox
 
 @MainActor
 public final class AccessibilityHelperServer: AppLibraryXPCServer {

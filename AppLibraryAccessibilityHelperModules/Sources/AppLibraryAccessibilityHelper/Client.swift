@@ -5,6 +5,7 @@ import AppLibraryExtensionCommon
 import CoreGraphics
 import OSLog
 import XPC
+import XPCToolbox
 
 @main
 public struct Client: AppLibraryXPCClientProtocol {
@@ -34,7 +35,7 @@ public struct Client: AppLibraryXPCClientProtocol {
 	}
 
 	// The function that performs the work of the service.
-	func performTask(with request: Message.Request) -> (any Encodable)? {
+	func performTask(with request: AccessibilityHelperMessage.Request) -> (any Encodable)? {
 		do {
 			// Return an encodable response that will get sent back to the client.
 			return try request.performTask()

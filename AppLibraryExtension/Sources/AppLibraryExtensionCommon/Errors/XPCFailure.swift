@@ -1,4 +1,5 @@
 public enum XPCFailure {
+	case unexpectedRequest
 	case requestFailed
 	case invalidResponse
 }

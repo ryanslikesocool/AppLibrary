@@ -1,5 +1,5 @@
 {
-  "originHash" : "88628bc62a6984753ed2644b92b87230df054e80b3042b1e59d93f8e98f09781",
+  "originHash" : "ed455fa5fa7483b239ab4b2e909ae69d99cf3368b226a4eb875cc7da3512160d",
   "pins" : [
     {
       "identity" : "axtoolbox",
@@ -53,6 +53,15 @@
       "state" : {
         "revision" : "2a85cad13343421be8c3b4b37265a894f2763c0c",
         "version" : "0.0.3"
+      }
+    },
+    {
+      "identity" : "xpctoolbox",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ryanslikesocool/XPCToolbox.git",
+      "state" : {
+        "revision" : "e010d7be364386c5f61e7277793fdcef3e20959e",
+        "version" : "0.0.1"
       }
     }
   ],

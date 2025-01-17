@@ -33,5 +33,10 @@
 		"name": "Swift Algorithms",
 		"projectURL": "https://github.com/apple/swift-algorithms",
 		"licensePath": "blob/main/LICENSE.txt"
+	},
+	{
+		"name": "XPCToolbox",
+		"projectURL": "https://github.com/ryanslikesocool/XPCToolbox",
+		"licensePath": "blob/main/LICENSE.md"
 	}
 ]

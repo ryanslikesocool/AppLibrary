@@ -1,5 +1,6 @@
 import AppLibraryExtensionCommon
 import XPC
+import XPCToolbox
 
 open class AppLibraryXPCServer: AppLibraryXPCServerProtocol {
 	private var _session: XPCSession!

@@ -1,5 +1,6 @@
 import AppLibraryExtensionCommon
 @preconcurrency import XPC
+import XPCToolbox
 
 public protocol AppLibraryXPCClientProtocol {
 	/// The XPC service name that clients use to connect to the service.
