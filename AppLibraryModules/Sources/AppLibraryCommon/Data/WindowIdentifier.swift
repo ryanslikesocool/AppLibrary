@@ -70,11 +70,11 @@ public extension WindowIdentifier {
 // MARK: - Constants
 
 public extension WindowIdentifier {
-	static let appLibrary = Self("com.DevelopedWithLove.AppLibrary.AppLibrary")
+	static let browser = Self("\(Bundle.main.bundleIdentifier!).Browser")
 
 	static let settings = Self("com_apple_SwiftUI_Settings_window")
 
-	static let about = Self("com.DevelopedWithLove.AppLibrary.About")
+	static let about = Self("\(Bundle.main.bundleIdentifier!).About")
 }
 
 // MARK: -

@@ -13,6 +13,10 @@ struct MainMenu: Commands {
 		CommandGroup(after: .toolbar) {
 			RefreshButton()
 		}
+
+		CommandGroup(replacing: .singleWindowList) {
+			BrowserWindowLink()
+		}
 	}
 }
 

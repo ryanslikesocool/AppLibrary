@@ -7,9 +7,9 @@ public struct SectionStyleConfiguration {
 
 	@MainActor
 	init<Content, Header, Footer>(
-		content: () -> Content,
-		header: () -> Header,
-		footer: () -> Footer
+		content: Content,
+		header: Header,
+		footer: Footer
 	) where
 		Content: View,
 		Header: View,
@@ -18,17 +18,17 @@ public struct SectionStyleConfiguration {
 		self.content = if Content.self == EmptyView.self {
 			nil
 		} else {
-			ContentView(content())
+			ContentView(content)
 		}
 		self.header = if Header.self == EmptyView.self {
 			nil
 		} else {
-			HeaderView(header())
+			HeaderView(header)
 		}
 		self.footer = if Footer.self == EmptyView.self {
 			nil
 		} else {
-			FooterView(footer())
+			FooterView(footer)
 		}
 	}
 }

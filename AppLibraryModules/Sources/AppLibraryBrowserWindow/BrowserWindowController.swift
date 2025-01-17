@@ -65,16 +65,16 @@ extension BrowserWindowController: NSWindowDelegate {
 // MARK: - Constants
 
 extension BrowserWindowController {
-	static let logger: Logger = Logger(category: BrowserWindowController.self)
+	nonisolated static let logger: Logger = Logger(category: BrowserWindowController.self)
 
-	static let windowSize: CGSize = CGSize(width: 300, height: 450)
+	nonisolated static let windowSize: CGSize = CGSize(width: 300, height: 450)
 
 	/// The padding from the edge of the window to the dock.
 	///
 	/// The accessibility API used to calculate the position the window automatically adds some padding by default.
-	static let windowPadding: CGFloat = 0
+	nonisolated static let windowPadding: CGFloat = 0
 
-	static let windowIdentifier: NSUserInterfaceItemIdentifier = NSUserInterfaceItemIdentifier(WindowIdentifier.appLibrary)
+	nonisolated static let windowIdentifier: NSUserInterfaceItemIdentifier = NSUserInterfaceItemIdentifier(WindowIdentifier.browser)
 }
 
 // MARK: -

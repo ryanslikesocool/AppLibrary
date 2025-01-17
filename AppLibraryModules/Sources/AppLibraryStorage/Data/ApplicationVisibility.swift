@@ -47,8 +47,8 @@ extension ApplicationVisibility: CaseIterable { }
 extension ApplicationVisibility: CustomLocalizedStringResourceConvertible {
 	public var localizedStringResource: LocalizedStringResource {
 		switch self {
-			case .browser: .applicationVisibilityList.item.browser
-			case .searchResults: .applicationVisibilityList.item.searchResults
+			case .browser: .applicationVisibilityPicker.item.browser
+			case .searchResults: .applicationVisibilityPicker.item.searchResults
 		}
 	}
 }

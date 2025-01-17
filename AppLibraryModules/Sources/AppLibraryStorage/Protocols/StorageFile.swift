@@ -15,6 +15,11 @@ public extension StorageFile {
 	}
 
 	func write(to url: URL) throws {
+		try FileManager.default.createDirectory(
+			at: url.deletingLastPathComponent(),
+			withIntermediateDirectories: true
+		)
+
 		let data: Data = try PropertyListEncoder.shared.encode(self)
 		try data.write(to: url, options: .atomic)
 	}

@@ -8,6 +8,9 @@ public struct ShowInFinderButton<Label>: View where
 	private let url: URL?
 	private let label: Label
 
+	/// - Parameters:
+	///   - url:
+	///   - label:
 	public init(
 		_ url: URL?,
 		@ViewBuilder label: () -> Label
@@ -37,6 +40,8 @@ private extension ShowInFinderButton {
 public extension ShowInFinderButton where
 	Label == SwiftUI.Label<Text, Image>
 {
+	/// - Parameters:
+	///   - url:
 	init(_ url: URL?) {
 		self.init(url) {
 			Label(

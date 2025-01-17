@@ -42,6 +42,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		AF8E572C2D3A0A4E00D22B0C /* Exceptions for "AppLibrary" folder in "App Library" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = AF33F06A2CFAF53F00767656 /* App Library */;
+		};
 		AFBE9C112D36FE9C00B9B12E /* Exceptions for "AppLibraryHelper-Dock" folder in "App Library Helper (Dock)" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
@@ -54,6 +61,9 @@
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		AF33F06D2CFAF53F00767656 /* AppLibrary */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				AF8E572C2D3A0A4E00D22B0C /* Exceptions for "AppLibrary" folder in "App Library" target */,
+			);
 			path = AppLibrary;
 			sourceTree = "<group>";
 		};
@@ -379,7 +389,7 @@
 				CODE_SIGN_ENTITLEMENTS = AppLibrary/Entitlements.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 12;
+				CURRENT_PROJECT_VERSION = 47;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 838RGQ32CA;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -410,7 +420,7 @@
 				CODE_SIGN_ENTITLEMENTS = AppLibrary/Entitlements.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 12;
+				CURRENT_PROJECT_VERSION = 47;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 838RGQ32CA;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -439,7 +449,7 @@
 				CODE_SIGN_ENTITLEMENTS = "AppLibraryHelper-Dock/Entitlements.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 12;
+				CURRENT_PROJECT_VERSION = 47;
 				DEVELOPMENT_TEAM = 838RGQ32CA;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -462,7 +472,7 @@
 				CODE_SIGN_ENTITLEMENTS = "AppLibraryHelper-Dock/Entitlements.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 12;
+				CURRENT_PROJECT_VERSION = 47;
 				DEVELOPMENT_TEAM = 838RGQ32CA;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;

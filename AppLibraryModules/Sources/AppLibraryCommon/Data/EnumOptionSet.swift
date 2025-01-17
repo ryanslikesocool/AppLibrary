@@ -99,3 +99,10 @@ public extension EnumOptionSet where
 			}
 	}
 }
+
+public extension EnumOptionSet {
+	subscript(element: Enum) -> Bool {
+		get { self[Self(element)] }
+		set { self[Self(element)] = newValue }
+	}
+}

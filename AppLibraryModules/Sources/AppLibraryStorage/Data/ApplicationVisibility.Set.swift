@@ -8,7 +8,7 @@ public extension ApplicationVisibility {
 // MARK: - Constants
 
 public extension ApplicationVisibility.Set {
-	/// The application is not visible.
+	/// The application is not visible in any contexts.
 	///
 	/// This is equivalent to ``none``.
 	static let hidden: Self = Self.none
@@ -24,4 +24,9 @@ public extension ApplicationVisibility.Set {
 	/// ## See Also
 	/// ``ApplicationVisibility/searchResults``
 	static let searchResults = Self(.searchResults)
+
+	/// The application visible in all contexts.
+	///
+	/// This is equivalent to ``all``.
+	static let visible: Self = Self.all
 }

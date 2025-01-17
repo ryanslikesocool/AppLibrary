@@ -7,18 +7,17 @@ package struct AppsPane: View {
 	public init() { }
 
 	public var body: some View {
-		SheetFormItem(
-			title: .applicationSearchScopesList.title,
+		SheetLink(
+			.applicationSearchScopesList.title,
 			description: .applicationSearchScopesList.form.description,
 			sheetContent: ApplicationSearchScopesSheet.init
 		)
 
-		SheetFormItem(
-			title: .applicationVisibilityList.title,
-			description: .applicationVisibilityList.form.description,
-			sheetContent: ApplicationHideFlagsSheet.init
+		SheetLink(
+			.applicationConfigurationSheet.title,
+			sheetContent: ApplicationConfigurationSheet.init
 		)
-		
+
 		RefreshApplicationsFormItem()
 	}
 }

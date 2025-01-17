@@ -1,0 +1,64 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "DESCRIPTION_%@" : {
+      "comment" : "The argument is the value for the \"ACTION.HIDE\" key.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Configure where the app is visible.\nThe app can also be hidden by right-clicking on it in the Library and selecting “%@”."
+          }
+        }
+      }
+    },
+    "ITEM.BROWSER_%@" : {
+      "comment" : "The argument is the title of the browser window.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@"
+          }
+        }
+      },
+      "shouldTranslate" : false
+    },
+    "ITEM.FORMAT.ADJECTIVE_%@" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Visible in %@"
+          }
+        }
+      }
+    },
+    "ITEM.SEARCH_RESULTS" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Search Results"
+          }
+        }
+      }
+    },
+    "LABEL" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Visibility"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

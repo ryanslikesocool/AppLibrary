@@ -9,35 +9,44 @@ public struct StyledSection<Content, Header, Footer>: View where
 
 	@Environment(\.sectionStyle) private var style
 
-	private let content: () -> Content
-	private let header: () -> Header
-	private let footer: () -> Footer
+	private let content: Content
+	private let header: Header
+	private let footer: Footer
 
+	/// - Parameters:
+	///   - content:
+	///   - header:
+	///   - footer:
 	public init(
-		@ViewBuilder content: @escaping () -> Content,
-		@ViewBuilder header: @escaping () -> Header,
-		@ViewBuilder footer: @escaping () -> Footer
+		@ViewBuilder content: () -> Content,
+		@ViewBuilder header: () -> Header,
+		@ViewBuilder footer: () -> Footer
 	) {
-		self.content = content
-		self.header = header
-		self.footer = footer
+		self.content = content()
+		self.header = header()
+		self.footer = footer()
 	}
 
 	public var body: some View {
-		style.makeBody(configuration: SectionStyleConfiguration(
+		let configuration = Configuration(
 			content: content,
 			header: header,
 			footer: footer
-		))
+		)
+
+		style.makeBody(configuration: configuration)
 	}
 }
 
 // MARK: - Convenience
 
 public extension StyledSection {
+	/// - Parameters:
+	///   - title:
+	///   - content:
 	init<S>(
 		_ title: S,
-		@ViewBuilder content: @escaping () -> Content
+		@ViewBuilder content: () -> Content
 	) where
 		Header == Text,
 		Footer == EmptyView,
@@ -46,9 +55,12 @@ public extension StyledSection {
 		self.init(content: content, header: { Text(title) }, footer: EmptyView.init)
 	}
 
+	/// - Parameters:
+	///   - titleKey:
+	///   - content:
 	init(
 		_ titleKey: LocalizedStringKey,
-		@ViewBuilder content: @escaping () -> Content
+		@ViewBuilder content: () -> Content
 	) where
 		Header == Text,
 		Footer == EmptyView
@@ -56,8 +68,10 @@ public extension StyledSection {
 		self.init(content: content, header: { Text(titleKey) }, footer: EmptyView.init)
 	}
 
+	/// - Parameters:
+	///   - content:
 	init(
-		@ViewBuilder content: @escaping () -> Content
+		@ViewBuilder content: () -> Content
 	) where
 		Header == EmptyView,
 		Footer == EmptyView
@@ -65,18 +79,24 @@ public extension StyledSection {
 		self.init(content: content, header: EmptyView.init, footer: EmptyView.init)
 	}
 
+	/// - Parameters:
+	///   - content:
+	///   - header:
 	init(
-		@ViewBuilder content: @escaping () -> Content,
-		@ViewBuilder header: @escaping () -> Header
+		@ViewBuilder content: () -> Content,
+		@ViewBuilder header: () -> Header
 	) where
 		Footer == EmptyView
 	{
 		self.init(content: content, header: header, footer: EmptyView.init)
 	}
 
+	/// - Parameters:
+	///   - content:
+	///   - footer:
 	init(
-		@ViewBuilder content: @escaping () -> Content,
-		@ViewBuilder footer: @escaping () -> Footer
+		@ViewBuilder content: () -> Content,
+		@ViewBuilder footer: () -> Footer
 	) where
 		Header == EmptyView
 	{

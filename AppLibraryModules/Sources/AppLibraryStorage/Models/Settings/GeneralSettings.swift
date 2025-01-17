@@ -5,8 +5,11 @@ import Foundation
 public struct GeneralSettings {
 	public var appearance: Appearance
 
+	public var openAtLogin: OpenAtLogin
+
 	public init() {
 		appearance = .system
+		openAtLogin = false
 	}
 }
 

@@ -6,6 +6,8 @@ public struct SheetDoneButton<Label>: View where
 	@Environment(\.dismiss) private var dismiss
 	private let label: Label
 
+	/// - Parameters:
+	///   - label:
 	public init(
 		@ViewBuilder label: () -> Label
 	) {
