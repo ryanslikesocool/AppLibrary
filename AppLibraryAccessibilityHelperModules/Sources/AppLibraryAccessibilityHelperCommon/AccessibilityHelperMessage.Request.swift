@@ -60,6 +60,19 @@ extension AccessibilityHelperMessage.Request: Codable {
 	}
 }
 
+// MARK: - CustomStringConvertible
+
+extension AccessibilityHelperMessage.Request: CustomStringConvertible {
+	public var description: String {
+		switch self {
+			case let .dockTileRect(value): "dockTileRect(bundleURL: \(value.bundleURL))"
+			case let .dockEstimatedEdge(value): "dockEstimatedEdge(screenIndex: \(value.screenIndex))"
+			case let .dockRectAndEstimatedEdge(value): "dockRectAndEstimatedEdge(screenIndex: \(value.screenIndex))"
+			case let .requestAccessibilityAccess(value): "requestAccessibilityAccess"
+		}
+	}
+}
+
 // MARK: -
 
 public extension AccessibilityHelperMessage.Request {
@@ -74,18 +87,24 @@ public extension AccessibilityHelperMessage.Request {
 // MARK: - Convenience
 
 public extension AccessibilityHelperMessage.Request {
+	/// - Parameters:
+	///   - bundleURL: The bundle URL of the dock tile to locate.
 	static func dockTileRect(bundleURL: URL) -> Self {
 		dockTileRect(
 			DockTileRect(bundleURL: bundleURL)
 		)
 	}
 
+	/// - Parameters:
+	///   - screenIndex: The index of the screen to evaluate.
 	static func dockEstimatedEdge(screenIndex: Int) -> Self {
 		dockEstimatedEdge(
 			DockEstimatedEdge(screenIndex: screenIndex)
 		)
 	}
 
+	/// - Parameters:
+	///   - screenIndex: The index of the screen to evaluate.
 	static func dockRectAndEstimatedEdge(screenIndex: Int) -> Self {
 		dockRectAndEstimatedEdge(
 			DockRectAndEstimatedEdge(screenIndex: screenIndex)

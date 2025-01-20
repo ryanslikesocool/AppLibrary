@@ -1,10 +1,7 @@
 import AppLibraryExtensionCommon
 import CoreGraphics
 
-public struct DockEstimatedEdgeMessage: XPCMessage {
-	public typealias Super = AccessibilityHelperMessage
-	public typealias Failure = Super.Failure
-
+public struct DockEstimatedEdgeMessage: AccessibilityHelperMessageProtocol {
 	public init() { }
 }
 

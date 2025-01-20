@@ -27,7 +27,8 @@ public struct Client: AppLibraryXPCClientProtocol {
 		// When a session request arrives, you must either accept or reject it.
 		// The listener invokes the closure you specify every time a
 		// message is received.
-		return request.accept(
+
+		request.accept(
 			incomingMessageHandler: performTask(with:)
 		)
 	}
@@ -36,7 +37,7 @@ public struct Client: AppLibraryXPCClientProtocol {
 	func performTask(with request: AccessibilityHelperMessage.Request) -> (any Encodable)? {
 		Self.logger.debug("""
 		Received XPC request.
-		- Request: \(String(describing: request))
+		- Request: \(request)
 		""")
 
 		do {
@@ -45,7 +46,7 @@ public struct Client: AppLibraryXPCClientProtocol {
 		} catch {
 			Self.logger.error("""
 			Failed to process XPC request.
-			- Request: \(String(describing: request))
+			- Request: \(request)
 			- Error: \(error)
 			""")
 			return nil

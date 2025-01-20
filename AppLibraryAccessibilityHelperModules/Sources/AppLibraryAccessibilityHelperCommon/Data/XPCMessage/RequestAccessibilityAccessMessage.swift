@@ -1,9 +1,6 @@
 import AppLibraryExtensionCommon
 
-public struct RequestAccessibilityAccessMessage: XPCMessage {
-	public typealias Super = AccessibilityHelperMessage
-	public typealias Failure = Super.Failure
-
+public struct RequestAccessibilityAccessMessage: AccessibilityHelperMessageProtocol {
 	public init() { }
 }
 

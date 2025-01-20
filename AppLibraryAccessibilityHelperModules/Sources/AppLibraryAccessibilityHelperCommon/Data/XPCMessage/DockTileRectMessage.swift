@@ -2,10 +2,7 @@ import AppLibraryExtensionCommon
 import CoreGraphics
 import Foundation
 
-public struct DockTileRectMessage: XPCMessage {
-	public typealias Super = AccessibilityHelperMessage
-	public typealias Failure = Super.Failure
-
+public struct DockTileRectMessage: AccessibilityHelperMessageProtocol {
 	public init() { }
 }
 
@@ -15,11 +12,11 @@ public extension DockTileRectMessage {
 	struct Request: XPCMessageRequest {
 		public typealias Message = DockTileRectMessage
 
-		/// The bundle URL of the dock tile.
+		/// The bundle URL of the dock tile to locate.
 		public let bundleURL: URL
 
 		/// - Parameters:
-		///   - bundleURL: The bundle URL of the dock tile.
+		///   - bundleURL: The bundle URL of the dock tile to locate.
 		public init(bundleURL: URL) {
 			self.bundleURL = bundleURL
 		}
