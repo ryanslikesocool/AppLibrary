@@ -12,10 +12,6 @@ final class KeyboardObserver {
 
 	private var modifierFlags: NSEvent.ModifierFlags
 
-	public var isEventMonitorInitialized: Bool {
-		modifierEventMonitor != nil && keyEventMonitor != nil
-	}
-
 	public init() {
 		delegate = nil
 		modifierEventMonitor = nil
@@ -49,7 +45,7 @@ extension KeyboardObserver {
 	}
 
 	private func createEventMonitors() {
-		guard !isEventMonitorInitialized else {
+		guard !isEnabled else {
 			return
 		}
 
@@ -62,7 +58,7 @@ extension KeyboardObserver {
 	}
 
 	private func destroyEventMonitors() {
-		guard isEventMonitorInitialized else {
+		guard isEnabled else {
 			return
 		}
 

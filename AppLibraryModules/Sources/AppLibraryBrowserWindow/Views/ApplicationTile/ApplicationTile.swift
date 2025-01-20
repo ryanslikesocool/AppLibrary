@@ -21,8 +21,11 @@ struct ApplicationTile: View {
 		}
 		.background(isFocused ? Self.focusedBackgroundColor : Self.unfocusedBackgroundColor)
 
+//		.focusable(interactions: [.activate, .edit])
 		.focusable()
 		.focusEffectDisabled()
+
+		.inputCommandRepublisher()
 
 //		.draggable(application.latestInstance?.url) {
 //			ApplicationIcon(for: application)

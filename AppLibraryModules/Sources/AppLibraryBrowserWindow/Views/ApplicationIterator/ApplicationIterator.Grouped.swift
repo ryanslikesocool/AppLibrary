@@ -3,25 +3,27 @@ import AppLibraryRuntimeModel
 import AppLibraryStorage
 import SwiftUI
 
-extension LibraryView {
-	struct GroupedApplicationIterator: View {
-		@EnvironmentObject private var browserModel: BrowserModel
-
+extension ApplicationIterator {
+	struct Grouped: View {
 		@FocusState.Binding private var focusState: BrowserFocusElement?
 
+		private let applications: [ApplicationModel]
+
 		public init(
+			applications: [ApplicationModel],
 			focusState: FocusState<BrowserFocusElement?>.Binding
 		) {
+			self.applications = applications
 			_focusState = focusState
 		}
 
 		public var body: some View {
 			ForEach(groupedApplications, id: \.subject) { subject, elements in
 				Section {
-					ForEach(elements, id: \.bundleIdentifier) { application in
-						ApplicationTile(for: application)
-							.focused($focusState, equals: .application(application))
-					}
+					ApplicationIterator(
+						applications: elements,
+						focusState: $focusState
+					)
 				} header: {
 					Self.makeSectionHeader(subject: subject)
 				}
@@ -32,14 +34,14 @@ extension LibraryView {
 
 // MARK: - Constants
 
-private extension LibraryView.GroupedApplicationIterator {
+private extension ApplicationIterator.Grouped {
 	static let headerPadding: EdgeInsets = EdgeInsets(vertical: 4)
 	static var headerFont: Font { .subheadline.weight(.semibold) }
 }
 
 // MARK: - Supporting Views
 
-private extension LibraryView.GroupedApplicationIterator {
+private extension ApplicationIterator.Grouped {
 	static func makeSectionHeader(subject: String) -> some View {
 		Text(verbatim: subject)
 			.font(headerFont)
@@ -50,9 +52,9 @@ private extension LibraryView.GroupedApplicationIterator {
 
 // MARK: - Properties
 
-private extension LibraryView.GroupedApplicationIterator {
+private extension ApplicationIterator.Grouped {
 	var groupedApplications: [(subject: String, elements: [ApplicationModel].SubSequence)] {
-		browserModel.filteredApps
+		applications
 			.chunked(on: Self.createGroupKey(for:))
 			.compactMap { key, elements in
 				guard let key else {
@@ -65,11 +67,12 @@ private extension LibraryView.GroupedApplicationIterator {
 
 // MARK: - Functions
 
-private extension LibraryView.GroupedApplicationIterator {
+private extension ApplicationIterator.Grouped {
 	static func createGroupKey(for element: ApplicationModel) -> String? {
 		guard let character = element.displayName.first else {
 			return nil
 		}
+		
 		return if character.isNumber {
 			"#"
 		} else {

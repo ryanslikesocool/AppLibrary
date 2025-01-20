@@ -31,9 +31,9 @@ struct LibraryView: View {
 			.onReceive(Event.scrollToApp) { id in
 				scrollToApp(id: id, in: proxy)
 			}
-			.onChange(of: focusState) { _, newValue in
-				receiveFocus(newValue: newValue, in: proxy)
-			}
+//			.onChange(of: focusState) { _, newValue in
+//				receiveFocus(newValue: newValue, in: proxy)
+//			}
 		}
 
 //		.searchable(text: $searchQuery, placement: .sidebar)

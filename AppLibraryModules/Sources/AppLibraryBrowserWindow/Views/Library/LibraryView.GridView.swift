@@ -3,6 +3,8 @@ import SwiftUI
 
 extension LibraryView {
 	struct GridView: View {
+		@EnvironmentObject private var browserModel: BrowserModel
+		
 		@FocusState.Binding private var focusState: BrowserFocusElement?
 
 		public init(focusState: FocusState<BrowserFocusElement?>.Binding) {
@@ -11,7 +13,10 @@ extension LibraryView {
 
 		public var body: some View {
 			LazyVGrid(columns: Self.gridColumns) {
-				ApplicationIterator(focusState: $focusState)
+				ApplicationIterator(
+					applications: browserModel.filteredApps,
+					focusState: $focusState
+				)
 			}
 		}
 	}

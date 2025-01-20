@@ -21,7 +21,10 @@ struct SearchField: View {
 			TextField(text: $browserModel.searchQuery) {
 				labelTitle
 			}
-			.focused($focusState, equals: Self.focusTarget)
+			.focused($focusState, equals: .search)
+//			.onChange(of: focusState) {
+//				print("new focus state: \(focusState as Any)")
+//			}
 		}
 
 		.searchFieldTextStyle()
@@ -32,7 +35,13 @@ struct SearchField: View {
 		// However, SwiftUI treats the search field background and section header background as different views, so the material looks incorrect :(
 //		.background(.bar)
 
-		.searchFieldEvents(browserModel: browserModel, focusState: $focusState)
+//		.searchFieldEvents(browserModel: browserModel, focusState: $focusState)
+		.inputCommandRepublisher()
+
+//		.onReceive(Event.activateSearch) {
+//			FeatureFlag.Input.logEvent(in: SearchField.self, named: "activate")
+//			$focusState = .search
+//		}
 	}
 }
 
@@ -70,8 +79,6 @@ private extension SearchField {
 	static let cornerRadius: CGFloat = BrowserWindowShape.cornerRadius - outerPadding
 
 	static let shape: BrowserWindowShape = BrowserWindowShape().inset(by: outerPadding)
-
-	static let focusTarget: BrowserFocusElement = .search
 
 	static let fixedSize: (horizontal: Bool, vertical: Bool) = (false, true)
 }
@@ -120,19 +127,19 @@ private extension View {
 	) -> some View {
 		onReceive(Event.activateSearch) {
 			FeatureFlag.Input.logEvent(in: SearchField.self, named: "activate")
-			focusState.wrappedValue = SearchField.focusTarget
+			focusState.wrappedValue = .search
 		}
-		.onMoveCommand { direction in
-			FeatureFlag.Input.logEvent(in: SearchField.self, named: "move")
-			browserModel.onMoveSearch(direction: direction)
-		}
-		.onExitCommand {
-			FeatureFlag.Input.logEvent(in: SearchField.self, named: "exit")
-			focusState.wrappedValue = nil
-		}
-		.onSubmit {
-			FeatureFlag.Input.logEvent(in: SearchField.self, named: "submit")
-			browserModel.onSubmitSearch()
-		}
+//		.onMoveCommand { direction in
+//			FeatureFlag.Input.logEvent(in: SearchField.self, named: "move")
+//			browserModel.onMoveSearch(direction: direction)
+//		}
+//		.onExitCommand {
+//			FeatureFlag.Input.logEvent(in: SearchField.self, named: "exit")
+//			focusState.wrappedValue = nil
+//		}
+//		.onSubmit {
+//			FeatureFlag.Input.logEvent(in: SearchField.self, named: "submit")
+//			browserModel.onSubmitSearch()
+//		}
 	}
 }

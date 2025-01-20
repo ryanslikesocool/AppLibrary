@@ -30,6 +30,13 @@ public extension MoveCommandDirection {
 
 		self.init(where: \.keyEquivalent, equals: keyEquivalent)
 	}
+
+	init?(charactersIgnoringModifiersIn nsEvent: NSEvent) {
+		guard let keyEquivalent = KeyEquivalent(charactersIgnoringModifiersIn: nsEvent) else {
+			return nil
+		}
+		self.init(keyEquivalent: keyEquivalent)
+	}
 }
 
 // MARK: - Properties
