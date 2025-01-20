@@ -7,6 +7,8 @@ struct LibraryView: View {
 	@EnvironmentObject private var browserModel: BrowserModel
 	@FocusState.Binding private var focusState: BrowserFocusElement?
 
+//	@State private var searchQuery: String = ""
+
 	public init(focusState: FocusState<BrowserFocusElement?>.Binding) {
 		_focusState = focusState
 	}
@@ -15,14 +17,12 @@ struct LibraryView: View {
 		ScrollViewReader { proxy in
 			ScrollView(.vertical) {
 				scrollContent
-					.padding(.horizontal, libraryLayout.padding)
 			}
 
-			.frame(maxWidth: .infinity)
 			.buttonStyle(.plain)
 
-			.safeAreaPadding(.bottom, LibraryLayout.list.padding)
-			.safeAreaInset(edge: .top, spacing: LibraryLayout.list.padding) {
+			.contentMargins([.horizontal, .bottom], libraryLayout.padding, for: .scrollContent)
+			.safeAreaInset(edge: .top, spacing: 0) {
 				if browserModel.isSearchDisplayed {
 					SearchField(focusState: $focusState)
 				}
@@ -35,6 +35,8 @@ struct LibraryView: View {
 				receiveFocus(newValue: newValue, in: proxy)
 			}
 		}
+
+//		.searchable(text: $searchQuery, placement: .sidebar)
 	}
 }
 

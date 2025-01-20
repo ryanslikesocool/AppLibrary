@@ -6,9 +6,8 @@ import AppLibraryStorage
 import SwiftUI
 
 struct ApplicationTile: View {
-	@Environment(\.libraryLayout) private var libraryLayout
-
 	@Environment(\.isFocused) private var isFocused
+	@Environment(\.libraryLayout) private var libraryLayout
 
 	@ObservedObject private var application: ApplicationModel
 
@@ -25,13 +24,13 @@ struct ApplicationTile: View {
 		.focusable()
 		.focusEffectDisabled()
 
-		.contextMenu {
-			ContextMenu(for: application)
-		}
-
 //		.draggable(application.latestInstance?.url) {
 //			ApplicationIcon(for: application)
 //		}
+
+		.contextMenu {
+			ContextMenu(for: application)
+		}
 
 		.id(ApplicationModelIdentifier(application))
 		.applicationModelIdentifier(application)

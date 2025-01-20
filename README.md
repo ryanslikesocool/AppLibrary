@@ -26,6 +26,6 @@ Move the app to your Applications folder (and your dock!)
 
 
 ## Known Issues
-- Apps that may have multiple installations, such as Unity, are not currently supported.
+- Apps that may have multiple installations are not currently supported.
 - App Library cannot be completely sandboxed due to the way it uses accessibility features to locate the dock icon.
 	- Note: This is *partially* remedied using a helper application.

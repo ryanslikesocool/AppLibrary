@@ -23,7 +23,9 @@ public struct HideApplicationButton: View {
 
 private extension HideApplicationButton {
 	func buttonAction() {
-		AppsSettings.shared.hideApplication(with: applicationModelIdentifier)
+		@Storage(apps: \.applicationVisibilityFlags) var applicationVisibilityFlags
+		applicationVisibilityFlags[applicationModelIdentifier, default: .visible]
+			.remove(.browser)
 	}
 }
 

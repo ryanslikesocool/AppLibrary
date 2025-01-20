@@ -30,54 +30,31 @@ public extension LocalFileProtocol {
 	init(contentsOf url: URL) throws {
 		let decoder = PropertyListDecoder.shared
 
-		let data: Data
-		do {
-			data = try Data(contentsOf: url)
-		} catch {
-			throw LocalFileSerializationError.dataReadFailure(url, error)
-		}
-
-		do {
-			self = try decoder.decode(Self.self, from: data)
-		} catch {
-			throw LocalFileSerializationError.decodeFailure(Self.self, error)
-		}
+		let data: Data = try Data(contentsOf: url)
+		self = try decoder.decode(Self.self, from: data)
 	}
 
 	func write(to url: URL) throws {
 		let encoder = PropertyListEncoder.shared
 		encoder.outputFormat = .binary
 
-		do {
-			let fileManager = FileManager.default
-			let directoryPath: String = url
-				.deletingLastPathComponent()
-				.path(percentEncoded: false)
+		let fileManager = FileManager.default
+		let directoryPath: String = url
+			.deletingLastPathComponent()
+			.path(percentEncoded: false)
 
-			// it's recommended to just attempt operation
-			// instead of checking and then attempting
+		// NOTE: It's recommended to just attempt the operation
+		// instead of checking if the file exists and then attempting.
+
 //		if !fileManager.fileExists(atPath: directoryPath) {
-			try fileManager.createDirectory(
-				atPath: directoryPath,
-				withIntermediateDirectories: true
-			)
+		try fileManager.createDirectory(
+			atPath: directoryPath,
+			withIntermediateDirectories: true
+		)
 //		}
-		} catch {
-			throw LocalFileSerializationError.directoryValidationFailure(url, error)
-		}
 
-		let data: Data
-		do {
-			data = try encoder.encode(self)
-		} catch {
-			throw LocalFileSerializationError.encodeFailure(Self.self, error)
-		}
-
-		do {
-			try data.write(to: url)
-		} catch {
-			throw LocalFileSerializationError.dataWriteFailure(url, error)
-		}
+		let data: Data = try encoder.encode(self)
+		try data.write(to: url)
 	}
 
 //	func initialize() { }

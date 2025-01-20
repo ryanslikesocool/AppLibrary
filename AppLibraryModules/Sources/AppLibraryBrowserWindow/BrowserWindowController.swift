@@ -16,6 +16,7 @@ public final class BrowserWindowController: NSWindowController, ObservableObject
 		let window = NSVisualEffectWindow(
 			contentRect: NSRect(origin: .zero, size: BrowserWindowController.windowSize),
 			styleMask: [.titled, .fullSizeContentView, .nonactivatingPanel],
+//			backing: .buffered,
 			defer: false
 		)
 		window.identifier = Self.windowIdentifier
@@ -30,7 +31,8 @@ public final class BrowserWindowController: NSWindowController, ObservableObject
 		window.level = .floating
 		window.isMovable = false
 
-		window.material = .menu
+//		window.toolbarStyle = .unified
+		window.material = .popover
 
 		window.contentView = NSHostingView(rootView:
 			ContentView(browserModel: browserModel)
@@ -50,6 +52,7 @@ public final class BrowserWindowController: NSWindowController, ObservableObject
 extension BrowserWindowController: NSWindowDelegate {
 	public func windowDidResignKey(_ notification: Notification) {
 		dismiss()
+		
 		if FeatureFlag.Input.implementation == .keyboardObserver {
 			browserModel.keyboardObserver.isEnabled = false
 		}
@@ -157,3 +160,10 @@ private extension BrowserWindowController {
 		return frameOrigin
 	}
 }
+
+//public extension NSSearchField {
+//	override var focusRingType: NSFocusRingType {
+//		get { .default }
+//		set { }
+//	}
+//}

@@ -9,6 +9,10 @@ extension LibraryView {
 		@FocusState.Binding private var focusState: BrowserFocusElement?
 
 		private var applications: [ApplicationModel] {
+//			ApplicationCache.shared.applications
+//				.values(for: browserModel.filteredApplicationIdentifiers)
+//				.compactMap()
+
 			browserModel.filteredApps
 		}
 
@@ -23,7 +27,6 @@ extension LibraryView {
 				ApplicationTile(for: application)
 					.focused($focusState, equals: .application(application))
 			}
-			.focusSection()
 		}
 	}
 }

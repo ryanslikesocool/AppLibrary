@@ -8,7 +8,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Configure where the app is visible.\nThe app can also be hidden by right-clicking on it in the Library and selecting “%@”."
+            "value" : "Configure where the app is displayed.\nThe app can also be hidden by right-clicking on it in the Library and selecting “%@”."
           }
         }
       }

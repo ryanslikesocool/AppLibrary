@@ -104,4 +104,25 @@ public extension Sequence {
 			comparator.compare(lhs, rhs) == .orderedAscending
 		}
 	}
+
+	// MARK: compactMap
+
+	func compactMap<Value>() -> [Value] where
+		Element == Value?
+	{
+		compactMap { element in
+			element
+		}
+	}
+
+	// MARK: flatMap
+
+	func flatMap<InnerSequence>() -> [InnerSequence.Element] where
+		InnerSequence: Sequence,
+		Element == InnerSequence
+	{
+		flatMap { element in
+			element
+		}
+	}
 }

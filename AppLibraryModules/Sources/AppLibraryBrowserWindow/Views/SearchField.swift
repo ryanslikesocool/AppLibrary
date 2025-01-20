@@ -1,4 +1,5 @@
 import AppLibraryCommon
+import AppLibraryCommonViews
 import AppLibraryRuntimeModel
 import AppLibraryStorage
 import SwiftUI
@@ -26,6 +27,11 @@ struct SearchField: View {
 		.searchFieldTextStyle()
 		.searchFieldLayout(containerShape: containerShape)
 		.searchFieldBackground()
+
+		// NOTE: Besides `NSVisualEffectView.Material.headerView`, `Material.Bar` is the closest match to the section header material.
+		// However, SwiftUI treats the search field background and section header background as different views, so the material looks incorrect :(
+//		.background(.bar)
+
 		.searchFieldEvents(browserModel: browserModel, focusState: $focusState)
 	}
 }
@@ -49,8 +55,9 @@ private extension SearchField {
 // MARK: - Constants
 
 private extension SearchField {
-	static var backgroundStyle: some ShapeStyle { .bar }
+	static var backgroundStyle: some ShapeStyle { .regularMaterial }
 	static var maskedBlurStyle: some ShapeStyle { .ultraThickMaterial }
+	static var strokeStyle: some ShapeStyle { .separator }
 
 	static let labelSpacing: CGFloat = 4
 	static let labelVerticalAlignment: VerticalAlignment = .firstTextBaseline
@@ -59,7 +66,7 @@ private extension SearchField {
 	static var labelIconStyle: some ShapeStyle { .tertiary }
 
 	static let innerPadding: CGFloat = 8
-	static let outerPadding: CGFloat = 4
+	static let outerPadding: CGFloat = 6
 	static let cornerRadius: CGFloat = BrowserWindowShape.cornerRadius - outerPadding
 
 	static let shape: BrowserWindowShape = BrowserWindowShape().inset(by: outerPadding)
@@ -76,13 +83,13 @@ private extension View {
 		font(SearchField.labelFont)
 			.textFieldStyle(SearchField.labelTextFieldStyle)
 			.autocorrectionDisabled()
-			.writingToolsDisabled()
 	}
 
 	func searchFieldLayout(
 		containerShape: some InsettableShape
 	) -> some View {
 		padding(SearchField.innerPadding)
+			.overlay(SearchField.strokeStyle, in: containerShape.stroke(lineWidth: 1))
 			.background(SearchField.backgroundStyle, in: containerShape)
 			.fixedSize(horizontal: SearchField.fixedSize.horizontal, vertical: SearchField.fixedSize.vertical)
 

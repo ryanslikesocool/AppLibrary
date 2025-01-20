@@ -5,6 +5,10 @@ import OSLog
 @MainActor
 public final class AppsSettings: ObservableObject {
 	@Published public var searchScopes: Set<URL>
+
+	/// The visibility flags for applications, as defined by the user.
+	///
+	/// Only key-value pairs where the value is not ``ApplicationVisibility/Set/visible`` are serialized.
 	@Published public var applicationVisibilityFlags: [ApplicationModelIdentifier: ApplicationVisibility.Set]
 
 	public init() {
@@ -72,47 +76,4 @@ extension AppsSettings: SingletonFileProtocol {
 
 extension AppsSettings: SettingsFileProtocol {
 	public nonisolated static let category: SettingsCategory = .apps
-}
-
-// MARK: -
-
-public extension AppsSettings {
-	func hideApplication(with applicationIdentifier: ApplicationModelIdentifier) {
-		var visibilityFlags = applicationVisibilityFlags[applicationIdentifier, default: .all]
-		// NOTE: Because it is `mutating`, the `remove(_:)` operation must be the right side of the `!=` operation.
-		let removed = visibilityFlags != visibilityFlags.remove(.browser)
-		applicationVisibilityFlags[applicationIdentifier] = visibilityFlags
-
-		Logger.module.debug("""
-		\(removed ? "Successfully changed" : "Failed to change") visibility modifiers:
-		- Bundle Identifier: \(applicationIdentifier.bundleIdentifier)
-		""")
-	}
-
-	func removeApplicationVisibilityFlags(for applicationIdentifier: ApplicationModelIdentifier) {
-		let removed: Bool = applicationVisibilityFlags.removeValue(forKey: applicationIdentifier) != nil
-
-		Logger.module.debug("""
-		\(removed ? "Successfully removed" : "Failed to remove") visibility modifiers:
-		- Bundle Identifier: \(applicationIdentifier.bundleIdentifier)
-		""")
-	}
-
-	func addSearchScope(at url: URL) {
-		let added = searchScopes.insert(url).inserted
-
-		Logger.module.debug("""
-		\(added ? "Successfully added" : "Failed to add") search scope:
-		- Path: \(url.abbreviatingWithTildeInPath)
-		""")
-	}
-
-	func removeSearchScope(at url: URL) {
-		let removed = searchScopes.remove(url) != nil
-
-		Logger.module.debug("""
-		\(removed ? "Successfully removed" : "Failed to remove") search scope:
-		- Path: \(url.abbreviatingWithTildeInPath)
-		""")
-	}
 }

@@ -7,14 +7,14 @@ import SwiftUI
 
 @MainActor
 final class BrowserModel: ObservableObject {
-	private var applicationCache: ApplicationCache { .shared }
-
+	// TODO: Convert to `willSet { objectWillChange.send() }`?
 	@Published private(set) var state: BrowserState
+
 	@Published var searchQuery: String
 	@Published var focus: BrowserFocusElement?
 
 	var isSearchDisplayed: Bool {
-		if case .idle = applicationCache.state {
+		if case .idle = ApplicationCache.shared.state {
 			true
 		} else {
 			false
@@ -22,16 +22,26 @@ final class BrowserModel: ObservableObject {
 	}
 
 	var filteredApps: [ApplicationModel] {
-		ApplicationFilter.filter(applicationCache.applications.values, searchQuery: searchQuery)
+		// NOTE: Despite this being a computed property, SwiftUI *seems* to be smart enough
+		// to compute this a reasonable number of times, so there's not a huge need for optimization.
+		// That said, it may be something to revisit in the future.
+
+		ApplicationCache.shared.applications.values
+			.filter(searchQuery: searchQuery)
 	}
 
 	let keyboardObserver: KeyboardObserver
 
-//	private lazy var refreshAppsSubscriber: AnyCancellable? = Event.refreshApps
-//		.sink { self.refreshApps() }
-
-//	private lazy var activateSearchSubscriber: AnyCancellable? = Event.activateSearch
-//		.sink { self.activateSearch() }
+	// NOTE: Annoyingly, this seems to be required to force the view to update.
+	// Something to revisit in the future.
+	private lazy var applicationFilterChangeSubscriber: AnyCancellable = Publishers.CombineLatest(
+		ApplicationCache.shared.$applications,
+		AppsSettings.shared.$applicationVisibilityFlags
+//		$searchQuery // Already `@Published` locally
+	)
+	.sink { _, _ in
+		self.objectWillChange.send()
+	}
 
 	init() {
 		state = .idle
@@ -45,8 +55,7 @@ final class BrowserModel: ObservableObject {
 			keyboardObserver.delegate = self
 		}
 
-//		_ = refreshAppsSubscriber
-//		_ = activateSearchSubscriber
+		_ = applicationFilterChangeSubscriber
 	}
 }
 
@@ -63,18 +72,6 @@ extension BrowserModel {
 		focus = .search
 	}
 
-	func filteredAppsChanged(_ newValue: borrowing [ApplicationModel]) {
-		guard searchQuery.isEmpty else {
-			return
-		}
-
-		state = if newValue.isEmpty {
-			.error(.allApplicationsHidden)
-		} else {
-			.idle
-		}
-	}
-
 	func refreshApps() {
 		do {
 			let searchScopes = try getSearchScopes()
@@ -85,7 +82,7 @@ extension BrowserModel {
 			// We should probably only ever need the task from `ApplicationCacheState.loading(task:)`
 			// That said, there's probably a better way to handle this, rather than starting 2 tasks.
 			Task {
-				await applicationCache.reload(searchScopes: searchScopes)
+				await ApplicationCache.shared.reload(searchScopes: searchScopes)
 
 				self.state = .idle
 			}

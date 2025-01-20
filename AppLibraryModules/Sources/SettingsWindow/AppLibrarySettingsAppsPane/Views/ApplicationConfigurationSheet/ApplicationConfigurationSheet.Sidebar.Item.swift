@@ -11,11 +11,17 @@ extension ApplicationConfigurationSheet.Sidebar {
 		}
 
 		public var body: some View {
-			ApplicationLabel(for: applicationModelIdentifier)
-				.tag(applicationModelIdentifier)
-				.contextMenu {
-					ContextMenu(for: applicationModelIdentifier)
-				}
+			NavigationLink(value: applicationModelIdentifier) {
+				ApplicationLabel(for: applicationModelIdentifier)
+					.contextMenu {
+						ContextMenu(for: applicationModelIdentifier)
+					}
+			}
+//			ApplicationLabel(for: applicationModelIdentifier)
+//				.tag(applicationModelIdentifier)
+//				.contextMenu {
+//					ContextMenu(for: applicationModelIdentifier)
+//				}
 		}
 	}
 }

@@ -5,21 +5,17 @@ import SwiftUI
 
 extension ApplicationConfigurationSheet {
 	struct Sidebar: View {
-		@Binding private var searchQuery: String
-		@Binding private var selection: ApplicationModelIdentifier?
+		@State private var searchQuery: String = ""
 
-		public init(selection: Binding<ApplicationModelIdentifier?>, searchQuery: Binding<String>) {
-			_searchQuery = searchQuery
-			_selection = selection
-		}
+		public init() {		}
 
 		public var body: some View {
 			List(
 				applications,
-				selection: $selection,
 				rowContent: Item.init(for:)
 			)
 			.listStyle(.sidebar)
+			.searchable(text: $searchQuery, placement: .sidebar)
 		}
 	}
 }

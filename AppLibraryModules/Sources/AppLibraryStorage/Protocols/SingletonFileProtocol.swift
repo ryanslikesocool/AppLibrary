@@ -10,8 +10,6 @@ public protocol SingletonFileProtocol: LocalFileProtocol, ObservableObject {
 
 	init()
 
-	func write()
-
 	/// With the default ``read`` implementation, this is called immediately after successfully reading the file.
 	/// Perform any necessary setup here.
 	// Shadows ``LocalFileProtocol.initialize()``
@@ -19,6 +17,12 @@ public protocol SingletonFileProtocol: LocalFileProtocol, ObservableObject {
 }
 
 // MARK: - Default Implementation
+
+public extension SingletonFileProtocol {
+	func initialize() { }
+}
+
+// MARK: - Intrinsic
 
 public extension SingletonFileProtocol {
 	static func read() -> Self {
@@ -29,7 +33,7 @@ public extension SingletonFileProtocol {
 			result.initialize()
 			return result
 		} catch {
-			Logger.module.error("""
+			Logger.singletonFileProtocol.error("""
 			Failed to read file:
 			- Type: \(Self.self)
 			- URL: \(fileURL)
@@ -44,8 +48,14 @@ public extension SingletonFileProtocol {
 
 		do {
 			try write(to: fileURL)
+
+			Logger.singletonFileProtocol.debug("""
+			Successfully wrote file:
+			- Type: \(Self.self)
+			- URL: \(fileURL)
+			""")
 		} catch {
-			Logger.module.error("""
+			Logger.singletonFileProtocol.error("""
 			Failed to write file:
 			- Type: \(Self.self)
 			- URL: \(fileURL)
@@ -53,6 +63,10 @@ public extension SingletonFileProtocol {
 			""")
 		}
 	}
+}
 
-	func initialize() { }
+// MARK: - Constants
+
+private extension Logger {
+	static let singletonFileProtocol: Self = Self(category: (any SingletonFileProtocol).self)
 }

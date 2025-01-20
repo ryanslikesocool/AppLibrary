@@ -10,12 +10,12 @@ extension LibraryView {
 		}
 
 		public var body: some View {
-			LazyVStack {
-				ApplicationIterator(focusState: $focusState)
-			}
-//			LazyVStack(pinnedViews: .sectionHeaders) {
-//				GroupedApplicationIterator(focusState: $focusState)
+//			LazyVStack {
+//				ApplicationIterator(focusState: $focusState)
 //			}
+			LazyVStack(pinnedViews: .sectionHeaders) {
+				GroupedApplicationIterator(focusState: $focusState)
+			}
 		}
 	}
 }

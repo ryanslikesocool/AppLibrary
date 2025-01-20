@@ -10,7 +10,7 @@ public final class ObservingCurrentValue<Output>: ObservableObject {
 		self
 	}
 
-	public var publisher: some Publisher<Output, Never> {
+	public var publisher: Published<Output>.Publisher {
 		$wrappedValue
 	}
 

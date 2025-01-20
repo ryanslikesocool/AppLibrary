@@ -11,6 +11,8 @@ let package = Package(
 	products: [
 		.library(name: "AppLibraryModules", targets: ["AppLibrary"]),
 
+		// NOTE: The following products are only declared for validation.
+		
 		.library(name: "AppLibraryBrowserWindow", targets: ["AppLibraryBrowserWindow"]),
 		.library(name: "AppLibraryAboutWindow", targets: ["AppLibraryAboutWindow"]),
 		.library(name: "AppLibrarySettingsWindow", targets: ["AppLibrarySettingsWindow"]),

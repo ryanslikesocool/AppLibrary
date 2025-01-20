@@ -63,6 +63,7 @@ private extension ApplicationSearchScopesList.AddMenu {
 	}
 
 	func addSearchScope(at url: URL) {
-		AppsSettings.shared.addSearchScope(at: url)
+		@Storage(apps: \.searchScopes) var searchScopes
+		searchScopes.insert(url)
 	}
 }

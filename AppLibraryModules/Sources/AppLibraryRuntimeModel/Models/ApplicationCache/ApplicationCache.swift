@@ -23,3 +23,17 @@ extension ApplicationCache {
 	/// The shared application cache instance.
 	public static let shared: ApplicationCache = ApplicationCache()
 }
+
+// MARK: -
+
+public extension ApplicationCache {
+	/// - Parameter keys: The keys of the values to access.
+	func values<S>(
+		for keys: S
+	) -> [ApplicationModel] where
+		S: Sequence,
+		S.Element == ApplicationModelIdentifier
+	{
+		keys.compactMap(applications.value(for:))
+	}
+}

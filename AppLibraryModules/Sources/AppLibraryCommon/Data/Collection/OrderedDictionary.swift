@@ -448,4 +448,18 @@ public extension OrderedDictionary {
 	mutating func merge(_ other: Self, uniquingKeysWith combine: (Value, Value) throws -> Value) rethrows {
 		try merge(other.storage.map { key, value in (key, value) }, uniquingKeysWith: combine)
 	}
+
+	/// - Parameter key: The key of the value to access.
+	/// - Returns: The value for the given `key`, if it could be found; `nil` otherwise.
+	func value(for key: Key) -> Value? {
+		self[key]
+	}
+
+	/// - Parameter keys: The keys of the values to access.
+	/// - Returns: In order, for each element: the value for the key, if it could be found; `nil` otherwise.
+	func values(
+		for keys: borrowing some Sequence<Key>
+	) -> [Value?] {
+		keys.map(value(for:))
+	}
 }

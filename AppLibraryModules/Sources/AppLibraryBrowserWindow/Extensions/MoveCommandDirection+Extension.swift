@@ -2,7 +2,9 @@ import AppLibraryStorage
 import SwiftUI
 
 extension MoveCommandDirection {
-	func offset(for layout: LibraryLayout) -> Int {
+	func offset(
+		for layout: LibraryLayout
+	) -> Int {
 		switch (self, layout) {
 			case (.left, _): -1
 			case (.right, _): 1

@@ -7,11 +7,15 @@ struct ApplicationSearchScopesSheet: View {
 	public var body: some View {
 		StyledSection(
 			content: makeContent,
-			header: makeHeader,
-			footer: makeFooter
+			header: makeHeader
 		)
 		.sectionStyle(.sheet)
-		.frame(width: 400, height: 450)
+		.toolbar {
+			ToolbarItem(placement: .cancellationAction) {
+				SheetDoneButton()
+			}
+		}
+		.frame(width: 400, height: 400)
 	}
 }
 
@@ -35,12 +39,5 @@ private extension ApplicationSearchScopesSheet {
 		Spacer()
 
 		ApplicationSearchScopesList.AddMenu()
-	}
-
-	@ViewBuilder
-	func makeFooter() -> some View {
-		Spacer()
-
-		SheetDoneButton()
 	}
 }

@@ -5,7 +5,6 @@ import OSLog
 import SwiftUI
 
 struct ApplicationSearchScopesList: View {
-	@StorageFile(AppsSettings.self) private var apps
 	@Storage(apps: \.searchScopes) private var searchScopes
 
 	public init() { }
@@ -51,6 +50,6 @@ private extension ApplicationSearchScopesList {
 	}
 
 	func removeSearchScope(at url: URL) {
-		apps.removeSearchScope(at: url)
+		searchScopes.remove(url)
 	}
 }

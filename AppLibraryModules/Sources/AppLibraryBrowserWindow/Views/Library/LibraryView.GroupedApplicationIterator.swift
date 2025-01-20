@@ -1,3 +1,4 @@
+import AppLibraryCommon
 import AppLibraryRuntimeModel
 import AppLibraryStorage
 import SwiftUI
@@ -7,27 +8,6 @@ extension LibraryView {
 		@EnvironmentObject private var browserModel: BrowserModel
 
 		@FocusState.Binding private var focusState: BrowserFocusElement?
-
-		private var groupedApplications: [(subject: String, elements: [ApplicationModel].SubSequence)] {
-			browserModel.filteredApps.chunked(on: Self.createGroupKey(for:))
-				.compactMap { key, elements in
-					guard let key else {
-						return nil
-					}
-					return (key, elements)
-				}
-		}
-
-		private static func createGroupKey(for element: ApplicationModel) -> String? {
-			guard let character = element.displayName.first else {
-				return nil
-			}
-			return if character.isNumber {
-				"#"
-			} else {
-				character.uppercased()
-			}
-		}
 
 		public init(
 			focusState: FocusState<BrowserFocusElement?>.Binding
@@ -43,10 +23,9 @@ extension LibraryView {
 							.focused($focusState, equals: .application(application))
 					}
 				} header: {
-					makeSectionHeader(subject)
+					Self.makeSectionHeader(subject: subject)
 				}
 			}
-			.focusSection()
 		}
 	}
 }
@@ -54,15 +33,47 @@ extension LibraryView {
 // MARK: - Constants
 
 private extension LibraryView.GroupedApplicationIterator {
-	static var headerMaxWidth: CGFloat? { .infinity }
-	static let headerAlignment: Alignment = .leading
+	static let headerPadding: EdgeInsets = EdgeInsets(vertical: 4)
+	static var headerFont: Font { .subheadline.weight(.semibold) }
 }
 
 // MARK: - Supporting Views
 
 private extension LibraryView.GroupedApplicationIterator {
-	func makeSectionHeader(_ subject: String) -> some View {
+	static func makeSectionHeader(subject: String) -> some View {
 		Text(verbatim: subject)
-			.frame(maxWidth: Self.headerMaxWidth, alignment: Self.headerAlignment)
+			.font(headerFont)
+			.frame(maxWidth: .infinity, alignment: .leading)
+			.padding(headerPadding)
+	}
+}
+
+// MARK: - Properties
+
+private extension LibraryView.GroupedApplicationIterator {
+	var groupedApplications: [(subject: String, elements: [ApplicationModel].SubSequence)] {
+		browserModel.filteredApps
+			.chunked(on: Self.createGroupKey(for:))
+			.compactMap { key, elements in
+				guard let key else {
+					return nil
+				}
+				return (key, elements)
+			}
+	}
+}
+
+// MARK: - Functions
+
+private extension LibraryView.GroupedApplicationIterator {
+	static func createGroupKey(for element: ApplicationModel) -> String? {
+		guard let character = element.displayName.first else {
+			return nil
+		}
+		return if character.isNumber {
+			"#"
+		} else {
+			character.uppercased()
+		}
 	}
 }

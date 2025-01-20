@@ -6,14 +6,20 @@ import SwiftUI
 public struct SingletonFileObjectProperty<Model, Value>: DynamicProperty where
 	Model: SingletonFileProtocol
 {
-	@SingletonFileObject
+	@ObservedObject
 	private var model: Model
 
 	private let keyPath: ReferenceWritableKeyPath<Model, Value>
 
 	public var wrappedValue: Value {
 		get { model[keyPath: keyPath] }
-		nonmutating set { model[keyPath: keyPath] = newValue }
+		nonmutating set {
+			model[keyPath: keyPath] = newValue
+			
+			// TODO: Figure out a better way to save.
+			// We don't really want to write on *every single change*.
+			model.write()
+		}
 	}
 
 	public var projectedValue: Binding<Value> {
@@ -27,7 +33,7 @@ public struct SingletonFileObjectProperty<Model, Value>: DynamicProperty where
 		_ model: Model,
 		_ keyPath: ReferenceWritableKeyPath<Model, Value>
 	) {
-		_model = SingletonFileObject(model)
+		self.model = model
 		self.keyPath = keyPath
 	}
 }

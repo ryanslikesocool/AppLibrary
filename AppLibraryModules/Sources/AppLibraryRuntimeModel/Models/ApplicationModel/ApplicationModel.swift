@@ -1,5 +1,6 @@
 import AppKit
 import AppLibraryCommon
+import AppLibraryStorage
 import Foundation
 import NSMetadataToolbox
 import OSLog
@@ -96,6 +97,23 @@ extension ApplicationModel {
 	private static let fileExtension: String = ".app"
 
 	static let logger = Logger(category: ApplicationModel.self)
+}
+
+// MARK: -
+
+public extension ApplicationModel {
+	/// The visibility flags for the application, as defined by the user.
+	@MainActor
+	var visibilityFlags: ApplicationVisibility.Set {
+		get {
+			let identifier = ApplicationModelIdentifier(self)
+			return AppsSettings.shared.applicationVisibilityFlags[identifier, default: .visible]
+		}
+		set {
+			let identifier = ApplicationModelIdentifier(self)
+			AppsSettings.shared.applicationVisibilityFlags[identifier] = newValue
+		}
+	}
 }
 
 // MARK: - Utility

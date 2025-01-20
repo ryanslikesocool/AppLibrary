@@ -16,7 +16,7 @@ public struct Client: AppLibraryXPCClientProtocol {
 	public var listener: XPCListener? = nil
 
 	public init() {
-		Self.logger.info("Initialized \(Self.self).")
+		Self.logger.info("Initialized XPC client `\(Self.self)`.")
 
 		AccessibilityUtility.requestAccess()
 	}
@@ -24,8 +24,6 @@ public struct Client: AppLibraryXPCClientProtocol {
 	public func handleSession(
 		request: XPCListener.IncomingSessionRequest
 	) -> XPCListener.IncomingSessionRequest.Decision {
-		Self.logger.info("Received XPC request.")
-
 		// When a session request arrives, you must either accept or reject it.
 		// The listener invokes the closure you specify every time a
 		// message is received.
@@ -36,12 +34,18 @@ public struct Client: AppLibraryXPCClientProtocol {
 
 	// The function that performs the work of the service.
 	func performTask(with request: AccessibilityHelperMessage.Request) -> (any Encodable)? {
+		Self.logger.debug("""
+		Received XPC request.
+		- Request: \(String(describing: request))
+		""")
+
 		do {
 			// Return an encodable response that will get sent back to the client.
 			return try request.performTask()
 		} catch {
 			Self.logger.error("""
-			Failed to decode received message.
+			Failed to process XPC request.
+			- Request: \(String(describing: request))
 			- Error: \(error)
 			""")
 			return nil
