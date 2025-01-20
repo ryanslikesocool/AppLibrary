@@ -17,8 +17,7 @@ struct ApplicationIterator: View {
 
 	public var body: some View {
 		ForEach(applications, id: \.bundleIdentifier) { application in
-			ApplicationTile(for: application)
-				.focused($focusState, equals: .application(application))
+			ApplicationTile(for: application, focusState: $focusState)
 		}
 	}
 }

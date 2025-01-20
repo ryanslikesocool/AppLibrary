@@ -35,13 +35,7 @@ struct SearchField: View {
 		// However, SwiftUI treats the search field background and section header background as different views, so the material looks incorrect :(
 //		.background(.bar)
 
-//		.searchFieldEvents(browserModel: browserModel, focusState: $focusState)
 		.inputCommandRepublisher()
-
-//		.onReceive(Event.activateSearch) {
-//			FeatureFlag.Input.logEvent(in: SearchField.self, named: "activate")
-//			$focusState = .search
-//		}
 	}
 }
 
@@ -119,27 +113,5 @@ private extension View {
 //			}
 			.padding(.bottom, -LibraryLayout.list.padding)
 		}
-	}
-
-	func searchFieldEvents(
-		browserModel: BrowserModel,
-		focusState: FocusState<BrowserFocusElement?>.Binding
-	) -> some View {
-		onReceive(Event.activateSearch) {
-			FeatureFlag.Input.logEvent(in: SearchField.self, named: "activate")
-			focusState.wrappedValue = .search
-		}
-//		.onMoveCommand { direction in
-//			FeatureFlag.Input.logEvent(in: SearchField.self, named: "move")
-//			browserModel.onMoveSearch(direction: direction)
-//		}
-//		.onExitCommand {
-//			FeatureFlag.Input.logEvent(in: SearchField.self, named: "exit")
-//			focusState.wrappedValue = nil
-//		}
-//		.onSubmit {
-//			FeatureFlag.Input.logEvent(in: SearchField.self, named: "submit")
-//			browserModel.onSubmitSearch()
-//		}
 	}
 }

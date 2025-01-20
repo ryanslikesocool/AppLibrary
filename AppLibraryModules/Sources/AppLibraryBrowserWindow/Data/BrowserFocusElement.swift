@@ -2,7 +2,7 @@ import AppLibraryStorage
 import AppLibraryRuntimeModel
 
 enum BrowserFocusElement {
-	case invalid
+	case `default`
 	case search
 	case application(ApplicationModelIdentifier) // TODO: Change argument to `ApplicationInstanceIdentifier`
 //	case group(ApplicationGroup)
@@ -25,7 +25,7 @@ extension BrowserFocusElement: Hashable { }
 extension BrowserFocusElement: Identifiable {
 	var id: String {
 		switch self {
-			case .invalid: "AppLibrary.Invalid"
+			case .default: "AppLibrary.Default"
 			case .search: "AppLibrary.Search"
 			case let .application(application): application.bundleIdentifier
 //			case let .group(group): group.rawValue

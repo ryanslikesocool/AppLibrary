@@ -23,12 +23,12 @@ struct ContentView: View {
 		}
 
 		.ignoresSafeArea()
-		.libraryLayout(layout)
-
-//		.refreshable(action: browserModel.refreshApps)
 
 		.inputReceiver(focusState: $focusState)
 
+//		.refreshable(action: browserModel.refreshApps)
+
+		.libraryLayout(layout)
 		.environmentObject(browserModel)
 	}
 }

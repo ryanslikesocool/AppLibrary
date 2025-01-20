@@ -7,6 +7,8 @@ struct InputReceiver: ViewModifier {
 
 	@EnvironmentObject private var browserModel: BrowserModel
 
+	@Environment(\.libraryLayout) private var libraryLayout
+
 	@FocusState.Binding private var focusState: BrowserFocusElement?
 
 	fileprivate init(focusState: FocusState<BrowserFocusElement?>.Binding) {
@@ -21,8 +23,9 @@ struct InputReceiver: ViewModifier {
 					.focusable()
 
 					// NOTE: If the argument for this modifier equals the value for the `defaultFocus` modifier, stuff breaks.
-					// Declaring an extra case, different from the `defaultFocus`, seems to work for some reason.
-					.focused($focusState, equals: .invalid)
+					// Declaring an extra case, different from the on in `defaultFocus`, seems to work for some reason.
+					// This also seemingly fixes issues where setting `focusState` to `nil` (instead of `default`) will break.
+					.focused($focusState, equals: .default)
 
 					.inputCommandRepublisher()
 			}
@@ -60,7 +63,34 @@ private extension InputReceiver {
 
 	func onReceiveMoveCommand(direction: MoveCommandDirection) {
 		Self.logger.debug("Received \"move\" command.")
-		// TODO: handle event
+
+		// TODO: figure out how to handle when `.search` is focused.
+
+		switch (focusState, direction) {
+			case (.default?, .right),
+			     (.default?, .down),
+			     (.search?, .down):
+				// Set focus to the first application in the list.
+				guard let application = browserModel.filteredApps.first else {
+					break
+				}
+				focusState = .application(application)
+				// TODO: force scroll view to jump to element
+			case (.default?, .left),
+			     (.default?, .up),
+			     (.search?, .up):
+				// Set focus to the last application in the list.
+				guard let application = browserModel.filteredApps.last else {
+					break
+				}
+				focusState = .application(application)
+				// TODO: force scroll view to jump to element
+			case (.application?, _):
+				let applicationIndexOffset = direction.offset(for: libraryLayout)
+				// TODO: set focus element
+			default:
+				break
+		}
 	}
 
 	func onReceiveSubmitCommand() {
@@ -74,7 +104,7 @@ private extension InputReceiver {
 			case let .application(applicationModelIdentifier)?:
 				// TODO: handle event
 				break
-			case .invalid?,
+			case .default?,
 			     nil:
 				break
 		}
@@ -85,11 +115,11 @@ private extension InputReceiver {
 
 		switch focusState {
 			case .search?:
-				focusState = nil
+				focusState = .default
 			case .application?,
-			     .invalid?,
+			     .default?,
 			     nil:
-				// TODO: dismiss window
+				// TODO: handle event (dismiss window)
 				break
 		}
 	}
