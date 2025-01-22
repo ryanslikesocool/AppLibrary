@@ -1,3 +1,4 @@
+import AcknowledgementToolbox
 import Foundation
 
 struct Contributor {
@@ -24,14 +25,33 @@ extension Contributor: Sendable { }
 
 extension Contributor: Decodable { }
 
-// MARK: - CreditProtocol
+// MARK: - PrimitiveAcknowledgementItem
 
-extension Contributor: CreditProtocol {
-	typealias TopLevelDecoder = JSONDecoder
+extension Contributor: PrimitiveAcknowledgementItem { }
 
-	static var fileURL: URL? {
-		Bundle.main.url(forResource: "Contributors", withExtension: "json")
+// MARK: - DecodableAcknowledgementItem
+
+extension Contributor: DecodableAcknowledgementItem {
+	static var topLevelDecoder: JSONDecoder {
+		.shared
 	}
 
-	static let modelKeyPath: KeyPath<AboutWindowModel, [Self]> = \.contributors
+	static var fileURL: URL? {
+		Bundle.main.url(
+			forResource: "Contributors",
+			withExtension: "json"
+		)
+	}
+}
+
+// MARK: - StoredAcknowledgementItem
+
+extension Contributor: StoredAcknowledgementItem {
+	static let modelKeyPath = \AboutWindowModel.contributors
+}
+
+// MARK: - CreditItem
+
+extension Contributor: CreditItem {
+	static let creditKind: CreditKind = .contributor
 }

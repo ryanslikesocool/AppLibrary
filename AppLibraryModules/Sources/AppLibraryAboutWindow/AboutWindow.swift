@@ -18,12 +18,12 @@ public struct AboutWindow: Scene {
 		.defaultPosition(Self.defaultPosition)
 		.windowStyle(Self.windowStyle)
 		.windowResizability(Self.windowResizability)
-		.environmentObject(model)
 		.commands {
 			CommandGroup(replacing: .appInfo) {
 				AboutLink()
 			}
 		}
+		.environmentObject(model)
 	}
 }
 

@@ -1,7 +1,7 @@
 import SwiftUI
 
 protocol CreditItemView: View {
-	associatedtype Value: CreditProtocol
+	associatedtype Value: CreditItem where Value.ItemView == Self
 
-	init(_ value: Value)
+	nonisolated init(_ value: Value)
 }

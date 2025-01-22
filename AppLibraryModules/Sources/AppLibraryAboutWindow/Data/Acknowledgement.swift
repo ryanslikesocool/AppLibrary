@@ -1,3 +1,4 @@
+import AcknowledgementToolbox
 import Foundation
 
 struct Acknowledgement {
@@ -59,14 +60,33 @@ extension Acknowledgement: Decodable {
 	}
 }
 
-// MARK: - CreditProtocol
+// MARK: - PrimitiveAcknowledgementItem
 
-extension Acknowledgement: CreditProtocol {
-	typealias TopLevelDecoder = JSONDecoder
+extension Acknowledgement: PrimitiveAcknowledgementItem { }
 
-	static var fileURL: URL? {
-		Bundle.main.url(forResource: "Acknowledgements", withExtension: "json")
+// MARK: - DecodableAcknowledgementItem
+
+extension Acknowledgement: DecodableAcknowledgementItem {
+	static var topLevelDecoder: JSONDecoder {
+		.shared
 	}
 
-	static let modelKeyPath: KeyPath<AboutWindowModel, [Self]> = \.acknowledgements
+	static var fileURL: URL? {
+		Bundle.main.url(
+			forResource: "Acknowledgements",
+			withExtension: "json"
+		)
+	}
+}
+
+// MARK: - StoredAcknowledgementItem
+
+extension Acknowledgement: StoredAcknowledgementItem {
+	static let modelKeyPath = \AboutWindowModel.acknowledgements
+}
+
+// MARK: - CreditItem
+
+extension Acknowledgement: CreditItem {
+	static let creditKind: CreditKind = .acknowledgement
 }

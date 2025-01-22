@@ -1,4 +1,4 @@
-import AppLibraryResources
+import AcknowledgementToolbox
 import SwiftUI
 
 struct CreditsSection: View {
@@ -6,8 +6,10 @@ struct CreditsSection: View {
 
 	public var body: some View {
 		VStack {
-			CreditsListLink(.credits.section.contributors.title)
-			CreditsListLink(.credits.section.acknowledgements.title)
+			CreditListLink(ofType: Contributor.self)
+			CreditListLink(ofType: Acknowledgement.self)
 		}
+		.buttonStyle(.expandingLabel(.horizontal))
+		.controlSize(.large)
 	}
 }

@@ -3,10 +3,12 @@ import SFSymbolToolbox
 import SwiftUI
 
 extension Contributor {
-	struct ItemView: AppLibraryAboutWindow.CreditItemView {
+	struct ItemView: CreditItemView {
+		public typealias Value = Contributor
+
 		private let value: Value
 
-		public init(_ value: Contributor) {
+		public nonisolated init(_ value: Value) {
 			self.value = value
 		}
 

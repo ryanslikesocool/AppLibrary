@@ -38,5 +38,15 @@
 		"name": "XPCToolbox",
 		"projectURL": "https://github.com/ryanslikesocool/XPCToolbox",
 		"licensePath": "blob/main/LICENSE.md"
+	},
+	{
+		"name": "PainlessCG",
+		"projectURL": "https://github.com/ryanslikesocool/PainlessCG",
+		"licensePath": "blob/main/LICENSE.md"
+	},
+	{
+		"name": "AcknowledgementToolbox",
+		"projectURL": "https://github.com/ryanslikesocool/AcknowledgementToolbox",
+		"licensePath": "blob/main/LICENSE.md"
 	}
 ]

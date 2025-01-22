@@ -12,7 +12,7 @@ let package = Package(
 		.library(name: "AppLibraryModules", targets: ["AppLibrary"]),
 
 		// NOTE: The following products are only declared for validation.
-		
+
 		.library(name: "AppLibraryBrowserWindow", targets: ["AppLibraryBrowserWindow"]),
 		.library(name: "AppLibraryAboutWindow", targets: ["AppLibraryAboutWindow"]),
 		.library(name: "AppLibrarySettingsWindow", targets: ["AppLibrarySettingsWindow"]),
@@ -31,6 +31,10 @@ let package = Package(
 		.package(url: "https://github.com/ryanslikesocool/LocalizationToolbox.git", from: "0.0.4"),
 		.package(url: "https://github.com/ryanslikesocool/NSMetadataToolbox.git", from: "0.0.6"),
 		.package(url: "https://github.com/ryanslikesocool/SFSymbolToolbox.git", from: "0.0.3"),
+//		.package(url: "https://github.com/ryanslikesocool/PainlessCG.git", from: "0.0.4"),
+		.package(path: "~/Documents/Xcode Projects/PainlessCG"),
+//		.package(url: "https://github.com/ryanslikesocool/AcknowledgementToolbox.git", from: "0.0.1"),
+		.package(path: "~/Documents/Xcode Projects/AcknowledgementToolbox/AcknowledgementToolbox"),
 
 		.package(path: "../AppLibraryCore"),
 		.package(path: "../AppLibraryAccessibilityHelperModules"),
@@ -62,6 +66,8 @@ let package = Package(
 		.target(
 			name: "AppLibraryAboutWindow",
 			dependencies: [
+				"AcknowledgementToolbox",
+
 				"AppLibraryCommon",
 				"AppLibraryCommonViews",
 				"AppLibraryResources",
@@ -169,6 +175,7 @@ var commonTargets: [Target] {
 			name: "AppLibraryCommon",
 			dependencies: [
 				"BundleToolbox",
+				"PainlessCG",
 
 				"AppLibraryCore",
 			]
