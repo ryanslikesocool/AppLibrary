@@ -23,14 +23,18 @@ public struct ApplicationIcon: View {
 	}
 
 	public var body: some View {
-		if stackCount > 1 {
-			icon
-				.background {
-					ForEach(Self.stackCountRange.dropFirst(), id: \.self, content: stackIcon(index:))
-				}
-		} else {
-			icon
-		}
+//		if stackCount > 1 {
+		icon
+			.background {
+				ForEach(
+					(1 ... stackCount).dropFirst().reversed(),
+					id: \.self,
+					content: stackIcon(index:)
+				)
+			}
+//		} else {
+//			icon
+//		}
 	}
 }
 
@@ -39,9 +43,11 @@ public struct ApplicationIcon: View {
 private extension ApplicationIcon {
 	static let stackCountRange: ClosedRange<Int> = 1 ... 3
 
-	static let stackInstanceOffset: CGSize = CGSize(width: 0, height: 8)
+	static let stackInstanceOffset: CGSize = CGSize(width: 0, height: 6)
 
-	static let stackInstanceSizeDelta: CGSize = CGSize(repeating: -8)
+	static let stackInstanceSizeDelta: CGFloat = 4
+
+	static let stackInstanceWhiteStep: Double = 0.1
 }
 
 // MARK: - Supporting Views
@@ -54,11 +60,15 @@ private extension ApplicationIcon {
 	}
 
 	func stackIcon(index: Int) -> some View {
-		let scale = CGFloat(index)
+		let scale = CGFloat(index - 1)
 
 		return icon
+			.colorMultiply(
+				Color(white: 1 - Self.stackInstanceWhiteStep * scale)
+			)
+
+			.padding(.horizontal, Self.stackInstanceSizeDelta * scale)
 			.offset(Self.stackInstanceOffset * scale)
-			.scaleEffect(Self.stackInstanceSizeDelta * scale)
 	}
 }
 

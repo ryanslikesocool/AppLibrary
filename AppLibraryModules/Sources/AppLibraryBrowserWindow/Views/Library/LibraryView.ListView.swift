@@ -11,13 +11,6 @@ extension LibraryView {
 		}
 
 		public var body: some View {
-//			LazyVStack {
-//				ApplicationIterator(
-//					applications: browserModel.filteredApps,
-//					focusState: $focusState
-//				)
-//			}
-			
 			LazyVStack(pinnedViews: .sectionHeaders) {
 				ApplicationIterator(
 					applications: browserModel.filteredApps,

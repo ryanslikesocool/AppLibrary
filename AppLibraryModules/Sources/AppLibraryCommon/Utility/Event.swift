@@ -9,4 +9,6 @@ public extension Event {
 	@MainActor static let moveCommand = PassthroughEvent<MoveCommandDirection>()
 	@MainActor static let submitCommand = PassthroughEvent<Void>()
 	@MainActor static let exitCommand = PassthroughEvent<Void>()
+
+	@MainActor static let windowVisibility = PassthroughEvent<WindowIdentifier, WindowVisibilityMessage>()
 }

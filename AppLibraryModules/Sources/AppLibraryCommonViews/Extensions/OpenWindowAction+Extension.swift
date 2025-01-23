@@ -5,14 +5,14 @@ public extension OpenWindowAction {
 	/// Opens a window that’s associated with the specified identifier.
 	///
 	/// Don’t call this method directly. SwiftUI calls it when you call the
-	/// [`openWindow`](https://developer.apple.com/documentation/swiftui/environmentvalues/openwindow)
+	/// [`openWindow`]( https://developer.apple.com/documentation/swiftui/environmentvalues/openwindow )
 	/// action with an identifier:
 	/// ```swift
 	/// openWindow(id: .message)
 	/// ```
 	///
 	/// For information about how Swift uses the `callAsFunction()` method to simplify call site syntax, see
-	/// [Methods with Special Names](https://docs.swift.org/swift-book/documentation/the-swift-programming-language/declarations/#Methods-with-Special-Names)
+	/// [Methods with Special Names]( https://docs.swift.org/swift-book/documentation/the-swift-programming-language/declarations/#Methods-with-Special-Names )
 	/// in *The Swift Programming Language*.
 	///
 	/// - Parameter id: The identifier of the scene to present.
@@ -25,14 +25,14 @@ public extension OpenWindowAction {
 	/// Opens a window defined by the window group that presents the specified value type and that’s associated with the specified identifier.
 	///
 	/// Don’t call this method directly. SwiftUI calls it when you call the
-	/// [`openWindow`](https://developer.apple.com/documentation/swiftui/environmentvalues/openwindow)
+	/// [`openWindow`]( https://developer.apple.com/documentation/swiftui/environmentvalues/openwindow )
 	/// action with an identifier and a value:
 	/// ```swift
 	/// openWindow(id: .message, value: message.id)
 	/// ```
 	///
 	/// For information about how Swift uses the `callAsFunction()` method to simplify call site syntax, see
-	/// [Methods with Special Names](https://docs.swift.org/swift-book/documentation/the-swift-programming-language/declarations/#Methods-with-Special-Names)
+	/// [Methods with Special Names]( https://docs.swift.org/swift-book/documentation/the-swift-programming-language/declarations/#Methods-with-Special-Names )
 	/// in *The Swift Programming Language*.
 	///
 	/// - Parameters:
@@ -56,14 +56,14 @@ public extension OpenWindowAction {
 	/// Regardless of `sharingBehavior`, an error is thrown if the window fails to open.
 	///
 	/// Don’t call this method directly. SwiftUI calls it when you call the
-	/// [`openWindow`](https://developer.apple.com/documentation/swiftui/environmentvalues/openwindow)
+	/// [`openWindow`]( https://developer.apple.com/documentation/swiftui/environmentvalues/openwindow )
 	/// action with an identifier and a sharing behavior:
 	/// ```swift
 	/// try await openWindow(id: .message, sharingBehavior: .requested)
 	/// ```
 	///
 	/// For information about how Swift uses the `callAsFunction()` method to simplify call site syntax, see
-	/// [Methods with Special Names](https://docs.swift.org/swift-book/documentation/the-swift-programming-language/declarations/#Methods-with-Special-Names)
+	/// [Methods with Special Names]( https://docs.swift.org/swift-book/documentation/the-swift-programming-language/declarations/#Methods-with-Special-Names )
 	/// in *The Swift Programming Language*.
 	///
 	/// - Parameters:
@@ -83,14 +83,14 @@ public extension OpenWindowAction {
 	/// Regardless of `sharingBehavior`, an error is thrown if the window fails to open.
 	///
 	/// Don’t call this method directly. SwiftUI calls it when you call the
-	/// [`openWindow`](https://developer.apple.com/documentation/swiftui/environmentvalues/openwindow)
+	/// [`openWindow`]( https://developer.apple.com/documentation/swiftui/environmentvalues/openwindow )
 	/// action with an identifier, a value, and a sharing behavior:
 	/// ```swift
 	/// try await openWindow(id: .message, value: message.id, sharingBehavior: .required)
 	/// ```
 	///
 	/// For information about how Swift uses the `callAsFunction()` method to simplify call site syntax, see
-	/// [Methods with Special Names](https://docs.swift.org/swift-book/documentation/the-swift-programming-language/declarations/#Methods-with-Special-Names)
+	/// [Methods with Special Names]( https://docs.swift.org/swift-book/documentation/the-swift-programming-language/declarations/#Methods-with-Special-Names )
 	/// in *The Swift Programming Language*.
 	///
 	/// - Parameters:

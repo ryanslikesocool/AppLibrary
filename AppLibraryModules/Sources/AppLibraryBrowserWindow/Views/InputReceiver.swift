@@ -119,7 +119,7 @@ private extension InputReceiver {
 			case .application?,
 			     .default?,
 			     nil:
-				// TODO: handle event (dismiss window)
+				Event.windowVisibility.send(.browser, .dismiss)
 				break
 		}
 	}

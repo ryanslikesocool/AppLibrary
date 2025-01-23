@@ -7,14 +7,15 @@ struct LibraryView: View {
 	@EnvironmentObject private var browserModel: BrowserModel
 	@FocusState.Binding private var focusState: BrowserFocusElement?
 
-//	@State private var searchQuery: String = ""
-
 	public init(focusState: FocusState<BrowserFocusElement?>.Binding) {
 		_focusState = focusState
 	}
 
 	public var body: some View {
 		ScrollViewReader { proxy in
+			// NOTE: `List` displays the ideal header and separator style,
+			// but I can't figure out how to make the header material uniform with the search background.
+
 			ScrollView(.vertical) {
 				scrollContent
 			}
@@ -22,7 +23,7 @@ struct LibraryView: View {
 			.buttonStyle(.plain)
 
 			.contentMargins([.horizontal, .bottom], libraryLayout.padding, for: .scrollContent)
-			.safeAreaInset(edge: .top, spacing: 0) {
+			.safeAreaInset(edge: .top, spacing: Self.searchSpacing) {
 				if browserModel.isSearchDisplayed {
 					SearchField(focusState: $focusState)
 				}
@@ -35,9 +36,13 @@ struct LibraryView: View {
 //				receiveFocus(newValue: newValue, in: proxy)
 //			}
 		}
-
-//		.searchable(text: $searchQuery, placement: .sidebar)
 	}
+}
+
+// MARK: - Constants
+
+private extension LibraryView {
+	static let searchSpacing: CGFloat? = 0
 }
 
 // MARK: - Supporting Views

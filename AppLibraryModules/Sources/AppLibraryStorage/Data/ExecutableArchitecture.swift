@@ -13,6 +13,9 @@ public enum ExecutableArchitecture: String {
 	/// Specifies the 64-bit Intel architecture.
 	case x86_64
 
+	/// Specifies the 32-bit ARM architecture.
+	case arm
+
 	/// Specifies the 64-bit ARM architecture.
 	case arm64
 
@@ -37,3 +40,21 @@ extension ExecutableArchitecture: Hashable { }
 // MARK: - CaseIterable
 
 extension ExecutableArchitecture: CaseIterable { }
+
+// MARK: -
+
+public extension ExecutableArchitecture {
+	static var current: Self {
+#if arch(i386)
+		.i386
+#elseif arch(x86_64)
+		.x86_86
+#elseif arch(arm)
+		.arm
+#elseif arch(arm64)
+		.arm64
+#else
+		preconditionFailure("Running on an unexpected architecture.  Please file a bug report.")
+#endif
+	}
+}

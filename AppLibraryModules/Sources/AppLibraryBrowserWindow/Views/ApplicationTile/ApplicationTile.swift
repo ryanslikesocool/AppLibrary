@@ -6,8 +6,8 @@ import AppLibraryStorage
 import SwiftUI
 
 struct ApplicationTile: View {
-//	@Environment(\.isFocused) private var isFocused
 	@Environment(\.libraryLayout) private var libraryLayout
+//	@Environment(\.dismissWindow) private var dismissWindow
 
 	@ObservedObject private var application: ApplicationModel
 
@@ -26,11 +26,12 @@ struct ApplicationTile: View {
 	}
 
 	public var body: some View {
-		Button(action: application.openLatest) {
+		Button(action: buttonAction) {
 			ApplicationLabel(for: application)
 		}
+		.contentShape(Self.backgroundShape)
 
-		.focusable(interactions: [.edit])
+		.focusable(interactions: [.edit, .activate])
 		.focusEffectDisabled()
 		.focused($focusState, equals: .application(application))
 
@@ -69,5 +70,15 @@ private extension ApplicationTile {
 		AnyShapeStyle(
 			.selection
 		)
+	}
+}
+
+// MARK: - Functions
+
+private extension ApplicationTile {
+	func buttonAction() {
+		application.openLatest()
+
+		Event.windowVisibility.send(.browser, .dismiss)
 	}
 }

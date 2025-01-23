@@ -5,17 +5,27 @@ struct ListApplicationLabelStyle: ApplicationLabelStyle {
 	public init() { }
 
 	public func makeBody(configuration: Configuration) -> some View {
-		HStack {
+		HStack(spacing: Self.spacing) {
 			configuration.icon
-				.frame(height: 56)
+				.frame(height: Self.iconSize)
 
 			configuration.title
-				.font(.body)
+				.font(Self.titleFont)
 
 			Spacer()
 		}
 		.contentShape(.rect)
 	}
+}
+
+// MARK: - Constants
+
+private extension ListApplicationLabelStyle {
+	static let spacing: CGFloat? = nil
+
+	static let iconSize: CGFloat? = 56
+
+	static var titleFont: Font { .body }
 }
 
 // MARK: - Convenience

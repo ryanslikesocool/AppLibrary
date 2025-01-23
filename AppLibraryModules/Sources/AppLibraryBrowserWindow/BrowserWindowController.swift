@@ -3,11 +3,16 @@ import AppLibraryAccessibilityHelperServer
 import AppLibraryCommon
 import AppLibraryCommonViews
 import AppLibraryResources
+import Combine
 import OSLog
 import SwiftUI
 
 public final class BrowserWindowController: NSWindowController, ObservableObject {
 	private let browserModel: BrowserModel
+
+	private lazy var windowVisibilitySubscriber: AnyCancellable = Event.windowVisibility
+		.filter(windowIdentifier: Self.windowIdentifier)
+		.sink { _, message in self.receive(windowVisibilityMessage: message) }
 
 	public init() {
 		browserModel = BrowserModel()
@@ -19,7 +24,7 @@ public final class BrowserWindowController: NSWindowController, ObservableObject
 //			backing: .buffered,
 			defer: false
 		)
-		window.identifier = Self.windowIdentifier
+		window.identifier = NSUserInterfaceItemIdentifier(Self.windowIdentifier)
 
 		super.init(window: window)
 
@@ -31,7 +36,6 @@ public final class BrowserWindowController: NSWindowController, ObservableObject
 		window.level = .floating
 		window.isMovable = false
 
-//		window.toolbarStyle = .unified
 		window.material = .popover
 
 		window.contentView = NSHostingView(rootView:
@@ -39,6 +43,8 @@ public final class BrowserWindowController: NSWindowController, ObservableObject
 		)
 
 		positionWindow(window)
+
+		_ = windowVisibilitySubscriber
 	}
 
 	@available(*, unavailable)
@@ -52,7 +58,7 @@ public final class BrowserWindowController: NSWindowController, ObservableObject
 extension BrowserWindowController: NSWindowDelegate {
 	public func windowDidResignKey(_ notification: Notification) {
 		dismiss()
-		
+
 		if FeatureFlag.Input.implementation == .keyboardObserver {
 			browserModel.keyboardObserver.isEnabled = false
 		}
@@ -77,7 +83,7 @@ extension BrowserWindowController {
 	/// The accessibility API used to calculate the position the window automatically adds some padding by default.
 	nonisolated static let windowPadding: CGFloat = 0
 
-	nonisolated static let windowIdentifier: NSUserInterfaceItemIdentifier = NSUserInterfaceItemIdentifier(WindowIdentifier.browser)
+	nonisolated static let windowIdentifier = WindowIdentifier.browser
 }
 
 // MARK: -
@@ -88,8 +94,6 @@ public extension BrowserWindowController {
 			Self.logger.debug("Browser window does not exist.  This should not happen.")
 			return
 		}
-//		NSApp.setActivationPolicy(.accessory)
-//		NSApp.setActivationPolicy(.regular)
 
 		positionWindow(window)
 
@@ -100,8 +104,20 @@ public extension BrowserWindowController {
 	}
 
 	func dismiss() {
+		guard let window else {
+			Self.logger.debug("Browser window does not exist.  This should not happen.")
+			return
+		}
+
+		window.orderOut(self)
 		Self.logger.debug("Dismissed browser.")
-		window?.orderOut(self)
+	}
+
+	private func receive(windowVisibilityMessage message: WindowVisibilityMessage) {
+		switch message {
+			case .reveal: reveal()
+			case .dismiss: dismiss()
+		}
 	}
 }
 
@@ -127,10 +143,6 @@ private extension BrowserWindowController {
 
 		guard
 			let screen = screen ?? NSScreen.main,
-//			let screenIndex = NSScreen.screens.firstIndex(of: screen),
-//			let dock = Dock.main,
-//			let iconRect = DockTile.main(in: dock)?.rect,
-//			let (dockRect, dockEdge) = dock.rectAndEstimatedEdge(on: screen)
 			let iconRect = try? accessibilityHelper.requestDockTileRect(for: Bundle.main),
 			let (dockRect, dockEdge) = try? accessibilityHelper.requestRectAndEstimatedEdge(screen: screen)
 		else {
@@ -160,10 +172,3 @@ private extension BrowserWindowController {
 		return frameOrigin
 	}
 }
-
-//public extension NSSearchField {
-//	override var focusRingType: NSFocusRingType {
-//		get { .default }
-//		set { }
-//	}
-//}

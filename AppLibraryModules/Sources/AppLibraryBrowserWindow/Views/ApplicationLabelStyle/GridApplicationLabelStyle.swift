@@ -5,17 +5,27 @@ struct GridApplicationLabelStyle: ApplicationLabelStyle {
 	public init() { }
 
 	public func makeBody(configuration: Configuration) -> some View {
-		VStack(alignment: .center, spacing: 4) {
+		VStack(alignment: .center, spacing: Self.spacing) {
 			configuration.icon
-				.frame(height: 48)
+				.frame(height: Self.iconSize)
 
 			configuration.title
-				.font(.footnote)
+				.font(Self.titleFont)
 				.lineLimit(2, reservesSpace: true)
 		}
 		.multilineTextAlignment(.center)
 		.contentShape(.rect)
 	}
+}
+
+// MARK: - Constants
+
+private extension GridApplicationLabelStyle {
+	static let spacing: CGFloat? = 4
+
+	static let iconSize: CGFloat? = 48
+
+	static var titleFont: Font { .footnote }
 }
 
 // MARK: - Convenience

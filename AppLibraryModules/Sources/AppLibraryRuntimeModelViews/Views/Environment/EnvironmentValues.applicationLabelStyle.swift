@@ -1,5 +1,6 @@
 import SwiftUI
 
+// VALIDATE: Should this be `internal`?
 public extension EnvironmentValues {
 	@Entry
 	fileprivate(set) var applicationLabelStyle: AnyApplicationLabelStyle = AnyApplicationLabelStyle(.default)

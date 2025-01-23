@@ -36,7 +36,8 @@ extension ApplicationIterator {
 
 private extension ApplicationIterator.Grouped {
 	static let headerPadding: EdgeInsets = EdgeInsets(vertical: 4)
-	static var headerFont: Font { .subheadline.weight(.semibold) }
+
+	static var headerFontWeight: Font.Weight { .semibold }
 }
 
 // MARK: - Supporting Views
@@ -44,7 +45,7 @@ private extension ApplicationIterator.Grouped {
 private extension ApplicationIterator.Grouped {
 	static func makeSectionHeader(subject: String) -> some View {
 		Text(verbatim: subject)
-			.font(headerFont)
+			.fontWeight(headerFontWeight)
 			.frame(maxWidth: .infinity, alignment: .leading)
 			.padding(headerPadding)
 	}
@@ -72,7 +73,7 @@ private extension ApplicationIterator.Grouped {
 		guard let character = element.displayName.first else {
 			return nil
 		}
-		
+
 		return if character.isNumber {
 			"#"
 		} else {

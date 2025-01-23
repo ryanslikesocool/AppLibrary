@@ -1,5 +1,7 @@
 import AppKit
 
+// TODO: Should this be an `enum`?
+
 @frozen
 public struct WindowIdentifier: RawRepresentable {
 	public typealias RawValue = String

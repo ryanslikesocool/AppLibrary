@@ -21,6 +21,10 @@ extension ErrorView {
 // MARK: - Constants
 
 private extension ErrorView.ErrorTitle {
-	static var font: Font { .title.weight(fontWeight) }
-	static var fontWeight: Font.Weight { .semibold }
+	static var font: Font {
+		.title
+			.weight(
+				.semibold
+			)
+	}
 }
