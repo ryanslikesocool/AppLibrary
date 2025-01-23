@@ -1,3 +1,4 @@
+import AppLibraryCommon
 import OSLog
 
 enum FeatureFlag { }
@@ -29,5 +30,23 @@ extension FeatureFlag {
 
 			Logger.input.debug("\(scope()) received \"\(name())\" event")
 		}
+	}
+}
+
+// MARK: - ListView
+
+extension FeatureFlag {
+	enum ListView {
+		static let implementation: ListViewImplementation
+			= .list
+	}
+}
+
+// MARK: - Search
+
+extension FeatureFlag {
+	enum Search {
+		static let viewImplementation: ViewImplementation
+			= .appKit
 	}
 }

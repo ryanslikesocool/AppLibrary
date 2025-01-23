@@ -37,17 +37,25 @@ extension ApplicationIterator {
 private extension ApplicationIterator.Grouped {
 	static let headerPadding: EdgeInsets = EdgeInsets(vertical: 4)
 
-	static var headerFontWeight: Font.Weight { .semibold }
+	static var headerFontWeight: Font.Weight { .medium }
 }
 
 // MARK: - Supporting Views
 
 private extension ApplicationIterator.Grouped {
+	@ViewBuilder
 	static func makeSectionHeader(subject: String) -> some View {
-		Text(verbatim: subject)
-			.fontWeight(headerFontWeight)
-			.frame(maxWidth: .infinity, alignment: .leading)
-			.padding(headerPadding)
+		let text = Text(verbatim: subject)
+
+		switch FeatureFlag.ListView.implementation {
+			case .list:
+				text
+			case .lazyVStack:
+				text
+					.fontWeight(headerFontWeight)
+					.frame(maxWidth: .infinity, alignment: .leading)
+					.padding(headerPadding)
+		}
 	}
 }
 

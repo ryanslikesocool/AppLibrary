@@ -11,13 +11,26 @@ extension LibraryView {
 		}
 
 		public var body: some View {
-			LazyVStack(pinnedViews: .sectionHeaders) {
-				ApplicationIterator(
-					applications: browserModel.filteredApps,
-					focusState: $focusState
-				)
-				.grouped()
+			switch FeatureFlag.ListView.implementation {
+				case .list:
+					content
+				case .lazyVStack:
+					LazyVStack(pinnedViews: .sectionHeaders) {
+						content
+					}
 			}
 		}
+	}
+}
+
+// MARK: - Supporting Views
+
+private extension LibraryView.ListView {
+	var content: some View {
+		ApplicationIterator(
+			applications: browserModel.filteredApps,
+			focusState: $focusState
+		)
+		.grouped()
 	}
 }

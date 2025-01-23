@@ -13,28 +13,36 @@ struct LibraryView: View {
 
 	public var body: some View {
 		ScrollViewReader { proxy in
-			// NOTE: `List` displays the ideal header and separator style,
-			// but I can't figure out how to make the header material uniform with the search background.
-
-			ScrollView(.vertical) {
-				scrollContent
-			}
-
-			.buttonStyle(.plain)
-
-			.contentMargins([.horizontal, .bottom], libraryLayout.padding, for: .scrollContent)
-			.safeAreaInset(edge: .top, spacing: Self.searchSpacing) {
-				if browserModel.isSearchDisplayed {
-					SearchField(focusState: $focusState)
+			Group {
+				switch FeatureFlag.ListView.implementation {
+					case .list:
+						// NOTE: `List` displays the ideal header and separator style,
+						// but I can't figure out how to make the header material uniform with the search background.
+						// TODO: look into NSCollectionView https://developer.apple.com/documentation/appkit/nscollectionview
+						List {
+							scrollContent
+						}
+						.scrollContentBackground(.hidden)
+					case .lazyVStack:
+						ScrollView(.vertical) {
+							scrollContent
+						}
 				}
 			}
+			.buttonStyle(.plain)
 
 			.onReceive(Event.scrollToApp) { id in
 				scrollToApp(id: id, in: proxy)
 			}
-//			.onChange(of: focusState) { _, newValue in
-//				receiveFocus(newValue: newValue, in: proxy)
-//			}
+			.onChange(of: focusState) { _, newValue in
+				receiveFocus(newValue: newValue, in: proxy)
+			}
+		}
+		.contentMargins([.horizontal, .bottom], libraryLayout.padding, for: .scrollContent)
+		.safeAreaInset(edge: .top, spacing: Self.searchSpacing) {
+			if browserModel.isSearchDisplayed {
+				SearchField(focusState: $focusState)
+			}
 		}
 	}
 }
