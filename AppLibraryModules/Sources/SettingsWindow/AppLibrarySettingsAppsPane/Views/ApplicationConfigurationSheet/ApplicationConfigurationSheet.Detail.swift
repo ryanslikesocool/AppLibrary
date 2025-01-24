@@ -1,5 +1,6 @@
-import AppLibraryStorage
 import AppLibraryRuntimeModel
+import AppLibraryStorage
+import AppLibraryStorageViews
 import SwiftUI
 
 extension ApplicationConfigurationSheet {
@@ -17,7 +18,7 @@ extension ApplicationConfigurationSheet {
 
 		public var body: some View {
 			Form {
-				ApplicationVisibilitySection(for: applicationModelIdentifier)
+				ApplicationVisibilityPicker<TupleView<(Text, Text)>>(for: applicationModelIdentifier)
 			}
 			.formStyle(.grouped)
 //			.navigationTitle(

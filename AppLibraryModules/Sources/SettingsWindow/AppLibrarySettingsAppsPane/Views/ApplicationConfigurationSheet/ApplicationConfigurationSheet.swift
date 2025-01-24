@@ -10,13 +10,15 @@ struct ApplicationConfigurationSheet: View {
 	public var body: some View {
 		NavigationSplitView {
 			Sidebar()
-				.navigationSplitViewColumnWidth(Self.sidebarWidth)
 				.navigationDestination(for: ApplicationModelIdentifier.self) { applicationModelIdentifier in
 					Detail(for: applicationModelIdentifier)
 				}
 		} detail: {
 			Label(.applicationConfigurationSheet.detail.noSelection)
 				.labelStyle(.emptyViewFallback)
+
+				// NOTE: This modifier doesn't work when applied directly to the sidebar for some reason.
+				.navigationSplitViewColumnWidth(Self.width - Self.sidebarWidth)
 		}
 		.toolbar {
 			ToolbarItem(placement: .cancellationAction) {
@@ -30,8 +32,8 @@ struct ApplicationConfigurationSheet: View {
 // MARK: - Constants
 
 private extension ApplicationConfigurationSheet {
-	static let width: CGFloat? = 600
+	static let width: CGFloat = 600
 	static let height: CGFloat? = 350
 
-	static let sidebarWidth: CGFloat = 200
+	static let sidebarWidth: CGFloat = 230
 }

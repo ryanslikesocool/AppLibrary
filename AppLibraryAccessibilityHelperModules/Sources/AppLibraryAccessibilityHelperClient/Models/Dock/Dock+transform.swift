@@ -100,6 +100,7 @@ public extension Dock {
 					.right
 				}
 			case .unknown: nil
+			default: nil
 		}
 	}
 }

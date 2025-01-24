@@ -1,3 +1,4 @@
+import AppLibraryCommonViews
 import AppLibraryRuntimeModel
 import AppLibraryRuntimeModelViews
 import AppLibraryStorage
@@ -7,7 +8,7 @@ extension ApplicationConfigurationSheet {
 	struct Sidebar: View {
 		@State private var searchQuery: String = ""
 
-		public init() {		}
+		public init() { }
 
 		public var body: some View {
 			List(
@@ -16,6 +17,11 @@ extension ApplicationConfigurationSheet {
 			)
 			.listStyle(.sidebar)
 			.searchable(text: $searchQuery, placement: .sidebar)
+
+//			.safeAreaInset(edge: .top, spacing: nil) {
+//				NSSearchFieldRepresentable(string: $searchQuery)
+//					.padding()
+//			}
 		}
 	}
 }

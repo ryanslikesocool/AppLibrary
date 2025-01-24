@@ -19,6 +19,6 @@ struct SettingsTabContent: View {
 				case .apps: AppsPane()
 			}
 		}
-		.scrollDisabled(true)
+//		.scrollDisabled(true)
 	}
 }

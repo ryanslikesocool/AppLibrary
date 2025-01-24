@@ -17,11 +17,6 @@ extension ApplicationConfigurationSheet.Sidebar {
 						ContextMenu(for: applicationModelIdentifier)
 					}
 			}
-//			ApplicationLabel(for: applicationModelIdentifier)
-//				.tag(applicationModelIdentifier)
-//				.contextMenu {
-//					ContextMenu(for: applicationModelIdentifier)
-//				}
 		}
 	}
 }

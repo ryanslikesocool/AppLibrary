@@ -15,31 +15,25 @@ public struct Dock {
 		}
 
 #if DEBUG
-		Self.logElement(rootElement, label: "Accessibility Element - Root", attributes: [
-			.role,
-		])
+		Self.logElement(
+			rootElement,
+			label: "Accessibility Element - Root",
+			attributes: [
+				.role,
+			]
+		)
 
-//		Self.logElement(rootElement, label: "Accessibility Element - Root") { element in
-//			"""
-//			- Role: \(String(describing: try? element.value(forAttribute: .role)))
-//			"""
-//		}
-
-		Self.logElement(listElement, label: "Accessibility Element - List", attributes: [
-			.role,
-			.children,
-			.frame,
-			.orientation,
-		])
-
-//		Self.logElement(listElement, label: "Accessibility Element - List") { element in
-//			"""
-//			- Role: \(String(describing: try? element.value(forAttribute: .role)))
-//			- Children: \(String(describing: try? element.value(forAttribute: .children)))
-//			- Frame: \(String(describing: try? element.value(forAttribute: .frame)))
-//			- Orientation: \(String(describing: try? element.value(forAttribute: .orientation)))
-//			"""
-//		}
+		Self.logElement(
+			listElement,
+			label: "Accessibility Element - List",
+			attributes: [
+				.role,
+				.children,
+				.position,
+				.size,
+				.orientation,
+			]
+		)
 #endif
 
 		assert((try? rootElement.value(forAttribute: .role)) == .application)
@@ -132,21 +126,17 @@ public extension Dock {
 		assert((try? matchingElement.value(forAttribute: .subrole)) == .applicationDockItem)
 
 #if DEBUG
-		Self.logElement(matchingElement, label: "Accessibility Element - Dock Tile", attributes: [
-			.role,
-			.subrole,
-			.frame,
-			.url,
-		])
-
-//		Self.logElement(matchingElement, label: "Accessibility Element - Dock Tile") { element in
-//			"""
-//			- Role: \(String(describing: try? element.value(forAttribute: .role)))
-//			- Subrole: \(String(describing: try? element.value(forAttribute: .subrole)))
-//			- Frame: \(String(describing: try? element.value(forAttribute: .frame)))
-//			- URL: \(String(describing: try? element.value(forAttribute: .url)))
-//			"""
-//		}
+		Self.logElement(
+			matchingElement,
+			label: "Accessibility Element - Dock Tile",
+			attributes: [
+				.role,
+				.subrole,
+				.position,
+				.size,
+				.url,
+			]
+		)
 #endif
 
 		return DockTile(accessibilityElement: matchingElement)

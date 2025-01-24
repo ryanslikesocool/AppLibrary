@@ -1,13 +1,13 @@
 {
-  "originHash" : "d3538a56147518b21985ba29c28192d61d103209e59b21ae0e8bb13c859c1ce5",
+  "originHash" : "19327be12a8f262689c0df4cb5e6c001b37ffc4e8fadf0a419dfcd4224ca378c",
   "pins" : [
     {
       "identity" : "axtoolbox",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/ryanslikesocool/AXToolbox.git",
       "state" : {
-        "revision" : "284f69b3ae07cba436131cc2c53c18dec7fce137",
-        "version" : "0.0.5"
+        "revision" : "cfacd5b243145141a867673618755c2a9955bb30",
+        "version" : "0.0.6"
       }
     },
     {
@@ -33,8 +33,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/ryanslikesocool/LocalizationToolbox.git",
       "state" : {
-        "revision" : "e1a40f79acab1d73dc8366b8f9ec30a8f3613ef7",
-        "version" : "0.0.4"
+        "revision" : "d79753b17d9239fd272449d877829d1ca26b6257",
+        "version" : "0.0.5"
       }
     },
     {

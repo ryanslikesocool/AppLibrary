@@ -2,6 +2,7 @@ import AppLibraryCommon
 import AppLibraryCommonViews
 import AppLibraryRuntimeModel
 import AppLibraryStorage
+import AppLibraryStorageViews
 import SwiftUI
 
 extension ApplicationTile {
@@ -17,7 +18,10 @@ extension ApplicationTile {
 				OpenApplicationButton(application: application)
 			}
 			Section {
-				HideApplicationButton(application: application)
+				ApplicationVisibilityPicker<Text>(for: ApplicationModelIdentifier(application))
+					.applicationVisibilityPickerStyle(.menuToggleList)
+
+//				HideApplicationButton(application: application)
 
 				if let latestInstance = application.latestInstance {
 					ShowInFinderButton(latestInstance.url)

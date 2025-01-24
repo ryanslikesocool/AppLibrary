@@ -13,7 +13,7 @@ let package = Package(
 		.library(name: "AppLibraryAccessibilityHelperServer", targets: ["AppLibraryAccessibilityHelperServer"]),
 	],
 	dependencies: [
-		.package(url: "https://github.com/ryanslikesocool/AXToolbox.git", from: "0.0.5"),
+		.package(url: "https://github.com/ryanslikesocool/AXToolbox.git", from: "0.0.6"),
 
 		.package(path: "../AppLibraryCore"),
 		.package(path: "../AppLibraryExtension"),

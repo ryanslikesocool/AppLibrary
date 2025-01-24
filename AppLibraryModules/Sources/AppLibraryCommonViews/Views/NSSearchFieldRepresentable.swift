@@ -1,8 +1,7 @@
 import AppKit
-import AppLibraryCommon
 import SwiftUI
 
-struct NSSearchFieldRepresentable: NSViewRepresentable {
+public struct NSSearchFieldRepresentable: NSViewRepresentable {
 	@Binding private var string: String
 
 	public init(string: Binding<String>) {
@@ -52,7 +51,7 @@ struct NSSearchFieldRepresentable: NSViewRepresentable {
 
 // MARK: - Coordinator
 
-extension NSSearchFieldRepresentable {
+public extension NSSearchFieldRepresentable {
 	final class Coordinator: NSObject {
 		fileprivate var parent: NSSearchFieldRepresentable
 
@@ -84,7 +83,7 @@ extension NSSearchFieldRepresentable {
 }
 
 extension NSSearchFieldRepresentable.Coordinator: NSSearchFieldDelegate {
-	func controlTextDidChange(_ notification: Notification) {
+	public func controlTextDidChange(_ notification: Notification) {
 		guard let nsView = notification.object as? NSSearchFieldRepresentable.NSViewType else {
 			return
 		}

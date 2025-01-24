@@ -60,6 +60,7 @@ let package = Package(
 				"AppLibrarySettingsWindow",
 				"AppLibraryResources",
 				"AppLibraryRuntimeModel",
+				"AppLibraryStorageViews",
 			]
 		),
 
@@ -90,6 +91,14 @@ let package = Package(
 
 				"AppLibraryStorage",
 				"AppLibraryCommon",
+			]
+		),
+
+		.target(
+			name: "AppLibraryStorageViews",
+			dependencies: [
+				"AppLibraryStorage",
+				"AppLibraryCommonViews",
 			]
 		),
 
@@ -150,11 +159,8 @@ var settingsWindowTargets: [Target] {
 		.target(
 			name: "AppLibrarySettingsAppsPane",
 			dependencies: [
-				"AppLibraryStorage",
-				"AppLibraryCommon",
-				"AppLibraryCommonViews",
 				"AppLibraryRuntimeModelViews",
-				"AppLibraryRuntimeModel",
+				"AppLibraryStorageViews",
 			]
 		),
 	]
