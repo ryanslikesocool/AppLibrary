@@ -18,4 +18,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 	func applicationDidBecomeActive(_ notification: Notification) {
 		browserWindowController.reveal()
 	}
+
+	func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
+		false
+	}
 }

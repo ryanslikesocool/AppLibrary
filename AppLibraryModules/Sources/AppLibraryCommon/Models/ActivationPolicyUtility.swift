@@ -6,9 +6,13 @@ import OSLog
 @MainActor
 public enum ActivationPolicyUtility {
 	/// The current activation policy for the application.
-	static var current: NSApplication.ActivationPolicy {
+	public static var current: NSApplication.ActivationPolicy {
 		get { NSApp.activationPolicy() }
 		set {
+			guard newValue != current else {
+				return
+			}
+
 			let success = NSApp.setActivationPolicy(newValue)
 
 			logger.log(
@@ -23,7 +27,7 @@ public enum ActivationPolicyUtility {
 	}
 
 	/// The target activation policy for the application policy, computed based on which windows are visible.
-	static var target: NSApplication.ActivationPolicy {
+	public static var target: NSApplication.ActivationPolicy {
 		let intersection = Set(NSApp.windows
 			.filter(\.isVisible)
 			.compactMap { window -> WindowIdentifier? in
