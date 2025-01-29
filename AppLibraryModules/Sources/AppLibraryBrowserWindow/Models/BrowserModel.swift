@@ -10,7 +10,7 @@ final class BrowserModel: ObservableObject {
 	// TODO: Convert to `willSet { objectWillChange.send() }`?
 	@Published private(set) var state: BrowserState
 
-	@Published var searchQuery: String
+	@Published var search: SearchModel
 
 	var isSearchDisplayed: Bool {
 		if case .idle = ApplicationCache.shared.state {
@@ -25,8 +25,10 @@ final class BrowserModel: ObservableObject {
 		// to compute this a reasonable number of times, so there's not a huge need for optimization.
 		// That said, it may be something to revisit in the future.
 
-		ApplicationCache.shared.applications.values
-			.filter(searchQuery: searchQuery)
+//		ApplicationCache.shared.applications.values
+//			.filter(searchQuery: searchQuery)
+
+		ApplicationCache.shared.applications.values.filter(using: search)
 	}
 
 	// NOTE: Annoyingly, this seems to be required to force the view to update.
@@ -42,7 +44,7 @@ final class BrowserModel: ObservableObject {
 
 	init() {
 		state = .idle
-		searchQuery = ""
+		search = SearchModel()
 
 		refreshApps()
 

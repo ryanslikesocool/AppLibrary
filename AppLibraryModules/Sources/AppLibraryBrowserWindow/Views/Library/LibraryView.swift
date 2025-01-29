@@ -58,7 +58,7 @@ private extension LibraryView {
 private extension LibraryView {
 	@ViewBuilder
 	var scrollContent: some View {
-		if browserModel.searchQuery.isEmpty {
+		if browserModel.search.isEmpty {
 			switch libraryLayout {
 				case .list: ListView(focusState: $focusState)
 				case .grid: GridView(focusState: $focusState)

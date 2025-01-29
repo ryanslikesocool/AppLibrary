@@ -17,14 +17,14 @@ struct SearchField: View {
 		Group {
 			switch FeatureFlag.Search.viewImplementation {
 				case .appKit:
-					NSSearchFieldRepresentable(string: $browserModel.searchQuery)
+					NSSearchFieldRepresentable(string: $browserModel.search.query)
 						.nsTextFieldPlaceholderString(NSApplication.shared.appName)
 				case .swiftUI:
 					HStack(alignment: .firstTextBaseline, spacing: Self.labelSpacing) {
 						labelIcon
 							.foregroundStyle(Self.labelIconStyle)
 
-						TextField(text: $browserModel.searchQuery) {
+						TextField(text: $browserModel.search.query) {
 							labelTitle
 						}
 					}

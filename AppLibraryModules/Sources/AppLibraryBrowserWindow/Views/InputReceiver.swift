@@ -112,7 +112,7 @@ private extension InputReceiver {
 
 		switch focusState {
 			case .search?:
-				guard !browserModel.searchQuery.isEmpty else {
+				guard !browserModel.search.isEmpty else {
 					focusState = nil
 					Logger.input.debug("\(#function): Search was focused, query was empty.")
 					break
@@ -124,7 +124,7 @@ private extension InputReceiver {
 				}
 
 				bestMatch.openLatest()
-				browserModel.searchQuery = ""
+				browserModel.search.clear()
 				Logger.input.debug("\(#function): Opening app for best match.")
 			case let .application(applicationModelIdentifier)?:
 				// TODO: handle event
