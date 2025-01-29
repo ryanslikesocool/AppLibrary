@@ -1,5 +1,4 @@
 import AppLibraryCommonViews
-import OSLog
 import SwiftUI
 
 struct MainMenu: Commands {
@@ -18,10 +17,4 @@ struct MainMenu: Commands {
 			BrowserWindowLink()
 		}
 	}
-}
-
-// MARK: - Constants
-
-extension MainMenu {
-	static let logger = Logger(category: Self.self)
 }

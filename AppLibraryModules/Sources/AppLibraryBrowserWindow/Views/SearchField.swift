@@ -27,7 +27,6 @@ struct SearchField: View {
 						TextField(text: $browserModel.searchQuery) {
 							labelTitle
 						}
-						.focused($focusState, equals: .search)
 					}
 
 					.searchFieldTextStyle()
@@ -36,7 +35,9 @@ struct SearchField: View {
 		}
 		.padding(SearchField.outerPadding)
 		.controlSize(.large)
+
 		.focusEffectDisabled()
+		.focused($focusState, equals: .search)
 
 		.searchFieldBackground()
 

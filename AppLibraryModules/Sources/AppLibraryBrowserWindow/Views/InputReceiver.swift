@@ -50,19 +50,28 @@ private extension InputReceiver {
 
 private extension InputReceiver {
 	func onReceiveActivateSearchCommand() {
-		Self.logger.debug("Received \"activate search\" command.")
+		Self.logger.debug("""
+		Received command:
+		- Type: activate search
+		""")
 
 		focusState = .search
 	}
 
 	func onReceiveRefreshApplicationsCommand() {
-		Self.logger.debug("Received \"refresh applications\" command.")
+		Self.logger.debug("""
+		Received command:
+		- Type: refresh applications
+		""")
 
 		browserModel.refreshApps()
 	}
 
 	func onReceiveMoveCommand(direction: MoveCommandDirection) {
-		Self.logger.debug("Received \"move\" command.")
+		Self.logger.debug("""
+		Received command:
+		- Type: move
+		""")
 
 		// TODO: figure out how to handle when `.search` is focused.
 
@@ -75,7 +84,7 @@ private extension InputReceiver {
 					break
 				}
 				focusState = .application(application)
-				// TODO: force scroll view to jump to element
+			// TODO: force scroll view to jump to element
 			case (.default?, .left),
 			     (.default?, .up),
 			     (.search?, .up):
@@ -84,23 +93,39 @@ private extension InputReceiver {
 					break
 				}
 				focusState = .application(application)
-				// TODO: force scroll view to jump to element
+			// TODO: force scroll view to jump to element
 			case (.application?, _):
 				let applicationIndexOffset = direction.offset(for: libraryLayout)
-				// TODO: set focus element
+			// TODO: set focus element
 			default:
 				break
 		}
 	}
 
 	func onReceiveSubmitCommand() {
-		Self.logger.debug("Received \"submit\" command.")
+		Self.logger.debug("""
+		Received command:
+		- Type: submit
+		""")
 
 		// NOTE: `onSubmit` modifier only seems to support text fields and search fields.
 
 		switch focusState {
 			case .search?:
-				browserModel.onSubmitSearch()
+				guard !browserModel.searchQuery.isEmpty else {
+					focusState = nil
+					Logger.input.debug("\(#function): Search was focused, query was empty.")
+					break
+				}
+
+				guard let bestMatch = browserModel.filteredApps.first else {
+					Logger.input.debug("\(#function): Best match for search was not found.")
+					break
+				}
+
+				bestMatch.openLatest()
+				browserModel.searchQuery = ""
+				Logger.input.debug("\(#function): Opening app for best match.")
 			case let .application(applicationModelIdentifier)?:
 				// TODO: handle event
 				break
@@ -111,7 +136,10 @@ private extension InputReceiver {
 	}
 
 	func onReceiveExitCommand() {
-		Self.logger.debug("Received \"exit\" command.")
+		Self.logger.debug("""
+		Received command:
+		- Type: exit
+		""")
 
 		switch focusState {
 			case .search?:
@@ -120,7 +148,6 @@ private extension InputReceiver {
 			     .default?,
 			     nil:
 				Event.windowVisibility.send(.browser, .dismiss)
-				break
 		}
 	}
 }

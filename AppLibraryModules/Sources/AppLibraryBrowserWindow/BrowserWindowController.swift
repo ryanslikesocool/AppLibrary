@@ -17,23 +17,21 @@ public final class BrowserWindowController: NSWindowController, ObservableObject
 	public init() {
 		browserModel = BrowserModel()
 
-		// TODO: Should this be a panel?
-		let window = NSVisualEffectWindow(
+		let window = BrowserWindow(
 			contentRect: NSRect(origin: .zero, size: BrowserWindowController.windowSize),
 			styleMask: [.titled, .fullSizeContentView, .nonactivatingPanel],
-//			backing: .buffered,
 			defer: false
 		)
 		window.identifier = NSUserInterfaceItemIdentifier(Self.windowIdentifier)
 
 		super.init(window: window)
 
-		window.delegate = self
 		window.title = LocalizedStringResource.browserWindow.title
 		window.titleVisibility = .hidden
 		window.titlebarAppearsTransparent = true
 		window.isExcludedFromWindowsMenu = true
-		window.level = .floating
+		window.level = .modalPanel
+		window.isReleasedWhenClosed = false
 		window.isMovable = false
 
 		window.material = .popover
@@ -50,24 +48,6 @@ public final class BrowserWindowController: NSWindowController, ObservableObject
 	@available(*, unavailable)
 	required init?(coder: NSCoder) {
 		fatalError("init(coder:) has not been implemented")
-	}
-}
-
-// MARK: - NSWindowDelegate
-
-extension BrowserWindowController: NSWindowDelegate {
-	public func windowDidResignKey(_ notification: Notification) {
-		dismiss()
-
-		if FeatureFlag.Input.implementation == .keyboardObserver {
-			browserModel.keyboardObserver.isEnabled = false
-		}
-	}
-
-	public func windowDidBecomeKey(_ notification: Notification) {
-		if FeatureFlag.Input.implementation == .keyboardObserver {
-			browserModel.keyboardObserver.isEnabled = true
-		}
 	}
 }
 

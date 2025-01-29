@@ -11,7 +11,6 @@ final class BrowserModel: ObservableObject {
 	@Published private(set) var state: BrowserState
 
 	@Published var searchQuery: String
-	@Published var focus: BrowserFocusElement?
 
 	var isSearchDisplayed: Bool {
 		if case .idle = ApplicationCache.shared.state {
@@ -30,8 +29,6 @@ final class BrowserModel: ObservableObject {
 			.filter(searchQuery: searchQuery)
 	}
 
-	let keyboardObserver: KeyboardObserver
-
 	// NOTE: Annoyingly, this seems to be required to force the view to update.
 	// Something to revisit in the future.
 	private lazy var applicationFilterChangeSubscriber: AnyCancellable = Publishers.CombineLatest(
@@ -46,14 +43,8 @@ final class BrowserModel: ObservableObject {
 	init() {
 		state = .idle
 		searchQuery = ""
-		focus = nil
-		keyboardObserver = KeyboardObserver()
 
 		refreshApps()
-
-		if FeatureFlag.Input.implementation == .keyboardObserver {
-			keyboardObserver.delegate = self
-		}
 
 		_ = applicationFilterChangeSubscriber
 	}
@@ -68,10 +59,6 @@ extension BrowserModel {
 // MARK: -
 
 extension BrowserModel {
-	private func activateSearch() {
-		focus = .search
-	}
-
 	func refreshApps() {
 		do {
 			let searchScopes = try getSearchScopes()
