@@ -18,6 +18,8 @@ package struct AppsPane: View {
 			sheetContent: ApplicationConfigurationSheet.init
 		)
 
+		// VALIDATE: Does this really need to be here?
+		// Is having it in the menu bar enough?
 		RefreshApplicationsFormItem()
 	}
 }

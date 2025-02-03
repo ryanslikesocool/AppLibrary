@@ -31,7 +31,7 @@ private extension DevelopedWithLoveLink {
 	static let multilineTextAlignment: TextAlignment = .center
 
 	static var customSymbol: ImageResource { .heart_pixel_fill }
-	static var symbolForegroundStyle: some ShapeStyle { Color.developedwithlove_red }
+	static var symbolForegroundStyle: some ShapeStyle { Color.developedWithLove_red }
 
 	static var buttonStyle: some PrimitiveButtonStyle { .plain }
 }

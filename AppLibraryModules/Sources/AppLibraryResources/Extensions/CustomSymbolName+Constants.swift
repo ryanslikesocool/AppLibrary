@@ -3,6 +3,8 @@ import SFSymbolToolbox
 public extension CustomSymbolName {
 	// MARK: F
 
+	/// ## See Also
+	/// - ``ImageResource/finder``
 	static let finder: Self = "finder"
 
 	// MARK: H

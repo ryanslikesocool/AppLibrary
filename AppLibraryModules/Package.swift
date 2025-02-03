@@ -27,6 +27,8 @@ let package = Package(
 		.library(name: "AppLibraryResources", targets: ["AppLibraryResources"]),
 	],
 	dependencies: [
+		.package(url: "https://github.com/apple/swift-algorithms.git", from: "1.2.0"),
+		
 		.package(url: "https://github.com/ryanslikesocool/BundleToolbox.git", from: "0.0.5"),
 		.package(url: "https://github.com/ryanslikesocool/LocalizationToolbox.git", from: "0.0.4"),
 		.package(url: "https://github.com/ryanslikesocool/NSMetadataToolbox.git", from: "0.0.6"),
@@ -180,6 +182,8 @@ var commonTargets: [Target] {
 		.target(
 			name: "AppLibraryCommon",
 			dependencies: [
+				.product(name: "Algorithms", package: "swift-algorithms"),
+
 				"BundleToolbox",
 				"PainlessCG",
 
