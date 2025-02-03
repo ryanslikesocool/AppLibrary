@@ -8,8 +8,8 @@ extension AppInfoSection {
 		public var body: some View {
 			Image(nsImage: .appIcon)
 				.resizable()
-//				.aspectRatio(contentMode: Self.iconAspectContentMode)
-				.frame(width: Self.width, height: Self.height)
+				.aspectRatio(contentMode: .fit)
+				.frame(width: Self.width)
 		}
 	}
 }
@@ -17,7 +17,5 @@ extension AppInfoSection {
 // MARK: - Constants
 
 private extension AppInfoSection.AppIcon {
-	//	static let aspectContentMode: ContentMode = .fit
 	static let width: CGFloat? = 128
-	static var height: CGFloat? { width }
 }

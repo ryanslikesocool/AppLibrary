@@ -32,6 +32,7 @@ public extension SystemSymbolName {
 	// MARK: I
 
 	static let info: Self = "info"
+	static let info_circle: Self = "info.circle"
 
 	// MARK: L
 
@@ -43,6 +44,7 @@ public extension SystemSymbolName {
 
 	// MARK: P
 
+	static let person_3: Self = "person.3"
 	static let plus: Self = "plus"
 
 	// MARK: S

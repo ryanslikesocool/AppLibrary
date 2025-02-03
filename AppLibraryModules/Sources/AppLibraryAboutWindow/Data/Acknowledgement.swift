@@ -62,16 +62,21 @@ extension Acknowledgement: Decodable {
 
 // MARK: - PrimitiveAcknowledgementItem
 
-extension Acknowledgement: PrimitiveAcknowledgementItem { }
+extension Acknowledgement: PrimitiveAcknowledgementItem {
+	public static func process(items: [Self]) throws -> [Self] {
+		items
+			.sorted(by: \.name)
+	}
+}
 
 // MARK: - DecodableAcknowledgementItem
 
 extension Acknowledgement: DecodableAcknowledgementItem {
-	static var topLevelDecoder: JSONDecoder {
+	public static var topLevelDecoder: JSONDecoder {
 		.shared
 	}
 
-	static var fileURL: URL? {
+	public static var fileURL: URL? {
 		Bundle.main.url(
 			forResource: "Acknowledgements",
 			withExtension: "json"
@@ -82,11 +87,11 @@ extension Acknowledgement: DecodableAcknowledgementItem {
 // MARK: - StoredAcknowledgementItem
 
 extension Acknowledgement: StoredAcknowledgementItem {
-	static let modelKeyPath = \AboutWindowModel.acknowledgements
+	public static let modelKeyPath = \AboutWindowModel.acknowledgements
 }
 
 // MARK: - CreditItem
 
 extension Acknowledgement: CreditItem {
-	static let creditKind: CreditKind = .acknowledgement
+	public static let creditKind: CreditKind = .acknowledgement
 }

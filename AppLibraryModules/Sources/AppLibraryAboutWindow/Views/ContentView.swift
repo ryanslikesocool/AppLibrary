@@ -11,13 +11,18 @@ struct ContentView: View {
 				Divided {
 					AppInfoSection()
 					CreditsSection()
-					DevelopedWithLoveLink()
+					CopyrightSection()
 				}
 			}
 			.scenePadding()
 		}
 		.frame(width: Self.width)
 		.fixedSize(horizontal: true, vertical: true)
+		.toolbar {
+			// NOTE: This view is included to force the window to create a toolbar
+			// at the top level of the `NavigationStack`.
+			Spacer()
+		}
 	}
 }
 

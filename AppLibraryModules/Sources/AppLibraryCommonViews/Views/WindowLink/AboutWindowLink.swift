@@ -1,0 +1,24 @@
+import AppLibraryCommon
+import AppLibraryResources
+import SFSymbolToolbox
+import SwiftUI
+
+/// A button that opens the about window.
+public struct AboutWindowLink: View {
+	public init() { }
+
+	public var body: some View {
+		WindowLink(id: Self.windowID) {
+			Label(
+				LocalizedStringResource.aboutWindow.title,
+				systemImage: SystemSymbolName.info_circle.rawValue
+			)
+		}
+	}
+}
+
+// MARK: - Constants
+
+private extension AboutWindowLink {
+	static let windowID: WindowIdentifier = .about
+}

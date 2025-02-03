@@ -5,6 +5,10 @@ struct MainMenu: Commands {
 	public init() { }
 
 	public var body: some Commands {
+		CommandGroup(replacing: .appInfo) {
+			AboutWindowLink()
+		}
+
 		CommandGroup(after: .textEditing) {
 			FindButton()
 		}

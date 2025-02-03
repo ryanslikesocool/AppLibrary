@@ -13,16 +13,12 @@ public struct AboutWindow: Scene {
 			id: Self.windowID
 		) {
 			ContentView()
-				.windowButtons(miniaturize: .hidden, zoom: .hidden)
+				.onWindowAppear(perform: applyWindowStyle)
 		}
 		.defaultPosition(Self.defaultPosition)
 		.windowStyle(Self.windowStyle)
+		.windowToolbarStyle(Self.windowToolbarStyle)
 		.windowResizability(Self.windowResizability)
-		.commands {
-			CommandGroup(replacing: .appInfo) {
-				AboutLink()
-			}
-		}
 		.environmentObject(model)
 	}
 }
@@ -36,5 +32,25 @@ public extension AboutWindow {
 private extension AboutWindow {
 	static var defaultPosition: UnitPoint { .center }
 	static var windowStyle: some WindowStyle { .hiddenTitleBar }
+	static var windowToolbarStyle: some WindowToolbarStyle { .unifiedCompact }
 	static var windowResizability: WindowResizability { .contentSize }
+}
+
+// MARK: - Functions
+
+private extension AboutWindow {
+	func applyWindowStyle(nsWindow: NSWindow) {
+		nsWindow.isMovableByWindowBackground = true
+
+		deactivateButton(.miniaturizeButton)
+		deactivateButton(.zoomButton)
+
+		func deactivateButton(_ buttonType: NSWindow.ButtonType) {
+			guard let button = nsWindow.standardWindowButton(buttonType) else {
+				return
+			}
+			button.isEnabled = false
+			button.isHidden = true
+		}
+	}
 }

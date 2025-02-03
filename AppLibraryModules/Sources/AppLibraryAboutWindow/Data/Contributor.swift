@@ -27,16 +27,21 @@ extension Contributor: Decodable { }
 
 // MARK: - PrimitiveAcknowledgementItem
 
-extension Contributor: PrimitiveAcknowledgementItem { }
+extension Contributor: PrimitiveAcknowledgementItem {
+	public static func process(items: [Self]) throws -> [Self] {
+		items
+			.sorted(by: \.name)
+	}
+}
 
 // MARK: - DecodableAcknowledgementItem
 
 extension Contributor: DecodableAcknowledgementItem {
-	static var topLevelDecoder: JSONDecoder {
+	public static var topLevelDecoder: JSONDecoder {
 		.shared
 	}
 
-	static var fileURL: URL? {
+	public static var fileURL: URL? {
 		Bundle.main.url(
 			forResource: "Contributors",
 			withExtension: "json"
@@ -47,11 +52,11 @@ extension Contributor: DecodableAcknowledgementItem {
 // MARK: - StoredAcknowledgementItem
 
 extension Contributor: StoredAcknowledgementItem {
-	static let modelKeyPath = \AboutWindowModel.contributors
+	public static let modelKeyPath = \AboutWindowModel.contributors
 }
 
 // MARK: - CreditItem
 
 extension Contributor: CreditItem {
-	static let creditKind: CreditKind = .contributor
+	public static let creditKind: CreditKind = .contributor
 }

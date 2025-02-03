@@ -11,7 +11,7 @@ extension AppInfoSection {
 		public init() { }
 
 		public var body: some View {
-			if let appVersion = NSApplication.shared.appVersion {
+			if let appVersion = try? Bundle.main.object(forInfoDictionaryKey: .applicationVersion()) {
 				Button {
 					buttonAction(appVersion)
 				} label: {
