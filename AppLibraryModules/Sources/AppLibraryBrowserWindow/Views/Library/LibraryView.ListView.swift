@@ -5,23 +5,15 @@ import SwiftUI
 
 extension LibraryView {
 	struct ListView: View {
-		@Query private var applications: [ApplicationModel]
 		@FocusState.Binding private var focusState: BrowserFocusElement?
+		private let applications: [ApplicationModel]
 
-		public init(focusState: FocusState<BrowserFocusElement?>.Binding) {
-//			let predicate = #Predicate<ApplicationModel> { applicationModel in
-//				// TODO: Reimplement visibility flags
-//			}
-			let sortDescriptors: [SortDescriptor<ApplicationModel>] = [
-				SortDescriptor(\.displayName),
-			]
-
-			_applications = Query(
-				filter: nil,
-				sort: sortDescriptors
-			)
-
+		public init(
+			applications: [ApplicationModel],
+			focusState: FocusState<BrowserFocusElement?>.Binding
+		) {
 			_focusState = focusState
+			self.applications = applications
 		}
 
 		public var body: some View {

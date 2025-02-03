@@ -81,7 +81,7 @@ public extension ApplicationCache {
 						break
 					case .didFinishGathering:
 						let newStorage = Self.processQueryResults(query, searchScopes: searchScopes).values
-						self.replaceStorage(with: newStorage)
+						self.updateStorage(with: newStorage)
 //						Self.logger.info("""
 //						Finished metadata query.
 //						- Processed Results: \(self.applications.count)

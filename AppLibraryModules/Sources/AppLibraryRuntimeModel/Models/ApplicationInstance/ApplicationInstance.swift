@@ -23,7 +23,7 @@ public final class ApplicationInstance {
 	/// The URL where the application instance is located.
 	///
 	/// All ``ApplicationModel/instances`` in an `ApplicationModel` are expected to have a unique URL.
-	@Attribute(.unique, .ephemeral)
+	@Attribute(.unique)
 	public private(set) var url: URL
 
 	/// The version of the application instance.

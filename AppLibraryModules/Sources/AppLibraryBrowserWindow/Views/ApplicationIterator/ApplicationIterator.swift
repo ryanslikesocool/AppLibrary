@@ -1,3 +1,4 @@
+import OSLog
 import AppLibraryRuntimeModel
 import AppLibraryStorage
 import SwiftUI
@@ -16,7 +17,7 @@ struct ApplicationIterator: View {
 	}
 
 	public var body: some View {
-		ForEach(applications, id: \.bundleIdentifier) { application in
+		ForEach(applications) { application in
 			ApplicationTile(for: application, focusState: $focusState)
 		}
 	}

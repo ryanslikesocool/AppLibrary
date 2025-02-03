@@ -1,13 +1,24 @@
 import AppLibraryCommon
+import AppLibraryRuntimeModel
+import SwiftData
 import AppLibraryStorage
 import SwiftUI
 
 struct LibraryView: View {
 	@Environment(\.libraryLayout) private var libraryLayout
 	@EnvironmentObject private var browserModel: BrowserModel
+	@Query private var applications: [ApplicationModel]
 	@FocusState.Binding private var focusState: BrowserFocusElement?
 
-	public init(focusState: FocusState<BrowserFocusElement?>.Binding) {
+	public init(
+		focusState: FocusState<BrowserFocusElement?>.Binding
+	) {
+		// NOTE: Ideally, we'd perform filtering in the query, but Swift Predicates are a pain...
+		let sortDescriptors: [SortDescriptor<ApplicationModel>] = [
+			SortDescriptor(\.displayName),
+		]
+		_applications = Query(sort: sortDescriptors)
+
 		_focusState = focusState
 	}
 
@@ -60,11 +71,11 @@ private extension LibraryView {
 	var scrollContent: some View {
 		if browserModel.search.isEmpty {
 			switch libraryLayout {
-				case .list: ListView(focusState: $focusState)
-				case .grid: GridView(focusState: $focusState)
+				case .list: ListView(applications: filteredApplications, focusState: $focusState)
+				case .grid: GridView(applications: filteredApplications, focusState: $focusState)
 			}
 		} else {
-			ListView(focusState: $focusState)
+			ListView(applications: filteredApplications, focusState: $focusState)
 		}
 	}
 }
@@ -85,5 +96,13 @@ private extension LibraryView {
 
 	func scrollToSection(character: Character, in proxy: ScrollViewProxy) {
 		proxy.scrollTo(character, anchor: .top)
+	}
+}
+
+// MARK: - Properties
+
+private extension LibraryView {
+	var filteredApplications: [ApplicationModel] {
+		applications.filter(using: browserModel.search)
 	}
 }

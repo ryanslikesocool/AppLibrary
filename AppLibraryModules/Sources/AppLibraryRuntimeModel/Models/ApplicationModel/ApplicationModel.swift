@@ -23,7 +23,6 @@ public final class ApplicationModel {
 	///
 	/// Individual ``instances`` may override this value.
 	/// The default value is provided by the instance with the newest ``ApplicationInstance/version``.
-//	@Attribute(.ephemeral)
 	public private(set) var displayName: String
 
 	/// The copyright string for the application.

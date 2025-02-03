@@ -57,52 +57,120 @@ extension ApplicationCache {
 		}
 	}
 
-//	func insert(_ applicationModels: Set<ApplicationModel>) {
-//		do {
-//			try modelContainer.mainContext.transaction {
-////				applicationModels.forEach(insert(_:)) // TODO: Figure out why this wants to `throw`
-//
-//				for applicationModel in applicationModels {
-//					insert(applicationModel)
-//				}
-//			}
-//		} catch {
-//			Logger.module.error("""
-//			Failed to insert models:
-//			- Error: \(error)
-//			""")
-//		}
-//	}
-
-	func replaceStorage(with applicationModels: some Sequence<ApplicationModel>) {
-		// TODO: Improve updating
-		// - Remove old models
-		// - Update existing models
-		// - Add new models
-
+	@available(*, deprecated, message: "Use `updateStorage(with:) instead.`")
+	func replaceStorage(with newApplicationModels: some Sequence<ApplicationModel>) {
 		do {
-			// Do a bunch of the operations at once.
-			try modelContainer.mainContext.transaction {
+			let modelContext = modelContainer.mainContext
 
+			try modelContext.transaction {
 				// NOTE: We can't use `modelContainer.deleteAllData()` or `modelContainer.erase()`
 				// because the app crashes when trying to insert entities.
 				// (I think it might delete the entity descriptions.)
 				// So instead, we delete all models with matching types.
-				try modelContainer.mainContext.delete(model: ApplicationModel.self)
-//				try modelContainer.mainContext.delete(model: ApplicationInstance.self) // Deleting all `ApplicationModel`s should cascade.
+				try modelContext.delete(model: ApplicationModel.self)
 
-				for applicationModel in applicationModels {
-					modelContainer.mainContext.insert(applicationModel)
-					for instance in applicationModel.instances {
-						modelContainer.mainContext.insert(instance)
-					}
+				// Deleting `ApplicationModel` should cascade to include `ApplicationInstance`.
+//				try modelContext.delete(model: ApplicationInstance.self)
+
+				assert(
+					((try? modelContext.count(of: ApplicationModel.self)) ?? 0)
+						+ ((try? modelContext.count(of: ApplicationInstance.self)) ?? 0)
+						== 0
+				)
+
+				for applicationModel in newApplicationModels {
+					modelContext.insert(applicationModel)
+
+					// Inserting `ApplicationModel` should cascade to include `ApplicationInstance`.
+//					for instance in applicationModel.instances {
+//						modelContext.insert(instance)
+//					}
 				}
+
+//				Logger.module.debug("""
+//				Instance Count: \(String(describing: try? modelContext.count(of: ApplicationInstance.self)))
+//				""")
 			}
 		} catch {
 			Logger.module.error("""
 			Failed to replace storage:
-			- Error: \(error)
+			- Error: \(error.localizedDescription)
 			""")
+		}
+	}
+
+	func updateStorage(with newApplicationModels: some Sequence<ApplicationModel>) {
+		do {
+			let modelContext = modelContainer.mainContext
+
+			try modelContext.transaction {
+				try deleteNonexistentModels(in: modelContext)
+				try updateExistingModels(in: modelContext)
+				try insertNewModels(in: modelContext)
+			}
+		} catch {
+			Logger.module.error("""
+			Failed to update storage:
+			- Error: \(error.localizedDescription)
+			""")
+		}
+
+		func deleteNonexistentModels(in modelContext: ModelContext) throws {
+//			// Swift hates me, specifically, so we can't use `#Predicate` here.
+//			let predicate = #Predicate<ApplicationModel> { existingApplicationModel in
+//				!newApplicationModels.contains { newApplicationModel in
+//					newApplicationModel.bundleIdentifier == existingApplicationModel.bundleIdentifier
+//				}
+//			}
+//
+//			try modelContext.delete(
+//				model: ApplicationModel.self,
+//				where: predicate
+//			)
+
+			let deletingApplicationModels = try modelContext.models(ofType: ApplicationModel.self)
+				.filter { existingApplicationModel in
+					!newApplicationModels.contains { newApplicationModel in
+						newApplicationModel.bundleIdentifier == existingApplicationModel.bundleIdentifier
+					}
+				}
+
+			for model in deletingApplicationModels {
+				// Deleting `ApplicationModel` should cascade to include `ApplicationInstance`.
+				modelContext.delete(model)
+			}
+		}
+
+		func updateExistingModels(in modelContext: ModelContext) throws {
+			for newApplicationModel in newApplicationModels {
+				let newBundleIdentifier = newApplicationModel.bundleIdentifier
+				let predicate = #Predicate<ApplicationModel> { existingApplicationModel in
+					existingApplicationModel.bundleIdentifier == newBundleIdentifier
+
+					// `existingApplicationModel.bundleIdentifier == newApplicationModel.bundleIdentifier` doesn't compile.
+					// Because of course it doesn't.
+				}
+				let fetchDescriptor = FetchDescriptor<ApplicationModel>(predicate: predicate)
+
+				guard let existingApplicationModel = try modelContext.fetch(fetchDescriptor).first else {
+					continue
+				}
+
+				existingApplicationModel.formUnion(newApplicationModel)
+			}
+		}
+
+		func insertNewModels(in modelContext: ModelContext) throws {
+			let existingApplicationModels = try modelContext.models(ofType: ApplicationModel.self)
+
+			let insertingModels = newApplicationModels.filter { newApplicationModel in
+				!existingApplicationModels.contains { existingApplicationModel in
+					existingApplicationModel.bundleIdentifier == newApplicationModel.bundleIdentifier
+				}
+			}
+
+			// Inserting `ApplicationModel` should cascade to include `ApplicationInstance`.
+			modelContext.insert(contentsOf: insertingModels)
 		}
 	}
 }
