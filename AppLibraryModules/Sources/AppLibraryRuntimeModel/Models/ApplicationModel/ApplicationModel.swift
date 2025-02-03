@@ -1,3 +1,4 @@
+import SwiftData
 import AppKit
 import AppLibraryCommon
 import AppLibraryStorage
@@ -8,18 +9,21 @@ import OSLog
 // TODO: The most recent version of the app should provide primary attributes.
 // Primary attributes include `displayName`, `keywords`, and `appStoreCategory`.
 
+@Model
 public final class ApplicationModel {
 	/// The bundle identifier for the application, usually formatted in
-	/// [reverse-DNS notation](https://en.wikipedia.org/wiki/Reverse_domain_name_notation)\.
+	/// [reverse-DNS notation]( https://en.wikipedia.org/wiki/Reverse_domain_name_notation ).
 	///
 	/// This value is used as the primary identifier for an application.
 	/// All ``instances`` share this value.
-	public let bundleIdentifier: String
+	@Attribute(.unique)
+	public private(set) var bundleIdentifier: String
 
 	/// The display name for the application.
 	///
 	/// Individual ``instances`` may override this value.
 	/// The default value is provided by the instance with the newest ``ApplicationInstance/version``.
+//	@Attribute(.ephemeral)
 	public private(set) var displayName: String
 
 	/// The copyright string for the application.
@@ -43,7 +47,8 @@ public final class ApplicationModel {
 //	public private(set) var appStoreCategoryType: AppStoreCategoryType?
 
 	/// The instances of this application.
-	public private(set) var instances: InstanceStore
+	@Relationship(deleteRule: .cascade, minimumModelCount: 1, inverse: \ApplicationInstance.applicationModel)
+	public private(set) var instances: [ApplicationInstance]
 
 	/// The icons for the application.
 //	public private(set) var icons: [NSImage]
@@ -51,39 +56,26 @@ public final class ApplicationModel {
 	/// Create an application model from metadata items.
 	///
 	/// - Important: This initializer assumes that `bundleIdentifier` matches the value for the attribute
-	/// [`NSMetadataItemCFBundleIdentifierKey`](https://developer.apple.com/documentation/foundation/nsmetadataitemcfbundleidentifierkey)
-	/// on all `metadataItems`.
-//	public init?<S>(bundleIdentifier: String, metadataItems: borrowing S) where
-//		S: Sequence,
-//		S.Element == NSMetadataItem
-//	{
-//		instances = InstanceStore(metadataItems: metadataItems)
-//
-//		guard let displayName = instances.lazy.compactMap(\.displayName).last else {
-//			return nil
-//		}
-//
-//		self.bundleIdentifier = bundleIdentifier
-//		self.displayName = Self.trimFileExtension(displayName)
-//	}
-
-	/// Create an application model from application instances.
-	///
-	/// - Important: This initializer assumes that `bundleIdentifier` matches the value for the attribute
-	/// [`NSMetadataItemCFBundleIdentifierKey`](https://developer.apple.com/documentation/foundation/nsmetadataitemcfbundleidentifierkey)
+	/// [`NSMetadataItemCFBundleIdentifierKey`]( https://developer.apple.com/documentation/foundation/nsmetadataitemcfbundleidentifierkey )
 	/// on each instance's `metadataItem`.
-	public init?<C>(bundleIdentifier: String, instances: C) where
+	internal init?<C>(bundleIdentifier: String, metadataItems: C) where
 		C: Collection,
-		C.Element == ApplicationInstance
+		C.Element == NSMetadataItem
 	{
-		self.instances = InstanceStore(bundleIdentifier: bundleIdentifier, instances: instances)
+		// NOTE: We have to assign default values so we can use `self` when creating `instances`.
 
-		guard let displayName = instances.lazy.compactMap(\.displayName).last else {
+		self.displayName = String()
+		self.instances = []
+		self.bundleIdentifier = bundleIdentifier
+
+		let instances = metadataItems.compactMap { metadataItem in
+			try? ApplicationInstance(applicationModel: self, metadataItem: metadataItem)
+		}
+		guard let displayName = instances.max(using: .version)?.displayName else {
 			return nil
 		}
-
-		self.bundleIdentifier = bundleIdentifier
 		self.displayName = Self.trimFileExtension(displayName)
+		self.instances = instances
 	}
 }
 
@@ -123,11 +115,17 @@ extension ApplicationModel {
 	func formUnion(_ other: borrowing ApplicationModel) {
 		assert(bundleIdentifier == other.bundleIdentifier)
 
-		instances.merge(other.instances) { _, newValue in
-			// TODO: merge `oldValue` and `newValue`
-			newValue
+		var appendingInstances: [ApplicationInstance] = []
+		for newInstance in other.instances {
+			if let existingInstance = self.instances.first(where: { existingInstance in
+				existingInstance.url == newInstance.url
+			}) {
+				existingInstance.formUnion(newInstance)
+			} else {
+				appendingInstances.append(newInstance)
+			}
 		}
-		instances.sort()
+		instances.append(contentsOf: appendingInstances)
 	}
 
 	// VALIDATE: Do keywords need to be processed?
@@ -153,7 +151,6 @@ extension ApplicationModel {
 
 	/// The item in ``instances`` with the greatest ``ApplicationInstance/version``.
 	public var latestInstance: ApplicationInstance? {
-		// VALIDATE: `instances` should always be pre-sorted by ascending `version`.
-		instances.last
+		instances.max(using: .version)
 	}
 }

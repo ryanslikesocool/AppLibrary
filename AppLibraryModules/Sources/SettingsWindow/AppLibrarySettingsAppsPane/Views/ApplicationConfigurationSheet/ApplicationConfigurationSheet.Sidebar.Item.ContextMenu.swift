@@ -6,14 +6,14 @@ import SwiftUI
 
 extension ApplicationConfigurationSheet.Sidebar.Item {
 	struct ContextMenu: View {
-		private let applicationModelIdentifier: ApplicationModelIdentifier
+		private let applicationModel: ApplicationModel
 
-		public init(for applicationModelIdentifier: ApplicationModelIdentifier) {
-			self.applicationModelIdentifier = applicationModelIdentifier
+		public init(for applicationModel: ApplicationModel) {
+			self.applicationModel = applicationModel
 		}
 
 		public var body: some View {
-			ShowInFinderButton(latestInstance: applicationModelIdentifier)
+			ShowInFinderButton(latestInstance: applicationModel)
 		}
 	}
 }

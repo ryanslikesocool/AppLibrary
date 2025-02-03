@@ -80,19 +80,23 @@ private extension InputReceiver {
 			     (.default?, .down),
 			     (.search?, .down):
 				// Set focus to the first application in the list.
-				guard let application = browserModel.filteredApps.first else {
-					break
-				}
-				focusState = .application(application)
+				// TODO: reimplement
+//				guard let application = browserModel.filteredApps.first else {
+//					break
+//				}
+//				focusState = .application(application)
+				break
 			// TODO: force scroll view to jump to element
 			case (.default?, .left),
 			     (.default?, .up),
 			     (.search?, .up):
 				// Set focus to the last application in the list.
-				guard let application = browserModel.filteredApps.last else {
-					break
-				}
-				focusState = .application(application)
+				// TODO: reimplement
+//				guard let application = browserModel.filteredApps.last else {
+//					break
+//				}
+//				focusState = .application(application)
+				break
 			// TODO: force scroll view to jump to element
 			case (.application?, _):
 				let applicationIndexOffset = direction.offset(for: libraryLayout)
@@ -118,14 +122,16 @@ private extension InputReceiver {
 					break
 				}
 
-				guard let bestMatch = browserModel.filteredApps.first else {
-					Logger.input.debug("\(#function): Best match for search was not found.")
-					break
-				}
-
-				bestMatch.openLatest()
-				browserModel.search.clear()
-				Logger.input.debug("\(#function): Opening app for best match.")
+				// TODO: reimplement
+//				guard let bestMatch = browserModel.filteredApps.first else {
+//					Logger.input.debug("\(#function): Best match for search was not found.")
+//					break
+//				}
+//
+//				bestMatch.openLatest()
+//				browserModel.search.clear()
+//				Logger.input.debug("\(#function): Opening app for best match.")
+				break
 			case let .application(applicationModelIdentifier)?:
 				// TODO: handle event
 				break

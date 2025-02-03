@@ -2,6 +2,7 @@ import AppLibraryCommonViews
 import AppLibraryRuntimeModel
 import AppLibraryRuntimeModelViews
 import AppLibraryStorage
+import SwiftData
 import SwiftUI
 
 extension ApplicationConfigurationSheet {
@@ -11,12 +12,9 @@ extension ApplicationConfigurationSheet {
 		public init() { }
 
 		public var body: some View {
-			List(
-				applications,
-				rowContent: Item.init(for:)
-			)
-			.listStyle(.sidebar)
-			.searchable(text: $searchQuery, placement: .sidebar)
+			ListContent(searchQuery: searchQuery)
+				.listStyle(.sidebar)
+				.searchable(text: $searchQuery, placement: .sidebar)
 
 //			.safeAreaInset(edge: .top, spacing: nil) {
 //				NSSearchFieldRepresentable(string: $searchQuery)
@@ -26,18 +24,37 @@ extension ApplicationConfigurationSheet {
 	}
 }
 
-// MARK: - Properties
+// MARK: - Supporting Views
 
 private extension ApplicationConfigurationSheet.Sidebar {
-	var applications: [ApplicationModelIdentifier] {
-		if searchQuery.isEmpty {
-			ApplicationCache.shared.applications.keys
-		} else {
-			ApplicationCache.shared.applications.values
-				.filter { application in
-					application.displayName.localizedStandardContains(searchQuery)
+	struct ListContent: View {
+		@Query private var applications: [ApplicationModel]
+
+		fileprivate init(searchQuery: String) {
+			let predicate: Predicate<ApplicationModel>?
+			if searchQuery.isEmpty {
+				predicate = nil
+			} else {
+				predicate = #Predicate<ApplicationModel> { applicationModel in
+					applicationModel.displayName.localizedStandardContains(searchQuery)
 				}
-				.map(ApplicationModelIdentifier.init(_:))
+			}
+
+			let sortDescriptors: [SortDescriptor<ApplicationModel>] = [
+				SortDescriptor(\.displayName),
+			]
+
+			_applications = Query(
+				filter: predicate,
+				sort: sortDescriptors
+			)
+		}
+
+		public var body: some View {
+			List(
+				applications,
+				rowContent: Item.init(for:)
+			)
 		}
 	}
 }

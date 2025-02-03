@@ -1,20 +1,21 @@
-import AppLibraryStorage
+import AppLibraryRuntimeModel
 import AppLibraryRuntimeModelViews
+import AppLibraryStorage
 import SwiftUI
 
 extension ApplicationConfigurationSheet.Sidebar {
 	struct Item: View {
-		private let applicationModelIdentifier: ApplicationModelIdentifier
+		private let applicationModel: ApplicationModel
 
-		public init(for applicationModelIdentifier: ApplicationModelIdentifier) {
-			self.applicationModelIdentifier = applicationModelIdentifier
+		public init(for applicationModel: ApplicationModel) {
+			self.applicationModel = applicationModel
 		}
 
 		public var body: some View {
-			NavigationLink(value: applicationModelIdentifier) {
-				ApplicationLabel(for: applicationModelIdentifier)
+			NavigationLink(value: ApplicationModelIdentifier(applicationModel)) {
+				ApplicationLabel(for: applicationModel)
 					.contextMenu {
-						ContextMenu(for: applicationModelIdentifier)
+						ContextMenu(for: applicationModel)
 					}
 			}
 		}

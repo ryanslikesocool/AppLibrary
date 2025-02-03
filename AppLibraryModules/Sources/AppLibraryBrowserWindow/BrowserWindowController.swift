@@ -3,6 +3,7 @@ import AppLibraryAccessibilityHelperServer
 import AppLibraryCommon
 import AppLibraryCommonViews
 import AppLibraryResources
+import AppLibraryRuntimeModelViews
 import Combine
 import OSLog
 import SwiftUI
@@ -38,6 +39,7 @@ public final class BrowserWindowController: NSWindowController, ObservableObject
 
 		window.contentView = NSHostingView(rootView:
 			ContentView(browserModel: browserModel)
+				.applicationModelContainer()
 		)
 
 		positionWindow(window)

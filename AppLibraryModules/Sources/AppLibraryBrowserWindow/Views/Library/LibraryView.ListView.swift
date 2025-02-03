@@ -1,12 +1,26 @@
+import AppLibraryRuntimeModel
 import AppLibraryStorage
+import SwiftData
 import SwiftUI
 
 extension LibraryView {
 	struct ListView: View {
-		@EnvironmentObject private var browserModel: BrowserModel
+		@Query private var applications: [ApplicationModel]
 		@FocusState.Binding private var focusState: BrowserFocusElement?
 
 		public init(focusState: FocusState<BrowserFocusElement?>.Binding) {
+//			let predicate = #Predicate<ApplicationModel> { applicationModel in
+//				// TODO: Reimplement visibility flags
+//			}
+			let sortDescriptors: [SortDescriptor<ApplicationModel>] = [
+				SortDescriptor(\.displayName),
+			]
+
+			_applications = Query(
+				filter: nil,
+				sort: sortDescriptors
+			)
+
 			_focusState = focusState
 		}
 
@@ -28,7 +42,7 @@ extension LibraryView {
 private extension LibraryView.ListView {
 	var content: some View {
 		ApplicationIterator(
-			applications: browserModel.filteredApps,
+			applications: applications,
 			focusState: $focusState
 		)
 		.grouped()

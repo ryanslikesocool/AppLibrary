@@ -53,8 +53,8 @@ extension ApplicationModelIdentifier.ModelComparator: @preconcurrency SortCompar
 		let applicationCache = ApplicationCache.shared
 
 		return innerComparator.compare(
-			applicationCache.applications[lhs],
-			applicationCache.applications[rhs]
+			applicationCache.find(withIdentifier: lhs),
+			applicationCache.find(withIdentifier: rhs)
 		)
 	}
 }

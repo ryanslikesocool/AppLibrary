@@ -80,11 +80,12 @@ public extension ApplicationCache {
 					case .didStartGathering:
 						break
 					case .didFinishGathering:
-						self.applications = Self.processQueryResults(query, searchScopes: searchScopes)
-						Self.logger.info("""
-						Finished metadata query.
-						- Processed Results: \(self.applications.count)
-						""")
+						let newStorage = Self.processQueryResults(query, searchScopes: searchScopes).values
+						self.replaceStorage(with: newStorage)
+//						Self.logger.info("""
+//						Finished metadata query.
+//						- Processed Results: \(self.applications.count)
+//						""")
 						break eventLoop
 					case .gatheringProgress:
 						break
@@ -144,26 +145,12 @@ public extension ApplicationCache {
 				return nil
 			}
 
-			let applications: [ApplicationInstance] = group.results
-//				.compactMap(processResult(_:)) // TODO: Figure out why this wants to `throw`
-				.compactMap { element -> ApplicationInstance? in
-					processResult(element)
+			return ApplicationModel(
+				bundleIdentifier: bundleIdentifier,
+				metadataItems: group.results.compactMap { element in
+					element as? NSMetadataItem
 				}
-
-			return ApplicationModel(bundleIdentifier: bundleIdentifier, instances: applications)
-		}
-
-		func processResult(_ element: Any) -> ApplicationInstance? {
-			guard
-				let metadataItem = element as? NSMetadataItem,
-				let applicationInstance = try? ApplicationInstance(metadataItem: metadataItem)
-			// If we only want to include top-level results:
-//				searchScopes.contains(applicationInstance.url.deletingLastPathComponent())
-			else {
-				return nil
-			}
-
-			return applicationInstance
+			)
 		}
 	}
 }

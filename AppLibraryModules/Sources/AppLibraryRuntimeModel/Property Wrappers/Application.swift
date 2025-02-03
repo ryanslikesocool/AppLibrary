@@ -6,7 +6,7 @@ public struct Application {
 
 	@MainActor
 	public var projectedValue: ApplicationModel? {
-		ApplicationCache.shared.applications[wrappedValue]
+		ApplicationCache.shared.find(withIdentifier: wrappedValue)
 	}
 
 	public init(wrappedValue: ApplicationModelIdentifier) {

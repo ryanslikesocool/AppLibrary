@@ -20,5 +20,6 @@ struct SettingsTabContent: View {
 			}
 		}
 //		.scrollDisabled(true)
+		.applicationModelContainer()
 	}
 }

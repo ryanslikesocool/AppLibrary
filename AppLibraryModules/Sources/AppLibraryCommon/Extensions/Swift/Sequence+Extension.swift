@@ -84,7 +84,9 @@ public extension Sequence {
 	// MARK: min
 
 	/// Returns the minimum element in the sequence, using the given comparator to compare two elements.
-	/// - Returns: The sequence’s minimum element, according to `comparator`. If the sequence has no elements, returns `nil`.
+	///
+	/// - Returns: The sequence’s minimum element, according to `comparator`.
+	/// If the sequence has no elements, returns `nil`.
 	func min(
 		using comparator: some SortComparator<Element>
 	) -> Element? {
@@ -96,7 +98,9 @@ public extension Sequence {
 	// MARK: max
 
 	/// Returns the maximum element in the sequence, using the given comparator to compare two elements.
-	/// - Returns: The sequence’s maximum element, according to `comparator`. If the sequence has no elements, returns `nil`.
+	///
+	/// - Returns: The sequence’s maximum element, according to `comparator`.
+	/// If the sequence has no elements, returns `nil`.
 	func max(
 		using comparator: some SortComparator<Element>
 	) -> Element? {
