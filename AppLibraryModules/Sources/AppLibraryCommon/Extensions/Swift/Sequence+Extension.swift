@@ -1,7 +1,5 @@
 import Foundation
 
-// MARK: - Functions
-
 public extension Sequence {
 	// MARK: allEqual
 
@@ -79,34 +77,6 @@ public extension Sequence {
 	{
 		let keyPathComparator = KeyPathComparator(keyPath, comparator: comparator, order: order)
 		return sorted(using: keyPathComparator)
-	}
-
-	// MARK: min
-
-	/// Returns the minimum element in the sequence, using the given comparator to compare two elements.
-	///
-	/// - Returns: The sequence’s minimum element, according to `comparator`.
-	/// If the sequence has no elements, returns `nil`.
-	func min(
-		using comparator: some SortComparator<Element>
-	) -> Element? {
-		self.min { (lhs: Element, rhs: Element) -> Bool in
-			comparator.compare(lhs, rhs) == .orderedAscending
-		}
-	}
-
-	// MARK: max
-
-	/// Returns the maximum element in the sequence, using the given comparator to compare two elements.
-	///
-	/// - Returns: The sequence’s maximum element, according to `comparator`.
-	/// If the sequence has no elements, returns `nil`.
-	func max(
-		using comparator: some SortComparator<Element>
-	) -> Element? {
-		self.min { (lhs: Element, rhs: Element) -> Bool in
-			comparator.compare(lhs, rhs) == .orderedAscending
-		}
 	}
 
 	// MARK: compactMap

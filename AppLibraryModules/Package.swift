@@ -28,15 +28,19 @@ let package = Package(
 	],
 	dependencies: [
 		.package(url: "https://github.com/apple/swift-algorithms.git", from: "1.2.0"),
-		
-		.package(url: "https://github.com/ryanslikesocool/BundleToolbox.git", from: "0.0.5"),
-		.package(url: "https://github.com/ryanslikesocool/LocalizationToolbox.git", from: "0.0.4"),
-		.package(url: "https://github.com/ryanslikesocool/NSMetadataToolbox.git", from: "0.0.6"),
-		.package(url: "https://github.com/ryanslikesocool/SFSymbolToolbox.git", from: "0.0.3"),
-//		.package(url: "https://github.com/ryanslikesocool/PainlessCG.git", from: "0.0.4"),
-		.package(path: "~/Documents/Xcode Projects/PainlessCG"),
+
 //		.package(url: "https://github.com/ryanslikesocool/AcknowledgementToolbox.git", from: "0.0.1"),
 		.package(path: "~/Documents/Xcode Projects/AcknowledgementToolbox/AcknowledgementToolbox"),
+
+		.package(url: "https://github.com/ryanslikesocool/BundleToolbox.git", from: "0.0.5"),
+		.package(url: "https://github.com/ryanslikesocool/CollectionToolbox.git", from: "0.0.1"),
+		.package(url: "https://github.com/ryanslikesocool/LocalizationToolbox.git", from: "0.0.4"),
+		.package(url: "https://github.com/ryanslikesocool/NSMetadataToolbox.git", from: "0.0.6"),
+
+//		.package(url: "https://github.com/ryanslikesocool/PainlessCG.git", from: "0.0.4"),
+		.package(path: "~/Documents/Xcode Projects/PainlessCG"),
+
+		.package(url: "https://github.com/ryanslikesocool/SFSymbolToolbox.git", from: "0.0.3"),
 
 		.package(path: "../AppLibraryCore"),
 		.package(path: "../AppLibraryAccessibilityHelperModules"),
@@ -185,6 +189,7 @@ var commonTargets: [Target] {
 				.product(name: "Algorithms", package: "swift-algorithms"),
 
 				"BundleToolbox",
+				"CollectionToolbox",
 				"PainlessCG",
 
 				"AppLibraryCore",

@@ -1,17 +1,7 @@
 [
 	{
-		"name": "Mouse Finder",
-		"projectURL": "https://github.com/neilsardesai/Mouse-Finder",
-		"licensePath": "blob/main/LICENSE"
-	},
-	{
-		"name": "LocalizationToolbox",
-		"projectURL": "https://github.com/ryanslikesocool/LocalizationToolbox",
-		"licensePath": "blob/main/LICENSE.md"
-	},
-	{
-		"name": "NSMetadataToolbox",
-		"projectURL": "https://github.com/ryanslikesocool/NSMetadataToolbox",
+		"name": "AcknowledgementToolbox",
+		"projectURL": "https://github.com/ryanslikesocool/AcknowledgementToolbox",
 		"licensePath": "blob/main/LICENSE.md"
 	},
 	{
@@ -25,18 +15,18 @@
 		"licensePath": "blob/main/LICENSE.md"
 	},
 	{
-		"name": "SFSymbolToolbox",
-		"projectURL": "https://github.com/ryanslikesocool/SFSymbolToolbox",
+		"name": "CollectionToolbox",
+		"projectURL": "https://github.com/ryanslikesocool/CollectionToolbox",
 		"licensePath": "blob/main/LICENSE.md"
 	},
 	{
-		"name": "Swift Algorithms",
-		"projectURL": "https://github.com/apple/swift-algorithms",
-		"licensePath": "blob/main/LICENSE.txt"
+		"name": "LocalizationToolbox",
+		"projectURL": "https://github.com/ryanslikesocool/LocalizationToolbox",
+		"licensePath": "blob/main/LICENSE.md"
 	},
 	{
-		"name": "XPCToolbox",
-		"projectURL": "https://github.com/ryanslikesocool/XPCToolbox",
+		"name": "NSMetadataToolbox",
+		"projectURL": "https://github.com/ryanslikesocool/NSMetadataToolbox",
 		"licensePath": "blob/main/LICENSE.md"
 	},
 	{
@@ -45,8 +35,24 @@
 		"licensePath": "blob/main/LICENSE.md"
 	},
 	{
-		"name": "AcknowledgementToolbox",
-		"projectURL": "https://github.com/ryanslikesocool/AcknowledgementToolbox",
+		"name": "SFSymbolToolbox",
+		"projectURL": "https://github.com/ryanslikesocool/SFSymbolToolbox",
 		"licensePath": "blob/main/LICENSE.md"
+	},
+	{
+		"name": "XPCToolbox",
+		"projectURL": "https://github.com/ryanslikesocool/XPCToolbox",
+		"licensePath": "blob/main/LICENSE.md"
+	},
+
+	{
+		"name": "Mouse Finder",
+		"projectURL": "https://github.com/neilsardesai/Mouse-Finder",
+		"licensePath": "blob/main/LICENSE"
+	},
+	{
+		"name": "Swift Algorithms",
+		"projectURL": "https://github.com/apple/swift-algorithms",
+		"licensePath": "blob/main/LICENSE.txt"
 	}
 ]

@@ -1,5 +1,5 @@
 {
-  "originHash" : "67459d10c8c721ed144b60c0ec81c7d862d24683c96d133367e8591ac3f50879",
+  "originHash" : "80c4ceccc8548ba574466603748d8c3bb0a661e92aae6b42511c81da0f589ac5",
   "pins" : [
     {
       "identity" : "axtoolbox",
@@ -17,6 +17,15 @@
       "state" : {
         "revision" : "83b67868dd2949ab401b8340727f8af6e5397d96",
         "version" : "0.0.5"
+      }
+    },
+    {
+      "identity" : "collectiontoolbox",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ryanslikesocool/CollectionToolbox.git",
+      "state" : {
+        "revision" : "dd4b90529bd8f92ef99229bc9670bf3e657af979",
+        "version" : "0.0.1"
       }
     },
     {

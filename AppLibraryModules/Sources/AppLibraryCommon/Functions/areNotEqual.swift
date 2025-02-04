@@ -1,7 +1,7 @@
-/// Determine if two objects implementing ``Swift/Equatable`` are not equal.
+/// Determine if two objects implementing [`Equatable`]( https://developer.apple.com/documentation/swift/equatable ) are not equal.
 ///
 /// Based on
-/// [this approach from Nil Coalescing](https://nilcoalescing.com/blog/CheckIfTwoValuesOfTypeAnyAreEqual/)\.
+/// [this approach from Nil Coalescing]( https://nilcoalescing.com/blog/CheckIfTwoValuesOfTypeAnyAreEqual/ ).
 ///
 /// - Parameters:
 ///   - lhs: The left side of the operation.
@@ -22,10 +22,10 @@ public func areNotEqual(_ lhs: any Equatable, _ rhs: any Equatable) -> Bool {
 	}
 }
 
-/// Determine if two objects implementing ``Swift/Equatable`` are not equal.
+/// Determine if two objects implementing [`Equatable`]( https://developer.apple.com/documentation/swift/equatable ) are not equal.
 ///
 /// Based on
-/// [this approach from Nil Coalescing](https://nilcoalescing.com/blog/CheckIfTwoValuesOfTypeAnyAreEqual/)\.
+/// [this approach from Nil Coalescing]( https://nilcoalescing.com/blog/CheckIfTwoValuesOfTypeAnyAreEqual/ ).
 ///
 /// - Parameters:
 ///   - lhs: The left side of the operation.

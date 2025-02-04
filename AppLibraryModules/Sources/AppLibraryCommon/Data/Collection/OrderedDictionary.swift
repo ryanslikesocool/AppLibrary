@@ -1,3 +1,4 @@
+import CollectionToolbox
 import Foundation
 
 // TODO: Consider using `OrderedDictionary` from Swift Collections.

@@ -1,5 +1,6 @@
 import AppLibraryCommon
 import AppLibraryStorage
+import CollectionToolbox
 import Foundation
 
 public extension ApplicationModelIdentifier {
@@ -11,12 +12,12 @@ public extension ApplicationModelIdentifier {
 
 		public init<Comparator>(
 			comparator: Comparator,
-			optionalBehavior: OptionalSortBehavior = .nilLast
+			optionalOrder: OptionalSortOrder = .nilLast
 		) where
 			Comparator: SortComparator,
 			Comparator.Compared == ApplicationModel
 		{
-			innerComparator = OptionalComparator(comparator: comparator, optionalBehavior: optionalBehavior)
+			innerComparator = OptionalComparator(comparator: comparator, optionalOrder: optionalOrder)
 		}
 	}
 }
@@ -67,57 +68,57 @@ public extension SortComparator where
 {
 	static func model<Comparator>(
 		comparator: Comparator,
-		optionalBehavior: OptionalSortBehavior = .nilLast
+		optionalOrder: OptionalSortOrder = .nilLast
 	) -> Self where
 		Comparator: SortComparator,
 		Comparator.Compared == ApplicationModel
 	{
-		Self(comparator: comparator, optionalBehavior: optionalBehavior)
+		Self(comparator: comparator, optionalOrder: optionalOrder)
 	}
 
 	static func model<T>(
 		by keyPath: any KeyPath<ApplicationModel, T> & Sendable,
 		order: SortOrder = .forward,
-		optionalBehavior: OptionalSortBehavior = .nilLast
+		optionalOrder: OptionalSortOrder = .nilLast
 	) -> Self where
 		T: Comparable
 	{
 		let comparator = KeyPathComparator(keyPath, order: order)
-		return Self(comparator: comparator, optionalBehavior: optionalBehavior)
+		return Self(comparator: comparator, optionalOrder: optionalOrder)
 	}
 
 	static func model<T>(
 		by keyPath: any KeyPath<ApplicationModel, T?> & Sendable,
 		order: SortOrder = .forward,
-		optionalBehavior: OptionalSortBehavior = .nilLast
+		optionalOrder: OptionalSortOrder = .nilLast
 	) -> Self where
 		T: Comparable
 	{
 		let comparator = KeyPathComparator(keyPath, order: order)
-		return Self(comparator: comparator, optionalBehavior: optionalBehavior)
+		return Self(comparator: comparator, optionalOrder: optionalOrder)
 	}
 
 	static func model<T, Comparator>(
 		by keyPath: any KeyPath<ApplicationModel, T> & Sendable,
 		comparator: Comparator,
-		optionalBehavior: OptionalSortBehavior = .nilLast
+		optionalOrder: OptionalSortOrder = .nilLast
 	) -> Self where
 		Comparator: SortComparator,
 		Comparator.Compared == T
 	{
 		let keyPathComparator = KeyPathComparator(keyPath, comparator: comparator)
-		return Self(comparator: keyPathComparator, optionalBehavior: optionalBehavior)
+		return Self(comparator: keyPathComparator, optionalOrder: optionalOrder)
 	}
 
 	static func model<T, Comparator>(
 		by keyPath: any KeyPath<ApplicationModel, T?> & Sendable,
 		comparator: Comparator,
-		optionalBehavior: OptionalSortBehavior = .nilLast
+		optionalOrder: OptionalSortOrder = .nilLast
 	) -> Self where
 		Comparator: SortComparator,
 		Comparator.Compared == T
 	{
 		let keyPathComparator = KeyPathComparator(keyPath, comparator: comparator)
-		return Self(comparator: keyPathComparator, optionalBehavior: optionalBehavior)
+		return Self(comparator: keyPathComparator, optionalOrder: optionalOrder)
 	}
 }
