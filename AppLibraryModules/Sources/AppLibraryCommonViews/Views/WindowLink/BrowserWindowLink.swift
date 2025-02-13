@@ -5,7 +5,7 @@ import SwiftUI
 
 /// A button that opens the browser window.
 public struct BrowserWindowLink: View {
-	public init() { }
+	public nonisolated init() { }
 
 	public var body: some View {
 		WindowLink(id: Self.windowID) {

@@ -1,14 +1,18 @@
 import SwiftUI
 
+/// ## Topics
+/// - ``SectionStyle/automatic``
 public struct AutomaticSectionStyle: SectionStyle {
-	public init() { }
+	public nonisolated init() { }
 
 	public func makeBody(configuration: Configuration) -> some View {
-		Section(
-			content: { configuration.content },
-			header: { configuration.header },
-			footer: { configuration.footer }
-		)
+		Section {
+			configuration.content
+		} header: {
+			configuration.header
+		} footer: {
+			configuration.footer
+		}
 	}
 }
 
@@ -17,7 +21,7 @@ public struct AutomaticSectionStyle: SectionStyle {
 public extension SectionStyle where
 	Self == AutomaticSectionStyle
 {
-	static var automatic: Self {
+	nonisolated static var automatic: Self {
 		Self()
 	}
 }

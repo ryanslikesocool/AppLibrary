@@ -7,8 +7,6 @@ public struct FindButton<Label>: View where
 {
 	private let label: Label
 
-	/// - Parameters:
-	///   - label:
 	public init(
 		@ViewBuilder label: () -> Label
 	) {

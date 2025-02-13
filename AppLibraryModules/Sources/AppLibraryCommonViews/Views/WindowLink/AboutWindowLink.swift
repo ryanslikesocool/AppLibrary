@@ -5,7 +5,7 @@ import SwiftUI
 
 /// A button that opens the about window.
 public struct AboutWindowLink: View {
-	public init() { }
+	public nonisolated init() { }
 
 	public var body: some View {
 		WindowLink(id: Self.windowID) {

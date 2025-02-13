@@ -3,7 +3,7 @@ import SwiftUI
 /// ## Topics
 /// - ``LabelStyle/emptyViewFallback``
 public struct EmptyViewFallbackLabelStyle: LabelStyle {
-	public init() { }
+	public nonisolated init() { }
 
 	public func makeBody(configuration: Configuration) -> some View {
 		VStack {
@@ -30,7 +30,7 @@ private extension EmptyViewFallbackLabelStyle {
 public extension LabelStyle where
 	Self == EmptyViewFallbackLabelStyle
 {
-	static var emptyViewFallback: Self {
+	nonisolated static var emptyViewFallback: Self {
 		Self()
 	}
 }

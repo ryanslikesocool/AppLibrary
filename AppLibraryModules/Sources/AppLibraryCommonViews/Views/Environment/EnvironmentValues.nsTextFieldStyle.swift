@@ -9,7 +9,9 @@ public extension EnvironmentValues {
 
 public extension View {
 	/// - Parameter style: The style to apply to any `NSTextField`s in the environment.
-	nonisolated func nsTextFieldStyle(_ style: NSTextFieldStyle) -> some View {
+	nonisolated func nsTextFieldStyle(
+		_ style: NSTextFieldStyle
+	) -> some View {
 		environment(\.nsTextFieldStyle, style)
 	}
 }

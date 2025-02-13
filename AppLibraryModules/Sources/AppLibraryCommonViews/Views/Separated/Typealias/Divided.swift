@@ -6,7 +6,7 @@ public typealias Divided<Content> = Separated<Content, Divider> where Content: V
 public extension Separated where
 	Separator == Divider
 {
-	init(@ViewBuilder content: @escaping ContentProvider) {
+	init(@ViewBuilder content: @escaping () -> Content) {
 		self.init(content: content, separator: Divider.init)
 	}
 }

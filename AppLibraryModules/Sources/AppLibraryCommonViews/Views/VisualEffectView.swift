@@ -22,7 +22,7 @@ public struct VisualEffectView: NSViewRepresentable {
 	///   - blendingMode: A value indicating how the view’s contents blend with the surrounding content.
 	///   - state: A value that indicates whether a view has a visual effect applied.
 	///   - isEmphasized: A Boolean value indicating whether to emphasize the look of the material.
-	public init(
+	public nonisolated init(
 		material: NSVisualEffectView.Material,
 		blendingMode: NSVisualEffectView.BlendingMode,
 		state: NSVisualEffectView.State = .followsWindowActiveState,

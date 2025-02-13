@@ -41,9 +41,6 @@ public struct StyledSection<Content, Header, Footer>: View where
 // MARK: - Convenience
 
 public extension StyledSection {
-	/// - Parameters:
-	///   - title:
-	///   - content:
 	init<S>(
 		_ title: S,
 		@ViewBuilder content: () -> Content
@@ -55,9 +52,6 @@ public extension StyledSection {
 		self.init(content: content, header: { Text(title) }, footer: EmptyView.init)
 	}
 
-	/// - Parameters:
-	///   - titleKey:
-	///   - content:
 	init(
 		_ titleKey: LocalizedStringKey,
 		@ViewBuilder content: () -> Content
@@ -68,8 +62,6 @@ public extension StyledSection {
 		self.init(content: content, header: { Text(titleKey) }, footer: EmptyView.init)
 	}
 
-	/// - Parameters:
-	///   - content:
 	init(
 		@ViewBuilder content: () -> Content
 	) where
@@ -79,9 +71,6 @@ public extension StyledSection {
 		self.init(content: content, header: EmptyView.init, footer: EmptyView.init)
 	}
 
-	/// - Parameters:
-	///   - content:
-	///   - header:
 	init(
 		@ViewBuilder content: () -> Content,
 		@ViewBuilder header: () -> Header
@@ -91,9 +80,6 @@ public extension StyledSection {
 		self.init(content: content, header: header, footer: EmptyView.init)
 	}
 
-	/// - Parameters:
-	///   - content:
-	///   - footer:
 	init(
 		@ViewBuilder content: () -> Content,
 		@ViewBuilder footer: () -> Footer

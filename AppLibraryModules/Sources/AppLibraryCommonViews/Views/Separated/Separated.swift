@@ -7,17 +7,14 @@ public struct Separated<Content, Separator>: View where
 	Content: View,
 	Separator: View
 {
-	public typealias ContentProvider = () -> Content
-	public typealias SeparatorProvider = () -> Separator
-
 	private let includeBound: SeparatedViewBound
-	private let content: ContentProvider
-	private let separator: SeparatorProvider
+	private let content: () -> Content
+	private let separator: () -> Separator
 
 	public init(
 		includeBound: SeparatedViewBound = .none,
-		@ViewBuilder content: @escaping ContentProvider,
-		@ViewBuilder separator: @escaping SeparatorProvider
+		@ViewBuilder content: @escaping () -> Content,
+		@ViewBuilder separator: @escaping () -> Separator
 	) {
 		self.includeBound = includeBound
 		self.content = content

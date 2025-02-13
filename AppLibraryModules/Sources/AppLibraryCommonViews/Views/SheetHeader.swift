@@ -7,9 +7,6 @@ public struct SheetHeaderLabel<Headline, Subheadline>: View where
 	private let headline: () -> Headline
 	private let subheadline: () -> Subheadline
 
-	/// - Parameters:
-	///   - headline:
-	///   - subheadline:
 	public init(
 		@ViewBuilder headline: @escaping () -> Headline,
 		@ViewBuilder subheadline: @escaping () -> Subheadline
@@ -36,9 +33,6 @@ public extension SheetHeaderLabel where
 	Headline == Text,
 	Subheadline == Text
 {
-	/// - Parameters:
-	///   - headline:
-	///   - subheadline:
 	init<S>(
 		headline: LocalizedStringResource,
 		subheadline: S
@@ -46,14 +40,11 @@ public extension SheetHeaderLabel where
 		S: StringProtocol
 	{
 		self.init(
-			headline: { Text(headline) },
-			subheadline: { Text(subheadline) }
+			headline: { Headline(headline) },
+			subheadline: { Subheadline(subheadline) }
 		)
 	}
 
-	/// - Parameters:
-	///   - headline:
-	///   - subheadline:
 	init<S>(
 		headline: S,
 		subheadline: LocalizedStringResource
@@ -61,28 +52,23 @@ public extension SheetHeaderLabel where
 		S: StringProtocol
 	{
 		self.init(
-			headline: { Text(headline) },
-			subheadline: { Text(subheadline) }
+			headline: { Headline(headline) },
+			subheadline: { Subheadline(subheadline) }
 		)
 	}
 
-	/// - Parameters:
-	///   - headline:
-	///   - subheadline:
 	init(
 		headline: LocalizedStringResource,
 		subheadline: LocalizedStringResource
 	) {
 		self.init(
-			headline: { Text(headline) },
-			subheadline: { Text(subheadline) }
+			headline: { Headline(headline) },
+			subheadline: { Subheadline(subheadline) }
 		)
 	}
 }
 
 public extension SheetHeaderLabel {
-	/// - Parameters:
-	///   - headline:
 	init(
 		headline: LocalizedStringResource
 	) where
@@ -90,8 +76,8 @@ public extension SheetHeaderLabel {
 		Subheadline == EmptyView
 	{
 		self.init(
-			headline: { Text(headline) },
-			subheadline: EmptyView.init
+			headline: { Headline(headline) },
+			subheadline: Subheadline.init
 		)
 	}
 }

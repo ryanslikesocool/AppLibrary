@@ -8,7 +8,7 @@ public extension Separated where
 {
 	init(
 		minLength: CGFloat? = nil,
-		@ViewBuilder content: @escaping ContentProvider
+		@ViewBuilder content: @escaping () -> Content
 	) {
 		self.init(content: content, separator: { Spacer(minLength: minLength) })
 	}

@@ -7,9 +7,6 @@ public struct RemoveButton<Label>: View where
 	private let label: Label
 	private let action: @MainActor () -> Void
 
-	/// - Parameters:
-	///   - action:
-	///   - label:
 	public init(
 		action: @escaping @MainActor () -> Void,
 		@ViewBuilder label: () -> Label
@@ -30,8 +27,6 @@ public struct RemoveButton<Label>: View where
 public extension RemoveButton where
 	Label == SwiftUI.Label<Text, Image>
 {
-	/// - Parameters:
-	///   - action:
 	init(
 		action: @escaping @MainActor () -> Void
 	) {

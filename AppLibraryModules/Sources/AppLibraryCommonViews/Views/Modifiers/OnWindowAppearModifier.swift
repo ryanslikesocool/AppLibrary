@@ -26,7 +26,7 @@ private extension OnWindowAppearModifier {
 		DispatchQueue.main.async {
 			guard let windowID else {
 				Logger.module.warning("""
-				The environment value `windowReference` was not defined.
+				The environment value `windowID` was not defined.
 				The action provided by cannot be \(Self.self) cannot be executed.
 				""")
 				return

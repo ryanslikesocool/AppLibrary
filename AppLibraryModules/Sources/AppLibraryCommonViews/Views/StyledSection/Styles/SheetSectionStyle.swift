@@ -1,33 +1,34 @@
 import SwiftUI
 
+/// ## Topics
+/// - ``SectionStyle/sheet``
 public struct SheetSectionStyle: SectionStyle {
-	public init() { }
+	public nonisolated init() { }
 
 	public func makeBody(configuration: Configuration) -> some View {
 		VStack(spacing: .zero) {
-			if let header = configuration.header {
-				HStack {
-					header
-				}
-				.padding()
-				.frame(maxWidth: .infinity)
-
-				Divider()
-			}
-
-			configuration.content
-
-			if let footer = configuration.footer {
-				Divider()
-
-				HStack {
-					footer
-				}
-				.padding()
-				.frame(maxWidth: .infinity)
+			Divided {
+				Self.unwrapBar(configuration.header)
+				configuration.content
+				Self.unwrapBar(configuration.footer)
 			}
 		}
 		.sectionStyle(.automatic)
+	}
+}
+
+// MARK: - Supporting Views
+
+private extension SheetSectionStyle {
+	@ViewBuilder
+	static func unwrapBar(_ content: (some View)?) -> some View {
+		if let content {
+			HStack {
+				content
+			}
+			.padding()
+			.frame(maxWidth: .infinity)
+		}
 	}
 }
 
@@ -36,7 +37,7 @@ public struct SheetSectionStyle: SectionStyle {
 public extension SectionStyle where
 	Self == SheetSectionStyle
 {
-	static var sheet: Self {
+	nonisolated static var sheet: Self {
 		Self()
 	}
 }

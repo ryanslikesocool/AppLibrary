@@ -3,14 +3,12 @@ import SwiftUI
 struct SeparatedLayout<Separator>: _VariadicView_MultiViewRoot where
 	Separator: View
 {
-	typealias SeparatorProvider = () -> Separator
-
 	private let includeBound: SeparatedViewBound
-	private let separator: SeparatorProvider
+	private let separator: () -> Separator
 
 	public init(
 		includeBound: SeparatedViewBound,
-		separator: @escaping SeparatorProvider
+		separator: @escaping () -> Separator
 	) {
 		self.includeBound = includeBound
 		self.separator = separator

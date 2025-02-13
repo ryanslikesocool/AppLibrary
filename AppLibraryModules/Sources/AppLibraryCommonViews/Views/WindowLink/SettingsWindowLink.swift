@@ -7,7 +7,7 @@ import SwiftUI
 public struct SettingsWindowLink: View {
 	@Environment(\.openWindow) public var openWindow
 
-	public init() { }
+	public nonisolated init() { }
 
 	public var body: some View {
 		WindowLink(id: Self.windowID) {

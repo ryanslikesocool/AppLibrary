@@ -8,8 +8,6 @@ public struct RefreshButton<Label>: View where
 {
 	private let label: Label
 
-	/// - Parameters:
-	///   - label:
 	public init(
 		@ViewBuilder label: () -> Label
 	) {
@@ -37,9 +35,6 @@ private extension RefreshButton {
 public extension RefreshButton where
 	Label == SwiftUI.Label<Text, Image>
 {
-	/// - Parameters:
-	///   - title:
-	///   - systemImage:
 	init<S>(
 		_ title: S,
 		systemImage: String
@@ -54,9 +49,6 @@ public extension RefreshButton where
 		}
 	}
 
-	/// - Parameters:
-	///   - title:
-	///   - systemImage:
 	init<S>(
 		_ title: S,
 		systemImage: SystemSymbolName
@@ -71,9 +63,6 @@ public extension RefreshButton where
 		}
 	}
 
-	/// - Parameters:
-	///   - titleKey:
-	///   - systemImage:
 	init(
 		_ titleKey: LocalizedStringKey,
 		systemImage: String
@@ -86,9 +75,6 @@ public extension RefreshButton where
 		}
 	}
 
-	/// - Parameters:
-	///   - titleKey:
-	///   - systemImage:
 	init(
 		_ titleKey: LocalizedStringKey,
 		systemImage: SystemSymbolName
@@ -101,9 +87,6 @@ public extension RefreshButton where
 		}
 	}
 
-	/// - Parameters:
-	///   - title:
-	///   - systemImage:
 	init(
 		_ title: LocalizedStringResource,
 		systemImage: String
@@ -116,9 +99,6 @@ public extension RefreshButton where
 		}
 	}
 
-	/// - Parameters:
-	///   - title:
-	///   - systemImage:
 	init(
 		_ title: LocalizedStringResource,
 		systemImage: SystemSymbolName
