@@ -5,10 +5,6 @@ package struct GeneralPane: View {
 
 	public var body: some View {
 		Section {
-			AppearancePicker()
-		}
-
-		Section {
 			OpenAtLoginToggle()
 		}
 	}

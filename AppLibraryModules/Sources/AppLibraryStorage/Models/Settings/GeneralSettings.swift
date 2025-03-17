@@ -4,12 +4,10 @@ import Foundation
 
 @MainActor
 public final class GeneralSettings: ObservableObject {
-	@Published public var appearance: Appearance
 	@Published public var openAtLogin: OpenAtLogin
 
 	public init() {
-		appearance = .system
-		openAtLogin = false
+		openAtLogin = OpenAtLogin()
 	}
 }
 
@@ -19,7 +17,6 @@ public final class GeneralSettings: ObservableObject {
 
 extension GeneralSettings: @preconcurrency Encodable, @preconcurrency Decodable {
 	private enum CodingKeys: CodingKey {
-		case appearance
 	}
 
 	public convenience init(from decoder: Decoder) throws {
@@ -29,18 +26,11 @@ extension GeneralSettings: @preconcurrency Encodable, @preconcurrency Decodable 
 
 		// NOTE: Use `decodeIfPresent` when possible to avoid issues when adding new settings.
 
-		let appearance = try container.decodeIfPresent(Appearance.self, forKey: .appearance) ?? appearance
-		self.appearance = appearance
-
-		Task { @MainActor in
-			appearance.apply()
-		}
 	}
 
 	public func encode(to encoder: any Encoder) throws {
 		var container = encoder.container(keyedBy: CodingKeys.self)
 
-		try container.encode(appearance, forKey: .appearance)
 	}
 }
 
