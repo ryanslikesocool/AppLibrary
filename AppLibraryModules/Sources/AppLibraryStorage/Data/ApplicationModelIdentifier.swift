@@ -38,6 +38,23 @@ extension ApplicationModelIdentifier: Codable {
 	}
 }
 
+// MARK: - CodingKeyRepresentable
+
+extension ApplicationModelIdentifier: CodingKeyRepresentable {
+	public init?<T>(codingKey: T) where
+		T: CodingKey
+	{
+		guard let string = String(codingKey: codingKey) else {
+			return nil
+		}
+		self.init(bundleIdentifier: string)
+	}
+
+	public var codingKey: any CodingKey {
+		bundleIdentifier.codingKey
+	}
+}
+
 // MARK: - CustomStringConvertible
 
 extension ApplicationModelIdentifier: CustomStringConvertible {
