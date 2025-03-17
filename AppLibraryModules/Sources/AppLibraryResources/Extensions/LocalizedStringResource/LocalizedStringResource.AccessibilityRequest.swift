@@ -1,15 +1,15 @@
-import LocalizationToolbox
 import Foundation
+import LocalizationToolbox
 
 public extension LocalizedStringResource {
-	static let accessibilityRequest = AccessibilityRequest.self
+	static var accessibilityRequest: AccessibilityRequest.Type { AccessibilityRequest.self }
 
 	/// ## Topics
 	/// - ``accessibilityRequest``
 	enum AccessibilityRequest {
 		private static let localizationTable = LocalizationTableResource("AccessibilityRequest")
 
-		public static let action = Action.self
+		public static var action: Action.Type { Action.self }
 
 		public static let title = LocalizedStringResource("TITLE", table: localizationTable)
 		public static let description = LocalizedStringResource("DESCRIPTION", table: localizationTable)

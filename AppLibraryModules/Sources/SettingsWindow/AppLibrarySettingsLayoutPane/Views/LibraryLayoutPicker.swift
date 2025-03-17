@@ -12,7 +12,7 @@ struct LibraryLayoutPicker: View {
 
 	public var body: some View {
 		Picker(
-			String(localized: .libraryLayoutPicker.label),
+			String(localized: .libraryLayoutPicker.title),
 			selection: $selection
 		) {
 			ForEach(Self.itemDisplayOrder, content: makeItem)

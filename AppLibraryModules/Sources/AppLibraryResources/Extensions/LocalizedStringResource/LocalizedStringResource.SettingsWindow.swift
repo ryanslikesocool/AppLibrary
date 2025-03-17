@@ -1,24 +1,42 @@
-import LocalizationToolbox
 import Foundation
+import LocalizationToolbox
 
 public extension LocalizedStringResource {
-	static let settingsWindow = SettingsWindow.self
+	static var settingsWindow: SettingsWindow.Type { SettingsWindow.self }
 
 	/// ## Topics
 	/// - ``settingsWindow``
 	enum SettingsWindow {
 		private static let localizationTable = LocalizationTableResource("SettingsWindow")
 
-		public static let category = Category.self
+		public static var category: Category.Type { Category.self }
 
 		public static let title = LocalizedStringResource("TITLE", table: localizationTable)
 
 		/// ## Topics
 		/// - ``category``
 		public enum Category {
-			public static let general = LocalizedStringResource("CATEGORY.GENERAL", table: localizationTable)
-			public static let layout = LocalizedStringResource("CATEGORY.LAYOUT", table: localizationTable)
-			public static let apps = LocalizedStringResource("CATEGORY.APPS", table: localizationTable)
+			public static var apps: Apps.Type { Apps.self }
+			public static var general: General.Type { General.self }
+			public static var layout: Layout.Type { Layout.self }
+
+			/// ## Topics
+			/// - ``apps``
+			public enum Apps {
+				public static let title = LocalizedStringResource("CATEGORY.APPS.TITLE", table: localizationTable)
+			}
+
+			/// ## Topics
+			/// - ``general``
+			public enum General {
+				public static let title = LocalizedStringResource("CATEGORY.GENERAL.TITLE", table: localizationTable)
+			}
+
+			/// ## Topics
+			/// - ``layout``
+			public enum Layout {
+				public static let title = LocalizedStringResource("CATEGORY.LAYOUT.TITLE", table: localizationTable)
+			}
 		}
 	}
 }

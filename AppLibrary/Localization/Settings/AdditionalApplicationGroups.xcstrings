@@ -12,7 +12,7 @@
         }
       }
     },
-    "ITEM.RECENTLY_ADDED.LABEL" : {
+    "ITEM.RECENTLY_ADDED.TITLE" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -34,7 +34,7 @@
         }
       }
     },
-    "ITEM.RECENTLY_UPDATED.LABEL" : {
+    "ITEM.RECENTLY_UPDATED.TITLE" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {

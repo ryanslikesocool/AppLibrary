@@ -1,34 +1,34 @@
-import LocalizationToolbox
 import Foundation
+import LocalizationToolbox
 
 public extension LocalizedStringResource {
-	static let additionalApplicationGroups = AdditionalApplicationGroups.self
+	static var additionalApplicationGroups: AdditionalApplicationGroups.Type { AdditionalApplicationGroups.self }
 
 	/// ## Topics
 	/// - ``additionalApplicationGroups``
 	enum AdditionalApplicationGroups {
 		private static let localizationTable = LocalizationTableResource("AdditionalApplicationGroups")
 
-		public static let item: Item.Type = Item.self
-		public static let section: Section.Type = Section.self
+		public static var item: Item.Type { Item.self }
+		public static var section: Section.Type { Section.self }
 
 		/// ## Topics
 		/// - ``item``
 		public enum Item {
-			public static let recentlyAdded = RecentlyAdded.self
-			public static let recentlyUpdated = RecentlyUpdated.self
+			public static var recentlyAdded: RecentlyAdded.Type { RecentlyAdded.self }
+			public static var recentlyUpdated: RecentlyUpdated.Type { RecentlyUpdated.self }
 
 			/// ## Topics
 			/// - ``recentlyAdded``
 			public enum RecentlyAdded {
-				public static let label = LocalizedStringResource("ITEM.RECENTLY_ADDED.LABEL", table: localizationTable)
+				public static let title = LocalizedStringResource("ITEM.RECENTLY_ADDED.TITLE", table: localizationTable)
 				public static let description = LocalizedStringResource("ITEM.RECENTLY_ADDED.DESCRIPTION", table: localizationTable)
 			}
 
 			/// ## Topics
 			/// - ``recentlyUpdated``
 			public enum RecentlyUpdated {
-				public static let label = LocalizedStringResource("ITEM.RECENTLY_UPDATED.LABEL", table: localizationTable)
+				public static let title = LocalizedStringResource("ITEM.RECENTLY_UPDATED.TITLE", table: localizationTable)
 				public static let description = LocalizedStringResource("ITEM.RECENTLY_UPDATED.DESCRIPTION", table: localizationTable)
 			}
 		}

@@ -2,7 +2,7 @@ import Foundation
 import LocalizationToolbox
 
 public extension LocalizedStringResource {
-	static let aboutWindow = AboutWindow.self
+	static var aboutWindow: AboutWindow.Type { AboutWindow.self }
 
 	/// ## Topics
 	/// - ``aboutWindow``

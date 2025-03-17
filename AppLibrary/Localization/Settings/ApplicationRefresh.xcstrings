@@ -12,7 +12,7 @@
         }
       }
     },
-    "LABEL" : {
+    "TITLE" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {

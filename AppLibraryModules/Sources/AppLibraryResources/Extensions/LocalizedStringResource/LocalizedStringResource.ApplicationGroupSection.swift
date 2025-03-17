@@ -2,7 +2,7 @@ import LocalizationToolbox
 import Foundation
 
 public extension LocalizedStringResource {
-	static let applicationGroupSection = ApplicationGroupSection.self
+	static var applicationGroupSection: ApplicationGroupSection.Type { ApplicationGroupSection.self }
 
 	/// ## Topics
 	/// - ``applicationGroupSection``

@@ -2,13 +2,13 @@ import Foundation
 import LocalizationToolbox
 
 public extension LocalizedStringResource {
-	static let openAtLoginToggle = OpenAtLoginToggle.self
+	static var openAtLoginToggle: OpenAtLoginToggle.Type { OpenAtLoginToggle.self }
 
 	/// ## Topics
 	/// - ``openAtLoginToggle``
 	enum OpenAtLoginToggle {
 		private static let localizationTable = LocalizationTableResource("OpenAtLoginToggle")
 
-		public static let label = LocalizedStringResource("LABEL", table: localizationTable)
+		public static let title = LocalizedStringResource("TITLE", table: localizationTable)
 	}
 }

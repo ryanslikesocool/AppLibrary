@@ -2,30 +2,54 @@ import Foundation
 import LocalizationToolbox
 
 public extension LocalizedStringResource {
-	static let credits = Credits.self
+	static var credits: Credits.Type { Credits.self }
 
 	/// ## Topics
 	/// - ``credits``
 	enum Credits {
 		private static let localizationTable = LocalizationTableResource("Credits")
 
-		public static let link = Link.self
-		public static let section = Section.self
+		public static var link: Link.Type { Link.self }
+		public static var section: Section.Type { Section.self }
 
 		/// ## Topics
 		/// - ``link``
 		public enum Link {
-			public static let github = LocalizedStringResource("LINK.GITHUB", table: localizationTable)
-			public static let license = LocalizedStringResource("LINK.LICENSE", table: localizationTable)
-			public static let personal = LocalizedStringResource("LINK.PERSONAL", table: localizationTable)
-			public static let project = LocalizedStringResource("LINK.PROJECT", table: localizationTable)
+			public static var gitHub: GitHub.Type { GitHub.self }
+			public static var license: License.Type { License.self }
+			public static var personal: Personal.Type { Personal.self }
+			public static var project: Project.Type { Project.self }
+
+			/// ## Topics
+			/// - ``gitHub``
+			public enum GitHub {
+				public static let title = LocalizedStringResource("LINK.GITHUB.TITLE", table: localizationTable)
+			}
+
+			/// ## Topics
+			/// - ``license``
+			public enum License {
+				public static let title = LocalizedStringResource("LINK.LICENSE.TITLE", table: localizationTable)
+			}
+
+			/// ## Topics
+			/// - ``personal``
+			public enum Personal {
+				public static let title = LocalizedStringResource("LINK.PERSONAL.TITLE", table: localizationTable)
+			}
+
+			/// ## Topics
+			/// - ``project``
+			public enum Project {
+				public static let title = LocalizedStringResource("LINK.PROJECT.TITLE", table: localizationTable)
+			}
 		}
 
 		/// ## Topics
 		/// - ``section``
 		public enum Section {
-			public static let acknowledgements = Acknowledgements.self
-			public static let contributors = Contributors.self
+			public static var acknowledgements: Acknowledgements.Type { Acknowledgements.self }
+			public static var contributors: Contributors.Type { Contributors.self }
 
 			/// ## Topics
 			/// - ``acknowledgements``

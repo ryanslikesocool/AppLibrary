@@ -2,14 +2,14 @@ import Foundation
 import LocalizationToolbox
 
 public extension LocalizedStringResource {
-	static let applicationConfigurationSheet = ApplicationConfigurationSheet.self
+	static var applicationConfigurationSheet: ApplicationConfigurationSheet.Type { ApplicationConfigurationSheet.self }
 
 	/// ## Topics
 	/// - ``applicationConfigurationSheet``
 	enum ApplicationConfigurationSheet {
 		private static let localizationTable = LocalizationTableResource("ApplicationConfigurationSheet")
 
-		public static let detail = Detail.self
+		public static var detail: Detail.Type { Detail.self }
 
 		public static let title = LocalizedStringResource("TITLE", table: localizationTable)
 

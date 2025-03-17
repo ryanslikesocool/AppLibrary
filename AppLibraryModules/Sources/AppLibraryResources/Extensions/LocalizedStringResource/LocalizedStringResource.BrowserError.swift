@@ -1,17 +1,17 @@
-import LocalizationToolbox
 import Foundation
+import LocalizationToolbox
 
 public extension LocalizedStringResource {
-	static let browserError = BrowserError.self
+	static var browserError: BrowserError.Type { BrowserError.self }
 
 	/// ## Topics
 	/// - ``browserError``
 	enum BrowserError {
 		private static let localizationTable = LocalizationTableResource("BrowserError")
 
-		public static let noSearchScopes = NoSearchScopes.self
-		public static let noApplications = NoApplications.self
-		public static let allApplicationsHidden = AllApplicationsHidden.self
+		public static var noSearchScopes: NoSearchScopes.Type { NoSearchScopes.self }
+		public static var noApplications: NoApplications.Type { NoApplications.self }
+		public static var allApplicationsHidden: AllApplicationsHidden.Type { AllApplicationsHidden.self }
 
 		/// ## Topics
 		/// - ``noSearchScopes``

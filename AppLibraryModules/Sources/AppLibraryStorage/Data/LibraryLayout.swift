@@ -32,8 +32,8 @@ extension LibraryLayout: Codable { }
 extension LibraryLayout: CustomLocalizedStringResourceConvertible {
 	public var localizedStringResource: LocalizedStringResource {
 		switch self {
-			case .list: .libraryLayoutPicker.item.list
-			case .grid: .libraryLayoutPicker.item.grid
+			case .list: .libraryLayoutPicker.item.list.title
+			case .grid: .libraryLayoutPicker.item.grid.title
 		}
 	}
 }

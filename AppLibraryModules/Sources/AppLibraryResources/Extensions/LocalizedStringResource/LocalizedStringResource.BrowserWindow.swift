@@ -1,9 +1,9 @@
-import LocalizationToolbox
 import BundleToolbox
 import Foundation
+import LocalizationToolbox
 
 public extension LocalizedStringResource {
-	static let browserWindow = BrowserWindow.self
+	static var browserWindow: BrowserWindow.Type { BrowserWindow.self }
 
 	/// ## Topics
 	/// - ``browserWindow``

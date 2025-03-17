@@ -1,19 +1,19 @@
-import LocalizationToolbox
 import Foundation
+import LocalizationToolbox
 
 public extension LocalizedStringResource {
-	static let applicationSearchScopesList = ApplicationSearchScopesList.self
+	static var applicationSearchScopesList: ApplicationSearchScopesList.Type { ApplicationSearchScopesList.self }
 
 	/// ## Topics
 	/// - ``applicationSearchScopesList``
 	enum ApplicationSearchScopesList {
 		private static let localizationTable = LocalizationTableResource("ApplicationSearchScopesList")
 
-		public static let item = Item.self
-		public static let addMenu = AddMenu.self
-		public static let addDialog = AddDialog.self
-		public static let form = Form.self
-		public static let list = List.self
+		public static var item: Item.Type { Item.self }
+		public static var addMenu: AddMenu.Type { AddMenu.self }
+		public static var addDialog: AddDialog.Type { AddDialog.self }
+		public static var form: Form.Type { Form.self }
+		public static var list: List.Type { List.self }
 
 		public static let title = LocalizedStringResource("TITLE", table: localizationTable)
 

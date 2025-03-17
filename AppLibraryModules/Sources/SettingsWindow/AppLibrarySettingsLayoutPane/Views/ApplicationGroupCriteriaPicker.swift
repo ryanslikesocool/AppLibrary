@@ -18,7 +18,7 @@ struct ApplicationGroupCriteriaPicker: View {
 				makeItem(.category)
 			}
 		} label: {
-			Text(.applicationGroupCriteriaPicker.label)
+			Text(.applicationGroupCriteriaPicker.title)
 		}
 	}
 }
@@ -39,8 +39,8 @@ private extension ApplicationGroupCriteriaPicker {
 private extension ApplicationGroupCriteriaPicker.SelectionValue {
 	var labelKey: LocalizedStringResource {
 		switch self {
-			case .category?: .applicationGroupCriteriaPicker.item.category
-			case .none: .applicationGroupCriteriaPicker.item.none
+			case .category?: .applicationGroupCriteriaPicker.item.category.title
+			case .none: .applicationGroupCriteriaPicker.item.none.title
 		}
 	}
 }

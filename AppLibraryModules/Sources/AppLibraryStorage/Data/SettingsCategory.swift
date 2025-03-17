@@ -35,9 +35,9 @@ extension SettingsCategory: CaseIterable { }
 extension SettingsCategory: CustomLocalizedStringResourceConvertible {
 	public var localizedStringResource: LocalizedStringResource {
 		switch self {
-			case .general: .settingsWindow.category.general
-			case .layout: .settingsWindow.category.layout
-			case .apps: .settingsWindow.category.apps
+			case .general: .settingsWindow.category.general.title
+			case .layout: .settingsWindow.category.layout.title
+			case .apps: .settingsWindow.category.apps.title
 		}
 	}
 }

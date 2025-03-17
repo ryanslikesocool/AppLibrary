@@ -1,7 +1,7 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "ITEM.GRID" : {
+    "ITEM.GRID.TITLE" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -12,7 +12,7 @@
         }
       }
     },
-    "ITEM.LIST" : {
+    "ITEM.LIST.TITLE" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -23,7 +23,7 @@
         }
       }
     },
-    "LABEL" : {
+    "TITLE" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {

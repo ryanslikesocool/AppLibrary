@@ -28,7 +28,7 @@ extension Acknowledgement {
 private extension Acknowledgement.ItemView {
 	var projectLink: some View {
 		Link(
-			String(localized: .credits.link.project),
+			String(localized: .credits.link.project.title),
 			systemImage: .link,
 			destination: value.projectURL
 		)
@@ -37,7 +37,7 @@ private extension Acknowledgement.ItemView {
 	var licenseLink: some View {
 		// TODO: replace with scales symbol if/when one becomes available
 		Link(
-			String(localized: .credits.link.license),
+			String(localized: .credits.link.license.title),
 			systemImage: .building_columns,
 			destination: value.licenseURL
 		)

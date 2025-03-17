@@ -2,14 +2,14 @@ import Foundation
 import LocalizationToolbox
 
 public extension LocalizedStringResource {
-	static let applicationVisibilityPicker = ApplicationVisibilityPicker.self
+	static var applicationVisibilityPicker: ApplicationVisibilityPicker.Type { ApplicationVisibilityPicker.self }
 
 	/// ## Topics
 	/// - ``applicationVisibilityPicker``
 	enum ApplicationVisibilityPicker {
 		private static let localizationTable = LocalizationTableResource("ApplicationVisibilityPicker")
 
-		public static let item = Item.self
+		public static var item: Item.Type { Item.self }
 
 		public static let label = LocalizedStringResource("LABEL", table: localizationTable)
 
@@ -18,7 +18,7 @@ public extension LocalizedStringResource {
 		/// ## Topics
 		/// - ``item``
 		public enum Item {
-			public static let format = Format.self
+			public static var format: Format.Type { Format.self }
 
 			public static let browser = LocalizedStringResource("ITEM.BROWSER_\(LocalizedStringResource.browserWindow.title)", table: localizationTable)
 			public static let searchResults = LocalizedStringResource("ITEM.SEARCH_RESULTS", table: localizationTable)

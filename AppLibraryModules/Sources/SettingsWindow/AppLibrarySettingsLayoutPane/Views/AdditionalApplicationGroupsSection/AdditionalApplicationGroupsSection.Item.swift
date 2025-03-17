@@ -28,8 +28,8 @@ extension AdditionalApplicationGroupsSection {
 private extension AdditionalApplicationGroupsSection.Item.SelectionValue {
 	var labelKey: LocalizedStringResource {
 		switch self {
-			case .recentlyAdded: .additionalApplicationGroups.item.recentlyAdded.label
-			case .recentlyUpdated: .additionalApplicationGroups.item.recentlyUpdated.label
+			case .recentlyAdded: .additionalApplicationGroups.item.recentlyAdded.title
+			case .recentlyUpdated: .additionalApplicationGroups.item.recentlyUpdated.title
 		}
 	}
 

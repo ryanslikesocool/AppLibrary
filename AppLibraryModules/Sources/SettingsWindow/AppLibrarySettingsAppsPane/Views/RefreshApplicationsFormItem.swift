@@ -9,7 +9,7 @@ struct RefreshApplicationsFormItem: View {
 		LabeledContent {
 			RefreshButton()
 		} label: {
-			Text(.applicationRefresh.label)
+			Text(.applicationRefresh.title)
 			Text(.applicationRefresh.description)
 		}
 	}

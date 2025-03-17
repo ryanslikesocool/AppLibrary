@@ -2,7 +2,7 @@ import Foundation
 import LocalizationToolbox
 
 public extension LocalizedStringResource {
-	static let appStoreCategory = AppStoreCategory.self
+	static var appStoreCategory: AppStoreCategory.Type { AppStoreCategory.self }
 
 	/// ## Topics
 	/// - ``appStoreCategory``

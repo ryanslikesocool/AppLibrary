@@ -1,7 +1,7 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "LINK.GITHUB" : {
+    "LINK.GITHUB.TITLE" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -12,7 +12,7 @@
         }
       }
     },
-    "LINK.LICENSE" : {
+    "LINK.LICENSE.TITLE" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -23,7 +23,7 @@
         }
       }
     },
-    "LINK.PERSONAL" : {
+    "LINK.PERSONAL.TITLE" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -34,7 +34,7 @@
         }
       }
     },
-    "LINK.PROJECT" : {
+    "LINK.PROJECT.TITLE" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {

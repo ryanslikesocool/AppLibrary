@@ -1,7 +1,7 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "CATEGORY.APPS" : {
+    "CATEGORY.APPS.TITLE" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -12,7 +12,7 @@
         }
       }
     },
-    "CATEGORY.GENERAL" : {
+    "CATEGORY.GENERAL.TITLE" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -23,7 +23,7 @@
         }
       }
     },
-    "CATEGORY.LAYOUT" : {
+    "CATEGORY.LAYOUT.TITLE" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {

@@ -1,16 +1,16 @@
-import LocalizationToolbox
 import Foundation
+import LocalizationToolbox
 
 public extension LocalizedStringResource {
-	static let common = Common.self
+	static var common: Common.Type { Common.self }
 
 	/// ## Topics
 	/// - ``common``
 	enum Common {
 		private static let localizationTable = LocalizationTableResource("Common")
 
-		public static let action = Action.self
-		public static let link = Link.self
+		public static var action: Action.Type { Action.self }
+		public static var link: Link.Type { Link.self }
 
 		/// ## Topics
 		/// - ``action``

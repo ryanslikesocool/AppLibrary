@@ -10,7 +10,7 @@ struct OpenAtLoginToggle: View {
 
 	public var body: some View {
 		Toggle(
-			.openAtLoginToggle.label,
+			.openAtLoginToggle.title,
 			isOn: $openAtLogin.isEnabled
 		)
 	}

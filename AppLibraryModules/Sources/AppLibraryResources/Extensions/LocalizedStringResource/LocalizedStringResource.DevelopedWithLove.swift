@@ -2,7 +2,7 @@ import Foundation
 import LocalizationToolbox
 
 public extension LocalizedStringResource {
-	static let developedWithLove = DevelopedWithLove.self
+	static var developedWithLove: DevelopedWithLove.Type { DevelopedWithLove.self }
 
 	/// ## Topics
 	/// - ``developedWithLove``
