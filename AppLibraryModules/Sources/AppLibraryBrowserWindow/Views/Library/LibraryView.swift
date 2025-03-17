@@ -45,6 +45,9 @@ struct LibraryView: View {
 			.onReceive(Event.scrollToApp) { id in
 				scrollToApp(id: id, in: proxy)
 			}
+//			.onKeyPress(characters: .alphanumerics) { (keyPress: KeyPress) -> KeyPress.Result in
+//				// TODO: jump to first application where name starts with `keyPress.characters`
+//			}
 			.onChange(of: focusState) { _, newValue in
 				receiveFocus(newValue: newValue, in: proxy)
 			}

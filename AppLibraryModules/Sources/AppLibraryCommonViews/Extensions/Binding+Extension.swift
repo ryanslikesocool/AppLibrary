@@ -20,7 +20,7 @@ import SwiftUI
 public extension Binding<Bool> {
  	@MainActor
 	init<Enum>(
-		selection: Binding<EnumOptionSet<Enum>>,
+		selection: Binding<some EnumOptionSet<Enum>>,
 		element: Enum
 	) where
 		Enum: RawRepresentable,

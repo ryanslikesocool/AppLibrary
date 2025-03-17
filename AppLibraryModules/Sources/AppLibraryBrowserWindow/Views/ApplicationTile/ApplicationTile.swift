@@ -3,6 +3,7 @@ import AppLibraryCommonViews
 import AppLibraryRuntimeModel
 import AppLibraryRuntimeModelViews
 import AppLibraryStorage
+import OSLog
 import SwiftUI
 
 struct ApplicationTile: View {
@@ -31,9 +32,13 @@ struct ApplicationTile: View {
 		}
 		.contentShape(Self.backgroundShape)
 
-		.focusable(interactions: [.edit, .activate])
+		.focusable(interactions: [.edit, .activate]) // TODO: use `.activate` only when not using keyboard
 		.focusEffectDisabled()
 		.focused($focusState, equals: .application(application))
+
+//		.onKeyPress(.return) {
+//			// TODO: open application
+//		}
 
 		.background(
 			isFocused ? Self.focusedBackgroundStyle : Self.unfocusedBackgroundStyle,

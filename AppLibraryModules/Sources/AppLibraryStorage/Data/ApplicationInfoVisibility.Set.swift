@@ -2,8 +2,36 @@ import AppLibraryCommon
 
 public extension ApplicationInfoVisibility {
 	/// An efficient set of ``ApplicationInfoVisibility``.
-	typealias Set = EnumOptionSet<Self>
+	struct Set: EnumOptionSet {
+		public typealias Enum = ApplicationInfoVisibility
+
+		public let rawValue: RawValue
+
+		public init(rawValue: RawValue) {
+			self.rawValue = rawValue
+		}
+	}
 }
+
+// MARK: - Sendable
+
+extension ApplicationInfoVisibility.Set: Sendable { }
+
+// MARK: - Equatable
+
+extension ApplicationInfoVisibility.Set: Equatable { }
+
+// MARK: - Hashable
+
+extension ApplicationInfoVisibility.Set: Hashable { }
+
+// MARK: - Codable
+
+extension ApplicationInfoVisibility.Set: Codable { }
+
+// MARK: - CaseIterable
+
+extension ApplicationInfoVisibility.Set: CaseIterable { }
 
 // MARK: - Constants
 
@@ -25,4 +53,10 @@ public extension ApplicationInfoVisibility.Set {
 	/// ## See Also
 	/// - ``ApplicationInfoVisibility/architectures``
 	static let architectures: Self = Self(.architectures)
+
+	/// An indicator showing if an instance of the application is currently open.
+	///
+	/// ## See Also
+	/// - ``ApplicationInfoVisibility/openIndicator``
+	static let openIndicator: Self = Self(.openIndicator)
 }

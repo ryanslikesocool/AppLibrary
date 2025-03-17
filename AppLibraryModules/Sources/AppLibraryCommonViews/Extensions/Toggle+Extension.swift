@@ -10,7 +10,7 @@ public extension Toggle {
 	///   - element:
 	///   - label: A view that describes the purpose of the toggle.
 	init<Enum>(
-		selection: Binding<EnumOptionSet<Enum>>,
+		selection: Binding<some EnumOptionSet<Enum>>,
 		element: Enum,
 		@ViewBuilder label: () -> Label
 	) where
@@ -40,7 +40,7 @@ public extension Toggle where
 	///   - element:
 	init<Enum, S>(
 		_ title: S,
-		selection: Binding<EnumOptionSet<Enum>>,
+		selection: Binding<some EnumOptionSet<Enum>>,
 		element: Enum
 	) where
 		S: StringProtocol,
@@ -67,7 +67,7 @@ public extension Toggle where
 	///   - element:
 	init<Enum>(
 		_ titleKey: LocalizedStringKey,
-		selection: Binding<EnumOptionSet<Enum>>,
+		selection: Binding<some EnumOptionSet<Enum>>,
 		element: Enum
 	) where
 		Enum: RawRepresentable,
@@ -95,7 +95,7 @@ public extension Toggle where
 	@_disfavoredOverload
 	init<Enum>(
 		_ titleResource: LocalizedStringResource,
-		selection: Binding<EnumOptionSet<Enum>>,
+		selection: Binding<some EnumOptionSet<Enum>>,
 		element: Enum
 	) where
 		Enum: RawRepresentable,

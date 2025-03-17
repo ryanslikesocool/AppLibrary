@@ -1,4 +1,6 @@
 import AppLibraryCommon
+import AppLibraryRuntimeModel
+import SwiftData
 import OSLog
 import SwiftUI
 
@@ -80,24 +82,26 @@ private extension InputReceiver {
 			     (.default?, .down),
 			     (.search?, .down):
 				// Set focus to the first application in the list.
-				// TODO: reimplement
-//				guard let application = browserModel.filteredApps.first else {
+				// TODO: reimplement correctly
+//				guard let application = applications.first /*browserModel.filteredApps.first*/ else {
 //					break
 //				}
+//				Self.logger.debug("Moving focus to \(application.displayName)")
 //				focusState = .application(application)
+				// TODO: force scroll view to jump to element
 				break
-			// TODO: force scroll view to jump to element
 			case (.default?, .left),
 			     (.default?, .up),
 			     (.search?, .up):
 				// Set focus to the last application in the list.
-				// TODO: reimplement
-//				guard let application = browserModel.filteredApps.last else {
+				// TODO: reimplement correctly
+//				guard let application = applications.last /*browserModel.filteredApps.last*/ else {
 //					break
 //				}
+//				Self.logger.debug("Moving focus to \(application.displayName)")
 //				focusState = .application(application)
+				// TODO: force scroll view to jump to element
 				break
-			// TODO: force scroll view to jump to element
 			case (.application?, _):
 				let applicationIndexOffset = direction.offset(for: libraryLayout)
 			// TODO: set focus element

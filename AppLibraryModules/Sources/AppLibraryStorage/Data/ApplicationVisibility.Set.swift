@@ -2,8 +2,36 @@ import AppLibraryCommon
 
 public extension ApplicationVisibility {
 	/// An efficient set of ``ApplicationVisibility``.
-	typealias Set = EnumOptionSet<Self>
+	struct Set: EnumOptionSet {
+		public typealias Enum = ApplicationVisibility
+
+		public let rawValue: RawValue
+
+		public init(rawValue: RawValue) {
+			self.rawValue = rawValue
+		}
+	}
 }
+
+// MARK: - Sendable
+
+extension ApplicationVisibility.Set: Sendable { }
+
+// MARK: - Equatable
+
+extension ApplicationVisibility.Set: Equatable { }
+
+// MARK: - Hashable
+
+extension ApplicationVisibility.Set: Hashable { }
+
+// MARK: - Codable
+
+extension ApplicationVisibility.Set: Codable { }
+
+// MARK: - CaseIterable
+
+extension ApplicationVisibility.Set: CaseIterable { }
 
 // MARK: - Constants
 

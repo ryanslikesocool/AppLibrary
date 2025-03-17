@@ -26,6 +26,7 @@ extension LayoutSettings: @preconcurrency Encodable, @preconcurrency Decodable {
 		case layout
 		case groupCriteria
 		case additionalGroups
+		case infoVisibility
 	}
 
 	public convenience init(from decoder: Decoder) throws {
@@ -38,6 +39,7 @@ extension LayoutSettings: @preconcurrency Encodable, @preconcurrency Decodable {
 		layout = try container.decodeIfPresent(LibraryLayout.self, forKey: .layout) ?? layout
 		groupCriteria = try container.decodeIfPresent(ApplicationGroupCriteria.self, forKey: .groupCriteria) ?? groupCriteria
 		additionalGroups = try container.decodeIfPresent(AdditionalApplicationGroup.Set.self, forKey: .additionalGroups) ?? additionalGroups
+		infoVisibility = try container.decodeIfPresent(ApplicationInfoVisibility.Set.self, forKey: .infoVisibility) ?? infoVisibility
 	}
 
 	public func encode(to encoder: any Encoder) throws {
@@ -46,6 +48,7 @@ extension LayoutSettings: @preconcurrency Encodable, @preconcurrency Decodable {
 		try container.encode(layout, forKey: .layout)
 		try container.encode(groupCriteria, forKey: .groupCriteria)
 		try container.encode(additionalGroups, forKey: .additionalGroups)
+		try container.encode(infoVisibility, forKey: .infoVisibility)
 	}
 }
 

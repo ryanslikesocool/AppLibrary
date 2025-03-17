@@ -19,6 +19,12 @@ public enum ApplicationInfoVisibility: UInt8 {
 	/// ## See Also
 	/// - ``Set/architectures``
 	case architectures
+
+	/// The indicator showing if an instance of the application is currently open.
+	///
+	/// ## See Also
+	/// - ``Set/openIndicator``
+	case openIndicator
 }
 
 // MARK: - Sendable
@@ -55,6 +61,7 @@ extension ApplicationInfoVisibility: CaseIterable { }
 //			case .path: .applicationInfoVisibilityPicker.item.path
 //			case .version: .applicationInfoVisibilityPicker.item.version
 //			case .architectures: .applicationInfoVisibilityPicker.item.architectures
+//			case .openIndicator: .applicationInfoVisibilityPicker.item.openIndicator
 //		}
 //	}
 //}
