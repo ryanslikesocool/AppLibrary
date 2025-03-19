@@ -11,7 +11,7 @@ struct ApplicationSearchScopesSheet: View {
 		)
 		.sectionStyle(.sheet)
 		.toolbar {
-			ToolbarItem(placement: .cancellationAction) {
+			ToolbarItem(placement: .confirmationAction) {
 				SheetDoneButton()
 			}
 		}

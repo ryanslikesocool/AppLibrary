@@ -84,7 +84,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "App Library will look for apps in the directories listed below."
+            "value" : "App Library will look for apps in the listed directories."
           }
         }
       }

@@ -1,13 +1,13 @@
 import SwiftUI
 
 public struct SectionToggleListApplicationVisibilityPickerStyle: ApplicationVisibilityPickerStyle {
-	public init() { }
+	public nonisolated init() { }
 
 	public func makeBody(configuration: Configuration) -> some View {
 		Section {
-			ForEach(configuration.elements) { element in
+			ForEach(configuration.items) { element in
 				Toggle(
-					LocalizedStringResource.applicationVisibilityPicker.item.format.adjective(element.localizedStringResource),
+					element.localizedStringResource,
 					selection: configuration.$selection,
 					element: element
 				)
@@ -23,7 +23,7 @@ public struct SectionToggleListApplicationVisibilityPickerStyle: ApplicationVisi
 public extension ApplicationVisibilityPickerStyle where
 	Self == SectionToggleListApplicationVisibilityPickerStyle
 {
-	static var sectionToggleList: Self {
+	nonisolated static var sectionToggleList: Self {
 		Self()
 	}
 }

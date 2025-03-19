@@ -21,7 +21,7 @@ struct ApplicationConfigurationSheet: View {
 				.navigationSplitViewColumnWidth(Self.width - Self.sidebarWidth)
 		}
 		.toolbar {
-			ToolbarItem(placement: .cancellationAction) {
+			ToolbarItem(placement: .confirmationAction) {
 				SheetDoneButton()
 			}
 		}

@@ -8,7 +8,6 @@ public struct ApplicationVisibilityPicker<Label>: View where
 	public typealias SelectionValue = ApplicationVisibility.Set
 
 	@Environment(\.applicationVisibilityPickerStyle) private var style
-	@Environment(\.applicationVisibilityPickerElements) private var elements
 
 	@Binding private var selection: SelectionValue
 
@@ -25,7 +24,7 @@ public struct ApplicationVisibilityPicker<Label>: View where
 	public var body: some View {
 		let configuration = Configuration(
 			selection: $selection,
-			elements: elements,
+			items: Self.items,
 			label: label
 		)
 
@@ -35,11 +34,17 @@ public struct ApplicationVisibilityPicker<Label>: View where
 
 // MARK: - Constants
 
+private extension ApplicationVisibilityPicker {
+	static var items: [SelectionValue.Enum] {
+		SelectionValue.Enum.allCases
+	}
+}
+
 private extension ApplicationVisibilityPicker where
 	Label == Text
 {
 	nonisolated static var defaultLabel: Label {
-		Text(.applicationVisibilityPicker.label)
+		Text(.applicationVisibilityPicker.title)
 	}
 }
 

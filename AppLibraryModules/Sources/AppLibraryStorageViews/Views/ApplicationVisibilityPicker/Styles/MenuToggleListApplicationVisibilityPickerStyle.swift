@@ -3,13 +3,13 @@ import AppLibraryCommonViews
 import SwiftUI
 
 public struct MenuToggleListApplicationVisibilityPickerStyle: ApplicationVisibilityPickerStyle {
-	public init() { }
+	public nonisolated init() { }
 
 	public func makeBody(configuration: Configuration) -> some View {
 		Menu {
-			ForEach(configuration.elements) { element in
+			ForEach(configuration.items) { element in
 				Toggle(
-					LocalizedStringResource.applicationVisibilityPicker.item.format.adjective(element.localizedStringResource),
+					element.localizedStringResource,
 					selection: configuration.$selection,
 					element: element
 				)
@@ -25,7 +25,7 @@ public struct MenuToggleListApplicationVisibilityPickerStyle: ApplicationVisibil
 public extension ApplicationVisibilityPickerStyle where
 	Self == MenuToggleListApplicationVisibilityPickerStyle
 {
-	static var menuToggleList: Self {
+	nonisolated static var menuToggleList: Self {
 		Self()
 	}
 }

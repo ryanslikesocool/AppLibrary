@@ -14,12 +14,12 @@ extension ApplicationConfigurationSheet {
 		public var body: some View {
 			ListContent(searchQuery: searchQuery)
 				.listStyle(.sidebar)
-				.searchable(text: $searchQuery, placement: .sidebar)
-
-//			.safeAreaInset(edge: .top, spacing: nil) {
-//				NSSearchFieldRepresentable(string: $searchQuery)
-//					.padding()
-//			}
+			
+				.safeAreaInset(edge: .top, spacing: 0) {
+					NSSearchFieldRepresentable(string: $searchQuery)
+						.padding(8)
+						.safeAreaInset(edge: .bottom, spacing: 0, content: Divider.init)
+				}
 		}
 	}
 }

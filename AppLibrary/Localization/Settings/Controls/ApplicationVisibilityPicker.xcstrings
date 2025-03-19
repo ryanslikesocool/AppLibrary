@@ -26,17 +26,6 @@
       },
       "shouldTranslate" : false
     },
-    "ITEM.FORMAT.ADJECTIVE_%@" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Visible in %@"
-          }
-        }
-      }
-    },
     "ITEM.SEARCH_RESULTS" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -48,7 +37,7 @@
         }
       }
     },
-    "LABEL" : {
+    "TITLE" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {

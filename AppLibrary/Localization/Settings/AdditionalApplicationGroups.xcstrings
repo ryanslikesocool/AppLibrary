@@ -7,7 +7,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Add a group with apps that have been added in the last week."
+            "value" : "Display a group with apps that have been added in the last week."
           }
         }
       }
@@ -29,7 +29,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Add a group with apps that have been updated in the last week."
+            "value" : "Display a group with apps that have been updated in the last week."
           }
         }
       }
@@ -51,7 +51,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Add additional groups to the top of the library.\nGrouping is only available in the \"Grid\" layout."
+            "value" : "Add additional groups to the top of the library.\nGroups are only available in the \"Grid\" layout."
           }
         }
       }

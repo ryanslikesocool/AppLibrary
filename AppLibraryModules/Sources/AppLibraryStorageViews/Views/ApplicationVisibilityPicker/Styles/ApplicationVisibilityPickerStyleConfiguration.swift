@@ -6,17 +6,17 @@ public struct ApplicationVisibilityPickerStyleConfiguration {
 	public typealias SelectionValue = ApplicationVisibility.Set
 
 	@Binding public var selection: SelectionValue
-	public let elements: [SelectionValue.Enum]
+	public let items: [SelectionValue.Enum]
 	public let label: Label
 
 	@MainActor
 	init(
 		selection: Binding<SelectionValue>,
-		elements: [SelectionValue.Enum],
+		items: [SelectionValue.Enum],
 		label: some View
 	) {
 		_selection = selection
-		self.elements = elements
+		self.items = items
 		self.label = Label(label)
 	}
 }

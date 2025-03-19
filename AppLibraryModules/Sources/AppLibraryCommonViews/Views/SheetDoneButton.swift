@@ -18,7 +18,6 @@ public struct SheetDoneButton<Label>: View where
 		} label: {
 			label
 		}
-		.buttonStyle(.borderedProminent)
 	}
 }
 
@@ -28,6 +27,8 @@ public extension SheetDoneButton where
 	Label == SwiftUI.Text
 {
 	init() {
-		self.init { Label(.common.action.done) }
+		self.init {
+			Label(.common.action.done)
+		}
 	}
 }
