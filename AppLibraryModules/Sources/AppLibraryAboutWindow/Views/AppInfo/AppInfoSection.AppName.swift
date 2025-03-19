@@ -6,7 +6,7 @@ extension AppInfoSection {
 		public init() { }
 
 		public var body: some View {
-			Text(verbatim: NSApplication.shared.appName)
+			Text(verbatim: NSApplication.shared.applicationName)
 				.font(Self.font)
 		}
 	}

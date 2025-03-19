@@ -28,11 +28,11 @@ extension SearchModel: @preconcurrency FilterProtocol {
 
 		if query.isEmpty {
 			result = result.filter { subject in
-				subject.visibilityFlags.contains(.browser)
+				subject.configuration.visibilityFlags.contains(.browser)
 			}
 		} else {
 			result = result.filter { subject in
-				subject.visibilityFlags.contains(.searchResults)
+				subject.configuration.visibilityFlags.contains(.searchResults)
 					&& subject.displayName.localizedStandardContains(query)
 			}
 		}

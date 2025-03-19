@@ -19,7 +19,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 	}
 
 	func applicationDidFinishLaunching(_ notification: Notification) {
-		Logger.module.debug("Finished launching \(NSApplication.shared.appName).")
+		Logger.module.debug("Finished launching \(NSApplication.shared.applicationName).")
 
 		_ = GeneralSettings.shared
 		_ = AppsSettings.shared

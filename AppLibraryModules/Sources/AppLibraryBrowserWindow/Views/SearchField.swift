@@ -18,7 +18,7 @@ struct SearchField: View {
 			switch FeatureFlag.Search.viewImplementation {
 				case .appKit:
 					NSSearchFieldRepresentable(string: $browserModel.search.query)
-						.nsTextFieldPlaceholderString(NSApplication.shared.appName)
+						.nsTextFieldPlaceholderString(NSApplication.shared.applicationName)
 				case .swiftUI:
 					HStack(alignment: .firstTextBaseline, spacing: Self.labelSpacing) {
 						labelIcon
@@ -49,7 +49,7 @@ struct SearchField: View {
 
 private extension SearchField {
 	var labelTitle: some View {
-		Text(verbatim: NSApplication.shared.appName)
+		Text(verbatim: NSApplication.shared.applicationName)
 	}
 
 	var labelIcon: some View {

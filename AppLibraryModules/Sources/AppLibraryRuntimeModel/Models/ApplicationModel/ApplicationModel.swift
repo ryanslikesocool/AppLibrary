@@ -93,16 +93,16 @@ extension ApplicationModel {
 // MARK: -
 
 public extension ApplicationModel {
-	/// The visibility flags for the application, as defined by the user.
+	/// The configuration for the application, as defined by the user.
 	@MainActor
-	var visibilityFlags: ApplicationVisibility.Set {
+	var configuration: ApplicationConfiguration {
 		get {
 			let identifier = ApplicationModelIdentifier(self)
-			return AppsSettings.shared.applicationVisibilityFlags[identifier, default: .visible]
+			return AppsSettings.shared.applicationConfiguration[identifier, default: ApplicationConfiguration()]
 		}
 		set {
 			let identifier = ApplicationModelIdentifier(self)
-			AppsSettings.shared.applicationVisibilityFlags[identifier] = newValue
+			AppsSettings.shared.applicationConfiguration[identifier] = newValue
 		}
 	}
 }

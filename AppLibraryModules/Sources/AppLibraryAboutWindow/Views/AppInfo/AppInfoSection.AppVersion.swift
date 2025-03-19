@@ -67,7 +67,7 @@ private extension AppInfoSection.AppVersion {
 
 private extension AppInfoSection.AppVersion {
 	func buttonAction(_ appVersion: String) {
-		let appName = NSApplication.shared.appName
+		let appName = NSApplication.shared.applicationName
 		let copyString = "\(appName) \(appVersion)"
 
 		let pasteboard = NSPasteboard.general

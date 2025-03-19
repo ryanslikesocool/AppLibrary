@@ -38,7 +38,7 @@ final class BrowserModel: ObservableObject {
 //		AppsSettings.shared.$applicationVisibilityFlags
 ////		$searchQuery // Already `@Published` locally
 //	)
-	private lazy var applicationFilterChangeSubscriber: AnyCancellable = AppsSettings.shared.$applicationVisibilityFlags
+	private lazy var applicationFilterChangeSubscriber: AnyCancellable = AppsSettings.shared.$applicationConfiguration
 		.sink { _ in
 			self.objectWillChange.send()
 		}

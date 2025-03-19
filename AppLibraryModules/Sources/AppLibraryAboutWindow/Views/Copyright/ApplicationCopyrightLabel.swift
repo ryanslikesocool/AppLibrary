@@ -9,7 +9,7 @@ extension CopyrightSection {
 			guard let copyrightHolder = try? Bundle.main.object(forInfoDictionaryKey: .nsHumanReadableCopyright) else {
 				return nil
 			}
-			let applicationName = NSApp.appName
+			let applicationName = NSApp.applicationName
 
 			text = "\(applicationName) \(copyrightHolder)"
 		}

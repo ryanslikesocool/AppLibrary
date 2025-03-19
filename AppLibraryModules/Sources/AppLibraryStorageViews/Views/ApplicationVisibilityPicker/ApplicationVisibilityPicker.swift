@@ -60,11 +60,14 @@ public extension ApplicationVisibilityPicker {
 		for applicationModelIdentifier: ApplicationModelIdentifier,
 		@ViewBuilder label: () -> Label
 	) {
-		@Storage(apps: \.applicationVisibilityFlags) var applicationVisibilityFlags
+		@Storage(apps: \.applicationConfiguration) var applicationConfiguration
 		self.init(
 			selection: Binding(
-				get: { applicationVisibilityFlags[applicationModelIdentifier, default: .visible] },
-				set: { newValue in applicationVisibilityFlags[applicationModelIdentifier] = newValue }
+				get: { applicationConfiguration[applicationModelIdentifier, default: ApplicationConfiguration()].visibilityFlags },
+				set: { newValue in
+					applicationConfiguration[applicationModelIdentifier, default: ApplicationConfiguration()]
+						.visibilityFlags = newValue
+				}
 			),
 			label: label
 		)

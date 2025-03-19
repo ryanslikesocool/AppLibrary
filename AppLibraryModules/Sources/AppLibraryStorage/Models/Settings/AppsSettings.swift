@@ -6,14 +6,14 @@ import OSLog
 public final class AppsSettings: ObservableObject {
 	@Published public var searchScopes: Set<URL>
 
-	/// The visibility flags for applications, as defined by the user.
+	/// Configuration for applications, as defined by the user.
 	///
-	/// Only key-value pairs where the value is not ``ApplicationVisibility/Set/visible`` are serialized.
-	@Published public var applicationVisibilityFlags: [ApplicationModelIdentifier: ApplicationVisibility.Set]
+	/// Only key-value pairs where the value is not equal to the default configuration are serialized.
+	@Published public var applicationConfiguration: [ApplicationModelIdentifier: ApplicationConfiguration]
 
 	public init() {
 		searchScopes = Set([URL].defaultSearchScopes)
-		applicationVisibilityFlags = .default
+		applicationConfiguration = .default
 	}
 }
 
@@ -24,7 +24,7 @@ public final class AppsSettings: ObservableObject {
 extension AppsSettings: @preconcurrency Encodable, @preconcurrency Decodable {
 	private enum CodingKeys: CodingKey {
 		case searchScopes
-		case applicationVisibilityFlags
+		case applicationConfiguration
 	}
 
 	public convenience init(from decoder: Decoder) throws {
@@ -35,14 +35,14 @@ extension AppsSettings: @preconcurrency Encodable, @preconcurrency Decodable {
 		// NOTE: Use `decodeIfPresent` when possible to avoid issues when adding new settings.
 
 		searchScopes = try container.decodeIfPresent(Set<URL>.self, forKey: .searchScopes) ?? searchScopes
-		applicationVisibilityFlags = try container.decodeIfPresent([ApplicationModelIdentifier: ApplicationVisibility.Set].self, forKey: .applicationVisibilityFlags) ?? applicationVisibilityFlags
+		applicationConfiguration = try container.decodeIfPresent([ApplicationModelIdentifier: ApplicationConfiguration].self, forKey: .applicationConfiguration) ?? applicationConfiguration
 	}
 
 	public func encode(to encoder: any Encoder) throws {
 		var container = encoder.container(keyedBy: CodingKeys.self)
 
 		try container.encode(searchScopes, forKey: .searchScopes)
-		try container.encode(applicationVisibilityFlags, forKey: .applicationVisibilityFlags)
+		try container.encode(applicationConfiguration, forKey: .applicationConfiguration)
 	}
 }
 

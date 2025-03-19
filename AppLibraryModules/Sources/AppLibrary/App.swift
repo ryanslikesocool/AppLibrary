@@ -12,7 +12,7 @@ public struct App: SwiftUI.App {
 //	@Environment(\.scenePhase) private var scenePhase
 
 	public init() {
-		Logger.module.debug("Started launching \(NSApplication.shared.appName).")
+		Logger.module.debug("Started launching \(NSApplication.shared.applicationName).")
 	}
 
 	public var body: some Scene {
