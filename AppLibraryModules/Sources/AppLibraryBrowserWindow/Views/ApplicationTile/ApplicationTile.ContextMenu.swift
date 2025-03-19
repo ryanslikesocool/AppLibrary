@@ -17,11 +17,11 @@ extension ApplicationTile {
 			Section {
 				OpenApplicationButton(application: application)
 			}
+			
 			Section {
-				ApplicationVisibilityPicker<Text>(for: ApplicationModelIdentifier(application))
+				ApplicationVisibilityPicker(for: application)
+					.descriptiveLabelElementVisibility(.title)
 					.applicationVisibilityPickerStyle(.menuToggleList)
-
-//				HideApplicationButton(application: application)
 
 				if let latestInstance = application.latestInstance {
 					ShowInFinderButton(latestInstance.url)

@@ -1,29 +1,48 @@
 import AppLibraryRuntimeModel
+import SwiftData
 import AppLibraryStorage
 import AppLibraryStorageViews
 import SwiftUI
 
 extension ApplicationConfigurationSheet {
 	struct Detail: View {
-		private let applicationModelIdentifier: ApplicationModelIdentifier
+		@Environment(\.modelContext) private var modelContext
+		@Environment(ApplicationConfigurationSheetViewModel.self) private var viewModel
 
 		private var applicationModel: ApplicationModel? {
-			@Application(applicationModelIdentifier) var applicationModel
-			return $applicationModel
+			guard let selection = viewModel.selection else {
+				return nil
+			}
+			return modelContext.registeredModel(for: selection)
 		}
 
-		public init(for applicationModelIdentifier: ApplicationModelIdentifier) {
-			self.applicationModelIdentifier = applicationModelIdentifier
-		}
+		public init() { }
 
 		public var body: some View {
-			Form {
-				ApplicationVisibilityPicker<TupleView<(Text, Text)>>(for: applicationModelIdentifier)
+			if let applicationModel {
+				Self.makeContent(for: applicationModel)
+			} else {
+				Self.makeFallbackContent()
 			}
-			.formStyle(.grouped)
-//			.navigationTitle(
-//				applicationModel?.displayName ?? ""
-//			)
 		}
+	}
+}
+
+// MARK: - Supporting Views
+
+private extension ApplicationConfigurationSheet.Detail {
+	static func makeContent(for applicationModel: ApplicationModel) -> some View {
+		Form {
+			ApplicationVisibilityPicker(for: applicationModel)
+		}
+		.formStyle(.grouped)
+//		.navigationTitle(
+//			applicationModel?.displayName ?? ""
+//		)
+	}
+
+	nonisolated static func makeFallbackContent() -> some View {
+		Label(.applicationConfigurationSheet.detail.noSelection)
+			.labelStyle(.emptyViewFallback)
 	}
 }

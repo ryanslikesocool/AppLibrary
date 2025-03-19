@@ -14,7 +14,7 @@ extension ApplicationConfigurationSheet {
 		public var body: some View {
 			ListContent(searchQuery: searchQuery)
 				.listStyle(.sidebar)
-			
+
 				.safeAreaInset(edge: .top, spacing: 0) {
 					NSSearchFieldRepresentable(string: $searchQuery)
 						.padding(8)
@@ -28,6 +28,8 @@ extension ApplicationConfigurationSheet {
 
 private extension ApplicationConfigurationSheet.Sidebar {
 	struct ListContent: View {
+		@Environment(\.modelContext) private var modelContext
+		@Environment(ApplicationConfigurationSheetViewModel.self) private var viewModel
 		@Query private var applications: [ApplicationModel]
 
 		fileprivate init(searchQuery: String) {
@@ -51,10 +53,16 @@ private extension ApplicationConfigurationSheet.Sidebar {
 		}
 
 		public var body: some View {
+			@Bindable var viewModel = self.viewModel
+
 			List(
 				applications,
-				rowContent: Item.init(for:)
+				selection: $viewModel.selection,
+				rowContent: ApplicationLabel.init(for:)
 			)
+			.contextMenu(forSelectionType: ApplicationModel.ID.self) { selections in
+				ContextMenu(for: selections, in: modelContext)
+			}
 		}
 	}
 }

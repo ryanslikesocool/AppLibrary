@@ -14,9 +14,6 @@ extension ApplicationConfigurationSheet.Sidebar {
 		public var body: some View {
 			NavigationLink(value: ApplicationModelIdentifier(applicationModel)) {
 				ApplicationLabel(for: applicationModel)
-					.contextMenu {
-						ContextMenu(for: applicationModel)
-					}
 			}
 		}
 	}

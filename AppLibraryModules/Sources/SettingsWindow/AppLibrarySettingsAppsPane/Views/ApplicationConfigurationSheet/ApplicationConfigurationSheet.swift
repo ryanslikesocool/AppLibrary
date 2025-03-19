@@ -5,17 +5,15 @@ import AppLibraryStorage
 import SwiftUI
 
 struct ApplicationConfigurationSheet: View {
+	@State private var viewModel: ApplicationConfigurationSheetViewModel = ApplicationConfigurationSheetViewModel()
+
 	public init() { }
 
 	public var body: some View {
 		NavigationSplitView {
 			Sidebar()
-				.navigationDestination(for: ApplicationModelIdentifier.self) { applicationModelIdentifier in
-					Detail(for: applicationModelIdentifier)
-				}
 		} detail: {
-			Label(.applicationConfigurationSheet.detail.noSelection)
-				.labelStyle(.emptyViewFallback)
+			Detail()
 
 				// NOTE: This modifier doesn't work when applied directly to the sidebar for some reason.
 				.navigationSplitViewColumnWidth(Self.width - Self.sidebarWidth)
@@ -26,6 +24,7 @@ struct ApplicationConfigurationSheet: View {
 			}
 		}
 		.frame(width: Self.width, height: Self.height)
+		.environment(viewModel)
 	}
 }
 

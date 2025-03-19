@@ -1,3 +1,5 @@
+import AppLibraryRuntimeModel
+import AppLibraryCommonViews
 import AppLibraryStorage
 import SwiftUI
 
@@ -41,20 +43,13 @@ private extension ApplicationVisibilityPicker {
 }
 
 private extension ApplicationVisibilityPicker where
-	Label == Text
+	Label == DescriptiveLabel<Text, Text>
 {
-	nonisolated static var defaultLabel: Label {
-		Text(.applicationVisibilityPicker.title)
-	}
-}
-
-private extension ApplicationVisibilityPicker where
-	Label == TupleView<(Text, Text)>
-{
-	@ViewBuilder
-	nonisolated static var defaultLabel: Label {
-		ApplicationVisibilityPicker<Text>.defaultLabel
-		Text(.applicationVisibilityPicker.description)
+	static func makeDefaultLabel() -> Label {
+		Label(
+			title: .applicationVisibilityPicker.title,
+			description: .applicationVisibilityPicker.description
+		)
 	}
 }
 
@@ -62,43 +57,26 @@ private extension ApplicationVisibilityPicker where
 
 public extension ApplicationVisibilityPicker {
 	init(
-		for applicationModelIdentifier: ApplicationModelIdentifier,
+		for applicationModel: ApplicationModel,
 		@ViewBuilder label: () -> Label
 	) {
-		@Storage(apps: \.applicationConfiguration) var applicationConfiguration
+		@Bindable var applicationModel = applicationModel
+
 		self.init(
-			selection: Binding(
-				get: { applicationConfiguration[applicationModelIdentifier, default: ApplicationConfiguration()].visibilityFlags },
-				set: { newValue in
-					applicationConfiguration[applicationModelIdentifier, default: ApplicationConfiguration()]
-						.visibilityFlags = newValue
-				}
-			),
+			selection: $applicationModel.configuration.visibilityFlags,
 			label: label
 		)
 	}
 }
 
 public extension ApplicationVisibilityPicker where
-	Label == Text
+	Label == DescriptiveLabel<Text, Text>
 {
 	init(selection: Binding<SelectionValue>) {
-		self.init(selection: selection, label: { Self.defaultLabel })
+		self.init(selection: selection, label: Self.makeDefaultLabel)
 	}
 
-	init(for applicationModelIdentifier: ApplicationModelIdentifier) {
-		self.init(for: applicationModelIdentifier, label: { Self.defaultLabel })
-	}
-}
-
-public extension ApplicationVisibilityPicker where
-	Label == TupleView<(Text, Text)>
-{
-	init(selection: Binding<SelectionValue>) {
-		self.init(selection: selection, label: { Self.defaultLabel })
-	}
-
-	init(for applicationModelIdentifier: ApplicationModelIdentifier) {
-		self.init(for: applicationModelIdentifier, label: { Self.defaultLabel })
+	init(for applicationModel: ApplicationModel) {
+		self.init(for: applicationModel, label: Self.makeDefaultLabel)
 	}
 }
