@@ -1,6 +1,17 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "ACTION.ADD" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add"
+          }
+        }
+      }
+    },
     "ACTION.CANCEL" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -41,6 +52,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Hide"
+          }
+        }
+      }
+    },
+    "ACTION.MANAGE" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Manage"
           }
         }
       }
@@ -100,6 +122,17 @@
         }
       }
     },
+    "ACTION.SELECT" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Select"
+          }
+        }
+      }
+    },
     "ACTION.SHOW_IN_FINDER" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -111,13 +144,13 @@
         }
       }
     },
-    "LINK.MANAGE" : {
+    "LINK.FORMAT_%@" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Manage…"
+            "value" : "%@…"
           }
         }
       }

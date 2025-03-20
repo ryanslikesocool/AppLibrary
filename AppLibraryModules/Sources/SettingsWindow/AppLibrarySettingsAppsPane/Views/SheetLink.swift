@@ -36,7 +36,9 @@ private extension SheetLink {
 		Button {
 			isSheetPresented = true
 		} label: {
-			Text(.common.link.manage)
+			Text(
+				LocalizedStringResource.common.link.format(.common.action.manage)
+			)
 		}
 	}
 }

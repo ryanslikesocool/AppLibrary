@@ -5,6 +5,7 @@ import OSLog
 import SwiftUI
 
 struct ApplicationSearchScopesList: View {
+	@Environment(ApplicationSearchScopesEditorViewModel.self) private var viewModel
 	@Storage(apps: \.searchScopes) private var searchScopes
 
 	public init() { }
@@ -12,9 +13,9 @@ struct ApplicationSearchScopesList: View {
 	public var body: some View {
 		Group {
 			if searchScopes.isEmpty {
-				emptyListLabel
+				Self.makeEmptyListLabel()
 			} else {
-				listContent
+				makeListContent()
 			}
 		}
 		.onChange(of: searchScopes, onSearchScopesChanged)
@@ -24,21 +25,31 @@ struct ApplicationSearchScopesList: View {
 // MARK: - Supporting Views
 
 private extension ApplicationSearchScopesList {
-	var emptyListLabel: some View {
-		Text(.applicationSearchScopesList.list.emptyLabel)
-			.foregroundStyle(.secondary)
+	func makeListContent() -> some View {
+		@Bindable var viewModel = viewModel
+
+		let searchScopes = searchScopes
+			.sorted(using: .path())
+
+		return List(
+			searchScopes,
+			id: \.self,
+			selection: $viewModel.selections
+		) { url in
+			Item(for: url)
+				.padding(.vertical, 4)
+				.deleteAction {
+					viewModel.removeSearchScope(url)
+				}
+		}
+		.contextMenu(forSelectionType: URL.self) { selections in
+			ContextMenu(for: selections)
+		}
 	}
 
-	var listContent: some View {
-		let searchScopes = searchScopes
-			.sorted(using: URL.PathComparator())
-
-		return ForEach(searchScopes, id: \.self) { url in
-			Item(
-				for: url,
-				onRemove: { removeSearchScope(at: url) }
-			)
-		}
+	nonisolated static func makeEmptyListLabel() -> some View {
+		Text(.applicationSearchScopesList.list.emptyLabel)
+			.foregroundStyle(.secondary)
 	}
 }
 
@@ -47,9 +58,5 @@ private extension ApplicationSearchScopesList {
 private extension ApplicationSearchScopesList {
 	func onSearchScopesChanged() {
 		Event.refreshApps.send()
-	}
-
-	func removeSearchScope(at url: URL) {
-		searchScopes.remove(url)
 	}
 }

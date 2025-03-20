@@ -5,7 +5,7 @@ import AppLibraryStorage
 import SwiftUI
 
 struct ApplicationConfigurationSheet: View {
-	@State private var viewModel: ApplicationConfigurationSheetViewModel = ApplicationConfigurationSheetViewModel()
+	@State private var viewModel: ApplicationConfigurationEditorViewModel = ApplicationConfigurationEditorViewModel()
 
 	public init() { }
 

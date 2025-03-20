@@ -1,8 +1,8 @@
 import AppLibraryCommon
 import AppLibraryCommonViews
 import AppLibraryRuntimeModel
+import AppLibraryRuntimeModelViews
 import AppLibraryStorage
-import AppLibraryStorageViews
 import SwiftUI
 
 extension ApplicationTile {
@@ -17,7 +17,7 @@ extension ApplicationTile {
 			Section {
 				OpenApplicationButton(application: application)
 			}
-			
+
 			Section {
 				ApplicationVisibilityPicker(for: application)
 					.descriptiveLabelElementVisibility(.title)

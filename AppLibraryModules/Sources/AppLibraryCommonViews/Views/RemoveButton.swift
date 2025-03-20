@@ -4,19 +4,25 @@ import SwiftUI
 public struct RemoveButton<Label>: View where
 	Label: View
 {
-	private let label: Label
+	private let role: ButtonRole?
 	private let action: @MainActor () -> Void
+	private let label: Label
 
 	public init(
+		role: ButtonRole? = .destructive,
 		action: @escaping @MainActor () -> Void,
 		@ViewBuilder label: () -> Label
 	) {
+		self.role = role
 		self.action = action
 		self.label = label()
 	}
 
 	public var body: some View {
-		Button(action: action) {
+		Button(
+			role: role,
+			action: action
+		) {
 			label
 		}
 	}
@@ -28,9 +34,13 @@ public extension RemoveButton where
 	Label == SwiftUI.Label<Text, Image>
 {
 	init(
+		role: ButtonRole? = .destructive,
 		action: @escaping @MainActor () -> Void
 	) {
-		self.init(action: action) {
+		self.init(
+			role: role,
+			action: action
+		) {
 			Label(
 				String(localized: .common.action.remove),
 				systemImage: .trash

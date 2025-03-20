@@ -6,40 +6,45 @@ import SwiftUI
 
 extension ApplicationSearchScopesList {
 	struct AddMenu: View {
-		@State private var isFileImporterPresented: Bool = false
+		@Environment(ApplicationSearchScopesEditorViewModel.self) private var viewModel
 
 		public init() { }
 
 		public var body: some View {
 			Menu {
-				Section {
-					Button(
-						String(localized: .applicationSearchScopesList.addMenu.action),
-						action: primaryAction
-					)
-				}
-
-				DefaultSearchScopesSection(addSearchScope: addSearchScope)
+				makeMenuContent()
+					.labelStyle(.automatic)
 			} label: {
-				Label(
-					String(localized: .applicationSearchScopesList.addMenu.label),
-					systemImage: .plus
-				)
+				Self.makeMenuLabel()
 			} primaryAction: {
 				primaryAction()
 			}
-			.labelStyle(.iconOnly)
 			.fixedSize()
-
-			.fileImporter(
-				isPresented: $isFileImporterPresented,
-				allowedContentTypes: [.folder],
-				onCompletion: onFileImporterCompleted
-			)
-			.fileDialogDefaultDirectory(.homeDirectory)
-			.fileDialogMessage(Text(.applicationSearchScopesList.addDialog.message))
-			.fileDialogConfirmationLabel(Text(.applicationSearchScopesList.addDialog.confirm))
 		}
+	}
+}
+
+// MARK: - Supporting Views
+
+private extension ApplicationSearchScopesList.AddMenu {
+	@ViewBuilder
+	func makeMenuContent() -> some View {
+		Section {
+			Button(
+				LocalizedStringResource.common.link.format(.common.action.select),
+				systemImage: .folder,
+				action: primaryAction
+			)
+		}
+
+		DefaultSearchScopesSection()
+	}
+
+	nonisolated static func makeMenuLabel() -> some View {
+		Label(
+			String(localized: .common.action.add),
+			systemImage: .plus
+		)
 	}
 }
 
@@ -47,23 +52,6 @@ extension ApplicationSearchScopesList {
 
 private extension ApplicationSearchScopesList.AddMenu {
 	func primaryAction() {
-		isFileImporterPresented = true
-	}
-
-	func onFileImporterCompleted(_ result: Result<URL, Error>) {
-		switch result {
-			case let .failure(error):
-				Logger.module.error("""
-				Failed to select search directory:
-				- Error: \(error)
-				""")
-			case let .success(url):
-				addSearchScope(at: url)
-		}
-	}
-
-	func addSearchScope(at url: URL) {
-		@Storage(apps: \.searchScopes) var searchScopes
-		searchScopes.insert(url)
+		viewModel.state = .fileImporter
 	}
 }

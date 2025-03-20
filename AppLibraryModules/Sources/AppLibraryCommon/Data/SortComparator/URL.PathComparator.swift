@@ -15,11 +15,24 @@ public extension URL {
 			base: String.StandardComparator = .localizedStandard,
 			order: SortOrder = .forward
 		) {
-			self.stringComparator = String.StandardComparator(base, order: order)
+			stringComparator = String.StandardComparator(base, order: order)
 		}
 
 		public func compare(_ lhs: Compared, _ rhs: Compared) -> ComparisonResult {
 			stringComparator.compare(lhs.path(), rhs.path())
 		}
+	}
+}
+
+// MARK: - Convenience
+
+public extension SortComparator where
+	Self == URL.PathComparator
+{
+	static func path(
+		base: String.StandardComparator = .localizedStandard,
+		order: SortOrder = .forward
+	) -> Self {
+		Self(base: base, order: order)
 	}
 }

@@ -24,6 +24,10 @@ public extension SystemSymbolName {
 	static let eye: Self = "eye"
 	static let eye_slash: Self = "eye.slash"
 
+	// MARK: F
+
+	static let folder: Self = "folder"
+
 	// MARK: G
 
 	static let gear: Self = "gear"
@@ -41,6 +45,7 @@ public extension SystemSymbolName {
 	// MARK: M
 
 	static let magnifyingGlass: Self = "magnifyingglass"
+	static let minus: Self = "minus"
 
 	// MARK: P
 

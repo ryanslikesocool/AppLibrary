@@ -29,7 +29,7 @@ extension ApplicationConfigurationSheet {
 private extension ApplicationConfigurationSheet.Sidebar {
 	struct ListContent: View {
 		@Environment(\.modelContext) private var modelContext
-		@Environment(ApplicationConfigurationSheetViewModel.self) private var viewModel
+		@Environment(ApplicationConfigurationEditorViewModel.self) private var viewModel
 		@Query private var applications: [ApplicationModel]
 
 		fileprivate init(searchQuery: String) {

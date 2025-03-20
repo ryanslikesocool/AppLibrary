@@ -14,3 +14,11 @@ public extension URL {
 		NSWorkspace.shared.activateFileViewerSelecting([self])
 	}
 }
+
+public extension Sequence where
+	Element == URL
+{
+	func showInFinder() {
+		NSWorkspace.shared.activateFileViewerSelecting(Array(self))
+	}
+}

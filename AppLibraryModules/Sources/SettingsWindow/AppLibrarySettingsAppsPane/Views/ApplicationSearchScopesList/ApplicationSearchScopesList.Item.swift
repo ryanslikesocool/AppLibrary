@@ -5,36 +5,26 @@ import SwiftUI
 
 extension ApplicationSearchScopesList {
 	struct Item: View {
-		private let url: URL
-		private let removeSearchScope: @MainActor () -> Void
+		@Environment(\.delete) private var delete
 
-		public init(for url: URL, onRemove removeSearchScope: @escaping @MainActor () -> Void) {
+		private let url: URL
+
+		public init(for url: URL) {
 			self.url = url
-			self.removeSearchScope = removeSearchScope
 		}
 
 		public var body: some View {
-			LabeledContent {
-				Menu(content: makeMenuContent) {
-					Label(
-						String(localized: .applicationSearchScopesList.item.optionsLabel),
-						systemImage: .ellipsis
-					)
-					.frame(height: 16)
-					.labelStyle(.iconOnly)
-					.contentShape(.rect)
-				}
-				.fixedSize()
-				.menuIndicator(.hidden)
-				.buttonStyle(.plain)
-			} label: {
-				URLLabel(url)
-					.monospaced()
-					.lineLimit(1)
-					.truncationMode(.tail)
-					.help(url.abbreviatingWithTildeInPath)
-			}
-			.contextMenu(menuItems: makeMenuContent)
+			URLLabel(url)
+				.monospaced()
+				.lineLimit(1)
+				.truncationMode(.tail)
+				.help(url.abbreviatingWithTildeInPath)
+
+				.swipeActions(
+					edge: .trailing,
+					allowsFullSwipe: false,
+					content: makeSwipeActions
+				)
 		}
 	}
 }
@@ -42,14 +32,9 @@ extension ApplicationSearchScopesList {
 // MARK: - Supporting Views
 
 private extension ApplicationSearchScopesList.Item {
-	@ViewBuilder
-	func makeMenuContent() -> some View {
-		Section {
-			ShowInFinderButton(url)
-		}
-
-		Section {
-			RemoveButton(action: removeSearchScope)
+	func makeSwipeActions() -> some View {
+		RemoveButton {
+			delete?()
 		}
 	}
 }

@@ -1,13 +1,13 @@
 import AppLibraryRuntimeModel
-import SwiftData
+import AppLibraryRuntimeModelViews
 import AppLibraryStorage
-import AppLibraryStorageViews
+import SwiftData
 import SwiftUI
 
 extension ApplicationConfigurationSheet {
 	struct Detail: View {
 		@Environment(\.modelContext) private var modelContext
-		@Environment(ApplicationConfigurationSheetViewModel.self) private var viewModel
+		@Environment(ApplicationConfigurationEditorViewModel.self) private var viewModel
 
 		private var applicationModel: ApplicationModel? {
 			guard let selection = viewModel.selection else {

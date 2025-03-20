@@ -2,7 +2,7 @@ import AppLibraryRuntimeModel
 import SwiftUI
 
 @Observable
-final class ApplicationConfigurationSheetViewModel {
+final class ApplicationConfigurationEditorViewModel {
 	public var selection: ApplicationModel.ID?
 
 	public init() {

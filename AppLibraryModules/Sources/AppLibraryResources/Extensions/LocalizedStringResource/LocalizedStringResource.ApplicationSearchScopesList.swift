@@ -26,8 +26,6 @@ public extension LocalizedStringResource {
 		/// ## Topics
 		/// - ``addMenu``
 		public enum AddMenu {
-			public static let action = LocalizedStringResource("ADD_MENU.ACTION", table: localizationTable)
-			public static let label = LocalizedStringResource("ADD_MENU.LABEL", table: localizationTable)
 			public static let defaultSectionTitle = LocalizedStringResource("ADD_MENU.DEFAULT_SECTION.TITLE", table: localizationTable)
 		}
 

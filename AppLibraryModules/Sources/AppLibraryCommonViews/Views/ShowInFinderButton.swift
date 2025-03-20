@@ -5,14 +5,14 @@ import SwiftUI
 public struct ShowInFinderButton<Label>: View where
 	Label: View
 {
-	private let url: URL?
+	private let urls: [URL]
 	private let label: Label
 
 	public init(
-		_ url: URL?,
+		_ urls: some Sequence<URL>,
 		@ViewBuilder label: () -> Label
 	) {
-		self.url = url
+		self.urls = urls.sorted(using: .path())
 		self.label = label()
 	}
 
@@ -20,7 +20,20 @@ public struct ShowInFinderButton<Label>: View where
 		Button(action: buttonAction) {
 			label
 		}
-		.disabled(url == nil)
+		.disabled(urls.isEmpty)
+	}
+}
+
+// MARK: - Constants
+
+private extension ShowInFinderButton where
+	Label == SwiftUI.Label<Text, Image>
+{
+	nonisolated static func makeDefaultLabel() -> Label {
+		Label(
+			String(localized: .common.action.showInFinder),
+			image: .finder
+		)
 	}
 }
 
@@ -28,21 +41,34 @@ public struct ShowInFinderButton<Label>: View where
 
 private extension ShowInFinderButton {
 	func buttonAction() {
-		url?.showInFinder()
+		urls.showInFinder()
 	}
 }
 
 // MARK: - Convenience
 
+public extension ShowInFinderButton {
+	init(
+		_ url: URL?,
+		@ViewBuilder label: () -> Label
+	) {
+		let urls: [URL] = if let url {
+			[url]
+		} else {
+			[]
+		}
+		self.init(urls, label: label)
+	}
+}
+
 public extension ShowInFinderButton where
 	Label == SwiftUI.Label<Text, Image>
 {
+	init(_ urls: some Sequence<URL>) {
+		self.init(urls, label: Self.makeDefaultLabel)
+	}
+
 	init(_ url: URL?) {
-		self.init(url) {
-			Label(
-				String(localized: .common.action.showInFinder),
-				image: .finder
-			)
-		}
+		self.init(url, label: Self.makeDefaultLabel)
 	}
 }

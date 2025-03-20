@@ -23,17 +23,6 @@
         }
       }
     },
-    "ADD_MENU.ACTION" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Add Custom Scope"
-          }
-        }
-      }
-    },
     "ADD_MENU.DEFAULT_SECTION.TITLE" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -41,17 +30,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Default Scopes"
-          }
-        }
-      }
-    },
-    "ADD_MENU.LABEL" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Add Scope"
           }
         }
       }

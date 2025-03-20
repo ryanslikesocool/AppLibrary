@@ -5,17 +5,17 @@ import SwiftUI
 
 extension ApplicationSearchScopesList.AddMenu {
 	struct DefaultSearchScopesSection: View {
+		@Environment(ApplicationSearchScopesEditorViewModel.self) private var viewModel
 		@Storage(apps: \.searchScopes) private var searchScopes
 
-		private let addSearchScope: (URL) -> Void
-
-		public init(addSearchScope: @escaping (URL) -> Void) {
-			self.addSearchScope = addSearchScope
-		}
+		public init() { }
 
 		public var body: some View {
 			Section {
-				ForEach([URL].defaultSearchScopes, id: \.self, content: makeItem)
+				ForEach(
+					[URL].defaultSearchScopes, id: \.self,
+					content: makeItem
+				)
 			} header: {
 				Text(.applicationSearchScopesList.addMenu.defaultSectionTitle)
 			}
@@ -28,7 +28,7 @@ extension ApplicationSearchScopesList.AddMenu {
 private extension ApplicationSearchScopesList.AddMenu.DefaultSearchScopesSection {
 	func makeItem(for url: URL) -> some View {
 		Button {
-			addSearchScope(url)
+			viewModel.addSearchScope(url)
 		} label: {
 			URLLabel(url)
 		}
