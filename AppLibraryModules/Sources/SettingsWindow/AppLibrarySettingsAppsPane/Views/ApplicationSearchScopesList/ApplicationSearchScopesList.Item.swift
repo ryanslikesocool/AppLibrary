@@ -18,6 +18,9 @@ extension ApplicationSearchScopesList {
 				.monospaced()
 				.lineLimit(1)
 				.truncationMode(.tail)
+
+				.padding(.vertical, 4)
+
 				.help(url.abbreviatingWithTildeInPath)
 
 				.swipeActions(

@@ -10,7 +10,9 @@ public extension [URL] {
 		"/System/Library/CoreServices/Applications",
 //		"/System/Volumes/Preboot/Cryptexes/App/System/Applications",
 		"/Applications",
-		"~/Applications",
+
+		// The "~/Applications" shorthand doesn't play nicely since the app is sandboxed.
+		URL.userApplicationDirectory.path(percentEncoded: false),
 	]
 	.sorted(using: .localizedStandard)
 	.map { filePath in

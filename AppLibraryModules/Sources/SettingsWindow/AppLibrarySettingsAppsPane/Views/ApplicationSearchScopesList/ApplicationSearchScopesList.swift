@@ -37,7 +37,6 @@ private extension ApplicationSearchScopesList {
 			selection: $viewModel.selections
 		) { url in
 			Item(for: url)
-				.padding(.vertical, 4)
 				.deleteAction {
 					viewModel.removeSearchScope(url)
 				}
