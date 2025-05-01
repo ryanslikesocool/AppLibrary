@@ -4,28 +4,26 @@ import AppLibrarySettingsWindow
 import AppLibraryStorage
 import SwiftUI
 
-extension ErrorView {
-	struct RecoveryAction: View {
-		private let actionKind: BrowserError.RecoveryAction
+struct BrowserErrorRecoveryActionView: View {
+	private let actionKind: BrowserError.RecoveryAction
 
-		public init(error: BrowserError) {
-			actionKind = error.recoveryActionKind
-		}
+	public init(error: BrowserError) {
+		actionKind = error.recoveryActionKind
+	}
 
-		public var body: some View {
-			switch actionKind {
-				case let .openSettings(destination):
-					settingsButton(destination: destination)
-				case .retry:
-					retryButton()
-			}
+	public var body: some View {
+		switch actionKind {
+			case let .openSettings(destination):
+				settingsButton(destination: destination)
+			case .retry:
+				retryButton()
 		}
 	}
 }
 
 // MARK: - Supporting Views
 
-private extension ErrorView.RecoveryAction {
+private extension BrowserErrorRecoveryActionView {
 	func settingsButton(destination: SettingsCategory) -> some View {
 		SettingsButton(destination: destination)
 			.controlSize(.large) // TODO: why is this large?

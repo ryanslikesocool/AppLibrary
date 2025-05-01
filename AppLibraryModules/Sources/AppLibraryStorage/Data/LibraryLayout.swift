@@ -1,3 +1,5 @@
+import AppIntents
+import AppLibraryResources
 import Foundation
 
 public enum LibraryLayout: String {
@@ -17,23 +19,32 @@ extension LibraryLayout: Equatable { }
 
 extension LibraryLayout: Hashable { }
 
-// MARK: - Identifiable
-
-extension LibraryLayout: Identifiable {
-	public var id: RawValue { rawValue }
-}
-
 // MARK: - Codable
 
 extension LibraryLayout: Codable { }
 
-// MARK: - CustomLocalizedStringResourceConvertible
+// MARK: - StaticDisplayRepresentable
 
-extension LibraryLayout: CustomLocalizedStringResourceConvertible {
-	public var localizedStringResource: LocalizedStringResource {
-		switch self {
-			case .list: .libraryLayoutPicker.item.list.title
-			case .grid: .libraryLayoutPicker.item.grid.title
-		}
-	}
+extension LibraryLayout: StaticDisplayRepresentable {
+	public static let typeDisplayRepresentation = TypeDisplayRepresentation(
+		name: LocalizedStringResource("TITLE", table: Self.localizationTable),
+	)
+
+	public static let caseDisplayRepresentations: [Self: DisplayRepresentation] = [
+		.list: DisplayRepresentation(
+			title: LocalizedStringResource("ITEM.LIST.TITLE", table: Self.localizationTable),
+			image: DisplayRepresentation.Image(systemName: .square_grid_3x3),
+		),
+
+		.grid: DisplayRepresentation(
+			title: LocalizedStringResource("ITEM.GRID.TITLE", table: Self.localizationTable),
+			image: DisplayRepresentation.Image(systemName: .list_bullet),
+		),
+	]
+}
+
+// MARK: - Constants
+
+private extension LibraryLayout {
+	static let localizationTable = "LibraryLayoutPicker"
 }

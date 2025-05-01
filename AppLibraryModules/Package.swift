@@ -1,4 +1,4 @@
-// swift-tools-version: 6.0
+// swift-tools-version: 6.1
 
 import PackageDescription
 
@@ -34,8 +34,13 @@ let package = Package(
 
 		.package(url: "https://github.com/ryanslikesocool/BundleToolbox.git", from: "0.0.5"),
 		.package(url: "https://github.com/ryanslikesocool/CollectionToolbox.git", from: "0.0.1"),
-		.package(url: "https://github.com/ryanslikesocool/LocalizationToolbox.git", from: "0.0.4"),
+		.package(url: "https://github.com/ryanslikesocool/LocalizationToolbox.git", from: "0.0.6", traits: [
+			.defaults,
+			"SFSymbolToolbox",
+		]),
+
 		.package(url: "https://github.com/ryanslikesocool/NSMetadataToolbox.git", from: "0.0.6"),
+		.package(url: "https://github.com/ryanslikesocool/RepresentableBridge.git", branch: "main" /* from: "0.0.1" */ ),
 
 //		.package(url: "https://github.com/ryanslikesocool/PainlessCG.git", from: "0.0.4"),
 		.package(path: "~/Documents/Xcode Projects/PainlessCG"),
@@ -157,6 +162,8 @@ var settingsWindowTargets: [Target] {
 		.target(
 			name: "AppLibrarySettingsAppsPane",
 			dependencies: [
+				.product(name: "NSSplitViewRepresentable", package: "RepresentableBridge"),
+
 				"AppLibraryRuntimeModelViews",
 			]
 		),

@@ -11,10 +11,7 @@ public extension AccessibilityHelperServer {
 	func requestDockTileRect(
 		for bundle: Bundle = .main
 	) throws -> CGRect {
-		Self.logger.debug("""
-		\(StaticString.startXPCRequestPrefix)
-		- Function: \(#function)
-		""")
+		Self.logStartXPCRequest()
 
 		let request = Message.Request.dockTileRect(bundleURL: bundle.bundleURL)
 		let response: Message.Response = try session.sendSync(request)
@@ -34,10 +31,7 @@ public extension AccessibilityHelperServer {
 	) throws -> DockEdge {
 		typealias Message = AccessibilityHelperMessage
 
-		Self.logger.debug("""
-		\(StaticString.startXPCRequestPrefix)
-		- Function: \(#function)
-		""")
+		Self.logStartXPCRequest()
 
 		let request = Message.Request.dockEstimatedEdge(screenIndex: screenIndex)
 		let response: Message.Response = try session.sendSync(request)
@@ -65,10 +59,7 @@ public extension AccessibilityHelperServer {
 	func requestRectAndEstimatedEdge(
 		screenIndex: Int
 	) throws -> (rect: CGRect, edge: DockEdge) {
-		Self.logger.debug("""
-		\(StaticString.startXPCRequestPrefix)
-		- Function: \(#function)
-		""")
+		Self.logStartXPCRequest()
 
 		let request = Message.Request.dockRectAndEstimatedEdge(screenIndex: screenIndex)
 		let response: Message.Response = try session.sendSync(request)
@@ -95,10 +86,7 @@ public extension AccessibilityHelperServer {
 
 	@discardableResult
 	func requestAccessibilityAccess() throws -> Bool {
-		Self.logger.debug("""
-		\(StaticString.startXPCRequestPrefix)
-		- Function: \(#function)
-		""")
+		Self.logStartXPCRequest()
 
 		let request = Message.Request.requestAccessibilityAccess()
 		let response: Message.Response = try session.sendSync(request)
@@ -109,5 +97,23 @@ public extension AccessibilityHelperServer {
 		let responseValue = try result.get()
 
 		return responseValue.success
+	}
+}
+
+// MARK: - Logging
+
+private extension AccessibilityHelperServer {
+	@_transparent // `@_transparent` to inline function content
+	static func logStartXPCRequest(
+		_ function: StaticString = #function,
+	) {
+#if DEBUG
+		if FeatureFlag.Log.startXPCRequest {
+			logger.debug("""
+			\(StaticString.startXPCRequestPrefix)
+			- Function: \(function)
+			""")
+		}
+#endif
 	}
 }

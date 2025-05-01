@@ -11,7 +11,7 @@ public struct AboutWindowLink: View {
 		WindowLink(id: Self.windowID) {
 			Label(
 				LocalizedStringResource.aboutWindow.title,
-				systemImage: SystemSymbolName.info_circle.rawValue
+				systemImage: .info_circle
 			)
 		}
 	}

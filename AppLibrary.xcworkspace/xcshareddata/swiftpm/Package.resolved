@@ -1,5 +1,5 @@
 {
-  "originHash" : "80c4ceccc8548ba574466603748d8c3bb0a661e92aae6b42511c81da0f589ac5",
+  "originHash" : "da2a5639aaef3f9bc891dd8ee365cd1a127a44f89a70ba045a30b8bacfc555b1",
   "pins" : [
     {
       "identity" : "axtoolbox",
@@ -15,8 +15,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/ryanslikesocool/BundleToolbox.git",
       "state" : {
-        "revision" : "83b67868dd2949ab401b8340727f8af6e5397d96",
-        "version" : "0.0.5"
+        "revision" : "caa97f95b82dc231d313f2bf7a17114b96590773",
+        "version" : "0.0.6"
       }
     },
     {
@@ -24,8 +24,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/ryanslikesocool/CollectionToolbox.git",
       "state" : {
-        "revision" : "dd4b90529bd8f92ef99229bc9670bf3e657af979",
-        "version" : "0.0.1"
+        "revision" : "ae494fd9e4826c45522b48b0a5922e6b46dff40d",
+        "version" : "0.0.2"
       }
     },
     {
@@ -42,8 +42,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/ryanslikesocool/LocalizationToolbox.git",
       "state" : {
-        "revision" : "d79753b17d9239fd272449d877829d1ca26b6257",
-        "version" : "0.0.5"
+        "revision" : "224c9045c49c9f5cb1489e4359f0d5001f0e19e3",
+        "version" : "0.0.6"
       }
     },
     {
@@ -56,12 +56,21 @@
       }
     },
     {
+      "identity" : "representablebridge",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ryanslikesocool/RepresentableBridge.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "02bb6e1a916752593ea3dbf309a22eec968a47ec"
+      }
+    },
+    {
       "identity" : "sfsymboltoolbox",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/ryanslikesocool/SFSymbolToolbox.git",
       "state" : {
-        "revision" : "2a85cad13343421be8c3b4b37265a894f2763c0c",
-        "version" : "0.0.3"
+        "revision" : "534020ac1dd6ca32139c7859894e98d0d4cb9ce3",
+        "version" : "0.0.4"
       }
     },
     {
@@ -69,8 +78,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-algorithms.git",
       "state" : {
-        "revision" : "f6919dfc309e7f1b56224378b11e28bab5bccc42",
-        "version" : "1.2.0"
+        "revision" : "87e50f483c54e6efd60e885f7f5aa946cee68023",
+        "version" : "1.2.1"
       }
     },
     {
@@ -78,8 +87,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-numerics.git",
       "state" : {
-        "revision" : "0a5bc04095a675662cf24757cc0640aa2204253b",
-        "version" : "1.0.2"
+        "revision" : "e0ec0f5f3af6f3e4d5e7a19d2af26b481acb6ba8",
+        "version" : "1.0.3"
       }
     },
     {

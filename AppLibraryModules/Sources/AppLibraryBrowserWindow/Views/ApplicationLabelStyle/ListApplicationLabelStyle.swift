@@ -2,7 +2,7 @@ import AppLibraryRuntimeModelViews
 import SwiftUI
 
 struct ListApplicationLabelStyle: ApplicationLabelStyle {
-	public init() { }
+	public nonisolated init() { }
 
 	public func makeBody(configuration: Configuration) -> some View {
 		HStack(spacing: Self.spacing) {
@@ -33,7 +33,7 @@ private extension ListApplicationLabelStyle {
 extension ApplicationLabelStyle where
 	Self == ListApplicationLabelStyle
 {
-	static var list: Self {
+	nonisolated static var list: Self {
 		Self()
 	}
 }

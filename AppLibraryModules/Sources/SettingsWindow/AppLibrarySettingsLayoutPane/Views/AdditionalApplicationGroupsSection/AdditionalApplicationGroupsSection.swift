@@ -7,7 +7,10 @@ struct AdditionalApplicationGroupsSection: View {
 
 	public var body: some View {
 		Section {
-			ForEach(Self.itemDisplayOrder, content: Item.init)
+			ForEach(
+				Self.itemDisplayOrder, id: \.self,
+				content: Item.init(value:)
+			)
 		} header: {
 			Text(.additionalApplicationGroups.section.title)
 			Text(.additionalApplicationGroups.section.description)
@@ -18,5 +21,7 @@ struct AdditionalApplicationGroupsSection: View {
 // MARK: - Constants
 
 private extension AdditionalApplicationGroupsSection {
-	static let itemDisplayOrder: [AdditionalApplicationGroup] = AdditionalApplicationGroup.allCases
+	static var itemDisplayOrder: [AdditionalApplicationGroup] {
+		AdditionalApplicationGroup.allCases
+	}
 }

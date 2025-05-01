@@ -1,6 +1,9 @@
+import AppIntents
+import AppLibraryCommon
 import AppLibraryResources
 import Foundation
 import SFSymbolToolbox
+import SwiftUI
 
 public enum SettingsCategory: String {
 	case general
@@ -30,21 +33,50 @@ extension SettingsCategory: Identifiable {
 
 extension SettingsCategory: CaseIterable { }
 
-// MARK: - CustomLocalizedStringResourceConvertible
+// MARK: - CaseDisplayRepresentable
 
-extension SettingsCategory: CustomLocalizedStringResourceConvertible {
-	public var localizedStringResource: LocalizedStringResource {
-		switch self {
-			case .general: .settingsWindow.category.general.title
-			case .layout: .settingsWindow.category.layout.title
-			case .apps: .settingsWindow.category.apps.title
+extension SettingsCategory: CaseDisplayRepresentable {
+	public static let caseDisplayRepresentations: [Self : DisplayRepresentation] = [
+		.general: DisplayRepresentation(
+			title: LocalizedStringResource("CATEGORY.GENERAL.TITLE", table: Self.localizationTable),
+			image: DisplayRepresentation.Image(systemName: .gearShape),
+		),
+
+		.layout: DisplayRepresentation(
+			title: LocalizedStringResource("CATEGORY.LAYOUT.TITLE", table: Self.localizationTable),
+			image: DisplayRepresentation.Image(systemName: .square_grid_3x3),
+		),
+
+		.apps: DisplayRepresentation(
+			title: LocalizedStringResource("CATEGORY.APPS.TITLE", table: Self.localizationTable),
+			image: DisplayRepresentation.Image(systemName: .app),
+		),
+	]
+}
+
+// MARK: - CustomLabelConvertible
+
+extension SettingsCategory: CustomLabelConvertible {
+	public var label: Label<Text, Image> {
+		Label {
+			Text(localizedStringResource)
+		} icon: {
+//			Self.caseDisplayRepresentations[self]!.image
+			Image(systemName: systemSymbolName)
 		}
 	}
+}
+
+// MARK: - Constants
+
+private extension SettingsCategory {
+	static let localizationTable = "SettingsWindow"
 }
 
 // MARK: -
 
 public extension SettingsCategory {
+//	@available(*, deprecated)
 	var systemSymbolName: SystemSymbolName {
 		switch self {
 			case .general: .gearShape

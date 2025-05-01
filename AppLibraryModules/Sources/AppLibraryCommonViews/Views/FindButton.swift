@@ -37,7 +37,7 @@ public extension FindButton where
 	init() {
 		self.init {
 			Label(
-				String(localized: .common.action.find),
+				.common.action.find,
 				systemImage: .magnifyingGlass
 			)
 		}

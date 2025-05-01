@@ -11,22 +11,43 @@ struct ApplicationGroupCriteriaPicker: View {
 	public init() { }
 
 	public var body: some View {
-		Picker(selection: $selection) {
-			makeItem(.none)
-
-			Section {
-				makeItem(.category)
-			}
-		} label: {
+		Picker(
+			selection: $selection,
+			content: Self.makePickerContent,
+		) {
 			Text(.applicationGroupCriteriaPicker.title)
 		}
 	}
 }
 
+// MARK: - Constants
+
+private extension ApplicationGroupCriteriaPicker {
+	nonisolated static let itemDisplayOrder: [[SelectionValue]] = [
+		[
+			.none,
+		],
+		[
+			.category,
+		],
+	]
+}
+
 // MARK: - Supporting Views
 
 private extension ApplicationGroupCriteriaPicker {
-	func makeItem(
+	nonisolated static func makePickerContent() -> some View {
+		ForEach(itemDisplayOrder.indices, id: \.self) { groupIndex in
+			Section {
+				ForEach(
+					Self.itemDisplayOrder[groupIndex], id: \.self,
+					content: makeItem(_:)
+				)
+			}
+		}
+	}
+
+	nonisolated static func makeItem(
 		_ item: SelectionValue
 	) -> some View {
 		Text(item.labelKey)

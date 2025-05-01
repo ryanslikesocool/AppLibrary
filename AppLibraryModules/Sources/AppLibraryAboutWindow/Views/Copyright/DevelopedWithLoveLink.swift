@@ -1,4 +1,5 @@
 import AppLibraryResources
+import SFSymbolToolbox
 import SwiftUI
 
 struct DevelopedWithLoveLink: View {
@@ -14,7 +15,7 @@ struct DevelopedWithLoveLink: View {
 					.multilineTextAlignment(Self.multilineTextAlignment)
 					.foregroundStyle(Self.textForegroundStyle)
 
-				Image(Self.customSymbol)
+				Image(Self.customSymbolName)
 					.foregroundStyle(Self.symbolForegroundStyle)
 			}
 		}
@@ -30,7 +31,7 @@ private extension DevelopedWithLoveLink {
 
 	static let multilineTextAlignment: TextAlignment = .center
 
-	static var customSymbol: ImageResource { .heart_pixel_fill }
+	static var customSymbolName: CustomSymbolName { .heart_pixel_fill }
 	static var symbolForegroundStyle: some ShapeStyle { Color.developedWithLove_red }
 
 	static var buttonStyle: some PrimitiveButtonStyle { .plain }

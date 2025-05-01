@@ -27,8 +27,7 @@ public struct ApplicationIcon: View {
 		icon
 			.background {
 				ForEach(
-					(1 ... stackCount).dropFirst().reversed(),
-					id: \.self,
+					(1 ... stackCount).dropFirst().reversed(), id: \.self,
 					content: stackIcon(index:)
 				)
 			}

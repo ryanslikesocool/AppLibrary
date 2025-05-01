@@ -2,7 +2,7 @@ import AppLibraryRuntimeModelViews
 import SwiftUI
 
 struct GridApplicationLabelStyle: ApplicationLabelStyle {
-	public init() { }
+	public nonisolated init() { }
 
 	public func makeBody(configuration: Configuration) -> some View {
 		VStack(alignment: .center, spacing: Self.spacing) {
@@ -33,7 +33,7 @@ private extension GridApplicationLabelStyle {
 extension ApplicationLabelStyle where
 	Self == GridApplicationLabelStyle
 {
-	static var grid: Self {
+	nonisolated static var grid: Self {
 		Self()
 	}
 }

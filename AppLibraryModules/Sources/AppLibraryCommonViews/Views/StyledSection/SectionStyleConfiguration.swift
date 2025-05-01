@@ -1,8 +1,13 @@
 import SwiftUI
 
 public struct SectionStyleConfiguration {
+	/// The type-erased content of a ``StyledSection``.
 	public let content: Content
+
+	/// The type-erased header of a ``StyledSection``.
 	public let header: Header?
+
+	/// The type-erased footer of a ``StyledSection``.
 	public let footer: Footer?
 
 	@MainActor

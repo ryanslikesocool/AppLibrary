@@ -17,6 +17,7 @@ public final class GeneralSettings: ObservableObject {
 
 extension GeneralSettings: @preconcurrency Encodable, @preconcurrency Decodable {
 	private enum CodingKeys: CodingKey {
+		// openAtLogin
 	}
 
 	public convenience init(from decoder: Decoder) throws {

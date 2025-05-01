@@ -1,0 +1,12 @@
+// Configuration settings file format documentation can be found at:
+// https://developer.apple.com/documentation/xcode/adding-a-build-configuration-file-to-your-project
+
+MACOSX_DEPLOYMENT_TARGET = 14.0
+
+DEAD_CODE_STRIPPING = YES
+
+COMBINE_HIDPI_IMAGES = YES
+ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = NO
+LOCALIZATION_PREFERS_STRING_CATALOGS = YES
+SWIFT_EMIT_LOC_STRINGS = NO
+LOCALIZED_STRING_SWIFTUI_SUPPORT = NO

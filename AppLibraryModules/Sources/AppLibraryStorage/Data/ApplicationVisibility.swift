@@ -1,3 +1,4 @@
+import AppIntents
 import AppLibraryResources
 import Foundation
 
@@ -42,13 +43,22 @@ extension ApplicationVisibility: Codable { }
 
 extension ApplicationVisibility: CaseIterable { }
 
-// MARK: - CustomLocalizedStringResourceConvertible
+// MARK: - CaseDisplayRepresentable
 
-extension ApplicationVisibility: CustomLocalizedStringResourceConvertible {
-	public var localizedStringResource: LocalizedStringResource {
-		switch self {
-			case .browser: .applicationVisibilityPicker.item.browser
-			case .searchResults: .applicationVisibilityPicker.item.searchResults
-		}
-	}
+extension ApplicationVisibility: CaseDisplayRepresentable {
+	public static let caseDisplayRepresentations: [Self: DisplayRepresentation] = [
+		.browser: DisplayRepresentation(
+			title: LocalizedStringResource("ITEM.BROWSER_\(LocalizedStringResource.browserWindow.title)", table: Self.localizationTable),
+		),
+
+		.searchResults: DisplayRepresentation(
+			title: LocalizedStringResource("ITEM.SEARCH_RESULTS", table: Self.localizationTable),
+		),
+	]
+}
+
+// MARK: - Constants
+
+private extension ApplicationVisibility {
+	static let localizationTable = "ApplicationVisibilityPicker"
 }

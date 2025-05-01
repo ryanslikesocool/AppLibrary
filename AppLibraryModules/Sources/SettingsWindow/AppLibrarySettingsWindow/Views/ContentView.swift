@@ -31,7 +31,7 @@ private extension ContentView {
 					Tab(value: category) {
 						SettingsTabContent(category: category)
 					} label: {
-						SettingsTabLabel(category: category)
+						category.label
 					}
 				}
 			}
@@ -39,9 +39,7 @@ private extension ContentView {
 			TabView(selection: $tabSelection) {
 				ForEach(Self.tabDisplayOrder) { category in
 					SettingsTabContent(category: category)
-						.tabItem {
-							SettingsTabLabel(category: category)
-						}
+						.tabItem { category.label }
 						.tag(category)
 				}
 			}

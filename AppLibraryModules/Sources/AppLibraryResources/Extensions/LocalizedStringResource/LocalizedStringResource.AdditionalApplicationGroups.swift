@@ -9,11 +9,14 @@ public extension LocalizedStringResource {
 	enum AdditionalApplicationGroups {
 		private static let localizationTable = LocalizationTableResource("AdditionalApplicationGroups")
 
+		@available(*, deprecated)
 		public static var item: Item.Type { Item.self }
+		
 		public static var section: Section.Type { Section.self }
 
 		/// ## Topics
 		/// - ``item``
+		@available(*, deprecated)
 		public enum Item {
 			public static var recentlyAdded: RecentlyAdded.Type { RecentlyAdded.self }
 			public static var recentlyUpdated: RecentlyUpdated.Type { RecentlyUpdated.self }

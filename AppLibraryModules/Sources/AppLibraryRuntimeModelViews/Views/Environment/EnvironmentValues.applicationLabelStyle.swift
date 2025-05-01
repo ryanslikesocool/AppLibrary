@@ -9,7 +9,9 @@ public extension EnvironmentValues {
 // MARK: - Convenience
 
 public extension View {
-	nonisolated func applicationLabelStyle<Style>(_ applicationLabelStyle: Style) -> some View where
+	nonisolated func applicationLabelStyle<Style>(
+		_ applicationLabelStyle: Style
+	) -> some View where
 		Style: ApplicationLabelStyle
 	{
 		environment(\.applicationLabelStyle, AnyApplicationLabelStyle(applicationLabelStyle))

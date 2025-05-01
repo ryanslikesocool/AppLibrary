@@ -9,7 +9,9 @@ extension EnvironmentValues {
 // MARK: - Convenience
 
 public extension View {
-	nonisolated func applicationVisibilityPickerStyle<Style>(_ style: Style) -> some View where
+	nonisolated func applicationVisibilityPickerStyle<Style>(
+		_ style: Style
+	) -> some View where
 		Style: ApplicationVisibilityPickerStyle
 	{
 		environment(\.applicationVisibilityPickerStyle, AnyApplicationVisibilityPickerStyle(style))

@@ -35,77 +35,13 @@ private extension RefreshButton {
 public extension RefreshButton where
 	Label == SwiftUI.Label<Text, Image>
 {
-	init<S>(
-		_ title: S,
-		systemImage: String
-	) where
-		S: StringProtocol
-	{
-		self.init {
-			Label(
-				title,
-				systemImage: systemImage
-			)
-		}
-	}
-
-	init<S>(
-		_ title: S,
-		systemImage: SystemSymbolName
-	) where
-		S: StringProtocol
-	{
-		self.init {
-			Label(
-				title,
-				systemImage: systemImage
-			)
-		}
-	}
-
-	init(
-		_ titleKey: LocalizedStringKey,
-		systemImage: String
-	) {
-		self.init {
-			Label(
-				titleKey,
-				systemImage: systemImage
-			)
-		}
-	}
-
-	init(
-		_ titleKey: LocalizedStringKey,
-		systemImage: SystemSymbolName
-	) {
-		self.init {
-			Label(
-				titleKey,
-				systemImage: systemImage
-			)
-		}
-	}
-
-	init(
-		_ title: LocalizedStringResource,
-		systemImage: String
-	) {
-		self.init {
-			Label(
-				title,
-				systemImage: systemImage
-			)
-		}
-	}
-
 	init(
 		_ title: LocalizedStringResource,
 		systemImage: SystemSymbolName
 	) {
 		self.init {
 			Label(
-				String(localized: title),
+				title,
 				systemImage: systemImage
 			)
 		}
@@ -113,7 +49,7 @@ public extension RefreshButton where
 
 	init() {
 		self.init(
-			String(localized: .common.action.refresh),
+			.common.action.refresh,
 			systemImage: .arrow_clockwise
 		)
 	}

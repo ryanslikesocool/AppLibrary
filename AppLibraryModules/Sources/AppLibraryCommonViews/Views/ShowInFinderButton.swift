@@ -31,7 +31,7 @@ private extension ShowInFinderButton where
 {
 	nonisolated static func makeDefaultLabel() -> Label {
 		Label(
-			String(localized: .common.action.showInFinder),
+			.common.action.showInFinder,
 			image: .finder
 		)
 	}

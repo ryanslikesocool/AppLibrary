@@ -12,7 +12,7 @@ extension ApplicationSearchScopesList {
 				delete?()
 			} label: {
 				Label(
-					String(localized: .common.action.remove),
+					.common.action.remove,
 					systemImage: .minus
 				)
 			}

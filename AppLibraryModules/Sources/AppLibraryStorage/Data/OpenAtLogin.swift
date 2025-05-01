@@ -1,3 +1,4 @@
+import AppIntents
 import OSLog
 import ServiceManagement
 
@@ -42,6 +43,20 @@ extension OpenAtLogin: ExpressibleByBooleanLiteral {
 		self.init()
 		isEnabled = value
 	}
+}
+
+// MARK: - TypeDisplayRepresentable
+
+extension OpenAtLogin: TypeDisplayRepresentable {
+	public static let typeDisplayRepresentation = TypeDisplayRepresentation(
+		name: LocalizedStringResource("TITLE", table: Self.localizationTable),
+	)
+}
+
+// MARK: - Constants
+
+private extension OpenAtLogin {
+	static let localizationTable = "OpenAtLoginToggle"
 }
 
 // MARK: -

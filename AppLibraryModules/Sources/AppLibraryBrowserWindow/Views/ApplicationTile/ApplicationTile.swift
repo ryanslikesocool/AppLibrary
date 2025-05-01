@@ -51,6 +51,8 @@ struct ApplicationTile: View {
 //			ApplicationIcon(for: application)
 //		}
 
+		// TODO: use `.matchedGeometryEffect(id:in:)` to handle animation
+
 		.contextMenu {
 			ContextMenu(for: application)
 		}

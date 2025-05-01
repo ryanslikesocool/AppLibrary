@@ -10,7 +10,9 @@ extension EnvironmentValues {
 // MARK: - Convenience
 
 extension View {
-	nonisolated func libraryLayout(_ layout: LibraryLayout) -> some View {
+	nonisolated func libraryLayout(
+		_ layout: LibraryLayout,
+	) -> some View {
 		environment(\.libraryLayout, layout)
 			.applicationLabelStyle(layout.applicationLabelStyle)
 	}

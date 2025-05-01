@@ -9,12 +9,14 @@ public extension LocalizedStringResource {
 	enum SettingsWindow {
 		private static let localizationTable = LocalizationTableResource("SettingsWindow")
 
+		@available(*, deprecated)
 		public static var category: Category.Type { Category.self }
 
 		public static let title = LocalizedStringResource("TITLE", table: localizationTable)
 
 		/// ## Topics
 		/// - ``category``
+		@available(*, deprecated)
 		public enum Category {
 			public static var apps: Apps.Type { Apps.self }
 			public static var general: General.Type { General.self }

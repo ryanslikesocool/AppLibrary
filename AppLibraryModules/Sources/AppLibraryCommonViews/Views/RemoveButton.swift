@@ -42,7 +42,7 @@ public extension RemoveButton where
 			action: action
 		) {
 			Label(
-				String(localized: .common.action.remove),
+				.common.action.remove,
 				systemImage: .trash
 			)
 		}

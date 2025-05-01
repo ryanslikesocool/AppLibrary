@@ -1,27 +1,21 @@
-import AppLibraryCommon
-import AppLibraryCommonViews
-import AppLibraryStorage
-import OSLog
 import SwiftUI
 
-struct ErrorView: View {
-	private let error: BrowserError
+public struct DefaultErrorViewStyle: ErrorViewStyle {
+	public nonisolated init() { }
 
-	public init(reason error: BrowserError) {
-		self.error = error
-	}
-
-	public var body: some View {
+	public func makeBody(configuration: Configuration) -> some View {
 		VStack {
-			Image(systemName: .exclamationMark_octagon)
-				.resizable()
+			configuration.icon
 				.fontWeight(Self.iconFontWeight)
 				.frame(width: Self.iconWidth, height: Self.iconHeight)
 				.padding(.horizontal, Self.iconHorizontalPadding)
 
-			ErrorTitle(error: error)
-			RecoverySuggestion(error: error)
-			RecoveryAction(error: error)
+			configuration.title
+				.font(Self.titleFont)
+
+			configuration.recoverySuggestion
+
+			configuration.recoveryAction
 		}
 		.multilineTextAlignment(Self.multilineTextAlignment)
 		.foregroundStyle(Self.foregroundStyle)
@@ -32,7 +26,7 @@ struct ErrorView: View {
 
 // MARK: - Constants
 
-private extension ErrorView {
+private extension DefaultErrorViewStyle {
 	static var iconFontWeight: Font.Weight { .semibold }
 
 	static let iconWidth: CGFloat? = 48
@@ -40,9 +34,21 @@ private extension ErrorView {
 
 	static let iconHorizontalPadding: CGFloat = 32
 
+	static var titleFont: Font { .title.weight(.semibold) }
+
 	static let multilineTextAlignment: TextAlignment = .center
 	static var foregroundStyle: some ShapeStyle { .secondary }
 
 	static var maxWidth: CGFloat? { .infinity }
 	static var maxHeight: CGFloat? { .infinity }
+}
+
+// MARK: - Convenience
+
+public extension ErrorViewStyle where
+	Self == DefaultErrorViewStyle
+{
+	nonisolated static var `default`: Self {
+		Self()
+	}
 }

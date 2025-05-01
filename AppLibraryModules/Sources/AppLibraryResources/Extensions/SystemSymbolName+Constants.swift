@@ -41,6 +41,7 @@ public extension SystemSymbolName {
 	// MARK: L
 
 	static let link: Self = "link"
+	static let list_bullet: Self = "list.bullet"
 
 	// MARK: M
 

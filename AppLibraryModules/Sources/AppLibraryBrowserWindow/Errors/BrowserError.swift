@@ -3,7 +3,7 @@ import AppLibraryResources
 import AppLibraryStorage
 import Foundation
 
-enum BrowserError: Swift.Error {
+enum BrowserError {
 	case noSearchScopes
 	case noApplications
 	case allApplicationsHidden
@@ -20,6 +20,10 @@ extension BrowserError: Equatable { }
 // MARK: - Hashable
 
 extension BrowserError: Hashable { }
+
+// MARK: - Error
+
+extension BrowserError: Error { }
 
 // MARK: - LocalizedError
 

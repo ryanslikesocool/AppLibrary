@@ -1,42 +1,27 @@
 import AppLibraryCommon
+import AppLibraryCommonViews
 import AppLibraryStorage
 import SwiftUI
 
 extension AdditionalApplicationGroupsSection {
 	struct Item: View {
-		typealias SelectionValue = AdditionalApplicationGroup
+		public typealias SelectionValue = AdditionalApplicationGroup
 
 		@Storage(layout: \.additionalGroups) private var additionalGroups
 
-		private let group: SelectionValue
+		private let value: SelectionValue
 
-		public init(group: SelectionValue) {
-			self.group = group
+		public init(value: SelectionValue) {
+			self.value = value
 		}
 
 		public var body: some View {
-			Toggle(isOn: $additionalGroups[SelectionValue.Set(group)]) {
-				Text(group.labelKey)
-				Text(group.descriptionKey)
+			if let displayRepresentation = SelectionValue.caseDisplayRepresentations[value] {
+				Toggle(isOn: $additionalGroups[SelectionValue.Set(value)]) {
+					Text(displayRepresentation.title)
+					Text(displayRepresentation.subtitle)
+				}
 			}
-		}
-	}
-}
-
-// MARK: -
-
-private extension AdditionalApplicationGroupsSection.Item.SelectionValue {
-	var labelKey: LocalizedStringResource {
-		switch self {
-			case .recentlyAdded: .additionalApplicationGroups.item.recentlyAdded.title
-			case .recentlyUpdated: .additionalApplicationGroups.item.recentlyUpdated.title
-		}
-	}
-
-	var descriptionKey: LocalizedStringResource {
-		switch self {
-			case .recentlyAdded: .additionalApplicationGroups.item.recentlyAdded.description
-			case .recentlyUpdated: .additionalApplicationGroups.item.recentlyUpdated.description
 		}
 	}
 }

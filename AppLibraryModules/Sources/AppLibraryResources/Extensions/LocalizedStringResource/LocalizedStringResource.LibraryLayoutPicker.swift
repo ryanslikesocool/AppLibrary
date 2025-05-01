@@ -2,10 +2,12 @@ import Foundation
 import LocalizationToolbox
 
 public extension LocalizedStringResource {
+	@available(*, deprecated)
 	static var libraryLayoutPicker: LibraryLayoutPicker.Type { LibraryLayoutPicker.self }
 
 	/// ## Topics
 	/// - ``libraryLayoutPicker``
+	@available(*, deprecated)
 	enum LibraryLayoutPicker {
 		private static let localizationTable = LocalizationTableResource("LibraryLayoutPicker")
 

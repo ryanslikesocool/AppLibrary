@@ -13,7 +13,7 @@ public struct SettingsWindowLink: View {
 		WindowLink(id: Self.windowID) {
 			Label(
 				LocalizedStringResource.settingsWindow.title,
-				systemImage: SystemSymbolName.gearShape.rawValue
+				systemImage: .gearShape
 			)
 		}
 	}

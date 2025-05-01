@@ -1,3 +1,4 @@
+import AppIntents
 import AppLibraryResources
 import Foundation
 import UniformTypeIdentifiers
@@ -195,67 +196,200 @@ extension AppStoreCategoryType: Hashable { }
 
 extension AppStoreCategoryType: CaseIterable { }
 
-// MARK: - CustomLocalizedStringResourceConvertible
+// MARK: - CaseDisplayRepresentable
 
-extension AppStoreCategoryType: CustomLocalizedStringResourceConvertible {
-	public var localizedStringResource: LocalizedStringResource {
-		// TODO: Optimize
-		// - Is the Swift compiler already smart enough to optimize this away?
-		// - Should we store this as a `static let localizedStringResourceLookupTable: [Self : LocalizedStringResource]`?
-		// - Should we fall back to the old approach, where the `rawValue` is the localization key?
+extension AppStoreCategoryType: CaseDisplayRepresentable {
+	public static let caseDisplayRepresentations: [Self: DisplayRepresentation] = [
+		.books: DisplayRepresentation(
+			title: LocalizedStringResource("BOOKS", table: Self.localizationTable),
+		),
 
-		switch self {
-			case .books: .appStoreCategory.books
-			case .business: .appStoreCategory.business
-			case .developerTools: .appStoreCategory.developerTools
-			case .education: .appStoreCategory.education
-			case .entertainment: .appStoreCategory.entertainment
-			case .finance: .appStoreCategory.finance
-			case .foodAndDrink: .appStoreCategory.foodAndDrink
-			case .games: .appStoreCategory.games
-			case .actionGames: .appStoreCategory.actionGames
-			case .adventureGames: .appStoreCategory.adventureGames
-			case .arcadeGames: .appStoreCategory.arcadeGames
-			case .boardGames: .appStoreCategory.boardGames
-			case .cardGames: .appStoreCategory.cardGames
-			case .casinoGames: .appStoreCategory.casinoGames
-			case .diceGames: .appStoreCategory.diceGames
-			case .educationalGames: .appStoreCategory.educationalGames
-			case .familyGames: .appStoreCategory.familyGames
-			case .kidsGames: .appStoreCategory.kidsGames
-			case .musicGames: .appStoreCategory.musicGames
-			case .puzzleGames: .appStoreCategory.puzzleGames
-			case .racingGames: .appStoreCategory.racingGames
-			case .rolePlayingGames: .appStoreCategory.rolePlayingGames
-			case .simulationGames: .appStoreCategory.simulationGames
-			case .sportsGames: .appStoreCategory.sportsGames
-			case .strategyGames: .appStoreCategory.strategyGames
-			case .triviaGames: .appStoreCategory.triviaGames
-			case .wordGames: .appStoreCategory.wordGames
-			case .graphicsAndDesign: .appStoreCategory.graphicsAndDesign
-			case .healthcareAndFitness: .appStoreCategory.healthcareAndFitness
-			case .lifestyle: .appStoreCategory.lifestyle
-			case .magazinesAndNewspapers: .appStoreCategory.magazinesAndNewspapers
-			case .medical: .appStoreCategory.medical
-			case .music: .appStoreCategory.music
-			case .navigation: .appStoreCategory.navigation
-			case .news: .appStoreCategory.news
-			case .photography: .appStoreCategory.photography
-			case .productivity: .appStoreCategory.productivity
-			case .reference: .appStoreCategory.reference
-			case .shopping: .appStoreCategory.shopping
-			case .socialNetworking: .appStoreCategory.socialNetworking
-			case .sports: .appStoreCategory.sports
-			case .travel: .appStoreCategory.travel
-			case .utilities: .appStoreCategory.utilities
-			case .video: .appStoreCategory.video
-			case .weather: .appStoreCategory.weather
-		}
-	}
+		.business: DisplayRepresentation(
+			title: LocalizedStringResource("BUSINESS", table: Self.localizationTable),
+		),
+
+		.developerTools: DisplayRepresentation(
+			title: LocalizedStringResource("DEVELOPER_TOOLS", table: Self.localizationTable),
+		),
+
+		.education: DisplayRepresentation(
+			title: LocalizedStringResource("EDUCATION", table: Self.localizationTable),
+		),
+
+		.entertainment: DisplayRepresentation(
+			title: LocalizedStringResource("ENTERTAINMENT", table: Self.localizationTable),
+		),
+
+		.finance: DisplayRepresentation(
+			title: LocalizedStringResource("FINANCE", table: Self.localizationTable),
+		),
+
+		.foodAndDrink: DisplayRepresentation(
+			title: LocalizedStringResource("FOOD_AND_DRINK", table: Self.localizationTable),
+		),
+
+		.games: DisplayRepresentation(
+			title: LocalizedStringResource("GAMES", table: Self.localizationTable),
+		),
+
+		.actionGames: DisplayRepresentation(
+			title: LocalizedStringResource("ACTION_GAMES", table: Self.localizationTable),
+		),
+
+		.adventureGames: DisplayRepresentation(
+			title: LocalizedStringResource("ADVENTURE_GAMES", table: Self.localizationTable),
+		),
+
+		.arcadeGames: DisplayRepresentation(
+			title: LocalizedStringResource("ARCADE_GAMES", table: Self.localizationTable),
+		),
+
+		.boardGames: DisplayRepresentation(
+			title: LocalizedStringResource("BOARD_GAMES", table: Self.localizationTable),
+		),
+
+		.cardGames: DisplayRepresentation(
+			title: LocalizedStringResource("CARD_GAMES", table: Self.localizationTable),
+		),
+
+		.casinoGames: DisplayRepresentation(
+			title: LocalizedStringResource("CASINO_GAMES", table: Self.localizationTable),
+		),
+
+		.diceGames: DisplayRepresentation(
+			title: LocalizedStringResource("DICE_GAMES", table: Self.localizationTable),
+		),
+
+		.educationalGames: DisplayRepresentation(
+			title: LocalizedStringResource("EDUCATIONAL_GAMES", table: Self.localizationTable),
+		),
+
+		.familyGames: DisplayRepresentation(
+			title: LocalizedStringResource("FAMILY_GAMES", table: Self.localizationTable),
+		),
+
+		.kidsGames: DisplayRepresentation(
+			title: LocalizedStringResource("KIDS_GAMES", table: Self.localizationTable),
+		),
+
+		.musicGames: DisplayRepresentation(
+			title: LocalizedStringResource("MUSIC_GAMES", table: Self.localizationTable),
+		),
+
+		.puzzleGames: DisplayRepresentation(
+			title: LocalizedStringResource("PUZZLE_GAMES", table: Self.localizationTable),
+		),
+
+		.racingGames: DisplayRepresentation(
+			title: LocalizedStringResource("RACING_GAMES", table: Self.localizationTable),
+		),
+
+		.rolePlayingGames: DisplayRepresentation(
+			title: LocalizedStringResource("ROLE_PLAYING_GAMES", table: Self.localizationTable),
+		),
+
+		.simulationGames: DisplayRepresentation(
+			title: LocalizedStringResource("SIMULATION_GAMES", table: Self.localizationTable),
+		),
+
+		.sportsGames: DisplayRepresentation(
+			title: LocalizedStringResource("SPORTS_GAMES", table: Self.localizationTable),
+		),
+
+		.strategyGames: DisplayRepresentation(
+			title: LocalizedStringResource("STRATEGY_GAMES", table: Self.localizationTable),
+		),
+
+		.triviaGames: DisplayRepresentation(
+			title: LocalizedStringResource("TRIVIA_GAMES", table: Self.localizationTable),
+		),
+
+		.wordGames: DisplayRepresentation(
+			title: LocalizedStringResource("WORD_GAMES", table: Self.localizationTable),
+		),
+
+		.graphicsAndDesign: DisplayRepresentation(
+			title: LocalizedStringResource("GRAPHICS_DESIGN", table: Self.localizationTable),
+		),
+
+		.healthcareAndFitness: DisplayRepresentation(
+			title: LocalizedStringResource("HEALTHCARE_FITNESS", table: Self.localizationTable),
+		),
+
+		.lifestyle: DisplayRepresentation(
+			title: LocalizedStringResource("LIFESTYLE", table: Self.localizationTable),
+		),
+
+		.magazinesAndNewspapers: DisplayRepresentation(
+			title: LocalizedStringResource("MAGAZINES_AND_NEWSPAPERS", table: Self.localizationTable),
+		),
+
+		.medical: DisplayRepresentation(
+			title: LocalizedStringResource("MEDICAL", table: Self.localizationTable),
+		),
+
+		.music: DisplayRepresentation(
+			title: LocalizedStringResource("MUSIC", table: Self.localizationTable),
+		),
+
+		.navigation: DisplayRepresentation(
+			title: LocalizedStringResource("NAVIGATION", table: Self.localizationTable),
+		),
+
+		.news: DisplayRepresentation(
+			title: LocalizedStringResource("NEWS", table: Self.localizationTable),
+		),
+
+		.photography: DisplayRepresentation(
+			title: LocalizedStringResource("PHOTOGRAPHY", table: Self.localizationTable),
+		),
+
+		.productivity: DisplayRepresentation(
+			title: LocalizedStringResource("PRODUCTIVITY", table: Self.localizationTable),
+		),
+
+		.reference: DisplayRepresentation(
+			title: LocalizedStringResource("REFERENCE", table: Self.localizationTable),
+		),
+
+		.shopping: DisplayRepresentation(
+			title: LocalizedStringResource("SHOPPING", table: Self.localizationTable),
+		),
+
+		.socialNetworking: DisplayRepresentation(
+			title: LocalizedStringResource("SOCIAL_NETWORKING", table: Self.localizationTable),
+		),
+
+		.sports: DisplayRepresentation(
+			title: LocalizedStringResource("SPORTS", table: Self.localizationTable),
+		),
+
+		.travel: DisplayRepresentation(
+			title: LocalizedStringResource("TRAVEL", table: Self.localizationTable),
+		),
+
+		.utilities: DisplayRepresentation(
+			title: LocalizedStringResource("UTILITIES", table: Self.localizationTable),
+		),
+
+		.video: DisplayRepresentation(
+			title: LocalizedStringResource("VIDEO", table: Self.localizationTable),
+		),
+
+		.weather: DisplayRepresentation(
+			title: LocalizedStringResource("WEATHER", table: Self.localizationTable),
+		),
+	]
 
 	// TODO: Is there a built-in string table for category names somewhere?
 	// Maybe in `App Store.app`?
 
 	// Localized names might be provided by `NSMetadataItemAttributeKeys.AppStoreCategory`,
 	// which is different from `NSMetadataItemAttributeKeys.AppStoreCategoryType`.
+}
+
+// MARK: - Constants
+
+private extension AppStoreCategoryType {
+	static let localizationTable = "AppStoreCategory"
 }

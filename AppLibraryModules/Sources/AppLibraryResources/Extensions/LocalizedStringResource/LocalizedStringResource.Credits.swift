@@ -10,6 +10,8 @@ public extension LocalizedStringResource {
 		private static let localizationTable = LocalizationTableResource("Credits")
 
 		public static var link: Link.Type { Link.self }
+
+		@available(*, deprecated)
 		public static var section: Section.Type { Section.self }
 
 		/// ## Topics
@@ -47,6 +49,7 @@ public extension LocalizedStringResource {
 
 		/// ## Topics
 		/// - ``section``
+		@available(*, deprecated)
 		public enum Section {
 			public static var acknowledgements: Acknowledgements.Type { Acknowledgements.self }
 			public static var contributors: Contributors.Type { Contributors.self }

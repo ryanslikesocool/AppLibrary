@@ -6,7 +6,7 @@ import SwiftUI
 public struct OpenApplicationButton: View {
 	private let action: @MainActor () -> Void
 
-	private init(
+	private nonisolated init(
 		action: @escaping @MainActor () -> Void
 	) {
 		self.action = action

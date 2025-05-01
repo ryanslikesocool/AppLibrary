@@ -25,7 +25,9 @@ public extension Label where
 	) where
 		S: StringProtocol
 	{
-		self.init(title: { Title(title) })
+		self.init {
+			Title(title)
+		}
 	}
 
 	/// Creates a label with a title generated from a localized string.
@@ -38,7 +40,9 @@ public extension Label where
 	nonisolated init(
 		_ titleKey: LocalizedStringKey
 	) {
-		self.init(title: { Title(titleKey) })
+		self.init {
+			Title(titleKey)
+		}
 	}
 
 	/// Creates a label with a title generated from a string resource.
@@ -53,6 +57,8 @@ public extension Label where
 	nonisolated init(
 		_ titleResource: LocalizedStringResource
 	) {
-		self.init(title: { Title(titleResource) })
+		self.init {
+			Title(titleResource)
+		}
 	}
 }

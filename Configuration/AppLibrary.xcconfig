@@ -1,0 +1,10 @@
+// Configuration settings file format documentation can be found at:
+// https://developer.apple.com/documentation/xcode/adding-a-build-configuration-file-to-your-project
+
+ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon
+ASSETCATALOG_COMPILER_APPICON_NAME[config=Debug] = $(inherited)-Debug
+ASSETCATALOG_COMPILER_APPICON_NAME[config=Release] = $(inherited)-Release
+
+ENABLE_PREVIEWS = YES
+
+URL_PROJECT_HOMEPAGE = github.com/ryanslikesocool/AppLibrary

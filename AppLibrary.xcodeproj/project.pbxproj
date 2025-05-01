@@ -42,6 +42,15 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		AF7850EC2DA6596A00729234 /* Exceptions for "Configuration" folder in "App Library" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				AppLibrary.xcconfig,
+				AppLibraryHelper.xcconfig,
+				Project.xcconfig,
+			);
+			target = AF33F06A2CFAF53F00767656 /* App Library */;
+		};
 		AF8E572C2D3A0A4E00D22B0C /* Exceptions for "AppLibrary" folder in "App Library" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
@@ -68,6 +77,14 @@
 				Info.plist = text.plist.info;
 			};
 			path = AppLibrary;
+			sourceTree = "<group>";
+		};
+		AF78211E2DA5EBCC00729234 /* Configuration */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				AF7850EC2DA6596A00729234 /* Exceptions for "Configuration" folder in "App Library" target */,
+			);
+			path = Configuration;
 			sourceTree = "<group>";
 		};
 		AFBE9C052D36FE9C00B9B12E /* AppLibraryHelper-Accessibility */ = {
@@ -103,6 +120,7 @@
 		AF33F0622CFAF53F00767656 = {
 			isa = PBXGroup;
 			children = (
+				AF78211E2DA5EBCC00729234 /* Configuration */,
 				AF33F06D2CFAF53F00767656 /* AppLibrary */,
 				AFBE9C052D36FE9C00B9B12E /* AppLibraryHelper-Accessibility */,
 				AF33F09E2CFAF76000767656 /* Frameworks */,
@@ -145,6 +163,7 @@
 			);
 			fileSystemSynchronizedGroups = (
 				AF33F06D2CFAF53F00767656 /* AppLibrary */,
+				AF78211E2DA5EBCC00729234 /* Configuration */,
 			);
 			name = "App Library";
 			packageProductDependencies = (
@@ -185,7 +204,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1620;
-				LastUpgradeCheck = 1610;
+				LastUpgradeCheck = 1630;
 				TargetAttributes = {
 					AF33F06A2CFAF53F00767656 = {
 						CreatedOnToolsVersion = 16.1;
@@ -260,9 +279,10 @@
 /* Begin XCBuildConfiguration section */
 		AF33F0782CFAF54000767656 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = AF78211E2DA5EBCC00729234 /* Configuration */;
+			baseConfigurationReferenceRelativePath = Project.xcconfig;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -294,6 +314,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 838RGQ32CA;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
@@ -313,13 +334,11 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "© 2023 Ryan Boyer";
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MACOSX_DEPLOYMENT_TARGET = 15.1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
-				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -327,9 +346,10 @@
 		};
 		AF33F0792CFAF54000767656 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = AF78211E2DA5EBCC00729234 /* Configuration */;
+			baseConfigurationReferenceRelativePath = Project.xcconfig;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -361,6 +381,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 838RGQ32CA;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
@@ -374,31 +395,28 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "© 2023 Ryan Boyer";
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MACOSX_DEPLOYMENT_TARGET = 15.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;
 				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_EMIT_LOC_STRINGS = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
 		};
 		AF33F07B2CFAF54000767656 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = AF78211E2DA5EBCC00729234 /* Configuration */;
+			baseConfigurationReferenceRelativePath = AppLibrary.xcconfig;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Debug";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = AppLibrary/Entitlements.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 787;
-				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_TEAM = 838RGQ32CA;
+				CURRENT_PROJECT_VERSION = 801;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = AppLibrary/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "App Library";
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_LSUIElement = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2023 Ryan Boyer";
@@ -406,30 +424,27 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 0.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.DevelopedWithLove.AppLibrary;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
 		AF33F07C2CFAF54000767656 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = AF78211E2DA5EBCC00729234 /* Configuration */;
+			baseConfigurationReferenceRelativePath = AppLibrary.xcconfig;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = AppLibrary/Entitlements.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 787;
-				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_TEAM = 838RGQ32CA;
+				CURRENT_PROJECT_VERSION = 801;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = AppLibrary/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "App Library";
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_LSUIElement = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2023 Ryan Boyer";
@@ -437,57 +452,51 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 0.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.DevelopedWithLove.AppLibrary;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
 		AFBE9C0F2D36FE9C00B9B12E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = AF78211E2DA5EBCC00729234 /* Configuration */;
+			baseConfigurationReferenceRelativePath = AppLibraryHelper.xcconfig;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "AppLibraryHelper-Accessibility/Entitlements.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 787;
-				DEVELOPMENT_TEAM = 838RGQ32CA;
+				CURRENT_PROJECT_VERSION = 801;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "AppLibraryHelper-Accessibility/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "App Library Helper (Accessibility)";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2025 Ryan Boyer";
-				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 0.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.DevelopedWithLove.AppLibrary.Helper.Accessibility;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
 		AFBE9C102D36FE9C00B9B12E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = AF78211E2DA5EBCC00729234 /* Configuration */;
+			baseConfigurationReferenceRelativePath = AppLibraryHelper.xcconfig;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "AppLibraryHelper-Accessibility/Entitlements.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 787;
-				DEVELOPMENT_TEAM = 838RGQ32CA;
+				CURRENT_PROJECT_VERSION = 801;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "AppLibraryHelper-Accessibility/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "App Library Helper (Accessibility)";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2025 Ryan Boyer";
-				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 0.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.DevelopedWithLove.AppLibrary.Helper.Accessibility;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;

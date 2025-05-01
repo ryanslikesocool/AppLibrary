@@ -40,6 +40,23 @@ extension BundleIdentifier: Codable {
 	}
 }
 
+// MARK: - CodingKeyRepresentable
+
+extension BundleIdentifier: CodingKeyRepresentable {
+	public init?<T>(codingKey: T) where
+		T: CodingKey
+	{
+		guard let rawValue = RawValue(codingKey: codingKey) else {
+			return nil
+		}
+		self.init(rawValue: rawValue)
+	}
+
+	public var codingKey: any CodingKey {
+		rawValue.codingKey
+	}
+}
+
 // MARK: - Constants
 
 private extension BundleIdentifier {
@@ -49,7 +66,6 @@ private extension BundleIdentifier {
 // MARK: - Convenience
 
 public extension BundleIdentifier {
-	@inlinable
 	init?(_ rawValue: String) {
 		self.init(rawValue: rawValue)
 	}
