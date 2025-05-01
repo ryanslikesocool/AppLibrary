@@ -1,5 +1,4 @@
 import AppLibraryCommon
-import AppLibraryResources
 import AppLibraryStorage
 import Foundation
 
@@ -28,31 +27,37 @@ extension BrowserError: Error { }
 // MARK: - LocalizedError
 
 extension BrowserError: LocalizedError {
-	var errorDescription: String? {
-		let localizedStringResource: LocalizedStringResource = switch self {
-			case .noSearchScopes: .browserError.noSearchScopes.description
-			case .noApplications: .browserError.noApplications.description
-			case .allApplicationsHidden: .browserError.allApplicationsHidden.description
+	public var errorDescription: String? {
+		let localizationValue: String.LocalizationValue = switch self {
+			case .noSearchScopes: "NO_SEARCH_SCOPES.DESCRIPTION"
+			case .noApplications: "NO_APPLICATIONS.DESCRIPTION"
+			case .allApplicationsHidden: "ALL_APPLICATIONS_HIDDEN.DESCRIPTION"
 		}
 
-		return String(localized: localizedStringResource)
+		return String(localized: localizationValue, table: Self.localizationTable)
 	}
 
-	var recoverySuggestion: String? {
-		let localizedStringResource: LocalizedStringResource = switch self {
-			case .noSearchScopes: .browserError.noSearchScopes.recoverySuggestion
-			case .noApplications: .browserError.noApplications.recoverySuggestion
-			case .allApplicationsHidden: .browserError.allApplicationsHidden.recoverySuggestion
+	public var recoverySuggestion: String? {
+		let localizationValue: String.LocalizationValue = switch self {
+			case .noSearchScopes: "NO_SEARCH_SCOPES.RECOVERY_SUGGESTION"
+			case .noApplications: "NO_APPLICATIONS.RECOVERY_SUGGESTION"
+			case .allApplicationsHidden: "ALL_APPLICATIONS_HIDDEN.RECOVERY_SUGGESTION"
 		}
 
-		return String(localized: localizedStringResource)
+		return String(localized: localizationValue, table: Self.localizationTable)
 	}
+}
+
+// MARK: - Constants
+
+private extension BrowserError {
+	static let localizationTable = "BrowserError"
 }
 
 // MARK: - Supporting Data
 
 extension BrowserError {
-	enum RecoveryAction {
+	public enum RecoveryAction {
 		case openSettings(SettingsCategory)
 		case retry
 	}
@@ -61,7 +66,7 @@ extension BrowserError {
 // MARK: -
 
 extension BrowserError {
-	var recoveryActionKind: RecoveryAction {
+	public var recoveryActionKind: RecoveryAction {
 		switch self {
 			case .noSearchScopes: .openSettings(.apps)
 			case .noApplications: .openSettings(.apps)

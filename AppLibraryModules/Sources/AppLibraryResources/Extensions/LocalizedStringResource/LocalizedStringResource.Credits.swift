@@ -11,9 +11,6 @@ public extension LocalizedStringResource {
 
 		public static var link: Link.Type { Link.self }
 
-		@available(*, deprecated)
-		public static var section: Section.Type { Section.self }
-
 		/// ## Topics
 		/// - ``link``
 		public enum Link {
@@ -44,26 +41,6 @@ public extension LocalizedStringResource {
 			/// - ``project``
 			public enum Project {
 				public static let title = LocalizedStringResource("LINK.PROJECT.TITLE", table: localizationTable)
-			}
-		}
-
-		/// ## Topics
-		/// - ``section``
-		@available(*, deprecated)
-		public enum Section {
-			public static var acknowledgements: Acknowledgements.Type { Acknowledgements.self }
-			public static var contributors: Contributors.Type { Contributors.self }
-
-			/// ## Topics
-			/// - ``acknowledgements``
-			public enum Acknowledgements {
-				public static let title = LocalizedStringResource("SECTION.ACKNOWLEDGEMENTS.TITLE", table: localizationTable)
-			}
-
-			/// ## Topics
-			/// - ``contributors``
-			public enum Contributors {
-				public static let title = LocalizedStringResource("SECTION.CONTRIBUTORS.TITLE", table: localizationTable)
 			}
 		}
 	}

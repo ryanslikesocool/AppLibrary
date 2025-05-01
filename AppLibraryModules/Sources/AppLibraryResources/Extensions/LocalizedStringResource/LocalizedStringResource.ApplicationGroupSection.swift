@@ -1,5 +1,5 @@
-import LocalizationToolbox
 import Foundation
+import LocalizationToolbox
 
 public extension LocalizedStringResource {
 	static var applicationGroupSection: ApplicationGroupSection.Type { ApplicationGroupSection.self }
